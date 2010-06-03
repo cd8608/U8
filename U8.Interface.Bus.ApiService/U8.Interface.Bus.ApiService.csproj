@@ -171,16 +171,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="U8SrvTrans">
-      <Guid>{14E97510-4C3F-4A31-8E69-2A1EF701E041}</Guid>
-      <VersionMajor>11</VersionMajor>
-      <VersionMinor>44</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\U8.Interface.Bus.Comm\U8.Interface.Bus.Comm.csproj">
       <Project>{5022ADAD-A6FC-4C98-A068-E35D1F98B98D}</Project>
       <Name>U8.Interface.Bus.Comm</Name>

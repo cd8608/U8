@@ -69,16 +69,16 @@ BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 ('0','1','盘点类型','T','0000000008',null,null,1,'普通仓库盘点','cCvType',null,'1000000008',1,1)
 END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000008' AND cardsection = 'T' AND fieldname='cIRdCode') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','入库类别编码','T','0000000008',null,null,0,'表头|入库类别编码,T|cIRdCode','cIRdCode',null,'1000000008',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000008' AND cardsection = 'T' AND fieldname='cORdCode') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','出库类别编码','T','0000000008',null,null,0,'表头|出库类别编码,T|cORdCode','cORdCode',null,'1000000008',1,1)
---END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000008' AND cardsection = 'T' AND fieldname='cIRdCode') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','入库类别编码','T','0000000008',null,null,0,'表头|入库类别编码,T|MES_cIRdCode','cIRdCode',null,'1000000008',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000008' AND cardsection = 'T' AND fieldname='cORdCode') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','出库类别编码','T','0000000008',null,null,0,'表头|出库类别编码,T|MES_cORdCode','cORdCode',null,'1000000008',1,1)
+END
 
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000008' AND cardsection = 'T' AND fieldname='cCVBatch') 
 --BEGIN

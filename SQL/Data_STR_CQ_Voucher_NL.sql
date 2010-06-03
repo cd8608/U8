@@ -662,6 +662,8 @@ CREATE TABLE dbo.MES_CQ_CheckVouch
 	opertype Int default 0,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
 
+	cIRdCode	Nvarchar(5), --入库类别	编码
+	cORdCode	Nvarchar(5),-- 出库类别	编码
 	cCVCode	Nvarchar(30), --盘点任务单号	
 	dCVDate	datetime, --计划盘点日期	取计划盘点日期
 	dACDate	datetime,--实际盘点日期	取盘点任务实际完成日期

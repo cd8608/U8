@@ -361,6 +361,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.cDepCode as mes_cDepCode ,";  //盘点部门
             sql += " lt.cPersonCode as mes_cPersonCode ,";
             sql += " lt.cWhCode as mes_cWhCode, ";
+            sql += " lt.cIRdCode as MES_cIRdCode, ";
+            sql += " lt.cORdCode as MES_cORdCode, "; 
             sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
             sql += " lb.cinvcode as mes_cinvcode ,lb.cVenCode as MES_B_cVenCode,  ";  
             sql += " lb.iquantity as MES_iquantity,   ";
