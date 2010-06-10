@@ -7,6 +7,21 @@ using System.Data;
 using System.Management;
 using U8.Interface.Bus.ApiService.DAL;
 
+
+ 
+
+using System.Runtime.InteropServices;
+using UFIDA.U8.MomServiceCommon;
+using UFIDA.U8.U8MOMAPIFramework;
+using UFIDA.U8.U8APIFramework;
+using UFIDA.U8.U8APIFramework.Meta;
+using UFIDA.U8.U8APIFramework.Parameter;
+using MSXML2; 
+using System.Diagnostics;
+using U8.Interface.Bus.ApiService.Model;
+using U8.Interface.Bus.DBUtility;
+
+
 namespace U8.Interface.Bus.ApiService.BLL
 {
     public static class Common
@@ -464,6 +479,131 @@ namespace U8.Interface.Bus.ApiService.BLL
             if (obj is DateTime) return ((DateTime)obj).ToString("yyyy-MM-dd HH:mm:ss");
             return obj.ToString();
         }
+
+
+        #region U8登录测试
+
+        /// <summary>
+        /// 测试U8登录
+        ///  source = "(default)"
+        /// </summary>
+        /// <returns></returns>
+        public static int TestU8Login(string sqlconnection,string ServerName,string source, string accid,string userid,string pwd,
+            string yearid,string date,
+            out string errmsg)
+        { 
+
+            Model.DealResult dr = new Model.DealResult(); 
+
+            U8Login.clsLogin u8Login = new U8Login.clsLogin();
+
+            #region 判断格式  登录
+             
+            string strErr = ",请在［账套档案注册］模块中更新!";
+            if (string.IsNullOrEmpty(userid))
+            {
+                dr.ResultMsg = "默认操作员不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(source))
+            {
+                dr.ResultMsg = "数据源不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(accid))
+            {
+                dr.ResultMsg = "账套号不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(ServerName))
+            {
+                dr.ResultMsg = "服务器地址不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(yearid))
+            {
+                dr.ResultMsg = "登陆年度不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            else
+            {
+                try { int.Parse(yearid); }
+                catch
+                {
+                    dr.ResultMsg = "登陆年度格式错误：" + yearid + strErr;
+                    dr.ResultNum = -1;
+                    Marshal.FinalReleaseComObject(u8Login);
+                    throw new Exception(dr.ResultMsg);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(sqlconnection))
+            {
+                DbHelperSQLP dsp = new DbHelperSQLP(sqlconnection);
+                string strSql = "SELECT 1 FROM UFSystem.dbo.UA_AccountDatabase A JOIN UFSystem.dbo.UA_Account B ON A.cAcc_Id=B.cAcc_Id WHERE A.cAcc_Id='" + accid + "' ";
+                if (!dsp.Exists(strSql))
+                {
+                    dr.ResultMsg = "登陆失败，原因：账套 " + accid + " 在 " + ServerName + " 上不存在";
+                    dr.ResultNum = -1;
+                    Marshal.FinalReleaseComObject(u8Login);
+                    errmsg = dr.ResultMsg;
+                    return -1;
+                }
+            }
+            #endregion
+
+            string subId = U8.Interface.Bus.SysInfo.subId;
+            string userId = userid;
+            string accId = source + "@" + accid;
+
+            string yearId = yearid; // DateTime.Now.ToString("yyyy"); // yearid;
+            string password =  pwd;
+            string _date = date; // DateTime.Now.ToString("yyyy-MM-dd");  //bd.ConnectInfo.Date;
+            string srv = ServerName;
+            string serial = BLL.Common.GetSerial();
+
+
+            #region 20140814
+
+            #endregion
+
+            if (!u8Login.Login(ref subId, ref accId, ref yearId, ref userId, ref password, ref _date, ref srv, ref serial))
+            {
+                dr.ResultMsg = "登陆失败，原因：" + u8Login.ShareString;
+                if (u8Login.ShareString.IndexOf("年度") > 0 || u8Login.ShareString.IndexOf("日期") > 0) dr.ResultMsg += " - " + _date;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                errmsg = dr.ResultMsg;
+                return -1;
+            }
+
+            //清除站点
+            if (!string.IsNullOrEmpty(sqlconnection))
+            {
+                DbHelperSQLP dsp = new DbHelperSQLP(sqlconnection);
+                string sql = string.Format("DELETE UFSystem..ua_Task WHERE cStation='{0}' AND cUser_Id='{1}' AND cAcc_Id='{2}' ", ServerName, userId, accId);
+                dsp.ExecuteSql(sql);
+            }
+
+            errmsg = null;
+            return 1;
+ 
+
+        }
+
+
+        #endregion
+
 
 
     }

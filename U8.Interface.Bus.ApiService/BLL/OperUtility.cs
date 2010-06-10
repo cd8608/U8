@@ -65,9 +65,14 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// </summary>
         /// <param name="log"></param>
         /// <returns></returns>
-        public void Run(object log)
+        public void RunObject(object log)
         {
-            Model.Synergismlog tmplog = log as Model.Synergismlog;
+
+            System.Diagnostics.Trace.WriteLine("begin log as Model.Synergismlog "); 
+            Model.Synergismlog tmplog = log as Model.Synergismlog; 
+            System.Diagnostics.Trace.WriteLine("end log as Model.Synergismlog ");
+
+            System.Diagnostics.Trace.WriteLine("before Run(tmplog) "); 
             Run(tmplog);
             
         }
@@ -79,15 +84,30 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <returns></returns>
         public void Run(Model.Synergismlog log)
         {
+
+            System.Diagnostics.Trace.WriteLine("begin Run(Model.Synergismlog log)   ");
+
+            System.Diagnostics.Trace.WriteLine("before log.OPClass   "); 
             log.OPClass = log.OPClass;
             log.OP = ClassFactory.GetBaseOp(log);
             DealResult dr = new DealResult();
-            dr.ResultNum = Constant.ResultNum_NoError;
+            dr.ResultNum = Constant.ResultNum_NoError; 
+            System.Diagnostics.Trace.WriteLine("after log.OPClass   ");
 
+
+            System.Diagnostics.Trace.WriteLine("before ITaskLogDetail  ");  
             BLL.TaskLogFactory.ITaskLogDetail logdtbll = ClassFactory.GetITaskLogDetailBLL(log.TaskType);
-            BLL.TaskLogFactory.ITaskLogMain logbll = ClassFactory.GetITaskLogMainBLL(log.TaskType); 
+            System.Diagnostics.Trace.WriteLine("after ITaskLogDetail  ");
 
-            Model.Synergismlogdt fdt = logdtbll.GetFrist(log, log.OP);
+            System.Diagnostics.Trace.WriteLine("before ITaskLogMain  "); 
+            BLL.TaskLogFactory.ITaskLogMain logbll = ClassFactory.GetITaskLogMainBLL(log.TaskType);
+            System.Diagnostics.Trace.WriteLine("after ITaskLogMain  ");
+
+
+            System.Diagnostics.Trace.WriteLine("before logdtbll.GetFrist  "); 
+            Model.Synergismlogdt fdt = logdtbll.GetFrist(log, log.OP); 
+            System.Diagnostics.Trace.WriteLine("after logdtbll.GetFrist  "); 
+
             //挂起主表(置于等待中)
             if (fdt.Cstatus == Constant.SynergisnLogDT_Cstatus_NoAudit)
             {
@@ -109,7 +129,10 @@ namespace U8.Interface.Bus.ApiService.BLL
             List<Model.Synergismlogdt> listnext = logdtbll.GetNext(fdt, log.OP);
              
             //协同操作
-            dr = MakeLogDT(log, dr, logdtbll, logbll, fdt, listnext);
+
+            System.Diagnostics.Trace.WriteLine("before MakeLogDT  "); 
+            dr = MakeLogDT(log, dr, logdtbll, logbll, fdt, listnext); 
+            System.Diagnostics.Trace.WriteLine("after MakeLogDT  "); 
 
             //发送消息
 
@@ -138,12 +161,17 @@ namespace U8.Interface.Bus.ApiService.BLL
 
             for (int i = 0; i < listnext.Count; i++)
             {
+
+                System.Diagnostics.Trace.WriteLine("listnext.Count:  " + listnext.Count); 
+
                 Synergismlogdt preDt;
                 Model.Synergismlogdt nextdt = listnext[i];
 
                 ////处理数据开始 
                 try
                 {
+
+                    System.Diagnostics.Trace.WriteLine("  处理数据开始  "); 
 
                     BaseData bd = ClassFactory.GetBaseData(nextdt);
                     bd.Fristsynergismlogdt = fdt;
@@ -169,7 +197,10 @@ namespace U8.Interface.Bus.ApiService.BLL
 
 
 
-                    dr = op.MakeData(nextdt, bd);
+                    System.Diagnostics.Trace.WriteLine("  before MakeData  "); 
+                    dr = op.MakeData(nextdt, bd); 
+                    System.Diagnostics.Trace.WriteLine("  after MakeData  "); 
+
 
                     string ccode;
                     if (nextdt.Cstatus != DAL.Constant.SynergisnLogDT_Cstatus_NoAudit)
@@ -180,7 +211,9 @@ namespace U8.Interface.Bus.ApiService.BLL
                             return dr;
                         }
 
-                        dr = op.MakeVouch(bd);  //生单、档案协同
+                        System.Diagnostics.Trace.WriteLine("  before MakeVouch  "); 
+                        dr = op.MakeVouch(bd);  //生单、档案协同 
+                        System.Diagnostics.Trace.WriteLine("  after MakeVouch  "); 
 
                         if (dr.ResultNum == DAL.Constant.ResultNum_NormalError)
                         {

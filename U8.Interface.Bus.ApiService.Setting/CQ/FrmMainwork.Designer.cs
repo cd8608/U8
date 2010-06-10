@@ -35,6 +35,7 @@
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.btnConnectSetting = new System.Windows.Forms.ToolStripButton();
+            this.btnU8AppSetting = new System.Windows.Forms.ToolStripButton();
             this.btnServiceState = new System.Windows.Forms.ToolStripButton();
             this.btnUISetting = new System.Windows.Forms.ToolStripButton();
             this.btnOutPut = new System.Windows.Forms.ToolStripButton();
@@ -144,6 +145,7 @@
             // 
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnConnectSetting,
+            this.btnU8AppSetting,
             this.btnServiceState,
             this.btnUISetting,
             this.btnOutPut,
@@ -163,6 +165,15 @@
             this.btnConnectSetting.Size = new System.Drawing.Size(97, 22);
             this.btnConnectSetting.Text = "服务链接设置";
             this.btnConnectSetting.Click += new System.EventHandler(this.btnConnectSetting_Click);
+            // 
+            // btnU8AppSetting
+            // 
+            this.btnU8AppSetting.Image = ((System.Drawing.Image)(resources.GetObject("btnU8AppSetting.Image")));
+            this.btnU8AppSetting.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnU8AppSetting.Name = "btnU8AppSetting";
+            this.btnU8AppSetting.Size = new System.Drawing.Size(85, 22);
+            this.btnU8AppSetting.Text = "U8对接设置";
+            this.btnU8AppSetting.Click += new System.EventHandler(this.btnU8AppSetting_Click);
             // 
             // btnServiceState
             // 
@@ -1158,5 +1169,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHEnd;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHState;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHErrMsg;
+        private System.Windows.Forms.ToolStripButton btnU8AppSetting;
     }
 }

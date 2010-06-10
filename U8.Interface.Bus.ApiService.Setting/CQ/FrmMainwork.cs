@@ -212,7 +212,7 @@ namespace U8.Interface.Bus.ApiService.Setting
 
                         if (U8.Interface.Bus.SysInfo.multiThread)
                         {
-                            threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run));
+                            threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.RunObject));
                             threadTask.Start(log);    
                         }
                         else
@@ -1571,5 +1571,13 @@ namespace U8.Interface.Bus.ApiService.Setting
             
         }
 
+        private void btnU8AppSetting_Click(object sender, EventArgs e)
+        {
+            using (Form f = new CQ.FrmU8AppSetting())
+            {
+                f.ShowDialog();
+            }
+        }
+         
     }
 }

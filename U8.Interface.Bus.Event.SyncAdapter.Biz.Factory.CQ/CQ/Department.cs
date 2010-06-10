@@ -56,7 +56,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         {
 
             StringBuilder sb = new StringBuilder();
-            StringBuilder sbm = new StringBuilder();
+            StringBuilder sbm = new StringBuilder(); 
+            StringBuilder sbd = new StringBuilder();
+
             sbm = this.CreateInsertString();
             if (sbm.Length > 0)
             {
@@ -68,10 +70,15 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             } 
             if (bNoCase)
             {
-                base.Delete();  //清除旧记录
+                //清除旧记录
+                sbd = this.CreateDeleteString();
             }
             if (sb.Length > 0)
             {
+                if (sbd.Length > 0)
+                {
+                    return ExecSql(sbd.ToString() + " " + sb.ToString());
+                }
                 return ExecSql(sb.ToString());
             }
             return null;

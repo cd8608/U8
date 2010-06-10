@@ -42,7 +42,7 @@ namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
             rmdoel.Cacc_id = U8.Interface.Bus.Config.ConfigUtility.U8AppAcc;  //"888";
             rmdoel.Cuser_id = U8.Interface.Bus.Config.ConfigUtility.U8AppUser;  // string username = Comm.RegistryKeyHelp.getValueRegEdit(SysInfo.u8path, "username");
             rmdoel.Cmaker = U8.Interface.Bus.Config.ConfigUtility.U8AppUser;  
-            rmdoel.Cpassword = U8.Interface.Bus.Config.ConfigUtility.U8AppPwd;  // Comm.RegistryKeyHelp.getValueRegEdit(SysInfo.u8path, "pwd");   pwd = Comm.DESEncrypt.Decrypt(pwd);
+            rmdoel.Cpassword = U8.Interface.Bus.Comm.DESEncrypt.Decrypt(U8.Interface.Bus.Config.ConfigUtility.U8AppPwd);  // Comm.RegistryKeyHelp.getValueRegEdit(SysInfo.u8path, "pwd");   pwd = Comm.DESEncrypt.Decrypt(pwd);
             rmdoel.Benable = "1";
             rmdoel.Datasource = "(default)";
 
@@ -62,7 +62,14 @@ namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
                 cimodel.sSrv = rmdoel.Cservername;
                 cimodel.SubId = "DP";  //测试
                 cimodel.UserId = rmdoel.Cuser_id;
-                cimodel.YearId = DateTime.Now.ToString("yyyy"); //rmdoel.Ibeginyear.ToString();
+                if (string.IsNullOrEmpty(U8.Interface.Bus.Config.ConfigUtility.U8AppYear))  //rmdoel.Ibeginyear.ToString();
+                {
+                    cimodel.YearId = DateTime.Now.ToString("yyyy");   
+                }
+                else
+                {
+                    cimodel.YearId = U8.Interface.Bus.Config.ConfigUtility.U8AppYear;
+                }
                 cimodel.Serial = BLL.Common.GetSerial();
                 cimodel.BEnable = rmdoel.Benable == "1" || rmdoel.Benable == "是";
                 cimodel.Constring = string.Format("Data Source={0};Initial Catalog={1};Persist Security Info=True;User ID=sa;Password={2};Current Language=Simplified Chinese", rmdoel.Caddress, rmdoel.Caccname, rmdoel.Cdbpwd);

@@ -15,7 +15,7 @@ namespace U8.Interface.Bus.WinService
         System.Threading.Thread thread;
 
         System.Threading.Thread threadTask;
-        U8.Interface.Bus.ApiService.BLL.TaskOperator oper;
+        //U8.Interface.Bus.ApiService.BLL.TaskOperator oper;
 
         public MainService()
         {
@@ -39,32 +39,51 @@ namespace U8.Interface.Bus.WinService
         /// 
         /// </summary>
         private void Run()
-        {
-            oper = new U8.Interface.Bus.ApiService.BLL.TaskOperator(); 
+        { 
+
+            U8.Interface.Bus.ApiService.BLL.TaskOperator oper = new U8.Interface.Bus.ApiService.BLL.TaskOperator();
             while (true)
             { 
                 try
                 {
+                    System.Diagnostics.Trace.WriteLine("begin License.Check "); 
                     U8.Interface.Bus.License.Check();
+                    System.Diagnostics.Trace.WriteLine("end License.Check ");
+                     
+                    System.Diagnostics.Trace.WriteLine("begin oper.GetTask "); 
                     U8.Interface.Bus.ApiService.Model.TaskList tasklist = oper.GetTask();
+                    System.Diagnostics.Trace.WriteLine("end oper.GetTask "); 
+
+
                     if (tasklist.Count > 0)
                     {
+
+                        System.Diagnostics.Trace.WriteLine(" tasklist.Count > 0 "); 
+
                         foreach (U8.Interface.Bus.ApiService.Model.Task task in tasklist)
                         {
-                            U8.Interface.Bus.ApiService.Model.Synergismlog log = new U8.Interface.Bus.ApiService.Model.Synergismlog();
+                            System.Diagnostics.Trace.WriteLine(" U8.Interface.Bus.ApiService.Model.Task task in tasklist"); 
+                            System.Diagnostics.Trace.WriteLine(" begin create log "); 
 
+                            U8.Interface.Bus.ApiService.Model.Synergismlog log = new U8.Interface.Bus.ApiService.Model.Synergismlog(); 
                             log.Cvouchertype = task.VouchType.CardNo;
                             log.Id = task.id;
                             log.TaskType = task.taskType;
                             log.OPClass = task.VouchType.VoucherClass;
 
+                            System.Diagnostics.Trace.WriteLine(" end create log "); 
                             if (SysInfo.multiThread)
-                            { 
-                                threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run));
+                            {
+
+                                System.Diagnostics.Trace.WriteLine("begin threadTask "); 
+                                threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.RunObject));
+                                System.Diagnostics.Trace.WriteLine("begin Start threadTask "); 
                                 threadTask.Start(log);  
                             }
                             else
                             {
+
+                                System.Diagnostics.Trace.WriteLine("begin oper.Run(log) "); 
                                 oper.Run(log);
                             }
                         }

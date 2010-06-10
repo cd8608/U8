@@ -70,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="CQ\FrmU8AppSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CQ\FrmU8AppSetting.Designer.cs">
+      <DependentUpon>FrmU8AppSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="CQ\FrmUISetting.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +115,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CQ\FrmU8AppSetting.resx">
+      <DependentUpon>FrmU8AppSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CQ\FrmUISetting.resx">
       <DependentUpon>FrmUISetting.cs</DependentUpon>
     </EmbeddedResource>

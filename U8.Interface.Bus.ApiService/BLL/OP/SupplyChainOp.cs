@@ -100,11 +100,17 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <returns></returns>
         public override Model.DealResult MakeVouch(BaseData bd)
         {
+
+            System.Diagnostics.Trace.WriteLine("   begin MakeVouch     ");  
+
             Model.DealResult dr;
             Model.APIData apidata = bd as Model.APIData;
             U8Login.clsLogin u8Login = new U8Login.clsLogin();
-            
-            dr = GetU8Login(apidata, u8Login);
+
+
+            System.Diagnostics.Trace.WriteLine("   before GetU8Login     ");  
+            dr = GetU8Login(apidata, u8Login); 
+            System.Diagnostics.Trace.WriteLine("   after GetU8Login     "); 
 
             if (dr.ResultNum < 0) return dr;
             U8ApiBroker broker = null;
@@ -217,11 +223,18 @@ namespace U8.Interface.Bus.ApiService.BLL
                 U8.Interface.Bus.Log.WriteFileWithName("DomBody.xml", xmlBody.xml);
                 
                 dr = BrokerInvoker(ubOrder);
-            }  
-            UpdateTeamworkField(bd, dr);
+            }
+
+            System.Diagnostics.Trace.WriteLine("   before  MakeVouch UpdateTeamworkField    ");  
+            UpdateTeamworkField(bd, dr); 
+            System.Diagnostics.Trace.WriteLine("   end  MakeVouch UpdateTeamworkField    "); 
+ 
             ClearUATask(bd);
             //if (!DAL.Common.SetCreateDate(bd, dr.VouchIdRet))
             //    U8.Interface.Bus.Log.WriteWinLog("设置单据制单时间失败,Cvouchertype:" + bd.Synergismlogdt.Cvouchertype + ";VouchIdRet:" + dr.VouchIdRet + ".");
+
+
+            System.Diagnostics.Trace.WriteLine("   end MakeVouch     ");  
 
             return dr;
         }

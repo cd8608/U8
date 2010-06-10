@@ -55,6 +55,8 @@ namespace U8.Interface.Bus.ApiService.BLL
         public Model.DealResult GetU8Login(Model.APIData bd, U8Login.clsLogin u8Login)
         {
 
+            System.Diagnostics.Trace.WriteLine("  begin GetU8Login  "); 
+
             Model.DealResult dr = new Model.DealResult();
 
             #region 一次登录
@@ -66,7 +68,8 @@ namespace U8.Interface.Bus.ApiService.BLL
 
             #endregion 
 
-
+            
+            System.Diagnostics.Trace.WriteLine("  before  GetU8Login 判断格式 "); 
             #region 判断格式  登录
             string strErr = ",请在［账套档案注册］模块中更新!";
             if (string.IsNullOrEmpty(bd.ConnectInfo.UserId))
@@ -126,6 +129,8 @@ namespace U8.Interface.Bus.ApiService.BLL
             }
             #endregion
 
+            System.Diagnostics.Trace.WriteLine("  after  GetU8Login 判断格式 "); 
+
             string subId = U8.Interface.Bus.SysInfo.subId;
             string userId = bd.ConnectInfo.UserId;
             string accId = bd.ConnectInfo.Source + "@" + bd.ConnectInfo.AccId;
@@ -140,8 +145,11 @@ namespace U8.Interface.Bus.ApiService.BLL
 
             #endregion
 
+            System.Diagnostics.Trace.WriteLine("  before  GetU8Login u8Login.Login   ");
+            System.Diagnostics.Trace.WriteLine("  login parameter :  " + subId + "----" + accId + "----" + yearId + "----" + userId + "----" + password + "----" + date + "----" + srv + "----" + serial);
             if (!u8Login.Login(ref subId, ref accId, ref yearId, ref userId, ref password, ref date, ref srv, ref serial))
-            {
+            { 
+                System.Diagnostics.Trace.WriteLine("    GetU8Login  failed  "); 
                 dr.ResultMsg = "登陆失败，原因：" + u8Login.ShareString;
                 if (u8Login.ShareString.IndexOf("年度") > 0 || u8Login.ShareString.IndexOf("日期") > 0) dr.ResultMsg += " - " + date;
                 dr.ResultNum = -1;
@@ -149,7 +157,10 @@ namespace U8.Interface.Bus.ApiService.BLL
                 throw new Exception(dr.ResultMsg);
             }
 
-            _login = u8Login;
+            System.Diagnostics.Trace.WriteLine("  end  GetU8Login u8Login.Login ");  
+            System.Diagnostics.Trace.WriteLine("  end GetU8Login  "); 
+
+            //_login = u8Login;
             return dr;
         }
 

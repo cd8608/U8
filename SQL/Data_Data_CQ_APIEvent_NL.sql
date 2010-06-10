@@ -808,154 +808,156 @@ go
 
 ----- 拆卸单  结束  -----
 
------   生产订单 开始   ----
--- 生产订单 审核后
-declare @AppSysID int,@AppTypeID int,@AppTagID int,@EndpointID nvarchar(50),@MsgTypeID int,@MsgTypeCategoryID int,@MsgFilterID int,@ParentAppTypeID int 
-select @AppSysID=IB_AppSys.ID from IB_AppSys,IB_Entities where IB_Entities.ID=IB_AppSys.EntityID and IB_Entities.EntityTag='U8API' 
-if @AppSysID is null 
-begin 
-insert into IB_Entities(EntityTag,FriendName)values('U8API','U8API') 
-insert into IB_AppSys(AppSystem,FriendName,EntityID)values('U8API','U8API',@@identity) 
-set @AppSysID=@@identity 
-end 
-set @ParentAppTypeID=0 
-set @AppTypeID=0 
-select @AppTypeID=ID from IB_AppType where AppType='U8M' and AppSysID=@AppSysID 
-if @AppTypeID is null or @AppTypeID=0 
-begin 
-insert into IB_AppType(AppType,FriendName,AppSysID)values('U8M','生产制造',@AppSysID) 
-select @AppTypeID=@@identity 
-if @ParentAppTypeID>0 
-begin 
-update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
-end 
-end 
-set @ParentAppTypeID=@AppTypeID 
-set @AppTypeID=0 
-select @AppTypeID=ID from IB_AppType where AppType='MOrder' and AppSysID=@AppSysID 
-if @AppTypeID is null or @AppTypeID=0 
-begin 
-insert into IB_AppType(AppType,FriendName,AppSysID)values('MOrder','生产订单',@AppSysID) 
-select @AppTypeID=@@identity 
-if @ParentAppTypeID>0 
-begin 
-update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
-end 
-end 
-set @ParentAppTypeID=@AppTypeID 
-select @AppTagID=ID from IB_AppTag where AppTag='HY_ME_SVREvent.AfterMoorderAudit' and AppTypeID=@AppTypeID 
-if @AppTagID is null 
-begin 
-insert into IB_AppTag(AppTag,FriendName,AppTypeID,ExtendProperties,Description,Customize,IsPlugin) 
- values('HY_ME_SVREvent.AfterMoorderAudit','Mes服务生产订单审核后事件',@AppTypeID,'','',0,1) 
-set @AppTagID=@@identity 
-end 
-else 
-begin 
-update IB_AppTag set ExtendProperties='',Description='',Customize=0 where ID=@AppTagID 
-end 
-select top 1 @EndpointID=ID from IB_EndPoint where AppTagID=@AppTagID 
-if @EndpointID is null 
-begin 
-insert into IB_EndPoint(Address,ProtocolID,ProtocolParams,AppTagID) 
- values('','DotNetAssemblyForRPC','<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>',@AppTagID) 
-end 
-else 
-begin 
-update IB_EndPoint set Address='',ProtocolID='DotNetAssemblyForRPC',ProtocolParams='<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>' where ID=@EndpointID 
-end 
-select @MsgTypeCategoryID=ID from MOM_MsgTypeCategories where MsgTypeCategory='插件事件' 
-select @MsgFilterID=ID from IB_MsgFilter where FilterName='XPathFilter' 
-select @MsgTypeID=ID from IB_MsgType where MsgType='Audit_After' and AppTypeID=@AppTypeID 
-if @MsgTypeID is null 
-begin 
-insert into IB_MsgType(MsgType,FriendName,MsgSchema,AppTypeID,MsgTypeCategoryID,MsgFilterID,ExtendProperties) values('Audit_After','审核后事件','<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',@AppTypeID,@MsgTypeCategoryID,@MsgFilterID,'') 
- set @MsgTypeID=@@identity 
-end 
-else 
-begin 
-update IB_MsgType set MsgSchema='<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',ExtendProperties='' where ID=@MsgTypeID 
-end 
-if (select count(*) from IB_Event_Plugin where AppTagID=@AppTagID and MsgTypeID=@MsgTypeID) = 0 
-begin 
-insert into IB_Event_Plugin(AppTagID,MsgTypeID,AccID,OrderNO,IsSyncOrAsync,Description,Disabled,UnVisible,UnDeleted) values(@AppTagID,@MsgTypeID,'',1,0,'',0,0,0)  
-end 
-go
 
--- 生产订单 弃审后 
-declare @AppSysID int,@AppTypeID int,@AppTagID int,@EndpointID nvarchar(50),@MsgTypeID int,@MsgTypeCategoryID int,@MsgFilterID int,@ParentAppTypeID int 
-select @AppSysID=IB_AppSys.ID from IB_AppSys,IB_Entities where IB_Entities.ID=IB_AppSys.EntityID and IB_Entities.EntityTag='U8API' 
-if @AppSysID is null 
-begin 
-insert into IB_Entities(EntityTag,FriendName)values('U8API','U8API') 
-insert into IB_AppSys(AppSystem,FriendName,EntityID)values('U8API','U8API',@@identity) 
-set @AppSysID=@@identity 
-end 
-set @ParentAppTypeID=0 
-set @AppTypeID=0 
-select @AppTypeID=ID from IB_AppType where AppType='U8M' and AppSysID=@AppSysID 
-if @AppTypeID is null or @AppTypeID=0 
-begin 
-insert into IB_AppType(AppType,FriendName,AppSysID)values('U8M','生产制造',@AppSysID) 
-select @AppTypeID=@@identity 
-if @ParentAppTypeID>0 
-begin 
-update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
-end 
-end 
-set @ParentAppTypeID=@AppTypeID 
-set @AppTypeID=0 
-select @AppTypeID=ID from IB_AppType where AppType='MOrder' and AppSysID=@AppSysID 
-if @AppTypeID is null or @AppTypeID=0 
-begin 
-insert into IB_AppType(AppType,FriendName,AppSysID)values('MOrder','生产订单',@AppSysID) 
-select @AppTypeID=@@identity 
-if @ParentAppTypeID>0 
-begin 
-update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
-end 
-end 
-set @ParentAppTypeID=@AppTypeID 
-select @AppTagID=ID from IB_AppTag where AppTag='HY_ME_SVREvent.AfterMoorderUnAudit' and AppTypeID=@AppTypeID 
-if @AppTagID is null 
-begin 
-insert into IB_AppTag(AppTag,FriendName,AppTypeID,ExtendProperties,Description,Customize,IsPlugin) 
- values('HY_ME_SVREvent.AfterMoorderUnAudit','Mes服务生产订单弃审后事件',@AppTypeID,'','',0,1) 
-set @AppTagID=@@identity 
-end 
-else 
-begin 
-update IB_AppTag set ExtendProperties='',Description='',Customize=0 where ID=@AppTagID 
-end 
-select top 1 @EndpointID=ID from IB_EndPoint where AppTagID=@AppTagID 
-if @EndpointID is null 
-begin 
-insert into IB_EndPoint(Address,ProtocolID,ProtocolParams,AppTagID) 
- values('','DotNetAssemblyForRPC','<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>',@AppTagID) 
-end 
-else 
-begin 
-update IB_EndPoint set Address='',ProtocolID='DotNetAssemblyForRPC',ProtocolParams='<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>' where ID=@EndpointID 
-end 
-select @MsgTypeCategoryID=ID from MOM_MsgTypeCategories where MsgTypeCategory='插件事件' 
-select @MsgFilterID=ID from IB_MsgFilter where FilterName='XPathFilter' 
-select @MsgTypeID=ID from IB_MsgType where MsgType='CancelAudit_After' and AppTypeID=@AppTypeID 
-if @MsgTypeID is null 
-begin 
-insert into IB_MsgType(MsgType,FriendName,MsgSchema,AppTypeID,MsgTypeCategoryID,MsgFilterID,ExtendProperties) values('CancelAudit_After','弃审后事件','<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',@AppTypeID,@MsgTypeCategoryID,@MsgFilterID,'') 
- set @MsgTypeID=@@identity 
-end 
-else 
-begin 
-update IB_MsgType set MsgSchema='<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',ExtendProperties='' where ID=@MsgTypeID 
-end 
-if (select count(*) from IB_Event_Plugin where AppTagID=@AppTagID and MsgTypeID=@MsgTypeID) = 0 
-begin 
-insert into IB_Event_Plugin(AppTagID,MsgTypeID,AccID,OrderNO,IsSyncOrAsync,Description,Disabled,UnVisible,UnDeleted) values(@AppTagID,@MsgTypeID,'',1,0,'',0,0,0)  
-end 
-go
 
------   生产订单 结束   ----
+-------   生产订单 开始   ----
+---- 生产订单 审核后
+--declare @AppSysID int,@AppTypeID int,@AppTagID int,@EndpointID nvarchar(50),@MsgTypeID int,@MsgTypeCategoryID int,@MsgFilterID int,@ParentAppTypeID int 
+--select @AppSysID=IB_AppSys.ID from IB_AppSys,IB_Entities where IB_Entities.ID=IB_AppSys.EntityID and IB_Entities.EntityTag='U8API' 
+--if @AppSysID is null 
+--begin 
+--insert into IB_Entities(EntityTag,FriendName)values('U8API','U8API') 
+--insert into IB_AppSys(AppSystem,FriendName,EntityID)values('U8API','U8API',@@identity) 
+--set @AppSysID=@@identity 
+--end 
+--set @ParentAppTypeID=0 
+--set @AppTypeID=0 
+--select @AppTypeID=ID from IB_AppType where AppType='U8M' and AppSysID=@AppSysID 
+--if @AppTypeID is null or @AppTypeID=0 
+--begin 
+--insert into IB_AppType(AppType,FriendName,AppSysID)values('U8M','生产制造',@AppSysID) 
+--select @AppTypeID=@@identity 
+--if @ParentAppTypeID>0 
+--begin 
+--update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
+--end 
+--end 
+--set @ParentAppTypeID=@AppTypeID 
+--set @AppTypeID=0 
+--select @AppTypeID=ID from IB_AppType where AppType='MOrder' and AppSysID=@AppSysID 
+--if @AppTypeID is null or @AppTypeID=0 
+--begin 
+--insert into IB_AppType(AppType,FriendName,AppSysID)values('MOrder','生产订单',@AppSysID) 
+--select @AppTypeID=@@identity 
+--if @ParentAppTypeID>0 
+--begin 
+--update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
+--end 
+--end 
+--set @ParentAppTypeID=@AppTypeID 
+--select @AppTagID=ID from IB_AppTag where AppTag='HY_ME_SVREvent.AfterMoorderAudit' and AppTypeID=@AppTypeID 
+--if @AppTagID is null 
+--begin 
+--insert into IB_AppTag(AppTag,FriendName,AppTypeID,ExtendProperties,Description,Customize,IsPlugin) 
+-- values('HY_ME_SVREvent.AfterMoorderAudit','Mes服务生产订单审核后事件',@AppTypeID,'','',0,1) 
+--set @AppTagID=@@identity 
+--end 
+--else 
+--begin 
+--update IB_AppTag set ExtendProperties='',Description='',Customize=0 where ID=@AppTagID 
+--end 
+--select top 1 @EndpointID=ID from IB_EndPoint where AppTagID=@AppTagID 
+--if @EndpointID is null 
+--begin 
+--insert into IB_EndPoint(Address,ProtocolID,ProtocolParams,AppTagID) 
+-- values('','DotNetAssemblyForRPC','<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>',@AppTagID) 
+--end 
+--else 
+--begin 
+--update IB_EndPoint set Address='',ProtocolID='DotNetAssemblyForRPC',ProtocolParams='<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>' where ID=@EndpointID 
+--end 
+--select @MsgTypeCategoryID=ID from MOM_MsgTypeCategories where MsgTypeCategory='插件事件' 
+--select @MsgFilterID=ID from IB_MsgFilter where FilterName='XPathFilter' 
+--select @MsgTypeID=ID from IB_MsgType where MsgType='Audit_After' and AppTypeID=@AppTypeID 
+--if @MsgTypeID is null 
+--begin 
+--insert into IB_MsgType(MsgType,FriendName,MsgSchema,AppTypeID,MsgTypeCategoryID,MsgFilterID,ExtendProperties) values('Audit_After','审核后事件','<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',@AppTypeID,@MsgTypeCategoryID,@MsgFilterID,'') 
+-- set @MsgTypeID=@@identity 
+--end 
+--else 
+--begin 
+--update IB_MsgType set MsgSchema='<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',ExtendProperties='' where ID=@MsgTypeID 
+--end 
+--if (select count(*) from IB_Event_Plugin where AppTagID=@AppTagID and MsgTypeID=@MsgTypeID) = 0 
+--begin 
+--insert into IB_Event_Plugin(AppTagID,MsgTypeID,AccID,OrderNO,IsSyncOrAsync,Description,Disabled,UnVisible,UnDeleted) values(@AppTagID,@MsgTypeID,'',1,0,'',0,0,0)  
+--end 
+--go
+
+---- 生产订单 弃审后 
+--declare @AppSysID int,@AppTypeID int,@AppTagID int,@EndpointID nvarchar(50),@MsgTypeID int,@MsgTypeCategoryID int,@MsgFilterID int,@ParentAppTypeID int 
+--select @AppSysID=IB_AppSys.ID from IB_AppSys,IB_Entities where IB_Entities.ID=IB_AppSys.EntityID and IB_Entities.EntityTag='U8API' 
+--if @AppSysID is null 
+--begin 
+--insert into IB_Entities(EntityTag,FriendName)values('U8API','U8API') 
+--insert into IB_AppSys(AppSystem,FriendName,EntityID)values('U8API','U8API',@@identity) 
+--set @AppSysID=@@identity 
+--end 
+--set @ParentAppTypeID=0 
+--set @AppTypeID=0 
+--select @AppTypeID=ID from IB_AppType where AppType='U8M' and AppSysID=@AppSysID 
+--if @AppTypeID is null or @AppTypeID=0 
+--begin 
+--insert into IB_AppType(AppType,FriendName,AppSysID)values('U8M','生产制造',@AppSysID) 
+--select @AppTypeID=@@identity 
+--if @ParentAppTypeID>0 
+--begin 
+--update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
+--end 
+--end 
+--set @ParentAppTypeID=@AppTypeID 
+--set @AppTypeID=0 
+--select @AppTypeID=ID from IB_AppType where AppType='MOrder' and AppSysID=@AppSysID 
+--if @AppTypeID is null or @AppTypeID=0 
+--begin 
+--insert into IB_AppType(AppType,FriendName,AppSysID)values('MOrder','生产订单',@AppSysID) 
+--select @AppTypeID=@@identity 
+--if @ParentAppTypeID>0 
+--begin 
+--update IB_AppType set ParentID=@ParentAppTypeID where ID=@AppTypeID 
+--end 
+--end 
+--set @ParentAppTypeID=@AppTypeID 
+--select @AppTagID=ID from IB_AppTag where AppTag='HY_ME_SVREvent.AfterMoorderUnAudit' and AppTypeID=@AppTypeID 
+--if @AppTagID is null 
+--begin 
+--insert into IB_AppTag(AppTag,FriendName,AppTypeID,ExtendProperties,Description,Customize,IsPlugin) 
+-- values('HY_ME_SVREvent.AfterMoorderUnAudit','Mes服务生产订单弃审后事件',@AppTypeID,'','',0,1) 
+--set @AppTagID=@@identity 
+--end 
+--else 
+--begin 
+--update IB_AppTag set ExtendProperties='',Description='',Customize=0 where ID=@AppTagID 
+--end 
+--select top 1 @EndpointID=ID from IB_EndPoint where AppTagID=@AppTagID 
+--if @EndpointID is null 
+--begin 
+--insert into IB_EndPoint(Address,ProtocolID,ProtocolParams,AppTagID) 
+-- values('','DotNetAssemblyForRPC','<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>',@AppTagID) 
+--end 
+--else 
+--begin 
+--update IB_EndPoint set Address='',ProtocolID='DotNetAssemblyForRPC',ProtocolParams='<?xml version="1.0" encoding="utf-8"?><momEndPointProtocol name="DotNetAssemblyForRPC"><runtimeParameters><param name="AssemblyPath" value="%U8SOFT%\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll" description="" display="true" /><param name="ClassFullName" value="U8.Interface.Bus.Event.SyncAdapter.MoEvent" description="" display="true" /><param name="MethodName" value="DoAPIEvent" description="" display="true" /><param name="TransactionType" value="" description="" display="true" /></runtimeParameters></momEndPointProtocol>' where ID=@EndpointID 
+--end 
+--select @MsgTypeCategoryID=ID from MOM_MsgTypeCategories where MsgTypeCategory='插件事件' 
+--select @MsgFilterID=ID from IB_MsgFilter where FilterName='XPathFilter' 
+--select @MsgTypeID=ID from IB_MsgType where MsgType='CancelAudit_After' and AppTypeID=@AppTypeID 
+--if @MsgTypeID is null 
+--begin 
+--insert into IB_MsgType(MsgType,FriendName,MsgSchema,AppTypeID,MsgTypeCategoryID,MsgFilterID,ExtendProperties) values('CancelAudit_After','弃审后事件','<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',@AppTypeID,@MsgTypeCategoryID,@MsgFilterID,'') 
+-- set @MsgTypeID=@@identity 
+--end 
+--else 
+--begin 
+--update IB_MsgType set MsgSchema='<?xml version="1.0" encoding="utf-8" ?><serviceInterface transactionType=""><operation name="" ><parameters><parameter index="0" name="moid" type="int" direction="in" desc="生产订单ID ( 表: mom_order.MoId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="1" name="modid" type="int" direction="in" desc="生产订单明细ID ( 表: mom_orderdetail.MoDId )" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter index="2" name="errmsg" type="string" direction="inout" desc="返回错误信息" optional="false" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /><parameter type="bool" direction="retval" desc="返回值: true:成功, false: 失败" byRef="false" uapMetaType="" uapMetaID="" uapMetaName="" isBoHead="false" isBoBody="false" /></parameters></operation></serviceInterface>',ExtendProperties='' where ID=@MsgTypeID 
+--end 
+--if (select count(*) from IB_Event_Plugin where AppTagID=@AppTagID and MsgTypeID=@MsgTypeID) = 0 
+--begin 
+--insert into IB_Event_Plugin(AppTagID,MsgTypeID,AccID,OrderNO,IsSyncOrAsync,Description,Disabled,UnVisible,UnDeleted) values(@AppTagID,@MsgTypeID,'',1,0,'',0,0,0)  
+--end 
+--go
+
+-------   生产订单 结束   ----
 
 
 -----   部门档案事件 开始   ----

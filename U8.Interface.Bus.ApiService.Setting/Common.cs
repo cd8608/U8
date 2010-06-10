@@ -257,6 +257,13 @@ namespace U8.Interface.Bus.ApiService.Setting
                 dicRegist.Add("username", U8.Interface.Bus.Config.ConfigUtility.DataBaseUser);
                 dicRegist.Add("pwd", DESEncrypt.Decrypt(U8.Interface.Bus.Config.ConfigUtility.DataBasePwd));
 
+                dicRegist.Add("u8servername", U8.Interface.Bus.Config.ConfigUtility.U8AppSrv);
+                dicRegist.Add("u8acc", U8.Interface.Bus.Config.ConfigUtility.U8AppAcc);
+                dicRegist.Add("u8username", U8.Interface.Bus.Config.ConfigUtility.U8AppUser);
+                dicRegist.Add("u8pwd", DESEncrypt.Decrypt(U8.Interface.Bus.Config.ConfigUtility.U8AppPwd));
+                dicRegist.Add("u8year", U8.Interface.Bus.Config.ConfigUtility.U8AppYear); 
+
+
                 dicRegist.Add("uistyle", RegistryKeyHelp.getValueRegEdit(RegistryKeyHelp.u8path, "uistyle"));
                 dicRegist.Add("display", RegistryKeyHelp.getValueRegEdit(RegistryKeyHelp.u8path, "display"));
                 dicRegist.Add("hcolumn", RegistryKeyHelp.getValueRegEdit(RegistryKeyHelp.u8path, "hcolumn"));
@@ -315,6 +322,12 @@ namespace U8.Interface.Bus.ApiService.Setting
                 U8.Interface.Bus.Config.ConfigUtility.DataBaseUser = dicRegist["username"];
                 U8.Interface.Bus.Config.ConfigUtility.DataBasePwd = DESEncrypt.Encrypt(dicRegist["pwd"]);
 
+                U8.Interface.Bus.Config.ConfigUtility.U8AppSrv = dicRegist["u8servername"];
+                U8.Interface.Bus.Config.ConfigUtility.U8AppAcc = dicRegist["u8acc"];
+                U8.Interface.Bus.Config.ConfigUtility.U8AppUser = dicRegist["u8username"];
+                U8.Interface.Bus.Config.ConfigUtility.U8AppPwd = DESEncrypt.Encrypt(dicRegist["u8pwd"]);  //dicRegist["u8pwd"]; //
+                U8.Interface.Bus.Config.ConfigUtility.U8AppYear = dicRegist["u8year"];
+
 
                 RegistryKeyHelp.SetValueRegEdit(RegistryKeyHelp.u8path, "uistyle", dicRegist["uistyle"]);
                 RegistryKeyHelp.SetValueRegEdit(RegistryKeyHelp.u8path, "display", dicRegist["display"]);
@@ -350,6 +363,13 @@ namespace U8.Interface.Bus.ApiService.Setting
                 U8.Interface.Bus.Config.ConfigUtility.DataBasePwd = DESEncrypt.Encrypt(dicRegist["pwd"]);
 
 
+                U8.Interface.Bus.Config.ConfigUtility.U8AppSrv = dicRegist["u8servername"];
+                U8.Interface.Bus.Config.ConfigUtility.U8AppAcc = dicRegist["u8acc"];
+                U8.Interface.Bus.Config.ConfigUtility.U8AppUser = dicRegist["u8username"]; 
+                U8.Interface.Bus.Config.ConfigUtility.U8AppPwd = DESEncrypt.Encrypt(dicRegist["u8pwd"]);  //dicRegist["u8pwd"]; //
+                U8.Interface.Bus.Config.ConfigUtility.U8AppYear = dicRegist["u8year"];
+
+ 
                 if (!RegistryKeyHelp.CreateItemRegEdit(RegistryKeyHelp.u8path)) return false;
                 RegistryKeyHelp.SetValueRegEdit(RegistryKeyHelp.u8path, "uistyle", dicRegist["uistyle"]);
                 RegistryKeyHelp.SetValueRegEdit(RegistryKeyHelp.u8path, "display", dicRegist["display"]);
@@ -368,7 +388,7 @@ namespace U8.Interface.Bus.ApiService.Setting
 
         #endregion
 
-        #region 链接方法
+        #region 数据库链接方法
         /// <summary>
         /// 设置链接
         /// </summary>
@@ -392,7 +412,7 @@ namespace U8.Interface.Bus.ApiService.Setting
         }
 
         /// <summary>
-        /// 测试链接
+        /// 测试数据库链接
         /// </summary>
         /// <returns></returns>
         public static int TestLink(string ServerName, string DBName, string UserName, string DBPwd)
@@ -417,7 +437,25 @@ namespace U8.Interface.Bus.ApiService.Setting
                 sqlcon.Close();
             }
         }
+
+
+
+
         #endregion
+
+        #region U8登录测试
+        /// <summary>
+        /// 测试U8登录
+        /// </summary>
+        /// <returns></returns>
+        public static int TestU8Login(string ServerName, string DBName, string UserName, string DBPwd)
+        { 
+            return 1;
+        }
+
+
+        #endregion
+
 
         #region 服务方法
 

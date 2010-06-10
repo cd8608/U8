@@ -216,6 +216,10 @@ namespace U8.Interface.Bus.Config
             SaveXml();
         }
 
+
+        /// <summary>
+        /// 密码
+        /// </summary>
         private static string u8apppwd;
         public static string U8AppPwd
         {
@@ -243,6 +247,11 @@ namespace U8.Interface.Bus.Config
             SaveXml();
         }
 
+
+
+        /// <summary>
+        /// U8账套号
+        /// </summary>
         private static string u8appacc;
         public static string U8AppAcc
         {
@@ -269,9 +278,37 @@ namespace U8.Interface.Bus.Config
             string res = SetAttrib("/configuration/ApiService", "u8acc", value);
             SaveXml();
         }
-         
 
-         
+        /// <summary>
+        /// 登录年度
+        /// </summary>
+        private static string u8appyear;
+        public static string U8AppYear
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(u8appyear))
+                {
+                    u8appyear = GetU8AppYear();
+                }
+                return u8appyear;
+            }
+            set
+            {
+                SetU8AppYear(value);
+            }
+        }
+        private static string GetU8AppYear()
+        {
+            string res = GetAttrib("/configuration/ApiService", "u8year");
+            return res;
+        }
+        private static void SetU8AppYear(string value)
+        {
+            string res = SetAttrib("/configuration/ApiService", "u8year", value);
+            SaveXml();
+        }
+
 
         #endregion
 
