@@ -331,6 +331,33 @@ CREATE TABLE dbo.MES_CQ_bom_opcomponent
 END
 GO
 
+
+/*==============================MES_CQ_bom_opcomponentsub structure =============================*/
+print 'dbo.MES_CQ_bom_opcomponentsub...'
+if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_bom_opcomponentsub') and sysstat & 0xf = 3)
+BEGIN
+CREATE TABLE dbo.MES_CQ_bom_opcomponentsub
+(
+	ddid nvarchar(36), --Int IDENTITY(1,1) not null , --替代料表ID	该子表数据唯一KEY
+	did	nvarchar(36),  --关联子表ID	该子表数据唯一KEY 
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
+	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
+	opertype Int default 0,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	cerrordesc nvarchar(4000) null ,  --错误信息
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
+
+	cInvCode	Nvarchar(20), -- 物料编号	
+	Sequence	Int, -- 替代次序
+	Factor	float, -- 替代比
+	 
+  CONSTRAINT PK_MES_CQ_bom_opcomponentsub PRIMARY KEY  CLUSTERED
+  (
+    did
+  )
+)
+END
+GO
+
  
 --组装单     0308
 print 'dbo.MES_CQ_AssemVouch...'
