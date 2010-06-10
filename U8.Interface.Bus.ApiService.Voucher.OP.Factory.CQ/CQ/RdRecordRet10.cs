@@ -247,7 +247,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             }
             else
             {
-                return null;
+                return logdt;
             }        
         }
 

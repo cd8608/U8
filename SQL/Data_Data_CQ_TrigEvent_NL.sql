@@ -314,12 +314,12 @@ CREATE TRIGGER [T_MES_CQ_WareHouse_INSERT]
 		SET @deal = 1 
 		
 		set nocount on   
-		DELETE FROM MES_CQ_workcenter WHERE  itype = '²Ö¿â' and WcCode in (select inserted.cWhCode from inserted  )    
+		DELETE FROM MES_CQ_workcenter WHERE  itype = @itype and WcCode in (select inserted.cWhCode from inserted  )    
 		 
 		INSERT INTO MES_CQ_workcenter
 		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0,0, cWhCode,cWhName,'²Ö¿â' as iType
+		NEWID(),0,0, cWhCode,cWhName,@itype as iType
 		FROM inserted t  
 		set nocount off 
 		--IF @@TRANCOUNT>=2 COMMIT

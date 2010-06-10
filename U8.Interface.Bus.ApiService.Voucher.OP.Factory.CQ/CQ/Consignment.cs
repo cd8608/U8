@@ -298,7 +298,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             }
             else
             {
-                return null;
+                return logdt;
             }
         }
 
@@ -349,8 +349,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
             string sql = "select b.*,";
             sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
-            sql += "lb.cWhCode as mes_cWhCode,lb.iquantity as mes_iquantity,lb.cvencode as mes_cvencode   ";
-            sql += " from " + _sourcetablenameb + " b with(nolock) left join  " + _sourcetablenameh + " t with(nolock) on b.id = t.id left join " + bodytable + " lb with(nolock) on lb.isosid = b.isosid left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
+            sql += " lb.cWhCode as mes_cWhCode,lb.iquantity as mes_iquantity,lb.cvencode as mes_cvencode   ";
+            sql += " from " + _sourcetablenameb + " b with(nolock) inner join  " + _sourcetablenameh + " t with(nolock) on b.id = t.id inner join " + bodytable + " lb with(nolock) on lb.isosid = b.isosid inner join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
