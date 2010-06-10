@@ -1,0 +1,42 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.ApiService.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.ApiService.Voucher.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MOMProtocol.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFIDA.U8.U8APIFramework.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MOMMessageFilter.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFIDA.U8.U8MOMAPIFramework.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MOMAdapter.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFIDA.U8.MomServiceCommon.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\COMAdapterForOldAPI.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MOMEngineDAC.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFSoft.AIF.MOM.Common.MessageObjectModel.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MSCOMProtocol.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MOMChannelProcessor.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\DotNetTransactionScopeService.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\Interop.TLI.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\DotNetAssemblyProtocol.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\Interop.VBAsyncPluginInvoker.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\Interop.U8APITransactionProxy.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFSoft.AIF.MOM.Common.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\IESBSDLMsgType.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFIDA.U8.UAP.VoucherMetaUpgrade.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\MOMEngine.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\IAppReceive.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\UFSoft.AIF.MOM.Common.MessageObjectModel.xml
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.ApiService.Voucher.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\bin\Debug\U8.Interface.Bus.ApiService.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\obj\Debug\ResolveAssemblyReference.cache
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\obj\Debug\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\obj\Debug\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\obj\Debug\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS\obj\Debug\U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS.pdb

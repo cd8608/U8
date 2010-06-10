@@ -1,0 +1,28 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\bin\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\bin\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\obj\Debug\U8.Interface.Bus.Comm.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\obj\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.DBUtility\obj\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.Comm.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.Comm.csproj.ResolveComReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\Interop.MSXML2.dll

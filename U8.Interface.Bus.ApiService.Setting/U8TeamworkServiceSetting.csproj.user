@@ -1,0 +1,5 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<ProjectView>ShowAllFiles</ProjectView>
+		<ReferencePath>D:\U8SOFT\Framework\;D:\U8SOFT\UAP\Runtime\;D:\U8SOFT\UAP\;D:\U8SOFT\Portal\;D:\Pak\Package\MSIOBJ\K7[U8V111](V6.2)\client\COM\TARGET\HY\client\HY_DZ_K7_XTPT\</ReferencePath></PropertyGroup>
+</Project>

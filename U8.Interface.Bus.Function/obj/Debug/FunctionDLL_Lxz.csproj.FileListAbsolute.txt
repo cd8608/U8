@@ -1,0 +1,8 @@
+C:\U8SOFT\HY\client\HY_DZ_K7_XTPT\FunctionDLL.dll
+C:\U8SOFT\HY\client\HY_DZ_K7_XTPT\FunctionDLL.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\FunctionDLL.dll
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\FunctionDLL.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\FunctionDLL.dll
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\FunctionDLL.pdb

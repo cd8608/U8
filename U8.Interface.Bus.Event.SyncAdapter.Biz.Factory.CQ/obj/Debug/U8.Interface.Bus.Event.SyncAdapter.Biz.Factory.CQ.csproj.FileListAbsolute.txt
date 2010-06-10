@@ -1,0 +1,14 @@
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.CQ\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.CQ\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.CQ\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.CQ\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.CQ\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.CQ\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ.pdb

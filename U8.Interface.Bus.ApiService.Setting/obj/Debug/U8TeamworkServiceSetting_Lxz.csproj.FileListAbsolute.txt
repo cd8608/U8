@@ -1,0 +1,24 @@
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\bin\Debug\U8TeamworkServiceSetting.exe.config
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.exe
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.pdb
+C:\U8SOFT\HY\client\HY_DZ_K7_XTPT\U8TeamworkServiceSetting.exe.config
+C:\U8SOFT\HY\client\HY_DZ_K7_XTPT\U8TeamworkServiceSetting.exe
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmConnectSetting.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmOutput.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmServiceSetting.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmTeamwork.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmUISetting.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.Properties.Resources.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\复件 U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting_Lxz.csproj.GenerateResource.Cache
+C:\U8SOFT\HY\client\HY_DZ_K7_XTPT\U8TeamworkServiceSetting.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.exe
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmConnectSetting.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmOutput.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmServiceSetting.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmTeamwork.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.FrmUISetting.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting.Properties.Resources.resources
+Z:\z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\U8TeamworkServiceSetting\U8TeamworkServiceSetting\obj\Debug\U8TeamworkServiceSetting_Lxz.csproj.GenerateResource.Cache

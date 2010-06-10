@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2989BE28-C645-4DDF-A6DC-9F5BEB9A4128}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>U8.Interface.Bus.ApiService</RootNamespace>
+    <AssemblyName>U8.Interface.Bus.ApiService</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\..\..\U8SOFT\HY\client\HY_ME_SVR\WinService\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ADODB, Version=2.6.0.0, Culture=neutral, PublicKeyToken=79a4e7ad54eeabca">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\U8SOFT\Interop\ADODB.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.MSXML2, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\U8SOFT\Interop\Interop.MSXML2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.U8Login, Version=1.14.0.0, Culture=neutral, PublicKeyToken=79a4e7ad54eeabca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\U8SOFT\Interop\Interop.U8Login.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UFIDA.U8.MomServiceCommon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=79a4e7ad54eeabca, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\U8SOFT\UFMOM\U8APIFramework\UFIDA.U8.MomServiceCommon.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UFIDA.U8.U8APIFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\U8SOFT\UFMOM\U8APIFramework\UFIDA.U8.U8APIFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UFIDA.U8.U8MOMAPIFramework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>c:\U8SOFT\UFMOM\U8APIFramework\UFIDA.U8.U8MOMAPIFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLL\OP\SupplyChainOp.cs" />
+    <Compile Include="BLL\OP\BaseOp.cs" />
+    <Compile Include="BLL\ClassFactory.cs" />
+    <Compile Include="BLL\Common.cs" />
+    <Compile Include="BLL\OperUtility.cs" />
+    <Compile Include="BLL\OP\PurchaseOp.cs" />
+    <Compile Include="BLL\OP\SaleOp.cs" />
+    <Compile Include="BLL\OP\StockOP.cs" />
+    <Compile Include="BLL\OP\SfcOp.cs" />
+    <Compile Include="BLL\OP\APIOp.cs" />
+    <Compile Include="BLL\TaskFactory\CQ\CQTaskDetail.cs" />
+    <Compile Include="BLL\TaskFactory\CQ\CQTaskMain.cs" />
+    <Compile Include="BLL\TaskFactory\ITaskLogDetail.cs" />
+    <Compile Include="BLL\TaskFactory\ITaskLogMain.cs" />
+    <Compile Include="BLL\TaskFactory\ShowLog.cs" />
+    <Compile Include="BLL\TaskFactory\ShowLogDt.cs" />
+    <Compile Include="BLL\TaskFactory\XT\SynergismLog.cs" />
+    <Compile Include="BLL\TaskFactory\XT\SynergisnLogDT.cs" />
+    <Compile Include="BLL\TaskFactory\DS\TaskDetail.cs" />
+    <Compile Include="BLL\TaskFactory\DS\TaskMain.cs" />
+    <Compile Include="DAL\APINormal.cs" />
+    <Compile Include="DAL\Common.cs" />
+    <Compile Include="DAL\Constant.cs" />
+    <Compile Include="DAL\DLLReflect.cs" />
+    <Compile Include="DAL\FieldCmpFactory\CQ\Fieldcmp.cs" />
+    <Compile Include="DAL\FieldCmpFactory\CQ\Fieldcmps.cs" />
+    <Compile Include="DAL\FieldCmpFactory\DS\Fieldcmp.cs" />
+    <Compile Include="DAL\FieldCmpFactory\DS\Fieldcmps.cs" />
+    <Compile Include="DAL\FieldCmpFactory\IFieldcmps.cs" />
+    <Compile Include="DAL\FieldCmpFactory\XT\Fieldcmp.cs" />
+    <Compile Include="DAL\FieldCmpFactory\XT\Fieldcmps.cs" />
+    <Compile Include="DAL\FieldCmpFactory\IFieldcmp.cs" />
+    <Compile Include="DAL\FixValue.cs" />
+    <Compile Include="DAL\Function.cs" />
+    <Compile Include="DAL\Regist.cs" />
+    <Compile Include="DAL\TaskLogFactory\CQ\CQTaskMain.cs" />
+    <Compile Include="DAL\TaskLogFactory\DS\TaskDetail.cs" />
+    <Compile Include="DAL\TaskLogFactory\DS\TaskMain.cs" />
+    <Compile Include="DAL\TaskLogFactory\ITaskLogDetail.cs" />
+    <Compile Include="DAL\TaskLogFactory\XT\ShowLog.cs" />
+    <Compile Include="DAL\TaskLogFactory\XT\ShowLogDt.cs" />
+    <Compile Include="DAL\TaskLogFactory\ITaskLogMain.cs" />
+    <Compile Include="Model\ServiceModel.cs" />
+    <Compile Include="Model\ShowLog.cs" />
+    <Compile Include="Model\ShowLogDt.cs" />
+    <Compile Include="DAL\TaskLogFactory\XT\SynergismLog.cs" />
+    <Compile Include="DAL\TaskLogFactory\XT\SynergismLogDt.cs" />
+    <Compile Include="BLL\U8NameValue.cs" />
+    <Compile Include="DAL\TaskLogFactory\CQ\CQTaskDetail.cs" />
+    <Compile Include="Model\APIData.cs" />
+    <Compile Include="Model\BaseData.cs" />
+    <Compile Include="Model\ConnectInfo.cs" />
+    <Compile Include="Model\DealResult.cs" />
+    <Compile Include="Model\DLLReflect.cs" />
+    <Compile Include="Model\Fieldcmp.cs" />
+    <Compile Include="Model\Fieldcmps.cs" />
+    <Compile Include="Model\Fixvalue.cs" />
+    <Compile Include="Model\Function.cs" />
+    <Compile Include="Model\Functions.cs" />
+    <Compile Include="Model\IrownoModel.cs" />
+    <Compile Include="Model\Regist.cs" />
+    <Compile Include="Model\Synergismlog.cs" />
+    <Compile Include="Model\Synergismlogdt.cs" />
+    <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\TaskList.cs" />
+    <Compile Include="Model\U8NameValue.cs" />
+    <Compile Include="Model\VoucherType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="U8SrvTrans">
+      <Guid>{14E97510-4C3F-4A31-8E69-2A1EF701E041}</Guid>
+      <VersionMajor>11</VersionMajor>
+      <VersionMinor>44</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\U8.Interface.Bus.Comm\U8.Interface.Bus.Comm.csproj">
+      <Project>{5022ADAD-A6FC-4C98-A068-E35D1F98B98D}</Project>
+      <Name>U8.Interface.Bus.Comm</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAL\Voucher\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

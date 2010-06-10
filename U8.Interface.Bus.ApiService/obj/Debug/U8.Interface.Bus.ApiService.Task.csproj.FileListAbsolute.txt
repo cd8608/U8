@@ -1,0 +1,13 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.ApiService.Task.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.ApiService.Task.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\Interop.U8Login.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.Task.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.Task.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\Interop.U8SrvTrans.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\Interop.U8SrvTrans.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.Task.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.pdb

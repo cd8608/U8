@@ -1,0 +1,10 @@
+SCC = This is a Source Code Control file.
+
+[U8TeamworkServiceSetting.sln]
+SCC_Aux_Path = 219.141.185.40:8879:U8_GMT_PLUGIN
+SCC_Project_Name = $/U8_GMT_PLUGIN/电子/业务协同平台/U8V11.0/U8TeamworkServiceSetting
+
+[U8TeamworkServiceSetting.csproj]
+SCC_Aux_Path = 219.141.185.40:8879:U8_GMT_PLUGIN
+SCC_Project_Name = $/U8_GMT_PLUGIN/电子/业务协同平台/U8V11.0/U8TeamworkServiceSetting/U8TeamworkServiceSetting
+

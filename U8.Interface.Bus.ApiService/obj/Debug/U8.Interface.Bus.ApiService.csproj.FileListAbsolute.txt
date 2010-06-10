@@ -1,0 +1,21 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.ApiService.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.ApiService.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\Interop.U8Login.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\bin\Debug\Interop.U8SrvTrans.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\Interop.U8SrvTrans.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.csproj.ResolveComReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService\obj\Debug\U8.Interface.Bus.ApiService.pdb

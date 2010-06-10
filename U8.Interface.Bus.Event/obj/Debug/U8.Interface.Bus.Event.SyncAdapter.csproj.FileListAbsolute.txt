@@ -1,0 +1,53 @@
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.Event.SyncAdapter.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.Event.SyncAdapter.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFIDA.U8.MomServiceCommon.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.U8M.DOSchema.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Spring.Data.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Spring.Aop.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.U8M.Common.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.Framework.AssemblyAssist.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\antlr.runtime.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Spring.Core.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.Framework.Exceptions.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFIDA.U8.U8M.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.Framework.ContextSrv.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Common.Logging.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.U8M.Base.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\bin\Interop.VBA.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\Interop.VBA.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\Interop.VBA.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.csproj.ResolveComReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.Event.SyncAdapter.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.Event.SyncAdapter.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFIDA.U8.MomServiceCommon.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.U8M.DOSchema.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Spring.Data.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Spring.Aop.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.U8M.Common.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.Framework.AssemblyAssist.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\antlr.runtime.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Spring.Core.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.Framework.Exceptions.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFIDA.U8.U8M.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.Framework.ContextSrv.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Common.Logging.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\UFSoft.U8.U8M.Base.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Interop.VBA.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.dll

@@ -1,0 +1,16 @@
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.HY.UAP.Event.SyncAdapter.Event.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.HY.UAP.Event.SyncAdapter.Event.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\Interop.ADODB.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\Interop.MSXML2.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\Interop.VBA.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Event.csproj.ResolveComReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Event.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Event.pdb
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\Interop.VBA.dll
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Event.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Event.dll
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Event\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Event.pdb

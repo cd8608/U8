@@ -1,0 +1,916 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>UFSoft.AIF.MOM.Common.MessageObjectModel</name>
+    </assembly>
+    <members>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender">
+            <summary>
+            消息发送方.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageValidator">
+            <summary>
+            MOM消息验证和错误处理基类
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageValidator.GetErrors">
+            <summary>
+            收集MOM消息构造时的错误信息,返回字符串数组
+            </summary>
+            <returns>MOM消息构造时的错误信息</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageValidator.GetErrorsArrayList">
+            <summary>
+            收集MOM消息构造时的错误信息,返回错误信息数组，数组元素是string类型
+            </summary>
+            <returns>MOM消息构造时的错误信息</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageValidator.SetValidate">
+            <summary>
+            忽略验证，认为消息是有效的
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.IMsgNode">
+            <summary>
+            Summary description for IMsgNode.
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.#ctor(System.String,System.String,System.String)">
+            <summary>
+            消息发送方构造
+            </summary>
+            <param name="sEntityTag">实体标识</param>
+            <param name="sAppType">应用类型</param>
+            <param name="sMsgType">消息类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            消息发送方构造
+            </summary>
+            <param name="sEntityTag">实体标识</param>
+            <param name="sAppType">应用类型</param>
+            <param name="sMsgType">消息类型</param>
+            <param name="sAppTag">应用标识</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.EntityTag">
+            <summary>
+            发送方实体标识
+            </summary>		
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.ApplicationType">
+            <summary>
+            发送方应用类型
+            </summary>		
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.ApplicationTag">
+            <summary>
+            发送方应用标识，可以为Null
+            </summary>		
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.MsgType">
+            <summary>
+            发送方消息类型
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender.Description">
+            <summary>
+            描述信息
+            </summary>		
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC">
+            <summary>
+            消息的RPC过程。RPC过程一般分为“call”和“return”两种类型，一个RPC过程包含一个Sender和一个或多个Receiver
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.#ctor(System.String,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender,UFSoft.AIF.MOM.Common.MessageObjectModel.RPCEnum)">
+            <summary>
+            消息RPC构造.没有接收方
+            </summary>
+            <param name="sMsgId">消息ID</param>
+            <param name="sender">发送方</param>
+            <param name="rpcType">RPC类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.#ctor(System.String,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceivers,UFSoft.AIF.MOM.Common.MessageObjectModel.RPCEnum)">
+            <summary>
+            消息RPC构造.
+            </summary>
+            <param name="sMsgId">消息ID</param>
+            <param name="sender">发送方</param>
+            <param name="receives">接收方</param>
+            <param name="rpcType">RPC类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.#ctor(System.String,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver[],UFSoft.AIF.MOM.Common.MessageObjectModel.RPCEnum)">
+            <summary>
+            消息RPC构造.
+            </summary>
+            <param name="sMsgId">消息ID</param>
+            <param name="sender">发送方</param>
+            <param name="receives">接收方</param>
+            <param name="rpcType">RPC类型</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.RPCType">
+            <summary>
+            RPC过程类型
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.MessageID">
+            <summary>
+            此RPC过程传输的消息ID
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.MsgSender">
+            <summary>
+            消息的发送方（源）
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC.MsgReceivers">
+            <summary>
+            消息的接收方列表（目标）
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses">
+            <summary>
+            消息处理路线。消息处理路线由一个或多个RPC过程组成,通常是"Call"和"Return"两个RPC过程，每个RPC过程又由发送方和接收方组成
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageRPC[])">
+            <summary>
+            消息处理过程类构造.
+            </summary>
+            <param name="rpcs">消息RPC过程.</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.ContainsKey(UFSoft.AIF.MOM.Common.MessageObjectModel.RPCEnum)">
+            <summary>
+            是否包含某一类型的RPC过程
+            </summary>
+            <param name="rpcType">RPC过程类型，一般为Call或Return</param>
+            <returns>是否存在</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.Clear">
+            <summary>
+            清除所有Item
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.Item(UFSoft.AIF.MOM.Common.MessageObjectModel.RPCEnum)">
+            <summary>
+            索引器。index为RPCEnum枚举类型，RPCEnum枚举包含RPCEnum.CALL和RPCEnum.RETURN两个枚举值。
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.Items">
+            <summary>
+            获取MessageRPC数组
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.CurrentRPC">
+            <summary>
+            当前RPC过程
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageCourses.Count">
+            <summary>
+            RPC过程数
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageChannelData">
+            <summary>
+            Summary description for MessageChannelData.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMException">
+            <summary>
+            Summary description for MOMException.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceivers">
+            <summary>
+            接收方集合
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.IBNode">
+            <summary>
+            集成节点类，用来表示实体标识、应用类型、应用标识
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.IBNode.IBNodeTag">
+            <summary>
+            集成节点的标记
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.IBNode.IBNodeName">
+            <summary>
+            集成节点的值
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.IBNode.ExtendProperties">
+            <summary>
+            集成节点的扩展属性。扩展属性由名/值对集合组成
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMChannelTag">
+            <summary>
+            Summary description for ChannelTag.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMReceiptState">
+            <summary>
+            Summary description for MOMReceiptState.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.RPCEnum">
+            <summary>
+            消息RPC过程枚举，用户在构造消息时应使用CALL枚举。
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MsgMode">
+            <summary>
+            消息模式
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.DeliveryMode">
+            <summary>
+            说明是持续性消息还是非持续性消息
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.PRILevel">
+            <summary>
+            消息优先级别
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MsgBodyContent">
+            <summary>
+            消息体内容类型
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MsgBodyAccessMode">
+            <summary>
+            消息体访问模式，分为内部和外部，如果是Inside则MsgBody和MsgHead一起存储在消息中；
+            如果是Outside则消息体存在消息之外的文件系统中。
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMRouteReports">
+            <summary>
+            Summary description for MOMRouteReports.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.ChannelTarget">
+            <summary>
+            Summary description for ChannelTarget.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMsgConst">
+            <summary>
+            Summary description for MOMMsgConst.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.ChannelOriginal">
+            <summary>
+            Summary description for ChannelOriginal.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.UserContextInfo">
+            <summary>
+            Summary description for Security.
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.UserContextInfo.UserContextData">
+            <summary>
+            如果消息体的类型是用户数据，即BodyDataType＝＝MsgBodyDataType.UserData，则该属性有值
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMServerNotices">
+            <summary>
+            Summary description for MOMServerNotices.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageUtilities">
+            <summary>
+            Summary description for MsgUtilities.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties">
+            <summary>
+            消息的基本属性
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.#ctor(System.String,System.String)">
+            <summary>
+            消息属性构造函数,消息默认不会失效,并自动设置发送时间
+            </summary>
+            <param name="msgId">消息ID</param>
+            <param name="msgType">消息类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.#ctor(System.String,System.String,System.DateTime)">
+            <summary>
+            消息属性构造函数,消息默认不会失效
+            </summary>
+            <param name="msgId">消息ID</param>
+            <param name="msgType">消息类型</param>
+            <param name="sentAt">消息发送时间</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.#ctor(System.String,System.String,System.DateTime,System.DateTime)">
+            <summary>
+            消息属性构造函数
+            </summary>
+            <param name="msgId">消息ID</param>
+            <param name="msgType">消息类型</param>
+            <param name="sentAt">消息发送时间</param>
+            <param name="expiresAt">消息失效时间</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.#ctor(System.String)">
+            <summary>
+            消息属性构造函数,消息默认不会失效,并自动设置发送时间
+            </summary>
+            <param name="msgType">消息类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.#ctor(System.String,System.DateTime)">
+            <summary>
+            消息属性构造函数,消息默认不会失效
+            </summary>
+            <param name="msgType">消息类型</param>
+            <param name="sentAt">消息发送时间</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.#ctor(System.String,System.DateTime,System.DateTime)">
+            <summary>
+            消息属性构造函数
+            </summary>
+            <param name="msgType">消息类型</param>
+            <param name="sentAt">消息发送时间</param>
+            <param name="expiresAt">消息失效时间</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.MessageID">
+            <summary>
+            消息ID，是此消息实例的唯一标识，用GUID表示
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.MsgType">
+            <summary>
+            消息的类型
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.SentAt">
+            <summary>
+            消息的发送时间
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties.ExpiresAt">
+            <summary>
+            消息的失效时间
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendPropertiesItem">
+            <summary>
+            MOM扩展属性
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendPropertiesItem.Key">
+            <summary>
+            扩展属性的Key
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendPropertiesItem.Value">
+            <summary>
+            扩展属性的值
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties">
+            <summary>
+            MOM扩展属性
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.GetItem(System.String)">
+            <summary>
+            通过Key取Item
+            </summary>
+            <param name="sKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.ContainsKey(System.String)">
+            <summary>
+            是否包含键
+            </summary>
+            <param name="sKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.ContainsValue(System.String)">
+            <summary>
+            是否包含值
+            </summary>
+            <param name="sValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.CloneItem(System.String)">
+            <summary>
+            通过Key取Item的副本
+            </summary>
+            <param name="sKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Add(System.String,System.String,System.String)">
+            <summary>
+            添加Item
+            </summary>
+            <param name="sKey"></param>
+            <param name="sValue"></param>
+            <param name="sDes"></param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Add(UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendPropertiesItem)">
+            <summary>
+            添加Item
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Remove(System.String)">
+            <summary>
+            删除Item
+            </summary>
+            <param name="sKey"></param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Clear">
+            <summary>
+            清除所有Item
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Item(System.String)">
+            <summary>
+            索引器,通过Key取Value
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Items">
+            <summary>
+            获取所有Item
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMExtendProperties.Count">
+            <summary>
+            Item个数
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead">
+            <summary>
+            消息头
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.#ctor">
+            <summary>
+            默认构造
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender)">
+            <summary>
+            消息头构造函数
+            </summary>
+            <param name="properties">消息属性</param>
+            <param name="controls">消息控制信息</param>
+            <param name="sender">消息发送方</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver)">
+            <summary>
+            消息头构造函数
+            </summary>
+            <param name="properties">消息属性</param>
+            <param name="controls">消息控制信息</param>
+            <param name="sender">消息发送方</param>
+            <param name="receiver">消息接收方</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver[])">
+            <summary>
+            消息头构造函数
+            </summary>
+            <param name="properties">消息属性</param>
+            <param name="controls">消息控制信息</param>
+            <param name="sender">消息发送方</param>
+            <param name="receivers">多个消息接收方</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageProperties,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSender,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceivers)">
+            <summary>
+            消息头构造函数
+            </summary>
+            <param name="properties">消息属性</param>
+            <param name="controls">消息控制信息</param>
+            <param name="sender">消息发送方</param>
+            <param name="receivers">多个消息接收方</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.MsgProperties">
+            <summary>
+            消息的基本属性，包括消息ID、消息类型、消息的发送时间、失效时间等
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.MsgControls">
+            <summary>
+            消息的控制信息，包括消息的发送模式、优先级别、失败后的重发次数等
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.MsgCourses">
+            <summary>
+            消息的执行路线（路由信息），包括多个执行过程，其中每个过程由发送方（源）和接收方（目标）构成
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.MsgChannelData">
+            <summary>
+            在经过消息通道时附加上的数据
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.MsgSecurity">
+            <summary>
+            消息的安全机制，包括身份验证、数据加密等
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead.UserContext">
+            <summary>
+            消息的上下文信息，包括数据库连接字符串、引用参数等
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessageException">
+            <summary>
+            Summary description for MOMMessageException.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody">
+            <summary>
+            消息体
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.#ctor">
+            <summary>
+            缺省构造
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.#ctor(System.String,UFSoft.AIF.MOM.Common.MessageObjectModel.MsgBodyContent)">
+            <summary>
+            用指定的消息体用户数据以及内容类型构造消息体对象
+            </summary>
+            <param name="sMsgBodyData">消息体用户数据,已转化成字符串并且必须符合XML规范</param>
+            <param name="contentType">数据的内容类型,有binary,text,xml</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.#ctor(System.Byte[])">
+            <summary>
+            用二进制用户数据和编码格式构造消息体对象
+            </summary>
+            <param name="msgBodyBinaryData">二进制消息体用户数据</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.#ctor(System.String,UFSoft.AIF.MOM.Common.MessageObjectModel.MsgBodyContent,UFSoft.AIF.MOM.Common.MessageObjectModel.MsgBodyAccessMode)">
+            <summary>
+            用二进制用户数据和编码格式构造消息体对象
+            </summary>
+            <param name="sMsgBodyInfo">如果msgBodyAccessMode参数是Inside,则该参数的值就是消息体数据;如果是Outside,则该参数的值是存放消息体的文件路径。</param>
+            <param name="contentType">数据的内容类型,有binary,text,xml</param>
+            <param name="msgBodyAccessMode">消息体用户数据的访问模式，分为Inside和Outside</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.BodyDataType">
+            <summary>
+            消息体的类型，分为用户类型MsgBodyDataType.UserData和服务器通知类型MsgBodyDataType.MOMServerNotice
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.ContentType">
+            <summary>
+            消息体的内容类型，有binary,text,xml
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.AccessMode">
+            <summary>
+            消息体内容的访问模式，分为Inside和Outside
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.AccessPath">
+            <summary>
+            如果消息体内容的访问模式是Outside，则该属性指存放消息体文件的路径
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.MOMNotices">
+            <summary>
+            如果消息体的类型是服务器通知，即BodyDataType＝＝MsgBodyDataType.MOMServerNotice，则该属性有值
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody.MessageBodyData">
+            <summary>
+            如果消息体的类型是用户数据，即BodyDataType＝＝MsgBodyDataType.UserData，则该属性有值
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMAppReceipt">
+            <summary>
+            Summary description for MOMAppReceipt.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageType">
+            <summary>
+            消息类型类。
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageType.Value">
+            <summary>
+            获取或设置一个值，表示消息类型标识。
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageType.Description">
+            <summary>
+            获取或设置一个值，表示消息类型的描述信息。
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageSecurity">
+            <summary>
+            Summary description for Security.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver">
+            <summary>
+            消息接收方.
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.#ctor(System.String,System.String)">
+            <summary>
+            消息接收方构造
+            </summary>
+            <param name="sEntityTag">实体标识</param>
+            <param name="sAppType">应用类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.#ctor(System.String,System.String,System.String)">
+            <summary>
+            消息接收方构造
+            </summary>
+            <param name="sEntityTag">实体标识</param>
+            <param name="sAppType">应用类型</param>
+            <param name="sMsgType">消息类型</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            消息接收方构造
+            </summary>
+            <param name="sEntityTag">实体标识</param>
+            <param name="sAppType">应用类型</param>
+            <param name="sMsgType">消息类型</param>
+            <param name="sAppTag">应用标识</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.EntityTag">
+            <summary>
+            接收方实体标识
+            </summary>		
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.ApplicationType">
+            <summary>
+            接收方应用类型
+            </summary>		
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.ApplicationTag">
+            <summary>
+            接收方应用标识
+            </summary>		
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.MsgType">
+            <summary>
+            接收方消息类型，可以为空
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceiver.Description">
+            <summary>
+            描述信息
+            </summary>		
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMChannelReport">
+            <summary>
+            Summary description for MOMChannelReport.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMReceipt">
+            <summary>
+            Summary description for MOMReceipt.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls">
+            <summary>
+            消息控制信息.
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MsgMode)">
+            <summary>
+            消息控制类构造。消息优先级别默认为1,消息重发次数默认为5
+            </summary>
+            <param name="messageMode">消息模式（同步/异步/发布）</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MsgMode,UFSoft.AIF.MOM.Common.MessageObjectModel.PRILevel)">
+            <summary>
+            消息控制类构造,消息重发次数默认为5
+            </summary>
+            <param name="messageMode">消息模式（同步/异步/发布）</param>
+            <param name="priority">消息优先级别，共7级，7级最高，1级最低</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MsgMode,UFSoft.AIF.MOM.Common.MessageObjectModel.DeliveryMode,UFSoft.AIF.MOM.Common.MessageObjectModel.PRILevel,System.Int32)">
+            <summary>
+            消息控制类构造.
+            </summary>
+            <param name="messageMode">消息发送模式（同步/异步/发布）</param>
+            <param name="deliveryMode">消息持续模式（持续/非持续）</param>
+            <param name="priority">消息优先级别，共7级，7级最高，1级最低</param>
+            <param name="iReSend">消息重发次数，默认为5</param>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.MessageMode">
+            <summary>
+            消息的发送模式
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.MsgDeliveryMode">
+            <summary>
+            指示该消息是否需要持久化，目前保留
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.Priority">
+            <summary>
+            消息的优先级别
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MessageControls.ReSend">
+            <summary>
+            消息的重发次数
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMReportFramework">
+            <summary>
+            Summary description for MOMReportFramework.
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage">
+            <summary>
+            MOM消息对象
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.#ctor">
+            <summary>
+            缺省构造
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead)">
+            <summary>
+            用指定的MessageHead初始化
+            </summary>
+            <param name="msgHead">消息头</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MessageHead,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageBody)">
+            <summary>
+            用指定的MessageHead和MessageBody初始化
+            </summary>
+            <param name="msgHead">消息头</param>
+            <param name="msgBody">消息体</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.#ctor(UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage)">
+            <summary>
+            从另外的MOMMessage对象构造
+            </summary>
+            <param name="msg">MOM消息对象</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.ConstructFromXmlNode(System.Xml.XmlNode)">
+            <summary>
+            从XmlNode加载消息
+            </summary>
+            <param name="node">承载MOM消息的XMLDOM对象</param>
+            <returns>是否成功加载</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.ConstructFromXml(System.String)">
+            <summary>
+            从XML字符串加载
+            </summary>
+            <param name="sXml">承载MOM消息的XML字符串</param>
+            <returns>是否成功加载</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.ToXml">
+            <summary>
+            将整个消息作为字符串返回
+            </summary>
+            <returns>返回的消息字符串</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.IsValid">
+            <summary>
+            检查消息是否有效
+            </summary>
+            <returns>消息是否有效</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.Clone">
+            <summary>
+            可隆消息
+            </summary>
+            <returns>MOMMessage对象</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.GetErrorsArrayList">
+            <summary>
+            获取错误列表，数组元素是字符串
+            </summary>
+            <returns>错误列表</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.SetValidate">
+            <summary>
+            忽略验证，认为消息是有效的
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.GetMessage">
+            <summary>
+            将MOMMessage对象转换为XMLDOM
+            </summary>
+            <returns>承载消息的XMLDOM</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.GetMessageString">
+            <summary>
+            将MOMMessage对象转换为消息字符串
+            </summary>
+            <returns>承载消息的字符串</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.Load(System.String)">
+            <summary>
+            从消息文件加载消息
+            </summary>
+            <param name="sFilePath">消息文件路径</param>
+            <returns>是否加载成功</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.Save(System.String)">
+            <summary>
+            将消息保存为消息文件
+            </summary>
+            <param name="sFilePath">消息文件路径</param>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.IsMOMMessage(System.String@)">
+            <summary>
+            检查是否是MOM消息
+            </summary>
+            <param name="sMsg">消息字符串</param>
+            <returns>是否是MOM消息</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.CreateSyncMsg(System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            创建同步消息对象
+            </summary>
+            <param name="receiverEntityTag">接收方实体标识</param>
+            <param name="receiverAppType">接收方应用类型</param>
+            <param name="receiverAppTag">接收方应用标识</param>
+            <param name="msgBody">消息体内容</param>
+            <param name="sError">创建消息对象失败时的返回信息</param>
+            <returns>MOM消息对象</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.CreateSyncMsg(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            创建同步消息对象
+            </summary>
+            <param name="senderEntityTag">发送方实体标识</param>
+            <param name="senderAppType">发送方应用类型</param>
+            <param name="senderAppTag">发送方应用标识，可以为空</param>
+            <param name="senderMsgType">发送方消息类型</param>
+            <param name="receiverEntityTag">接收方实体标识</param>
+            <param name="receiverAppType">接收方应用类型</param>
+            <param name="receiverAppTag">接收方应用标识</param>
+            <param name="receiverMsgType">接收方消息类型，可以为空</param>
+            <param name="msgBody">消息体内容</param>
+            <param name="sError">创建消息对象失败时的返回信息</param>
+            <returns>MOM消息对象</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.CreateAsyncMsg(System.String,System.String,System.String,System.String,UFSoft.AIF.MOM.Common.MessageObjectModel.MessageReceivers,System.String,System.String@)">
+            <summary>
+            创建异步消息对象
+            </summary>
+            <param name="senderEntityTag">发送方实体标识</param>
+            <param name="senderAppType">发送方应用类型</param>
+            <param name="senderAppTag">发送方应用标识，可以为空</param>
+            <param name="senderMsgType">发送方消息类型</param>
+            <param name="receivers">接收方列表</param>
+            <param name="msgBody">消息体内容</param>
+            <param name="sError">创建消息对象失败时的返回信息</param>
+            <returns>MOM消息对象</returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.CreateSubscribedMsg(System.String,System.String,System.String,System.String,System.String,System.String@)">
+            <summary>
+            创建用于发布/订阅的消息对象
+            </summary>
+            <param name="senderEntityTag">发送方实体标识</param>
+            <param name="senderAppType">发送方应用类型</param>
+            <param name="senderAppTag">发送方应用标识，可以为空</param>
+            <param name="senderMsgType">发送方消息类型</param>
+            <param name="msgBody">消息体内容</param>
+            <param name="sError">创建消息对象失败时的返回信息</param>
+            <returns>MOM消息对象</returns>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.MsgHead">
+            <summary>
+            消息头
+            </summary>
+        </member>
+        <member name="P:UFSoft.AIF.MOM.Common.MessageObjectModel.MOMMessage.MsgBody">
+            <summary>
+            消息体
+            </summary>
+        </member>
+        <member name="T:UFSoft.AIF.MOM.Common.MessageObjectModel.XMLNameSpace">
+            <summary>
+            消息的XMLNamespace.
+            </summary>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.XMLNameSpace.CreateXmlNamespaceMgr">
+            <summary>
+            创建消息命名空间管理器（在读取并解析消息时用到）
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:UFSoft.AIF.MOM.Common.MessageObjectModel.XMLNameSpace.XmlNodeNameForMOM(System.String)">
+            <summary>
+            通过XPath解析消息时自动为每个节点添加命名空间前缀。
+            </summary>
+            <param name="sLocalName"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

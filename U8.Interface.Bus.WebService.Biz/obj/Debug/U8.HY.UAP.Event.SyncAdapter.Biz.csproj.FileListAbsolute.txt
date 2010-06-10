@@ -1,0 +1,12 @@
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\U8.HY.UAP.Event.SyncAdapter.Biz.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\U8.HY.UAP.Event.SyncAdapter.Biz.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\Interop.ADODB.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Biz.csproj.ResolveComReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Biz.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Biz.pdb
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Biz.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Biz.dll
+C:\Users\Administrator\Desktop\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Biz.pdb

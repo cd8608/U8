@@ -1,0 +1,7 @@
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Service\obj\Debug\ResolveAssemblyReference.cache
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Service\obj\Debug\Interop.U8Login.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Service\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Service.csproj.ResolveComReference.cache
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\bin\U8.HY.UAP.Event.SyncAdapter.Service.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\bin\U8.HY.UAP.Event.SyncAdapter.Service.pdb
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Service\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Service.dll
+Z:\z\VSS\U8_GMT_PLUGIN\服装版\项目支持\ErpMesBus\Source\U8.HY.UAP.Event.SyncAdapter.Service\obj\Debug\U8.HY.UAP.Event.SyncAdapter.Service.pdb

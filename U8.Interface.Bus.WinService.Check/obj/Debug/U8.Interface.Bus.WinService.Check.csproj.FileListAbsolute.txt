@@ -1,0 +1,18 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\bin\Debug\U8TeamworkCheck.exe
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\bin\Debug\U8TeamworkCheck.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.WinService.Check.exe
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.WinService.Check.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.ProjectInstaller.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.CheckService.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.exe
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.WinService.Check.exe
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.WinService.Check.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.ProjectInstaller.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.CheckService.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.exe
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService.Check\obj\Debug\U8.Interface.Bus.WinService.Check.pdb

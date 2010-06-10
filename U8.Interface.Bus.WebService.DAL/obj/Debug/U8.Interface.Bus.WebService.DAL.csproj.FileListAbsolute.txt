@@ -1,0 +1,110 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\U8.Interface.Bus.WebService.DAL.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\U8.Interface.Bus.WebService.DAL.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFSoft.U8.Framework.Login.UI.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\SecurityLib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFIDA.U8.Framework.Login.UIForm.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFSoft.U8.Framework.LoginControlLib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFIDA.U8.Framework.Lib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFIDA.U8.Portal.Options.Common.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFIDA.U8.Spus.SpInfo.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFSoft.U8.Framework.DateTimePicker.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFIDA.U8.Framework.LoginPlugInterface.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\UFSoft.U8.Framework.Login.BO.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\TokenManage.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\I_UFSoft.U8.Framework.Login.BO.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\Fasterflect.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\securityAndCreditIdentity.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\en-US\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\zh-CN\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\zh-TW\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\en-US\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\zh-CN\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\zh-TW\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\en-US\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\zh-CN\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\zh-TW\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\bin\Debug\Interop.U8Login.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\obj\Debug\Interop.U8Login.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.Mes.Bus.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\Interop.U8Login.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.WebService.DAL.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.WebService.DAL.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.Login.UI.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\SecurityLib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Framework.Login.UIForm.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.LoginControlLib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Framework.Lib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Portal.Options.Common.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Spus.SpInfo.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.DateTimePicker.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Framework.LoginPlugInterface.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.Login.BO.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\TokenManage.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\I_UFSoft.U8.Framework.Login.BO.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Fasterflect.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\securityAndCreditIdentity.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\en-US\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-CN\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-TW\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\en-US\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-CN\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-TW\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\en-US\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-CN\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-TW\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Interop.MSXML2.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Interop.U8Login.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.WebService.DAL.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.WebService.DAL.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.Login.UI.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\SecurityLib.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Framework.Login.UIForm.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.LoginControlLib.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Framework.Lib.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Portal.Options.Common.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Spus.SpInfo.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.DateTimePicker.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFIDA.U8.Framework.LoginPlugInterface.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\UFSoft.U8.Framework.Login.BO.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\TokenManage.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\I_UFSoft.U8.Framework.Login.BO.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Fasterflect.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\securityAndCreditIdentity.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\en-US\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-CN\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-TW\UFIDA.U8.Framework.Login.UIForm.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\en-US\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-CN\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-TW\UFSoft.U8.Framework.DateTimePicker.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\en-US\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-CN\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\zh-TW\UFSoft.U8.Framework.Login.UI.resources.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\bin\Debug\Interop.U8Login.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\Interop.U8Login.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.csproj.ResolveComReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService.DAL\obj\Debug\U8.Interface.Bus.WebService.DAL.pdb

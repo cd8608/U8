@@ -1,0 +1,5 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Function\obj\Debug\ResolveAssemblyReference.cache
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.Function.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.Function.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Function\obj\Debug\U8.Interface.Bus.Function.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Function\obj\Debug\U8.Interface.Bus.Function.pdb

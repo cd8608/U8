@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "U8TeamworkCheck", "U8TeamworkCheck\U8TeamworkCheck.csproj", "{E5DF7E33-81A2-45AC-B81F-84201FBA5BD6}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 2
+		SccProjectName0 = \u0022$/U8_GMT_PLUGIN/电子/业务协同平台/U8V11.0/U8TeamworkCheck\u0022
+		SccLocalPath0 = ..
+		SccProvider0 = MSSCCI:Dynamsoft\u0020SourceAnywhere\u0020for\u0020VSS\u00205
+		SccProjectFilePathRelativizedFromConnection0 = U8TeamworkCheck\\
+		SccProjectUniqueName1 = U8TeamworkCheck\\U8TeamworkCheck.csproj
+		SccLocalPath1 = ..
+		SccProjectFilePathRelativizedFromConnection1 = U8TeamworkCheck\\U8TeamworkCheck\\
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5DF7E33-81A2-45AC-B81F-84201FBA5BD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5DF7E33-81A2-45AC-B81F-84201FBA5BD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5DF7E33-81A2-45AC-B81F-84201FBA5BD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5DF7E33-81A2-45AC-B81F-84201FBA5BD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

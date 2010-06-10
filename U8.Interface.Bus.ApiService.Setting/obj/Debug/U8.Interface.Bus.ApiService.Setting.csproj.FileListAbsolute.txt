@@ -1,0 +1,30 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmConnectSetting.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmOutput.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmServiceSetting.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmTeamwork.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmUISetting.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.Properties.Resources.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.csproj.GenerateResource.Cache
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.Setting.exe.config
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.Setting.exe
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.ApiService.Setting.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.exe
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmConfigSetting.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmMainwork.resources
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\U8.Interface.Bus.ApiService.Setting.exe.config
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.Setting.exe.config
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.Setting.exe
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.ApiService.Setting.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmConnectSetting.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmOutput.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmServiceSetting.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmTeamwork.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmUISetting.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.Properties.Resources.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmConfigSetting.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmMainwork.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.pdb

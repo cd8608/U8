@@ -1,0 +1,21 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\U8.Interface.Bus.WinService.exe
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\U8.Interface.Bus.WinService.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\U8.Interface.Bus.ApiService.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\U8.Interface.Bus.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\U8.Interface.Bus.ApiService.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\bin\Debug\U8.Interface.Bus.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.WinService.exe
+C:\U8SOFT\HY\client\HY_ME_SVR\WinService\U8.Interface.Bus.WinService.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.ProjectInstaller.resources
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.exe
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.WinService.exe
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.WinService.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.ProjectInstaller.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.csproj.GenerateResource.Cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.exe
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WinService\obj\Debug\U8.Interface.Bus.WinService.pdb

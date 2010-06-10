@@ -1,0 +1,12 @@
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.Interface.Bus.WebService.Biz.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.Interface.Bus.WebService.Biz.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.HY.UAP.Event.SyncAdapter.Biz\obj\Debug\U8.Interface.Bus.WebService.Biz.pdb
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\U8.Interface.Bus.WebService.Biz.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Service\U8.Interface.Bus.WebService.Biz.pdb
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.Biz\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.Biz\obj\Debug\Interop.ADODB.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.Biz\obj\Debug\U8.Interface.Bus.WebService.Biz.csproj.ResolveComReference.cache
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.Biz\obj\Debug\U8.Interface.Bus.WebService.Biz.dll
+C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService.Biz\obj\Debug\U8.Interface.Bus.WebService.Biz.pdb

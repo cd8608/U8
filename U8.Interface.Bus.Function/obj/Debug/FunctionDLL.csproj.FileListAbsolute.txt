@@ -1,0 +1,5 @@
+Z:\Z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\bin\Debug\FunctionDLL.dll
+Z:\Z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\bin\Debug\FunctionDLL.pdb
+Z:\Z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\ResolveAssemblyReference.cache
+Z:\Z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\FunctionDLL.dll
+Z:\Z\VSS\U8_GMT_PLUGIN\电子\业务协同平台\U8V11.0\FunctionDLL\FunctionDLL\obj\Debug\FunctionDLL.pdb
