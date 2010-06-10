@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace U8.Interface.Bus.ApiService.BLL.Task
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
 {
-    public class CQTaskMain : ITaskLogMain
+    public class TaskMain : ITaskLogMain
     {
 
         public int Update(Model.Synergismlog log,BaseOp op)

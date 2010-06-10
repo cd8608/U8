@@ -6,9 +6,9 @@ using U8.Interface.Bus.DBUtility;
 using System.Configuration;
 
 
-namespace U8.Interface.Bus.ApiService.BLL.Task
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
 {
-    public class CQTaskDetail:ITaskLogDetail
+    public class TaskDetail:ITaskLogDetail
     {
 
         /// <summary>

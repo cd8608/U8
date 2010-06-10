@@ -6,13 +6,13 @@ using System.Data;
 using System.Configuration;
 using U8.Interface.Bus.DBUtility;
 
-namespace U8.Interface.Bus.ApiService.DAL
+namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
 {
     /// <summary>
     /// HY_DZ_K7_SYNERGISMLOGDT
     /// 
     /// </summary>
-    public partial class CQTaskDetail : DAL.TaskLogFactory.ITaskLogDetail
+    public partial class TaskDetail : DAL.TaskLogFactory.ITaskLogDetail
     {
           
 

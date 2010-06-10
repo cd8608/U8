@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace U8.Interface.Bus.ApiService.BLL.Task
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory
 {
     public interface ITaskLogDetail
     {

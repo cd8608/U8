@@ -306,12 +306,12 @@ namespace U8.Interface.Bus.ApiService.Setting
             if (curLog.Opname == "还原")
             {
                 blldeal = new BLL.TaskOperator();
-                blldeal.DoRecover(curLog.Id.ToString());
+                blldeal.DoRecover(0,curLog.Id.ToString(),curLog.CVouchertypeCode);
             }
             else if (curLog.Opname == "作废")
             {
-                blldeal = new BLL.TaskOperator(); 
-                blldeal.DoScrap(curLog.Id.ToString());
+                blldeal = new BLL.TaskOperator();
+                blldeal.DoScrap(0, curLog.Id.ToString(), curLog.CVouchertypeCode);
             }
             else
             {

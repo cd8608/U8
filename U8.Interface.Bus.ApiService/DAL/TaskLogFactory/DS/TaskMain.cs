@@ -6,7 +6,7 @@ using System.Data;
 using System.Configuration;
 using U8.Interface.Bus.DBUtility;
 
-namespace U8.Interface.Bus.ApiService.DAL.DS
+namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.DS
 {
     /// <summary>
     /// HY_DZ_K7_SYNERGISMLOGDT

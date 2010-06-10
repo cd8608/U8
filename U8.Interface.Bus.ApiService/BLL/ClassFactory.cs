@@ -63,19 +63,19 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// </summary>
         /// <param name="tasktype"></param>
         /// <returns></returns>
-        public static BLL.Task.ITaskLogMain GetITaskLogMainBLL(int tasktype)
+        public static BLL.TaskLogFactory.ITaskLogMain GetITaskLogMainBLL(int tasktype)
         {
-            BLL.Task.ITaskLogMain logdtbll;
+            BLL.TaskLogFactory.ITaskLogMain logdtbll;
             switch (tasktype)
             {
                 case 0:
-                    logdtbll = new BLL.Task.CQTaskMain();
+                    logdtbll = new BLL.TaskLogFactory.CQ.TaskMain();
                     break;
                 case 1:
                     logdtbll = new BLL.SynergismLog();
                     break;
                 case 2:
-                    logdtbll = new BLL.Task.Factory.DS.TaskMain();
+                    logdtbll = new BLL.TaskLogFactory.DS.TaskMain();
                     break;
                 default:
                     BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + tasktype + "未适配!");
@@ -92,19 +92,19 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// </summary>
         /// <param name="tasktype"></param>
         /// <returns></returns>
-        public static BLL.Task.ITaskLogDetail GetITaskLogDetailBLL(int tasktype)
+        public static BLL.TaskLogFactory.ITaskLogDetail GetITaskLogDetailBLL(int tasktype)
         {
-            BLL.Task.ITaskLogDetail logdtbll;
+            BLL.TaskLogFactory.ITaskLogDetail logdtbll;
             switch (tasktype)
             {
                 case 0:
-                    logdtbll = new BLL.Task.CQTaskDetail();
+                    logdtbll = new BLL.TaskLogFactory.CQ.TaskDetail();
                     break;
                 case 1:
                     logdtbll = new BLL.SynergisnLogDT();
                     break;
                 case 2:
-                    logdtbll = new BLL.Task.Factory.DS.TaskDetail();
+                    logdtbll = new BLL.TaskLogFactory.DS.TaskDetail();
                     break;
                 default:
                     BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + tasktype + "未适配!");
@@ -127,13 +127,13 @@ namespace U8.Interface.Bus.ApiService.BLL
             switch (tasktype)
             {
                 case 0:
-                    logDAL = new DAL.CQTaskMain();
+                    logDAL = new DAL.TaskLogFactory.CQ.TaskMain();
                     break;
                 case 1:
                     logDAL = new DAL.SynergismLog();
                     break;
                 case 2:
-                    logDAL = new DAL.DS.TaskMain();
+                    logDAL = new DAL.TaskLogFactory.DS.TaskMain();
                     break;
                 default:
                     BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + tasktype + "未适配!");
@@ -157,13 +157,13 @@ namespace U8.Interface.Bus.ApiService.BLL
             switch (tasktype)
             {
                 case 0:
-                    logdtDAL = new DAL.CQTaskDetail();
+                    logdtDAL = new DAL.TaskLogFactory.CQ.TaskDetail();
                     break;
                 case 1:
                     logdtDAL = new DAL.SynergismLogDt();
                     break;
                 case 2:
-                    logdtDAL = new DAL.DS.TaskDetail();
+                    logdtDAL = new DAL.TaskLogFactory.DS.TaskDetail();
                     break;
                 default:
                     BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + tasktype + "未适配!");

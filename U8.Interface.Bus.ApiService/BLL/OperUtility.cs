@@ -84,8 +84,8 @@ namespace U8.Interface.Bus.ApiService.BLL
             DealResult dr = new DealResult();
             dr.ResultNum = Constant.ResultNum_NoError;
 
-            BLL.Task.ITaskLogDetail logdtbll = ClassFactory.GetITaskLogDetailBLL(log.TaskType); 
-            BLL.Task.ITaskLogMain logbll = ClassFactory.GetITaskLogMainBLL(log.TaskType); 
+            BLL.TaskLogFactory.ITaskLogDetail logdtbll = ClassFactory.GetITaskLogDetailBLL(log.TaskType);
+            BLL.TaskLogFactory.ITaskLogMain logbll = ClassFactory.GetITaskLogMainBLL(log.TaskType); 
 
             Model.Synergismlogdt fdt = logdtbll.GetFrist(log, log.OP);
             //挂起主表(置于等待中)
@@ -133,7 +133,7 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <param name="fdt">首节点信息</param>
         /// <param name="listnext">当前任务节点信息,档案同步时有可能存在多个子结点</param>
         /// <returns></returns>
-        private DealResult MakeLogDT(Synergismlog log, DealResult dr, BLL.Task.ITaskLogDetail logdtbll, BLL.Task.ITaskLogMain logbll, Model.Synergismlogdt fdt, List<Model.Synergismlogdt> listnext)
+        private DealResult MakeLogDT(Synergismlog log, DealResult dr, BLL.TaskLogFactory.ITaskLogDetail logdtbll, BLL.TaskLogFactory.ITaskLogMain logbll, Model.Synergismlogdt fdt, List<Model.Synergismlogdt> listnext)
         {
 
             for (int i = 0; i < listnext.Count; i++)
@@ -287,7 +287,7 @@ namespace U8.Interface.Bus.ApiService.BLL
         }
 
         /// <summary>
-        /// 报废
+        /// 报废 for setting
         /// </summary>
         /// <param name="id"></param>
         public void DoScrap(string id)
@@ -299,8 +299,41 @@ namespace U8.Interface.Bus.ApiService.BLL
             logdal.Update(log);
         }
 
-
         /// <summary>
+        /// 报废 for setting
+        /// </summary>
+        /// <param name="id"></param>
+        public void DoScrap(int tasktype, string id, string vouchertype)
+        {
+            DAL.TaskLogFactory.ITaskLogMain logdal = new DAL.SynergismLog();
+            DataSet ds = U8.Interface.Bus.DBUtility.DbHelperSQL.Query(" SELECT Dllpath,[Namespace],ClassName  FROM mes_comm_dllreflect WITH(NOLOCK) WHERE ClassType='op' AND tasktype ='" + tasktype + "'  AND cvouchertype = '" + vouchertype + "' ");
+            if (ds == null || ds.Tables[0].Rows.Count < 1)
+            {
+                throw new Exception("mes_comm_dllreflect 中不存在此op ");
+            }
+            BaseOp tmpOp = (BaseOp)System.Reflection.Assembly.Load(ds.Tables[0].Rows[0]["Dllpath"].ToString())
+                .CreateInstance(ds.Tables[0].Rows[0]["Namespace"].ToString() + "." + ds.Tables[0].Rows[0]["ClassName"].ToString());
+            if (tasktype == 0)
+            {
+                logdal = new DAL.TaskLogFactory.CQ.TaskMain();
+            }
+            else if (tasktype == 1)
+            {
+                logdal = new DAL.SynergismLog();
+            }
+            else
+            {
+                logdal = new DAL.TaskLogFactory.DS.TaskMain();
+            }
+
+            Model.Synergismlog log = logdal.GetModel(id, tmpOp);
+            log.Cstatus = Constant.SynerginsLog_Cstatus_Scrap;
+            log.Endtime = DateTime.Now;
+            logdal.Update(log, tmpOp);
+        }
+
+
+        /// <summary> 
         /// 还原 for setting   added by liuxzha 2015.04.10
         /// </summary>
         /// <param name="id"></param>
@@ -312,6 +345,41 @@ namespace U8.Interface.Bus.ApiService.BLL
             log.Endtime = DateTime.Now;
             logdal.Update(log);
         }
+
+
+        /// <summary> 
+        /// 还原 for setting   added by liuxzha 2015.04.10
+        /// </summary>
+        /// <param name="id"></param>
+        public void DoRecover(int taskType, string id, string vouchertype)
+        {
+            DAL.TaskLogFactory.ITaskLogMain logdal;
+
+            DataSet ds = U8.Interface.Bus.DBUtility.DbHelperSQL.Query(" SELECT Dllpath,[Namespace],ClassName  FROM mes_comm_dllreflect WITH(NOLOCK) WHERE ClassType='op' AND tasktype ='" + taskType + "'  AND cvouchertype = '" + vouchertype + "' ");
+            if (ds == null || ds.Tables[0].Rows.Count < 1)
+            {
+                throw new Exception("mes_comm_dllreflect 中不存在此op ");
+            }
+            BaseOp tmpOp = (BaseOp)System.Reflection.Assembly.Load(ds.Tables[0].Rows[0]["Dllpath"].ToString())
+                .CreateInstance(ds.Tables[0].Rows[0]["Namespace"].ToString() + "." + ds.Tables[0].Rows[0]["ClassName"].ToString());
+            if (taskType == 0)
+            {
+                logdal = new DAL.TaskLogFactory.CQ.TaskMain();
+            }
+            else if (taskType == 1)
+            {
+                logdal = new DAL.SynergismLog();
+            }
+            else
+            {
+                logdal = new DAL.TaskLogFactory.DS.TaskMain();
+            }
+            Model.Synergismlog log = logdal.GetModel(id, tmpOp);
+            log.Cstatus = Constant.SynerginsLog_Cstatus_NoDeal;
+            log.Endtime = DateTime.Now;
+            logdal.Update(log, tmpOp);
+        }
+
 
         /// <summary>
         /// 判断日志中记录的单据在账套中是否真的存在    added by liuxzha 2015.03.23

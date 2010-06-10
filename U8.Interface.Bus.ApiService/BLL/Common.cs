@@ -120,7 +120,7 @@ namespace U8.Interface.Bus.ApiService.BLL
                 return strDefault;
             }
 
-            BLL.Task.ITaskLogDetail bllDT = new BLL.SynergisnLogDT();
+            BLL.TaskLogFactory.ITaskLogDetail bllDT = new BLL.SynergisnLogDT();
             DAL.SynergismLogDt dalDT = new SynergismLogDt();
             Model.Synergismlogdt dtPrev;
             dtPrev = bllDT.GetPrevious(dt,dt.OP);

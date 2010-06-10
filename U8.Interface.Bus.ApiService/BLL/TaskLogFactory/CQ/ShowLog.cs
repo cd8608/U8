@@ -32,6 +32,7 @@ namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
                     model.Caccid = dt.Rows[n]["caccid"].ToString();
                     model.Cvouchertype = dt.Rows[n]["cvouchertype"].ToString();
                     model.Cvoucherno = dt.Rows[n]["cvoucherno"].ToString();
+                    model.CVouchertypeCode = dt.Rows[n]["cvouchertypecode"].ToString();
                     if (dt.Rows[n]["starttime"].ToString() != "")
                     {
                         model.Starttime = DateTime.Parse(dt.Rows[n]["starttime"].ToString());

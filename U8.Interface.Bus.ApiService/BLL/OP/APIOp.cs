@@ -242,13 +242,13 @@ namespace U8.Interface.Bus.ApiService.BLL
             switch (apidata.TaskType)
             {
                 case 0:
-                    dtdal = new DAL.CQTaskDetail();
+                    dtdal = new DAL.TaskLogFactory.CQ.TaskDetail();
                     break;
                 case 1:
                     dtdal = new DAL.SynergismLogDt();
                     break;
                 case 2:
-                    dtdal = new DAL.DS.TaskDetail();
+                    dtdal = new DAL.TaskLogFactory.DS.TaskDetail();
                     break;
                 default:
                     BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + apidata.TaskType + "未适配!");

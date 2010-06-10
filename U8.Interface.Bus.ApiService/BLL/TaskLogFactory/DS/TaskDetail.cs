@@ -6,7 +6,7 @@ using U8.Interface.Bus.DBUtility;
 using System.Configuration;
 
 
-namespace U8.Interface.Bus.ApiService.BLL.Task.Factory.DS
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.DS
 {
     public class TaskDetail:ITaskLogDetail
     {

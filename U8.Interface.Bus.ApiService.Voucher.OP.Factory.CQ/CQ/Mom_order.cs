@@ -314,6 +314,10 @@ namespace U8.Interface.Bus.ApiService.Voucher
             {
                 operflag = "0";
             }
+            else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
+            {
+                operflag = "4";
+            }
             else
             {
                 operflag = "2";

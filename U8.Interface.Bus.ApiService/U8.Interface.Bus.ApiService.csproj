@@ -92,8 +92,8 @@
     <Compile Include="BLL\OP\StockOP.cs" />
     <Compile Include="BLL\OP\SfcOp.cs" />
     <Compile Include="BLL\OP\APIOp.cs" />
-    <Compile Include="BLL\TaskLogFactory\CQ\CQTaskDetail.cs" />
-    <Compile Include="BLL\TaskLogFactory\CQ\CQTaskMain.cs" />
+    <Compile Include="BLL\TaskLogFactory\CQ\TaskDetail.cs" />
+    <Compile Include="BLL\TaskLogFactory\CQ\TaskMain.cs" />
     <Compile Include="BLL\TaskLogFactory\CQ\ShowLog.cs" />
     <Compile Include="BLL\TaskLogFactory\CQ\ShowLogDt.cs" />
     <Compile Include="BLL\TaskLogFactory\IShowLog.cs" />
@@ -121,7 +121,7 @@
     <Compile Include="DAL\FixValue.cs" />
     <Compile Include="DAL\Function.cs" />
     <Compile Include="DAL\Regist.cs" />
-    <Compile Include="DAL\TaskLogFactory\CQ\CQTaskMain.cs" />
+    <Compile Include="DAL\TaskLogFactory\CQ\TaskMain.cs" />
     <Compile Include="DAL\TaskLogFactory\CQ\ShowLog.cs" />
     <Compile Include="DAL\TaskLogFactory\CQ\ShowLogDt.cs" />
     <Compile Include="DAL\TaskLogFactory\DS\TaskDetail.cs" />
@@ -138,7 +138,7 @@
     <Compile Include="DAL\TaskLogFactory\XT\SynergismLog.cs" />
     <Compile Include="DAL\TaskLogFactory\XT\SynergismLogDt.cs" />
     <Compile Include="BLL\U8NameValue.cs" />
-    <Compile Include="DAL\TaskLogFactory\CQ\CQTaskDetail.cs" />
+    <Compile Include="DAL\TaskLogFactory\CQ\TaskDetail.cs" />
     <Compile Include="Model\APIData.cs" />
     <Compile Include="Model\BaseData.cs" />
     <Compile Include="Model\ConnectInfo.cs" />

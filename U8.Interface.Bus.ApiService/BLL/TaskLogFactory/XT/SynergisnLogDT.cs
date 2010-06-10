@@ -7,7 +7,7 @@ using System.Data;
 
 namespace U8.Interface.Bus.ApiService.BLL
 {
-    public class SynergisnLogDT : Task.ITaskLogDetail
+    public class SynergisnLogDT : TaskLogFactory.ITaskLogDetail
     {
         private readonly DAL.SynergismLogDt dal = new DAL.SynergismLogDt();
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace U8.Interface.Bus.ApiService.BLL.Task.Factory.DS
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.DS
 {
     public class TaskMain : ITaskLogMain
     {
