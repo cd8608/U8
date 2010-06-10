@@ -57,7 +57,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                     case "u8api/bom/save_after":
                         oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "Bom_bom",
                             true, System.Reflection.BindingFlags.CreateInstance, null,
-                            new object[] {  conn,   ds, login.UFDataConnstringForNet.ToString() }, null, null); 
+                            new object[] {  conn,   ds, login.UFDataConnstringForNet.ToString(),"a" }, null, null); 
                         //oper = new U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.Bom_bom(ref conn, ref ds, login.UFDataConnstringForNet.ToString());
                         using (System.Transactions.TransactionScope tra = new System.Transactions.TransactionScope(System.Transactions.TransactionScopeOption.Suppress))
                         {
@@ -116,7 +116,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                         oper = (Biz.BizBase)System.Reflection.Assembly.Load(
                             U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "Bom_bom", 
                             true, System.Reflection.BindingFlags.CreateInstance, null, 
-                            new object[] { conn, bomid, login.UFDataConnstringForNet.ToString() }, null, null);
+                            new object[] { conn, bomid, login.UFDataConnstringForNet.ToString(),"a" }, null, null);
                         //oper = new U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.Bom_bom(ref conn, bomid, login.UFDataConnstringForNet.ToString());
                         oper.Insert();
                         break;
@@ -130,7 +130,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                         oper = (Biz.BizBase)System.Reflection.Assembly.Load(
                             U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "Bom_bom", 
                             true, System.Reflection.BindingFlags.CreateInstance, null, 
-                            new object[] { conn, bomid, login.UFDataConnstringForNet.ToString() }, null, null);
+                            new object[] { conn, bomid, login.UFDataConnstringForNet.ToString(),"d" }, null, null);
                         //oper = new U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.Bom_bom(ref conn, bomid, login.UFDataConnstringForNet.ToString());
                         oper.Delete();
                         break; 

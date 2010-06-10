@@ -77,6 +77,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 sb.Append(this.CreateInsertString());
                 sb.Append(detailBiz.CreateInsertString());
 
+                sb.Replace("main|##newguid", Guid.NewGuid().ToString());
+
                 return ExecSql(sb.ToString());
             }
         }
@@ -98,10 +100,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             }
  
             StringBuilder sb = new StringBuilder();
-            sb.Append(this.CreateDeleteString());
             sb.Append(detailBiz.CreateDeleteString());
-
-
+            sb.Append(this.CreateDeleteString());
+ 
             return ExecSql(sb.ToString());
         }
 
@@ -125,6 +126,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         public void SetAddData(ref DataSet ds)
         {
 
+            detailBiz = new Bom_opcomponent(ref conn, bomId, ufConnStr, opertype);
+
             //主表 
             string InvCode;
             string VersionEffDate;
@@ -144,6 +147,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 VersionEffDate = ds.Tables["StandardBom"].Rows[0]["VersionEffDate"].ToString();
                 VersionEndDate = ds.Tables["StandardBom"].Rows[0]["VersionEndDate"].ToString();
 
+
+                tmpMainLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
                 tmpMainLst.Add(new BaseMode(null, null, null, "bomid", BomId, null, null));
                 tmpMainLst.Add(new BaseMode(null, null, null, "Version", version, null, null));
                 tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", VersionEffDate, null, null));
@@ -165,6 +170,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 } 
                 DInvCode = GetInvCodeByPartid(ds.Tables["BomComponents"].Rows[i]["ComponentId"].ToString());
 
+                tmpDetailLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null)); 
+                tmpDetailLst.Add(new BaseMode(null, null, null, "did", Guid.NewGuid().ToString(), null, null)); 
                 tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", DInvCode, null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", ds.Tables["BomComponents"].Rows[i]["BaseQtyN"].ToString(), null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", ds.Tables["BomComponents"].Rows[i]["BaseQtyD"].ToString(), null, null));
@@ -255,9 +262,10 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// <param name="bomId"></param>
         public void SetAddData(int bomId)
         {
+            detailBiz = new Bom_opcomponent(ref conn, bomId, ufConnStr,opertype);
 
             DataSet dsMainBom = new DataSet();
-            DataTable dtMainBom = GetChildByBomId(bomId);
+            DataTable dtMainBom = GetBomHeadByBomId(bomId);
             dsMainBom.Tables.Add(dtMainBom.Copy());
 
 
@@ -266,16 +274,16 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             dsBom.Tables.Add(dtBom.Copy());
  
             List<BaseMode> tmpMainLst = new List<BaseMode>(); 
-            List<BaseMode> tmpDetailLst = new List<BaseMode>();
  
             //表头
             for (int i = 0; i < dsMainBom.Tables.Count; i++)
             {
                 if (dsMainBom.Tables[i].Rows.Count > 0)
                 {
-                    for (int j = 0; j < dsBom.Tables[i].Rows.Count; j++)
+                    for (int j = 0; j < dsMainBom.Tables[i].Rows.Count; j++)
                     {
-                        // h.InvCode,h.InvName,h.version,h.bomid, h.VersionEffDate
+                        // h.InvCode,h.InvName,h.version,h.bomid, h.VersionEffDate 
+                        tmpMainLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "bomid", dsMainBom.Tables[i].Rows[j]["bomid"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "Version", dsMainBom.Tables[i].Rows[j]["version"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", dsMainBom.Tables[i].Rows[j]["VersionEffDate"].ToString(), null, null));
@@ -292,12 +300,15 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 if (dsBom.Tables[i].Rows.Count > 0)
                 { 
                     for (int j = 0; j < dsBom.Tables[i].Rows.Count; j++)
-                    {  
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["BaseQtyN"].ToString(), null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
-                        detailBiz.lst.Add(tmpDetailLst);
+                    {
 
+                        List<BaseMode> tmpDetailLst = new List<BaseMode>();
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "did", Guid.NewGuid().ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
+                        detailBiz.lst.Add(tmpDetailLst); 
    
                     }
                     
@@ -314,27 +325,26 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         public void SetDelData(int bomId)
         {
 
-            DataSet dsMainBom = new DataSet();
-            DataTable dtMainBom = GetChildByBomId(bomId);
-            dsMainBom.Tables.Add(dtMainBom.Copy());
+            detailBiz = new Bom_opcomponent(ref conn, bomId, ufConnStr, opertype);
 
+            DataSet dsMainBom = new DataSet();
+            DataTable dtMainBom = GetBomHeadByBomId(bomId);
+            dsMainBom.Tables.Add(dtMainBom.Copy());
 
             DataSet dsBom = new DataSet();
             DataTable dtBom = GetChildByBomId(bomId);
             dsBom.Tables.Add(dtBom.Copy());
-
-            List<BaseMode> tmpMainLst = new List<BaseMode>();
-            List<BaseMode> tmpDetailLst = new List<BaseMode>();
 
             //表头
             for (int i = 0; i < dsMainBom.Tables.Count; i++)
             {
                 if (dsMainBom.Tables[i].Rows.Count > 0)
                 {
-                    for (int j = 0; j < dsBom.Tables[i].Rows.Count; j++)
-                    {
+                    for (int j = 0; j < dsMainBom.Tables[i].Rows.Count; j++)
+                    {  
+                        List<BaseMode> tmpMainLst = new List<BaseMode>();
                         // h.InvCode,h.InvName,h.version,h.bomid, h.VersionEffDate
-                        tmpMainLst.Add(new BaseMode(null, null, null, "bomid", dsMainBom.Tables[i].Rows[j]["bomid"].ToString(), null, null));
+                        tmpMainLst.Add(new BaseMode("bomid",Convert.ToString(bomId), null, "bomid", dsMainBom.Tables[i].Rows[j]["bomid"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "Version", dsMainBom.Tables[i].Rows[j]["version"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", dsMainBom.Tables[i].Rows[j]["VersionEffDate"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", dsMainBom.Tables[i].Rows[j]["InvCode"].ToString(), null, null));
@@ -351,8 +361,10 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 {
                     for (int j = 0; j < dsBom.Tables[i].Rows.Count; j++)
                     {
+
+                        List<BaseMode> tmpDetailLst = new List<BaseMode>();
                         tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["BaseQtyN"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
                         detailBiz.lst.Add(tmpDetailLst); 
 
@@ -373,15 +385,17 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         private bool CheckAutoAudit(ref System.Data.DataSet ds)
         {
             string bomId = ds.Tables["StandardBom"].Rows[0]["BomId"].ToString();
-            string sql = " select count(1) as  cc from bom_bom with(nolock) where bomid ='" + bomId + "'  ";
-            DataTable dt = UFSelect(sql);
-            if (dt.Rows.Count > 0)
-            {
-                if ((int)dt.Rows[0][0] > 0)
-                {
-                    return false;
-                }
-            }
+            string sql;
+            DataTable dt;
+            //string sql = " select count(1) as  cc from bom_bom with(nolock) where bomid ='" + bomId + "'  ";
+            //DataTable dt = UFSelect(sql);
+            //if (dt.Rows.Count > 0)
+            //{
+            //    if ((int)dt.Rows[0][0] > 0)
+            //    {
+            //        return false;
+            //    }
+            //}
 
             sql = " select BomDefaultStatus  from mom_parameter  with(nolock)  ";
             dt = UFSelect(sql);
@@ -454,7 +468,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             DataTable dtBom = new DataTable();
             StringBuilder sb = new StringBuilder(); 
             sb.Append("     SELECT  ");
-            sb.Append("           h.InvCode,h.InvName,h.version,h.bomid, h.VersionEffDate   "); 
+            sb.Append("            h.bomid,h.InvCode,h.InvName,h.version,h.bomid, h.VersionEffDate   "); 
             sb.Append("     FROM v_bom_head h  with(nolock) "); 
             sb.Append("     WHERE  H.bomid ='" + bomId + "' "); 
 
@@ -475,8 +489,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             sb.Append(" SELECT V.* FROM  ");
             sb.Append(" ( ");
             sb.Append("     SELECT  ");
-            sb.Append("           h.InvCode,h.InvName,h.version,  ");
-            sb.Append("           D.DInvCode,D.DInvCode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit,d.DBaseQtyD,d.OpComponentId    ");
+            sb.Append("            h.bomid,h.InvCode,h.InvName,h.version,h.VersionEffDate,  ");
+            sb.Append("           D.DBaseQtyN,D.DBaseQtyD, ");
+            sb.Append("           D.DInvCode,D.DInvCode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit,d.OpComponentId    ");
             sb.Append("     FROM v_bom_head h  with(nolock) ");
             sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
             sb.Append("     WHERE  H.bomid ='" + bomId + "' ");

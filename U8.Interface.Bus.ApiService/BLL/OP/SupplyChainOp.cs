@@ -32,11 +32,11 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <param name="bd">HY_DZ_K7_DLLReflect 中预置的 data类</param>
         /// <returns></returns>
         public override Model.DealResult MakeData(Model.Synergismlogdt dt, BaseData bd)
-        { 
+        {
             Model.DealResult dr = new Model.DealResult();
             Model.APIData apidata = bd as Model.APIData;         //API实体,包括当前任务节点信息
             DAL.TaskLogFactory.ITaskLogDetail dtdal;
-           
+
             //当前任务节点信息
             switch (apidata.TaskType)
             {
@@ -51,11 +51,11 @@ namespace U8.Interface.Bus.ApiService.BLL
                     break;
                 default:
                     BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + apidata.TaskType + "未适配!");
-                     dr.Message = "tasktype" + apidata.TaskType + "未适配!";
-                     return dr;
+                    dr.Message = "tasktype" + apidata.TaskType + "未适配!";
+                    return dr;
 
             }
-  
+
             Model.Synergismlogdt pdt = dtdal.GetPrevious(dt);      //上一任务节点信息
 
             apidata.ConnectInfo = dtdal.GetConnectInfo(dt);   //获取当前结点的数据串连接串
@@ -71,13 +71,10 @@ namespace U8.Interface.Bus.ApiService.BLL
                 BLL.U8NameValue u8namevaluebll = new BLL.U8NameValue();  //字段赋值
                 u8namevaluebll.SetHeadData(apidata, rdds, rdsds, listfd, dt);
                 u8namevaluebll.SetBodyData(apidata, rdds, rdsds, listfd, dt);
- 
-                
-                if (apidata.TaskType == 1)
-                {//设置订单关联    
-                    DAL.Common.SetInBody(apidata);
 
-                }
+
+                //设置订单关联    
+                DAL.Common.SetInBody(apidata); 
                 SetNormalValue(apidata, dt);
             }
             return dr;

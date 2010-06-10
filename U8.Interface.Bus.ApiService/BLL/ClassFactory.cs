@@ -39,7 +39,6 @@ namespace U8.Interface.Bus.ApiService.BLL
         }
 
 
-
         /// <summary>
         /// 获取操作对象
         /// </summary>
@@ -53,9 +52,6 @@ namespace U8.Interface.Bus.ApiService.BLL
             Common.ErrorMsg(model, "未能取到操作类型对象");
             return (BaseOp)System.Reflection.Assembly.Load(model.Dllpath).CreateInstance(model.Npace + "." + model.ClassName);
         }
-
-
-
 
 
         /// <summary>
@@ -145,7 +141,6 @@ namespace U8.Interface.Bus.ApiService.BLL
         }
 
 
-
         /// <summary>
         /// 任务detail DAL 工厂
         /// </summary>
@@ -173,7 +168,6 @@ namespace U8.Interface.Bus.ApiService.BLL
             return logdtDAL;
 
         }
-
 
 
         /// <summary>

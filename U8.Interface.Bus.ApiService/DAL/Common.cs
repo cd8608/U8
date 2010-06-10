@@ -827,7 +827,11 @@ namespace U8.Interface.Bus.ApiService.DAL
         {
             //if (apiData.Synergismlogdt.Cvouchertype != "24" && apiData.Synergismlogdt.Cvouchertype != "01") return true;
 
-            BLL.SynergisnLogDT bllDT = new BLL.SynergisnLogDT();
+            BLL.TaskLogFactory.ITaskLogDetail bllDT = ClassFactory.GetITaskLogDetailBLL(apiData.TaskType); //new BLL.SynergisnLogDT();
+            if (apiData.OP == null)
+            {
+                apiData.OP = ClassFactory.GetBaseOp(apiData.Synergismlogdt);
+            }
             Model.Synergismlogdt dtPrev;
             dtPrev = bllDT.GetPrevious(apiData.Synergismlogdt,apiData.OP);
             if (dtPrev == null) return false;

@@ -14,6 +14,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         int bomId;
         System.Data.DataSet ds;
 
+        private string opertype;
 
         /// <summary>
         /// 保存前事件使用(保存并自动审核时，BOM单不会自动调用审核事件)
@@ -21,7 +22,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// <param name="conn"></param>
         /// <param name="ds"></param>
         /// <param name="ufConnStr"></param>
-        public Bom_opcomponent(ref ADODB.Connection conn, ref System.Data.DataSet ds, string ufConnStr)
+        public Bom_opcomponent(ref ADODB.Connection conn, ref System.Data.DataSet ds, string ufConnStr,string opertype)
             : base(conn, ufConnStr)
         {
 
@@ -31,22 +32,24 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             fieldcmpTablename = "MES_CQ_bom_bom";
             ufTableName = "Bom_opcomponent"; // "SaleOrderQ";       //来源表名
             ufPriKey = "bomid";          //来源表主键
-             
+
+            this.opertype = opertype;
             this.ds = ds;
          
         }
 
 
-        public Bom_opcomponent(ref ADODB.Connection conn, int bomId, string ufConnStr)
+        public Bom_opcomponent(ref ADODB.Connection conn, int bomId, string ufConnStr, string opertype)
             : base(conn, ufConnStr)
         {
-            oracleTableName = "MES_CQ_bom_bom";   //目标表名
+            oracleTableName = "MES_CQ_Bom_opcomponent";   //目标表名
             oraclePriKey = "bomid";      //目标表逻辑主键 
             fieldcmpTablename = "MES_CQ_bom_bom";
             ufTableName = "Bom_opcomponent"; // "SaleOrderQ";       //来源表名
             ufPriKey = "bomid";          //来源表主键
 
-            this.bomId = bomId; 
+            this.opertype = opertype;
+            this.bomId = bomId;
         }
 
 
@@ -539,6 +542,26 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             dt = UFSelect(sb.ToString());
 
             return dt;
+        }
+
+
+        public override StringBuilder CreateDeleteString()
+        {
+            if (Synch.Equals("UFOper"))
+            {
+                string sql = " DELETE FROM " + oracleTableName + " WHERE  " + oracleTableName + ".id in( select id from MES_CQ_bom_bom with(nolock) where  bomid ='" + bomId + "') ";
+                return new StringBuilder(sql);
+            }
+            else if (Synch.Equals("LinkOper"))
+            {
+                sqlOper = new U8.Interface.Bus.Event.SyncAdapter.Biz.LinkOper(oraLinkName, ufConnStr, ufTableName, ufPriKey, oracleTableName, oraclePriKey, l, lst);
+                return sqlOper.CreateDeleteString();
+            }
+            else
+            {
+                sqlOper = new U8.Interface.Bus.Event.SyncAdapter.Biz.OracleOper(oraConnStr, oracleTableName, oraclePriKey, l, lst);
+                return sqlOper.CreateDeleteString();
+            }
         }
 
 
