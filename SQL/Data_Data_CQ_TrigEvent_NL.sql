@@ -127,12 +127,12 @@ GO
 		 INSERT INTO MES_CQ_mps_netdemand
 		(ID,opertype,PlanCode,DemandId,cInvCode,
 		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
-		DmandDate
+		DmandDate,did
 	    )
 		SELECT 
 		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
-		FirmDate as DmandDate 
+		FirmDate as DmandDate ,NEWID()
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
 		Where t.SupplyType=3
 

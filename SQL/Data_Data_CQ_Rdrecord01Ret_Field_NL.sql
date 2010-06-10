@@ -517,6 +517,18 @@ BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0','1','存货编码','B','0000000013',null,null,0,'表体|存货编码,B|cInvCode','cInvCode',null,'1000000013',1,1)
 	END
+	
+	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000013' AND cardsection = 'B' AND fieldname='cinvm_unit') 
+	BEGIN
+	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	('0','1','主计量单位','B','0000000013',null,null,0,'表体|主计量单位,B|inv_cComUnitCode','cinvm_unit',null,'1000000013',1,1)
+	END
+	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000013' AND cardsection = 'B' AND fieldname='cinva_unit') 
+	BEGIN
+	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	('0','1','库存单位编码','B','0000000013',null,null,0,'表体|库存单位编码,B|inv_cSTComUnitCode','cinva_unit',null,'1000000013',1,1)
+	END
+	
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000013' AND cardsection = 'B' AND fieldname='iQuantity') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 

@@ -48,6 +48,7 @@ BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0','1','收付款协议编码','T','0000000003',null,null,0,'表头|收付款协议编码,T|cVenPUOMProtocol','cVenPUOMProtocol',null,'1000000003',1,1)
 	END
+	--u8v12.1
 	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000003' AND cardsection = 'T' AND fieldname='iFlowId') 
 	--BEGIN
 	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 

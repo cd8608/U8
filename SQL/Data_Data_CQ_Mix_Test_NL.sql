@@ -163,15 +163,18 @@ update MES_CQ_DispatchListRets  set opertype=0
 ----采购入库单
 --测试数据  新增  
 
-DECLARE @ID AS INT
-INSERT INTO MES_CQ_rdrecord01 (operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
-VALUES (0,0,'000001','put005','1','501','XYCG09120001','ZZM')
+DECLARE @ID AS nvarchar(36)
+DECLARE @DID AS nvarchar(36)
+SET @ID = NEWID()
+INSERT INTO MES_CQ_rdrecord01 (ID,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
+VALUES (@ID,0,0,'000001','put005','1','501','XYCG09120001','ZZM')
  
-SELECT @ID = @@IDENTITY
-INSERT INTO MES_CQ_rdrecords01 (id,opertype,dhcode,dhid,cInvCode,iquantity)
-VALUES (@ID,0,'0000000001','1000000001','CP001',100)
-INSERT INTO MES_CQ_rdrecords01 (id,opertype,dhcode,dhid,cInvCode,iquantity)
-VALUES (@ID,0,'0000000001','1000000002','CP001',10)
+SET @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords01 (id,DID,opertype,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,@DID,0,'0000000005','1000000009','CP001',100) 
+SET @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords01 (id,DID,opertype,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,@DID,0,'0000000005','1000000010','CP001',10)
  
 GO
  

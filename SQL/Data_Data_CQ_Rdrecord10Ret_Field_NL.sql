@@ -30,8 +30,8 @@ BEGIN
 --insert into MES_CQ_FIELDCMPS (TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable ) values 
 --  (0,'1000000102','数量','B','0000000011',null,null,0,'表体|数量,B|iquantity','iquantity',null,'1000000011','0','1')
 --END
---GO
-
+--GO 
+ 
 IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000011' AND fieldname='id' )  
 BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType,autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable ) values 
@@ -651,7 +651,7 @@ END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000011' AND cardsection = 'B' AND fieldname='cAssUnit') 
 --BEGIN
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','库存单位码','B','0000000011',null,null,0,'表体|库存单位码,B|cAssUnit','cAssUnit',null,'1000000011',1,1)
+--('0','1','库存单位码','B','0000000011',null,null,0,'表体|库存单位码,B|inv_cSTComUnitCode','cAssUnit',null,'1000000011',1,1)
 --END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000011' AND cardsection = 'B' AND fieldname='dMadeDate') 
 --BEGIN

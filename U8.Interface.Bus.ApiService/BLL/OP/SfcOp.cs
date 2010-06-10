@@ -152,8 +152,8 @@ namespace U8.Interface.Bus.ApiService.BLL
             int i = 0;
             foreach (BodyRow bodyRow in apidata.SfcBodyData)
             {
-                // SetUNV(lunv, WorkhrNoteOpSum, apidata, apidata.Synergismlogdt.Cvouchertype);
-                SetUNV(bodyRow.BodyCols, SubEntity, apidata, "FC32");
+                SetUNV(bodyRow.BodyCols, SubEntity, apidata, apidata.Synergismlogdt.Cvouchertype);
+                //SetUNV(bodyRow.BodyCols, SubEntity, apidata, "FC32");
 
                 #region 待删除
                 //foreach (Model.U8NameValue unv in lunv)
@@ -332,8 +332,8 @@ namespace U8.Interface.Bus.ApiService.BLL
                 case "workhrnote":
                     retId = Convert.ToString(extboRet[0].GetValue("WorkHrId"));
                     break;
-                case "mom":
-                    retId = Convert.ToString(extboRet[0].GetValue("Mom_OrderId"));
+                case "mom_order":
+                    retId = Convert.ToString(extboRet[0].GetValue("MoId"));
                     //
                     break;
                 default:
