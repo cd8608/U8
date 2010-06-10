@@ -250,7 +250,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Cvouchertype = cardNo;
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
-                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
                 DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
            
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)

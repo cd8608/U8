@@ -333,10 +333,12 @@ GO
 
 ----调拨单
 --测试数据  新增  
-DECLARE @ID AS INT
-INSERT INTO MES_CQ_TransVouch (operflag,opertype,cTVCode,dTVDate,cOWhCode,cIWhCode,cIRdCode,cORdCode
+DECLARE @ID AS INT 
+DECLARE @DID AS INT 
+INSERT INTO MES_CQ_TransVouch (operflag,opertype,cTVCode,dTVDate,cOWhCode,cIWhCode,cIRdCode,cORdCode,
+cODepCode,cIDepCode,cPersonCode
 )
-VALUES (0,0,'0000000001','2015-07-01 00:00:00.000','PT001','PT004',null,null)
+VALUES (0,0,'0000000001','2015-07-01 00:00:00.000','PT001','PT004','','','501','502','zzm')
  
 SELECT @ID = @@IDENTITY
 INSERT INTO MES_CQ_TransVouchs (id,opertype,cInvCode,iquantity,cVenCode)

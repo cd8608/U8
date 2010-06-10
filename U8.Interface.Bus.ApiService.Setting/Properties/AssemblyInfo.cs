@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("ServiceSetting")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("LxzCor")]
+[assembly: AssemblyCompany("YONYOU")]
 [assembly: AssemblyProduct("ServiceSetting")]
-[assembly: AssemblyCopyright("Copyright © LxzCor 2016")]
+[assembly: AssemblyCopyright("Copyright © YONYOU 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

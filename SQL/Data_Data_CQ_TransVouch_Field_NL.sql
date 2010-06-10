@@ -43,12 +43,12 @@ BEGIN
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cODepCode') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	('0','1','转出部门编码','T','0000000007',null,null,0,'表头|转出部门编码,T|cODepCode','cODepCode',null,'1000000007',1,1)
+	('0','1','转出部门编码','T','0000000007',null,null,0,'表头|转出部门编码,T|mes_T_cODepCode','cODepCode',null,'1000000007',1,1)
 	END
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cIDepCode') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	('0','1','转入部门编码','T','0000000007',null,null,0,'表头|转入部门编码,T|cIDepCode','cIDepCode',null,'1000000007',1,1)
+	('0','1','转入部门编码','T','0000000007',null,null,0,'表头|转入部门编码,T|mes_T_cIDepCode','cIDepCode',null,'1000000007',1,1)
 	END 
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cIRdCode') 
 	BEGIN
@@ -146,11 +146,11 @@ BEGIN
 	--('0','1','表头自定义项16','T','0000000007',null,null,0,'表头|表头自定义项16,T|cDefine16','cDefine16',null,'1000000007',1,1)
 	--END
 	
-	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cPersonCode') 
-	--BEGIN
-	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	--('0','1','经手人编码','T','0000000007',null,null,0,'表头|经手人编码,T|cPersonCode','cPersonCode',null,'1000000007',1,1)
-	--END
+	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cPersonCode') 
+	BEGIN
+	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	('0','1','经手人编码','T','0000000007',null,null,0,'表头|经手人编码,T|MES_T_cPersonCode','cPersonCode',null,'1000000007',1,1)
+	END
 	
 	
 	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cAccounter') 

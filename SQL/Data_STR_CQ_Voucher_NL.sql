@@ -605,6 +605,7 @@ CREATE TABLE dbo.MES_CQ_TransVouch
 	cIRdCode	Nvarchar(5), --入库类别	编码
 	cORdCode	Nvarchar(5),-- 出库类别	编码
 	cRemark	Nvarchar(255), --备注	
+	cPersonCode Nvarchar(20),  --经办人
   
 
   CONSTRAINT PK_MES_CQ_TransVouch PRIMARY KEY  CLUSTERED

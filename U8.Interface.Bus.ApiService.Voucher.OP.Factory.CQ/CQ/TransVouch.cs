@@ -208,7 +208,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             tmpd.Id = autoid;
             tmpd.Cvouchertype = cardNo;
             tmpd.Ilineno = 2;
-            tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+            tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
+            tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;  //自动审核
+
             DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid,"string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
@@ -324,10 +326,13 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as dTVDate ";   //移库日期
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.datetimeFormat) + "' as dnmaketime, ";   //制单时间
             sql += " lt.cTvCode as mes_cTvCode ,";
+            sql += " lt.cIDepCode as mes_T_cIDepCode ,";
+            sql += " lt.cODepCode as mes_T_cODepCode ,"; 
             sql += " lt.cIWhCode as mes_cIWhCode ,";
             sql += " lt.cOWhCode as mes_cOWhCode ,";
             sql += " lt.cIRdCode as mes_cIRdCode ,";
             sql += " lt.cORdCode as mes_cORdCode, ";
+            sql += " lt.cPersonCode as mes_T_cPersonCode, "; //经办人
             sql += " lt.cremark as mes_cTVMemo  "; 
             sql += " from   " + bodytable + " lb with(nolock) INNER JOIN " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             
