@@ -21,7 +21,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
     /// 采购退货单 /采购退货单(MES_COMM_DLLReflect预置的op类)   code 不重复
     /// envContext.SetApiContext("sBillType", new string()); //上下文数据类型：string，含义：到货单类型， 到货单 0 退货单 1
     /// </summary>
-    public class PU_ArrivalVouch : PurchaseOp
+    public class PU_ArrivalVouch : PurchaseRetOp
     { 
         private int tasktype = 0;
 
@@ -95,6 +95,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
         #endregion
 
+   
         public override TaskList GetTask()
         {
             string sql = "SELECT * FROM " + headtable + " WHERE " + taskStatusflagColName + " = 0 ";
@@ -205,7 +206,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             }
             else
             {
-                return null;
+                return logdt;
             }
         }
 
@@ -228,13 +229,17 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
-            string sql = "select "; // t.*,";
-            sql += "lt.cRdCode as MES_cRdCode ,lt.ddate as MES_ddate, ";
-            sql += "lt.cWhCode as MES_cWhCode ,lt.cRdStyleCode as MES_cRdStyleCode, "; 
-            sql += "lt.cDepCode as MES_cDepCode ,lt.cVenCode as MES_cVenCode, "; 
-            sql += "lt.cPersonCode as MES_cPersonCode ,lt.cRemark as MES_cRemark, "; 
+            string sql = "select top 1 st.*,"; // t.*,";
+            sql += " lt.cRdCode as MES_cRdCode ,lt.ddate as MES_ddate, ";
+            sql += " lt.cWhCode as MES_cWhCode ,lt.cRdStyleCode as MES_cRdStyleCode, "; 
+            sql += " lt.cDepCode as MES_cDepCode ,lt.cVenCode as MES_cVenCode, "; 
+            sql += " lt.cPersonCode as MES_cPersonCode ,lt.cRemark as MES_cRemark, "; 
             sql += " '采购退货单' as cSource ";
-            sql += " from  " + headtable + " lt with(nolock) where lt.id ='" + pdt.Id + "' ";
+            sql += " from  " + headtable + " lt with(nolock) ";
+            sql += " INNER JOIN  " + bodytable + " lb with(nolock) on lb.id = lt.id ";
+            sql += " INNER JOIN  " + sourceBodyTable + " sb with(nolock) on sb.autoid = lb.dhid ";
+            sql += " INNER JOIN  " + sourceHeadTable + " st with(nolock) on sb.id = st.id ";
+            sql += " where lt.id ='" + pdt.Id + "' ";
   
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
@@ -257,7 +262,16 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
             string sql = "select st.cCode as cCode,sb.*,"; 
             sql += " lt.cWhCode as MES_cWhCode,";
-            sql += " lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity   ";
+            sql += " lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity,   ";
+            sql += " CASE lb." + opertype + " WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
+            //sql += " lb.iquantity * sb.iOriCost as pro_iOriMoney , ";  //原币含税单价
+            sql += " lb.iquantity * sb.iOriCost as pro_iOriMoney , ";  //原币金额(不含税) 
+            sql += " lb.iquantity * sb.iOriCost * sb.iTaxRate/100 as pro_iOriTaxPrice , ";  //原币税额 
+            sql += " (lb.iquantity * sb.iOriCost + lb.iquantity * sb.iOriCost * sb.iTaxRate/100 ) as pro_iOriSum , ";  //原币价税合计
+            sql += " lb.iquantity * sb.iCost as pro_iMoney , ";  //本币金额 
+            sql += " lb.iquantity * sb.iCost * sb.iTaxRate/100 as pro_iTaxPrice , ";  //本币税额 
+            sql += " (lb.iquantity * sb.iCost + lb.iquantity * sb.iCost * sb.iTaxRate/100 ) as pro_iSum   ";  //本币价税合计
+
             sql += " FROM " + sourceBodyTable + " sb with(nolock) ";
             sql += " INNER JOIN " + sourceHeadTable + " st with(nolock) on sb.id = st.id ";
             sql += " INNER JOIN " + bodytable + " lb with(nolock) on lb.dhid = sb.autoid ";

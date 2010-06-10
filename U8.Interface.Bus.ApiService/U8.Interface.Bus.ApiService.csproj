@@ -92,6 +92,7 @@
     <Compile Include="BLL\OP\StockOP.cs" />
     <Compile Include="BLL\OP\SfcOp.cs" />
     <Compile Include="BLL\OP\APIOp.cs" />
+    <Compile Include="BLL\OP\PurchaseRetOp.cs" />
     <Compile Include="BLL\TaskLogFactory\CQ\TaskDetail.cs" />
     <Compile Include="BLL\TaskLogFactory\CQ\TaskMain.cs" />
     <Compile Include="BLL\TaskLogFactory\CQ\ShowLog.cs" />

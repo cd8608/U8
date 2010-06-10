@@ -167,7 +167,7 @@ namespace U8.Interface.Bus.Function
         }
 
         /// <summary>
-        /// 
+        /// 税率为17的计算公式
         /// </summary>
         /// <param name="strQty"></param>
         /// <param name="strTaxUnitPrice"></param>
@@ -239,11 +239,12 @@ namespace U8.Interface.Bus.Function
         }
 
         /// <summary>
-        /// 根据税率获取本币价格体系
+        /// 根据原币含税单价\税率\汇率 获取本币价格体系
         /// </summary>
-        /// <param name="strQty"></param>
-        /// <param name="strTaxUnitPrice"></param>
-        /// <param name="strRate"></param>
+        /// <param name="strQty">数量</param>
+        /// <param name="strTaxUnitPrice">原币含税单价,原币*汇率=本币</param>
+        /// <param name="strRate">汇率</param>
+        /// <param name="strITaxRate">税率:17</param>
         /// <returns></returns>
         public static string GetNatAccountByITaxRate(string strQty, string strTaxUnitPrice, string strRate, string strITaxRate)
         {
@@ -314,7 +315,7 @@ namespace U8.Interface.Bus.Function
             //本币税额
             inattax = inatsum - inatmoney;
 
-            //	本币价税合计
+            //本币价税合计
             inatunitprice = dTaxUnitPrice * dRate / (1 + dITaxRate);
 
             string res = string.Format("inatsum,{0};inatmoney,{1};inattax,{2};inatunitprice,{3}"
