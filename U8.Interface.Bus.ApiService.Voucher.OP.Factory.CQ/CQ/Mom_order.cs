@@ -38,7 +38,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// </summary>
         private string voucherNoColumnName = "mocode"; 
         private string headtable = "MES_CQ_mom_order";
-        private string bodytable = "MES_CQ_mom_orderdetail"; 
+        private string bodytable = "MES_CQ_mom_orderdetail";
+        private string bodysubtable = "MES_CQ_Mom_orderdetailsub";  //api 不支持，需要手工写表
         private string taskStatusflagColName = "operflag"; 
         private string opertype = "opertype";
 
@@ -53,6 +54,16 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
 
         #region  api 常量 
+
+        /// <summary>
+        /// 主表
+        /// </summary>
+        /// <returns></returns>
+        public override string SetTableName()
+        {
+            return "mom_order";
+        }
+
         /// <summary>
         /// 子表
         /// </summary>
@@ -64,6 +75,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             }
             set { }
         }  
+
         /// <summary>
         /// 子表下的子表
         /// 子件用料表
@@ -75,11 +87,20 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 return "Mom_MoAllocate";
             }
             set { }
-        }  
-        public override string SetTableName()
-        {
-            return "mom_order";
         }
+
+        /// <summary>
+        /// 子件替代料表
+        /// </summary>
+        public string SubChildSubEntityName
+        {
+            get
+            {
+                return "Mom_MoAllocatesub";
+            }
+            set { }
+        }  
+     
 
 
         public override string SetApiAddressAdd()

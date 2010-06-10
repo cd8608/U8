@@ -275,6 +275,38 @@ END
 GO
 
 
+
+/*==============================MES_CQ_mom_orderdetailsub structure =============================*/
+print 'dbo.MES_CQ_mom_orderdetailsub...'
+if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_mom_orderdetailsub') and sysstat & 0xf = 3)
+BEGIN
+CREATE TABLE dbo.MES_CQ_mom_orderdetailsub  
+(
+	ddid nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
+	did	nvarchar(36),--Int, -- 关联子件表ID 
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
+	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
+	opertype Int default 0,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	cerrordesc nvarchar(4000) null ,  --错误信息
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
+
+	Sequence int, -- 替代序号 
+    Factor float,  --替代比例
+    ReplaceFlag bit, --是否替换料
+    PartId int, -- 料品ID
+    EffBegDate datetime, --生效时间
+    EffEndDate datetime, --结束时间 
+	  
+  CONSTRAINT MES_CQ_mom_orderdetailsub PRIMARY KEY  CLUSTERED
+  (
+    ddid
+  )
+)
+END
+GO
+
+
+
 --BOM
 /*==============================MES_CQ_bom_bom structure =============================*/
 print 'dbo.MES_CQ_bom_bom...'

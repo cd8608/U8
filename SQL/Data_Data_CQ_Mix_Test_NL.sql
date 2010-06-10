@@ -282,14 +282,17 @@ GO
 
 ----材料出库单
 --测试数据  新增   
-DECLARE @ID AS INT
-INSERT INTO MES_CQ_rdrecord11 (operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode)
-VALUES (0,0,'000001','PT001','1','501') 
-SELECT @ID = @@IDENTITY
-INSERT INTO MES_CQ_rdrecords11 (id,opertype,MoCode,cPInvCode,cInvCode,iquantity,cVenCode)
-VALUES (@ID,0,'0000000002','CP001','BCP001',100,'XYCG09120001') 
+DECLARE @ID AS NVARCHAR(36)
+SELECT @ID = NEWID()
+INSERT INTO MES_CQ_rdrecord11 (id,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode)
+VALUES (@ID,0,0,'000001','PT001','1','501') 
+
+DECLARE @DID AS NVARCHAR(36)
+SELECT @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords11 (id,did,opertype,MoCode,cPInvCode,cInvCode,iquantity,cVenCode)
+VALUES (@ID,@DID,0,'0000000002','CP001','BCP001',100,'XYCG09120001') 
 GO
- 
+
 --测试数据  删除    
 DECLARE @ID AS INT
 INSERT INTO MES_CQ_rdrecord11 (operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode)
