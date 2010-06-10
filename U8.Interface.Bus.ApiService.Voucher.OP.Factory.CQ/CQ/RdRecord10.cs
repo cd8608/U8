@@ -25,10 +25,13 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         private int tasktype = 0;
 
         private string cardNo = "0411";
+
+        /// <summary>
+        /// 中间表
+        /// </summary>
         private string headtable = "MES_CQ_rdrecord10";
-        private string bodytable = "mes_cq_rdrecords10";
-
-
+        private string bodytable = "mes_cq_rdrecords10"; 
+        private string voucherNoColumnName = "cRdCode";  
         private string taskStatusflagColName = "operflag";
 
 
@@ -74,7 +77,13 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
         public override TaskList GetTask()
         {
-            string sql = "SELECT * FROM " + headtable + " WHERE operflag = 0 ";
+            //string sql = "SELECT * FROM " + headtable + " WHERE operflag = 0 "; 
+
+            string sql = " SELECT distinct T.* FROM " + headtable + " T WITH(NOLOCK) ";
+            sql += " INNER JOIN " + bodytable + " B WITH(NOLOCK) ON T.id = B.id  ";
+            sql += " INNER JOIN MES_CQ_RdRecords11 MB WITH(NOLOCK) ON MB.MoCode = B.MoCode ";
+            sql += " INNER JOIN MES_CQ_RdRecord11 MT WITH(NOLOCK) ON MT.id = MB.id  AND MT.operflag = 1  and T.opertype = MT.opertype and T.operflag = 0";
+
             string curid = "";  
             DataTable dt = new DataTable();
             dt = DbHelperSQL.Query(sql).Tables[0];
@@ -233,6 +242,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
+
                 DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
            
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -268,7 +279,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
             string sql = "select t.*,lt.cWhCode as cWhCode ,lt.cRdCode as cCode ";
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";
-            sql += ",'生产订单' as cSource ";
+            sql += ",'生产订单' as cSource "; 
+            sql += ",'" + apidata.ConnectInfo.UserId + "'  as PRO_CMaker  ";
             sql += " from  v_mom_order_wf t with(nolock) left join " + bodytable + " lb with(nolock) on lb.mocode = t.mocode left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id =" +
                 U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(pdt.Id, "string") + " ";
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);

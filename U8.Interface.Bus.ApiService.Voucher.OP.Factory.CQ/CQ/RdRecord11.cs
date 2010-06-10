@@ -29,7 +29,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// </summary>
         private string cardNo = "0412";
         private string headtable = "MES_CQ_rdrecord11";
-        private string bodytable = "mes_cq_rdrecords11";
+        private string bodytable = "mes_cq_rdrecords11"; 
+        private string voucherNoColumnName = "cRdCode"; 
 
         private string sourceCardNo = "MO21";
         private string sourceHeadTable = "v_mom_order_wf";
@@ -80,7 +81,13 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
         public override TaskList GetTask()
         {
-            string sql = "SELECT * FROM " + headtable + " WHERE operflag = 0 ";
+            //string sql = "SELECT * FROM " + headtable + " WHERE operflag = 0 ";
+            string sql = " SELECT distinct T.* FROM " + headtable + " T WITH(NOLOCK) ";
+            sql += " INNER JOIN " + bodytable + " B WITH(NOLOCK) ON T.id = B.id  ";
+            sql += " INNER JOIN MES_CQ_mom_order MT WITH(NOLOCK) ON MT.MoCode = B.MoCode  AND MT.operflag = 1  and T.opertype = MT.opertype and T.operflag = 0 ";
+
+             
+
             string curid = "";  
             DataTable dt = new DataTable();
             dt = DbHelperSQL.Query(sql).Tables[0];
@@ -239,6 +246,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
+
                 DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
            
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -349,55 +358,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
         public override int Update(Model.Synergismlog dt)
         { 
-            DateTime? finishTime = new DateTime?(); 
-            string operflag = dt.Cstatus;
-            
-            if (operflag == Constant.SynerginsLog_Cstatus_Complete || operflag == Constant.SynerginsLog_Cstatus_Wait)
-            {
-                operflag = "1";
-                finishTime = DateTime.Now;
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_Error)
-            {
-                operflag = "3";
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_NoDeal)
-            {
-                operflag = "0";
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
-            {
-                operflag = "4";
-            }
-            else
-            {
-                operflag = "2";
-            }
-             
- 
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("update " + headtable + " set ");
-            if (!string.IsNullOrEmpty(dt.Cvoucherno))
-            {
-                strSql.Append(" cRdCode = '" + dt.Cvoucherno + "',  ");
-
-            } 
-            if (finishTime == null)
-            {
-                strSql.Append(" finishTime = null,  ");
-            }
-            else
-            {
-                strSql.Append(" finishTime = '" + finishTime + "',  ");
-            }
-            strSql.Append(" operflag = " + operflag + "  ");
-            strSql.Append(" where id= " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
-
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
-
-            return rows;
-
-
+            return CQ.Utility.UpdateMainLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, "cerrordesc"); 
         }
 
 
@@ -405,44 +366,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         //修改日志
         public override int Update(Model.Synergismlogdt dt)
         {
-
-            string operflag = dt.Cstatus;
-            if (operflag == Constant.SynergisnLogDT_Cstatus_Complete)
-            {
-                operflag = "1";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_Error)
-            {
-                operflag = "3";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_NoDeal)
-            {
-                operflag = "0";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_Delete)
-            {
-                operflag = "1";
-            }
-            else
-            {
-                operflag = "2";
-            }
- 
-            StringBuilder strSql = new StringBuilder(); 
-
-            strSql.Append("update " + headtable + " set ");
-            if (!string.IsNullOrEmpty(dt.Cvoucherno))
-            {
-                strSql.Append(" cRdCode = '" + dt.Cvoucherno + "',  ");
-
-            }  
-            strSql.Append(" operflag = " + operflag + ",  ");
-            strSql.Append(" cerrordesc = '" + dt.Cerrordesc + "'  ");
-            strSql.Append(" where id=" + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
-
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
-
-            return rows;
+            return CQ.Utility.UpdateDetailLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, "cerrordesc");
+             
         }
 
 

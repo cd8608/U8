@@ -359,16 +359,18 @@ GO
 
 ----盘点单 delete from MES_CQ_CheckVouchs
 --测试数据  新增  
-DECLARE @ID AS INT
-INSERT INTO MES_CQ_CheckVouch (operflag,opertype,cCVCode,dCVDate,dACDate,
+DECLARE @ID AS nvarchar(36)
+DECLARE @DID AS NVARCHAR(36)
+SET @ID = NEWID()
+
+INSERT INTO MES_CQ_CheckVouch (id,operflag,opertype,cCVCode,dCVDate,dACDate,
 cDepCode,cPersonCode,cWhCode
 )
-VALUES (0,0,'0000000001','2015-07-01 00:00:00.000','2015-07-01 00:00:00.000',
-'501','zzm','put005')
- 
-SELECT @ID = @@IDENTITY
-INSERT INTO MES_CQ_CheckVouchs (id,opertype,cInvCode,iquantity,cVenCode)
-VALUES (@ID,0,'NoFree1',100,'XYCG09120001') 
+VALUES (@ID,0,0,'0000000001','2015-07-01 00:00:00.000','2015-07-01 00:00:00.000',
+'501','zzm','put005') 
+SET @DID = NEWID()
+INSERT INTO MES_CQ_CheckVouchs (id,did,opertype,cInvCode,iquantity,cVenCode)
+VALUES (@ID,@DID,0,'NoFree1',100,'XYCG09120001') 
  
 GO
  

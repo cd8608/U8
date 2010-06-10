@@ -194,7 +194,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Cvouchertype = cardNo;
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
-                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
                 //DataSet ds = DbHelperSQL.Query("SELECT lt." + voucherNoColumnName + " FROM " + bodytable + " lb with(nolock) INNER JOIN " + headtable + " lt WITH(NOLOCK) ON lt.ID = lb.id WHERE lb.ID = '" + dt.Id + "' ");
                 //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 //{

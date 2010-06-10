@@ -106,38 +106,38 @@ END
 
 GO
   
---采购退货 红字采购入库单
-/*==============================MES_CQ_rdrecord01Ret structure =============================*/
-print 'dbo.MES_CQ_rdrecord01Ret...'
-if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_rdrecord01Ret') and sysstat & 0xf = 3)
-BEGIN
-CREATE TABLE dbo.MES_CQ_rdrecord01Ret
-(
+----采购退货 红字采购入库单
+--/*==============================MES_CQ_rdrecord01Ret structure =============================*/
+--print 'dbo.MES_CQ_rdrecord01Ret...'
+--if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_rdrecord01Ret') and sysstat & 0xf = 3)
+--BEGIN
+--CREATE TABLE dbo.MES_CQ_rdrecord01Ret
+--(
 
-	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
-	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-	opertype Int default 0,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
-    cerrordesc nvarchar(4000) null ,  --错误信息
+--	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
+--	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+--	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
+--	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
+--	opertype Int default 0,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+--    cerrordesc nvarchar(4000) null ,  --错误信息
 
-	cRdCode	Nvarchar(30),	--入库单号
-	ddate	datetime,       --入库日期	
-	cWhCode	Nvarchar(10),   --仓库	仓库编码
-	cRdStyleCode	Nvarchar(5),    --收发类别	此字段是编码字段
-    cDepCode	Nvarchar(12), --部门(工作中心)	
-	cVenCode	Nvarchar(20), -- 供应商	 
-	cPersonCode	Nvarchar(20), -- 业务员	 	
-	cRemark	Nvarchar(255), --备注	   
+--	cRdCode	Nvarchar(30),	--入库单号
+--	ddate	datetime,       --入库日期	
+--	cWhCode	Nvarchar(10),   --仓库	仓库编码
+--	cRdStyleCode	Nvarchar(5),    --收发类别	此字段是编码字段
+--    cDepCode	Nvarchar(12), --部门(工作中心)	
+--	cVenCode	Nvarchar(20), -- 供应商	 
+--	cPersonCode	Nvarchar(20), -- 业务员	 	
+--	cRemark	Nvarchar(255), --备注	   
 
-  CONSTRAINT PK_MES_CQ_rdrecord01Ret PRIMARY KEY  CLUSTERED
-  (
-    id
-  )
-)
-END
+--  CONSTRAINT PK_MES_CQ_rdrecord01Ret PRIMARY KEY  CLUSTERED
+--  (
+--    id
+--  )
+--)
+--END
 
-GO
+--GO
 
 /*==============================MES_CQ_rdrecords01Ret structure =============================*/
 print 'dbo.MES_CQ_rdrecord10...'
