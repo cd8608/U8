@@ -8,14 +8,14 @@ namespace U8.Interface.Bus.ApiService.Model
 {
     public class BodyRow
     {
-        private List<Model.U8NameValue>  bodycols;
+        private List<Model.U8NameValue>  bodycols = new List<U8NameValue>();
         public List<Model.U8NameValue> BodyCols
         {
-            get { return BodyCols; }
-            set { BodyCols = value; }
+            get { return bodycols; }
+            set { bodycols = value; }
         }
 
-        private List<List<Model.U8NameValue>> childData;
+        private List<List<Model.U8NameValue>> childData = new List<List<U8NameValue>>();
         public List<List<Model.U8NameValue>> ChildData 
         {
             get { return childData; }

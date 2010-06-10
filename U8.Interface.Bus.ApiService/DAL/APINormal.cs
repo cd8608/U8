@@ -31,18 +31,38 @@ namespace U8.Interface.Bus.ApiService.DAL
 
   
             string iinvexchrate = "iinvexchrate";
-            foreach (List<Model.U8NameValue> list in apidata.BodyData)
+            if (apidata.SfcBodyData != null && apidata.SfcBodyData.Count > 0)
             {
-                Model.U8NameValue nv_iinvexchrate = DAL.Common.U8NameValueFind(list, iinvexchrate);
-                if (nv_iinvexchrate != null)
+                foreach (Model.BodyRow sfcrow in apidata.SfcBodyData)
                 {
-                    if (string.IsNullOrEmpty(nv_iinvexchrate.U8FieldValue))
+                    Model.U8NameValue nv_iinvexchrate = DAL.Common.U8NameValueFind(sfcrow.BodyCols, iinvexchrate);
+                    if (nv_iinvexchrate != null)
                     {
-                        nv_iinvexchrate.U8FieldValue = "0";
+                        if (string.IsNullOrEmpty(nv_iinvexchrate.U8FieldValue))
+                        {
+                            nv_iinvexchrate.U8FieldValue = "0";
+                        }
+                    }
+                }
+            }
+            else
+            {
+
+                foreach (List<Model.U8NameValue> list in apidata.BodyData)
+                {
+                    Model.U8NameValue nv_iinvexchrate = DAL.Common.U8NameValueFind(list, iinvexchrate);
+                    if (nv_iinvexchrate != null)
+                    {
+                        if (string.IsNullOrEmpty(nv_iinvexchrate.U8FieldValue))
+                        {
+                            nv_iinvexchrate.U8FieldValue = "0";
+                        }
                     }
                 }
             }
              
         }
+         
+
     }
 }

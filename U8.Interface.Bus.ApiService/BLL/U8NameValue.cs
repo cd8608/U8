@@ -359,7 +359,7 @@ namespace U8.Interface.Bus.ApiService.BLL
 
                     #region 添加表体子表 
                     DataSet dschild = new DataSet();
-                    dschild = ((SfcOp)apidata.OP).SetFromTabetsChild(dt, apidata.Fristsynergismlogdt, apidata);
+                    dschild = ((SfcOp)dt.OP).SetFromTabetsChild(dt, apidata.Fristsynergismlogdt, apidata);
                     List<List<Model.U8NameValue>> childData = SetSfcBodyChildRows(listfd, fd, ref i, ref rowno, apidata, dt, rdds, rdsds, dschild);
                     lmu8nv.ChildData = childData;
                     #endregion

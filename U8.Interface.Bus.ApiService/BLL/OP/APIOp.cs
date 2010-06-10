@@ -56,11 +56,15 @@ namespace U8.Interface.Bus.ApiService.BLL
         {
 
             Model.DealResult dr = new Model.DealResult();
-            if (bd.TaskType != 1 && null != _login)
-            {
-                u8Login = _login;
-                return dr;
-            }
+
+            #region 一次登录
+            //if (bd.TaskType != 1 && null != _login)
+            //{
+            //    u8Login = _login;
+            //    return dr;
+            //}
+
+            #endregion 
 
 
             #region 判断格式  登录

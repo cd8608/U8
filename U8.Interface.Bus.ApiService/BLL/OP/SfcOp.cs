@@ -137,7 +137,7 @@ namespace U8.Interface.Bus.ApiService.BLL
             Model.DealResult dr = new Model.DealResult();
 
             #region //第二层
-            if (apidata.BodyData.Count == 0)
+            if (apidata.SfcBodyData.Count == 0)
             {
                 return dr;
             }
@@ -148,7 +148,7 @@ namespace U8.Interface.Bus.ApiService.BLL
 
             ExtensionBusinessEntity SubEntity = broker.GetExtBoEntity("extbo")[0].SubEntity[SubEntityName];
 
-            SubEntity.ItemCount = apidata.BodyData.Count;
+            SubEntity.ItemCount = apidata.SfcBodyData.Count;
             int i = 0;
             foreach (BodyRow bodyRow in apidata.SfcBodyData)
             {

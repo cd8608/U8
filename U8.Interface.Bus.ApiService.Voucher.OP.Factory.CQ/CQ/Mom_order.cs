@@ -252,7 +252,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate, ";
             sql += " '生产订单' as cSource ";
             sql += " from  " + headtable + " lt with(nolock) ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
+            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = st.PlanCode  ";
             sql += " where lt.id ='" + pdt.Id + "' ";
             
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
@@ -282,7 +282,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate, ";
             sql += " '生产订单' as cSource ";
             sql += " from  " + headtable + " lt with(nolock) ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
+            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = st.PlanCode  ";
             sql += " where lt.id ='" + pdt.Id + "' ";
 
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
@@ -305,7 +305,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " '生产订单' as cSource ";
             sql += " from  " + headtable + " lt with(nolock) ";
             sql += " inner join " + bodytable + " lb with(nolock) on lt.id = lb.id ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
+            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = st.PlanCode  ";
             sql += " where lt.id ='" + pdt.Id + "' ";
 
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
