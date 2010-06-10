@@ -95,15 +95,30 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// <returns></returns>
         public override object Delete()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sbm = new StringBuilder();
             SetData(_ccode); 
-            sb.Append(detailBiz.CreateDeleteString());
+            if (bNoCase)
+            {
+                StringBuilder sbd = new StringBuilder();
+                sbd.Append(detailBiz.CreateDeleteString());
+                if (sbd.Length > 0)
+                {
+                    sbm.Append(sbd);
+                }
+            }
             if (bSaveOper)
             {
-                if (sb.Length > 0)
+                StringBuilder sbi = new StringBuilder();
+                sbi.Append(detailBiz.CreateInsertString());
+                if (sbi.Length > 0)
                 {
-                    return ExecSql(sb.ToString());
+                    sbm.Append(sbi);
                 }
+            
+            }
+            if (sbm.Length > 0)
+            {
+                return ExecSql(sbm.ToString());
             }
             return 1;
         }

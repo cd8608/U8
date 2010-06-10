@@ -28,8 +28,14 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// 目标
         /// </summary>
         private string cardNo = "0301";
+
+        /// <summary>
+        /// 中间
+        /// </summary>
         private string headtable = "MES_CQ_RdRecord08";
         private string bodytable = "MES_CQ_RdRecords08";
+        private string voucherNoColumnName = "cRdCode";
+        private string errordescColumnName = "cerrordesc";
 
         /// <summary>
         /// 来源
@@ -49,7 +55,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         {
             return "08";
         }
-  
+
         public override string SetApiAddressAdd()
         {
             return "U8API/otherin/Add";
@@ -84,7 +90,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         public override TaskList GetTask()
         {
             string sql = "SELECT * FROM " + headtable + " WHERE operflag = 0 ";
-            string curid = "";  
+            string curid = "";
             DataTable dt = new DataTable();
             dt = DbHelperSQL.Query(sql).Tables[0];
             if (null == dt || dt.Rows.Count == 0)
@@ -140,9 +146,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <returns></returns>
         public override Model.Synergismlog GetLogModel(string autoid)
         {
-            Model.Synergismlog tmpd = new Synergismlog(); 
+            Model.Synergismlog tmpd = new Synergismlog();
             tmpd.Id = autoid;
-            tmpd.Cvouchertype = cardNo; 
+            tmpd.Cvouchertype = cardNo;
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
             DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = '" + autoid + "' ");
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -168,8 +174,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             tmpd.Cvouchertype = cardNo;
             tmpd.Ilineno = 2;
             tmpd.TaskType = tasktype;
-            tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
-            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid,"string"));
+            tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid, "string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 tmpd.Cvoucherno = ds.Tables[0].Rows[i]["cRdCode"].ToString();
@@ -195,8 +201,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             //DataSet ds = DbHelperSQL.Query("SELECT " + sourceCodeColName + " FROM " + bodytable + " with(nolock) WHERE ID = " + dt.Id);
             //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             //{
-                //fdt.Cvoucherno = ds.Tables[0].Rows[i][sourceCodeColName].ToString();
-                
+            //fdt.Cvoucherno = ds.Tables[0].Rows[i][sourceCodeColName].ToString();
+
             //}
             return fdt;
 
@@ -239,7 +245,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <param name="dt"></param>
         /// <returns></returns>
         public override List<Model.Synergismlogdt> GetNext(Model.Synergismlogdt dt)
-        { 
+        {
             List<Model.Synergismlogdt> logdt = new List<U8.Interface.Bus.ApiService.Model.Synergismlogdt>();
             if (dt.Ilineno == 1)
             {
@@ -248,23 +254,24 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Cvouchertype = cardNo;
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
-                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-                DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
-           
+                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
+                DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id, "string"));
+
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     tmpd.Cvoucherno = ds.Tables[0].Rows[i]["cRdCode"].ToString();
                     tmpd.Autoid = ds.Tables[0].Rows[i]["id"].ToString();  //int.Parse(ds.Tables[0].Rows[i]["id"].ToString());
                     tmpd.Cdealmothed = int.Parse(ds.Tables[0].Rows[i]["opertype"].ToString()) + 1; // 0(自动生单/自动审核) 1增 2修改 3删
-                } 
-                
+                }
+
                 logdt.Add(tmpd);
                 return logdt;
             }
             else
             {
                 return logdt;
-            }        
+            }
         }
 
 
@@ -283,23 +290,23 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
-            string sql = "select ";  
-            sql += " lt.cvencode as MES_cvencode,"; 
+            string sql = "select ";
+            sql += " lt.cvencode as MES_cvencode,";
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";   //入库日期
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.datetimeFormat) + "' as dnmaketime, ";   //制单时间
             sql += " lt.cRdCode as cCode ,";
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode ";
             //sql += " ,lt.cPersonCode as MES_cPersonCode ";
             sql += " from   " + bodytable + " lb with(nolock) INNER JOIN " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
-            
+
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
             BLL.Common.ErrorMsg(ds, "未能获取 表头信息");
             return ds;
- 
+
         }
 
-  
+
         /// <summary>
         /// 获取来源表体数据
         /// </summary>
@@ -309,24 +316,24 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <returns></returns>
         public override System.Data.DataSet SetFromTabets(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
         {
- 
+
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);  //new ApiService.DAL.SynergismLogDt();
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
             string sql = "select  ";
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,";
             //sql += " lt.cPersonCode as MES_cPersonCode, ";
-            sql += " lt.cvencode as MES_cvencode,"; 
+            sql += " lt.cvencode as MES_cvencode,";
             sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
             sql += " lb.cinvcode as mes_cinvcode   ";
             sql += " ,lb.iquantity as MES_iquantity   ";
             sql += " from   " + bodytable + " lb with(nolock) INNER JOIN " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
-            
+
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
             BLL.Common.ErrorMsg(ds, "未能获取 表体信息");
             return ds;
         }
- 
+
 
         /// <summary>
         /// ID CODE 互查
@@ -362,55 +369,58 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         #region update  log
 
 
+
         public override int Update(Model.Synergismlog dt)
-        { 
-            DateTime? finishTime = new DateTime?(); 
-            string operflag = dt.Cstatus;
-            
-            if (operflag == Constant.SynerginsLog_Cstatus_Complete || operflag == Constant.SynerginsLog_Cstatus_Wait)
-            {
-                operflag = "1";
-                finishTime = DateTime.Now;
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_Error)
-            {
-                operflag = "3";
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_NoDeal)
-            {
-                operflag = "0";
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
-            {
-                operflag = "4";
-            }
-            else
-            {
-                operflag = "2";
-            }
-             
- 
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("update " + headtable + " set ");
-            if (!string.IsNullOrEmpty(dt.Cvoucherno))
-            {
-                strSql.Append(" cRdCode = '" + dt.Cvoucherno + "',  ");
+        {
+            return CQ.Utility.UpdateMainLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, errordescColumnName);
 
-            } 
-            if (finishTime == null)
-            {
-                strSql.Append(" finishTime = null,  ");
-            }
-            else
-            {
-                strSql.Append(" finishTime = '" + finishTime + "',  ");
-            }
-            strSql.Append(" operflag = " + operflag + "  ");
-            strSql.Append(" where id= " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
+            //    DateTime? finishTime = new DateTime?(); 
+            //    string operflag = dt.Cstatus;
 
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            //    if (operflag == Constant.SynerginsLog_Cstatus_Complete || operflag == Constant.SynerginsLog_Cstatus_Wait)
+            //    {
+            //        operflag = "1";
+            //        finishTime = DateTime.Now;
+            //    }
+            //    else if (operflag == Constant.SynerginsLog_Cstatus_Error)
+            //    {
+            //        operflag = "3";
+            //    }
+            //    else if (operflag == Constant.SynerginsLog_Cstatus_NoDeal)
+            //    {
+            //        operflag = "0";
+            //    }
+            //    else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
+            //    {
+            //        operflag = "4";
+            //    }
+            //    else
+            //    {
+            //        operflag = "2";
+            //    }
 
-            return rows; 
+
+            //    StringBuilder strSql = new StringBuilder();
+            //    strSql.Append("update " + headtable + " set ");
+            //    if (!string.IsNullOrEmpty(dt.Cvoucherno))
+            //    {
+            //        strSql.Append(" cRdCode = '" + dt.Cvoucherno + "',  ");
+
+            //    } 
+            //    if (finishTime == null)
+            //    {
+            //        strSql.Append(" finishTime = null,  ");
+            //    }
+            //    else
+            //    {
+            //        strSql.Append(" finishTime = '" + finishTime + "',  ");
+            //    }
+            //    strSql.Append(" operflag = " + operflag + "  ");
+            //    strSql.Append(" where id= " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
+
+            //    int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+
+            //    return rows; 
 
         }
 
@@ -418,52 +428,52 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         //修改日志
         public override int Update(Model.Synergismlogdt dt)
         {
+            return CQ.Utility.UpdateDetailLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, errordescColumnName);
+            //string operflag = dt.Cstatus;
+            //if (operflag == Constant.SynergisnLogDT_Cstatus_Complete)
+            //{
+            //    operflag = "1";
+            //}
+            //else if (operflag == Constant.SynergisnLogDT_Cstatus_Error)
+            //{
+            //    operflag = "3";
+            //}
+            //else if (operflag == Constant.SynergisnLogDT_Cstatus_NoDeal)
+            //{
+            //    operflag = "0";
+            //}
+            //else if (operflag == Constant.SynergisnLogDT_Cstatus_Delete)
+            //{
+            //    operflag = "1";
+            //}
+            //else
+            //{
+            //    operflag = "2";
+            //}
 
-            string operflag = dt.Cstatus;
-            if (operflag == Constant.SynergisnLogDT_Cstatus_Complete)
-            {
-                operflag = "1";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_Error)
-            {
-                operflag = "3";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_NoDeal)
-            {
-                operflag = "0";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_Delete)
-            {
-                operflag = "1";
-            }
-            else
-            {
-                operflag = "2";
-            }
- 
-            StringBuilder strSql = new StringBuilder(); 
+            //StringBuilder strSql = new StringBuilder(); 
 
-            strSql.Append("update " + headtable + " set ");
-            if (!string.IsNullOrEmpty(dt.Cvoucherno))
-            {
-                strSql.Append(" cRdCode = '" + dt.Cvoucherno + "',  ");
+            //strSql.Append("update " + headtable + " set ");
+            //if (!string.IsNullOrEmpty(dt.Cvoucherno))
+            //{
+            //    strSql.Append(" cRdCode = '" + dt.Cvoucherno + "',  ");
 
-            }  
-            strSql.Append(" operflag = " + operflag + ",  ");
-            strSql.Append(" cerrordesc = '" + dt.Cerrordesc + "'  ");
-            strSql.Append(" where id=" + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
+            //}  
+            //strSql.Append(" operflag = " + operflag + ",  ");
+            //strSql.Append(" cerrordesc = '" + dt.Cerrordesc + "'  ");
+            //strSql.Append(" where id=" + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
 
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            //int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
 
-            return rows;
+            //return rows;
         }
 
 
         #endregion
 
 
- 
- 
+
+
 
 
     }

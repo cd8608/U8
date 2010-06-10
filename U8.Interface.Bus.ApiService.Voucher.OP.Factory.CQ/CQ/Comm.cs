@@ -163,13 +163,21 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 strSql.Append(" " + voucherNoColumnName + " = '" + dt.Cvoucherno + "',  ");
             }
             strSql.Append(" " + flagColname + " = " + operflag + ", ");
-            if (string.IsNullOrEmpty(dt.Cerrordesc))
+
+            if (operflag == "0")
             {
-                strSql.Append("  " + errordesccolname + " = null ");
+                strSql.Append(" " + errordesccolname + " = null    ");
             }
             else
             {
-                strSql.Append("  " + errordesccolname + " = '" + U8.Interface.Bus.Comm.Convert.EncodeDbValue(dt.Cerrordesc) + "'  ");
+                if (string.IsNullOrEmpty(dt.Cerrordesc))
+                {
+                    strSql.Append("  " + errordesccolname + " = null ");
+                }
+                else
+                {
+                    strSql.Append("  " + errordesccolname + " = '" + U8.Interface.Bus.Comm.Convert.EncodeDbValue(dt.Cerrordesc) + "'  ");
+                }
             }
             strSql.Append(" where id=" + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id, "string") + " ");
 

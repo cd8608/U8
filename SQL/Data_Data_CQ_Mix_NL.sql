@@ -211,10 +211,66 @@ begin
 end 
 go
 
+if not exists (SELECT 1 FROM MES_CQ_FUNCTION WHERE cfunid = '016') 
+begin
+	insert into MES_CQ_FUNCTION ( accid,cfunclass,cfunesc,cfunid,cfunname,cfunobject,cfunsql,cfuntype,cfunvba,excdatabase ) values 
+	  (null,'U8.Interface.Bus.Function.Acount','根据数量\单价\税率 获取价格体系','016','GetAccountByITaxRate','U8.Interface.Bus.Function',null,'2',null,null)
+end  
+if not exists (SELECT 1 FROM MES_CQ_FUNCTIONS WHERE cfunid = '016') 
+begin
+	--输入  
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','iquantity','数量',1,'0','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','itaxunitprice','含税单价',2,'0','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','itaxrate','税率',3,'0','String')
+	--返回
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','itaxunitprice','含税单价',1,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','isum','原币价税合计',2,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','imoney','原币无税金额',3,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','itax','原币税额',4,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('016','iprice','无税单价',5,'1','String')
+
+end
+go
+if not exists (SELECT 1 FROM MES_CQ_FUNCTION WHERE cfunid = '017') 
+begin
+	insert into MES_CQ_FUNCTION ( accid,cfunclass,cfunesc,cfunid,cfunname,cfunobject,cfunsql,cfuntype,cfunvba,excdatabase ) values 
+	  (null,'U8.Interface.Bus.Function.Acount','根据税率获取本币金额','017','GetNatAccountByITaxRate','U8.Interface.Bus.Function',null,'2',null,null)
+end
+if not exists (SELECT 1 FROM MES_CQ_FUNCTIONS WHERE cfunid = '017') 
+begin
+	--输入  
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','iquantity','数量',1,'0','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','itaxunitprice','含税单价',2,'0','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','iexchrate','汇率',3,'0','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','itaxrate','税率',4,'0','String')
+	--返回
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','inatsum','本币价税合计',1,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','inatmoney','本币无税金额',2,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','inattax','本币税额',3,'1','String')
+	insert into MES_CQ_FUNCTIONS ( cfunid,cfunparareturn,cfunparareturndesc,cno,ctype,cvaluetype ) values 
+	  ('017','inatunitprice','本币无税单价',4,'1','String')
+end
+go  
+
 if not exists (SELECT 1 FROM MES_CQ_FUNCTION WHERE cfunid = '019') 
 begin
 insert into MES_CQ_FUNCTION ( accid,cfunclass,cfunesc,cfunid,cfunname,cfunobject,cfunsql,cfuntype,cfunvba,excdatabase ) values 
-  (null,'U8.Interface.Bus.Function.Compelete','记录订单跟踪信息','019','GetDidTraceInfo','FunctionDLL',null,'2',null,null)
+  (null,'U8.Interface.Bus.Function.Compelete','记录订单跟踪信息','019','GetDidTraceInfo','U8.Interface.Bus.Function',null,'2',null,null)
 end 
 --DELETE FROM MES_CQ_FUNCTIONS WHERE cfunid = '019'
 if not exists (SELECT 1 FROM MES_CQ_FUNCTIONS WHERE cfunid = '019') 
@@ -248,7 +304,7 @@ GO
 if not exists (SELECT 1 FROM MES_CQ_FUNCTION WHERE cfunid = '020') 
 begin
 insert into MES_CQ_FUNCTION ( accid,cfunclass,cfunesc,cfunid,cfunname,cfunobject,cfunsql,cfuntype,cfunvba,excdatabase ) values 
-  (null,'U8.Interface.Bus.Function.Compelete','获取上游单据的字段值','020','GetValueByAccVouchnoItemname','FunctionDLL',null,'2',null,null)
+  (null,'U8.Interface.Bus.Function.Compelete','获取上游单据的字段值','020','GetValueByAccVouchnoItemname','U8.Interface.Bus.Function',null,'2',null,null)
 end 
 --delete MES_CQ_FUNCTIONS WHERE cfunid = '020'
 if not exists (SELECT 1 FROM MES_CQ_FUNCTIONS WHERE cfunid = '020') 
@@ -272,7 +328,7 @@ GO
 if not exists (SELECT 1 FROM MES_CQ_FUNCTION WHERE cfunid = '021') 
 begin
 insert into MES_CQ_FUNCTION ( accid,cfunclass,cfunesc,cfunid,cfunname,cfunobject,cfunsql,cfuntype,cfunvba,excdatabase ) values 
-  (null,'U8.Interface.Bus.Function.Compelete','获取需求跟踪信息','021','GetSRPolicy','FunctionDLL',null,'2',null,null)
+  (null,'U8.Interface.Bus.Function.Compelete','获取需求跟踪信息','021','GetSRPolicy','U8.Interface.Bus.Function',null,'2',null,null)
 end 
 --delete MES_CQ_FUNCTIONS WHERE cfunid = '021'
 if not exists (SELECT 1 FROM MES_CQ_FUNCTIONS WHERE cfunid = '021') 
@@ -297,7 +353,7 @@ GO
 if not exists (SELECT 1 FROM MES_CQ_FUNCTION WHERE cfunid = '030') 
 begin
 insert into MES_CQ_FUNCTION ( accid,cfunclass,cfunesc,cfunid,cfunname,cfunobject,cfunsql,cfuntype,cfunvba,excdatabase ) values 
-  (null,'U8.Interface.Bus.Function.Compelete','根据来源账套采购订单子表ID获取目标账套销售订单信息','030','GetSoInfoForReturnOrder','FunctionDLL',null,'2',null,null)
+  (null,'U8.Interface.Bus.Function.Compelete','根据来源账套采购订单子表ID获取目标账套销售订单信息','030','GetSoInfoForReturnOrder','U8.Interface.Bus.Function',null,'2',null,null)
 end 
 --delete MES_CQ_FUNCTIONS WHERE cfunid = '030'
 if not exists (SELECT 1 FROM MES_CQ_FUNCTIONS WHERE cfunid = '030') 

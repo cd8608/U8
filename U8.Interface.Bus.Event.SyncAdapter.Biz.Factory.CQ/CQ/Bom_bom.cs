@@ -64,7 +64,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 {
                     SetAddData(ref ds);
                 }
-            
+
             }
             if (l.Count == 0 && lst.Count == 0)
             {
@@ -72,14 +72,18 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             }
             else
             {
+                StringBuilder sbd = new StringBuilder();
+                if (bNoCase)
+                {
+                    sbd.Append(detailBiz.CreateDeleteString());
+                    sbd.Append(this.CreateDeleteString()); 
+                }
 
-                StringBuilder sb = new StringBuilder();
-                sb.Append(this.CreateInsertString());
-                sb.Append(detailBiz.CreateInsertString());
-
-                sb.Replace("main|##newguid", Guid.NewGuid().ToString());
-
-                return ExecSql(sb.ToString());
+                StringBuilder sbi = new StringBuilder();
+                sbi.Append(this.CreateInsertString());
+                sbi.Append(detailBiz.CreateInsertString());
+                sbi.Replace("main|##newguid", Guid.NewGuid().ToString());
+                return ExecSql(sbd.ToString() + sbi.ToString());
             }
         }
 
@@ -98,16 +102,54 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 }
 
             }
+
+            StringBuilder sbd = new StringBuilder();
             if (bNoCase)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(detailBiz.CreateDeleteString());
-                sb.Append(this.CreateDeleteString());
-                ExecSql(sb.ToString());
+            { 
+                sbd.Append(detailBiz.CreateDeleteString());
+                sbd.Append(this.CreateDeleteString()); 
             }
+
+            StringBuilder sbi = new StringBuilder();
             if (bSaveOper)
             {
-                return Insert();
+                lst = new List<List<BaseMode>>();
+                l = new List<BaseMode>();
+                detailBiz.l = new List<BaseMode>();
+                detailBiz.lst = new List<List<BaseMode>>();
+
+                if (bomId > 0)
+                {
+                    SetAddData(bomId);
+                }
+                else
+                {
+                    if (CheckAutoAudit(ref ds))
+                    {
+                        SetAddData(ref ds);
+                    }
+
+                }
+                if (l.Count == 0 && lst.Count == 0)
+                {
+                    return null;
+                }
+                else
+                { 
+                    sbi.Append(this.CreateInsertString());
+                    sbi.Append(detailBiz.CreateInsertString()); 
+                    sbi.Replace("main|##newguid", Guid.NewGuid().ToString());
+
+                }
+ 
+            }
+
+            StringBuilder sbm = new StringBuilder();
+            sbm.Append(sbd);
+            sbm.Append(sbi);
+            if (sbm.Length > 0)
+            {
+                return ExecSql(sbm.ToString());
             }
             return 1;
 
@@ -156,12 +198,19 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
 
 
             tmpMainLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
-            tmpMainLst.Add(new BaseMode(null, null, null, "bomid", BomId, null, null));
+            tmpMainLst.Add(new BaseMode("bomid", BomId, null, "bomid", BomId, null, null));
             tmpMainLst.Add(new BaseMode(null, null, null, "Version", version, null, null));
             tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", VersionEffDate, null, null));
             tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", InvCode, null, null));
             tmpMainLst.Add(new BaseMode(null, null, null, "status", "0", null, null));
-            tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+            if (opertype.Equals("a"))
+            {
+                tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+            }
+            else
+            {
+                tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
+            }
 
 
             this.lst.Add(tmpMainLst);
@@ -184,8 +233,14 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", DInvCode, null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", ds.Tables["BomComponents"].Rows[i]["BaseQtyN"].ToString(), null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", ds.Tables["BomComponents"].Rows[i]["BaseQtyD"].ToString(), null, null));
-
-                tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                if (opertype.Equals("a"))
+                {
+                    tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                }
+                else
+                {
+                    tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
+                }
                 detailBiz.lst.Add(tmpDetailLst);
             }
 
@@ -297,12 +352,19 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                     {
                         // h.InvCode,h.InvName,h.version,h.bomid, h.VersionEffDate 
                         tmpMainLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
-                        tmpMainLst.Add(new BaseMode(null, null, null, "bomid", dsMainBom.Tables[i].Rows[j]["bomid"].ToString(), null, null));
+                        tmpMainLst.Add(new BaseMode("bomid",dsMainBom.Tables[i].Rows[j]["bomid"].ToString(), null, "bomid", dsMainBom.Tables[i].Rows[j]["bomid"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "Version", dsMainBom.Tables[i].Rows[j]["version"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", dsMainBom.Tables[i].Rows[j]["VersionEffDate"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", dsMainBom.Tables[i].Rows[j]["InvCode"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "status", "0", null, null));
-                        tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                        if (opertype.Equals("a"))
+                        {
+                            tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                        }
+                        else
+                        {
+                            tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
+                        }
                         this.lst.Add(tmpMainLst);
                     }
                 }
@@ -322,7 +384,14 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                         tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                        if (opertype.Equals("a"))
+                        {
+                            tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                        }
+                        else
+                        {
+                            tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
+                        }
                         detailBiz.lst.Add(tmpDetailLst); 
    
                     }

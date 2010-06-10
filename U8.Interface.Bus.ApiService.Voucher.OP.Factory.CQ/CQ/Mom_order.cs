@@ -50,6 +50,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         private string voucherTypeName = "生产订单";
    
 
+
+
+        #region  api 常量 
         /// <summary>
         /// 子表
         /// </summary>
@@ -60,9 +63,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 return "Mom_OrderDetail";
             }
             set { }
-        }
-
-
+        }  
         /// <summary>
         /// 子表下的子表
         /// 子件用料表
@@ -74,18 +75,13 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 return "Mom_MoAllocate";
             }
             set { }
-        }
-
-
-
-
+        }  
         public override string SetTableName()
         {
             return "mom_order";
         }
 
 
-        #region  api address
         public override string SetApiAddressAdd()
         {
             return "U8API/MOrder/MOrderAdd";
@@ -210,7 +206,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Cvouchertype = cardNo;
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
-                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+                tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
                 DataSet ds = DbHelperSQL.Query("SELECT " + voucherNoColumnName + " FROM " + bodytable + " with(nolock) WHERE ID = '" + dt.Id + "' ");
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {

@@ -503,6 +503,9 @@ namespace U8.Interface.Bus.ApiService.DAL
                     //sql = ("UPDATE RdRecord01 SET dVeriDate='" + date + "',dnverifytime='" + date + "' WHERE cCode='" + OrderCode + "' ");
                     sql = "UPDATE RdRecord01 SET dVeriDate=dDate,dnverifytime=dnmaketime WHERE cCode='" + OrderCode + "' ";
                     break;
+                case "MO21":
+                    return true;
+                    break;
                 default:
                     return false;
             }

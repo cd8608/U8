@@ -500,68 +500,64 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <returns></returns>
         public override Model.DealResult MakeAudit(BaseData bd, Model.Synergismlogdt dt)
         {
-            Model.DealResult dr;
+
+            Model.DealResult dr = new Model.DealResult();
             Model.APIData apidata = bd as Model.APIData;
-            BusinessObject domHead = null;
-            BusinessObject domBody = null;
-            LoadVouch(apidata, dt, out domHead, out domBody);
-            domHead.NeedFieldsCheck = false;
-            domBody.NeedFieldsCheck = false;
-            string vouchid = GetCodeorID(dt.Cvoucherno, apidata, "id");
+            //string vouchid = GetCodeorID(dt.Cvoucherno, apidata, "id");
+            string auditaddress = SetApiAddressAudit();
             U8Login.clsLogin u8Login = new U8Login.clsLogin();
-            dr = GetU8Login(apidata, u8Login);
-            if (dr.ResultNum < 0) return dr;
+            GetU8Login(apidata, u8Login);
             U8ApiBroker broker = null;
             dr = GetU8ApiBroker(apidata, u8Login, out broker, "audit");
-            if (dr.ResultNum < 0) return dr;
-            broker.SetBoParam("domHead", domHead);
-            broker.AssignNormalValue("bVerify", true);
-            
+
+            broker.AssignNormalValue("mocode", dt.Cvoucherno);
+
+            //第六步：调用API
             if (!broker.Invoke())
             {
-
+                //错误处理
                 Exception apiEx = broker.GetException();
                 if (apiEx != null)
                 {
                     if (apiEx is MomSysException)
                     {
                         MomSysException sysEx = apiEx as MomSysException;
-                        dr.ResultNum = -1;
-                        dr.ResultMsg = "系统异常：" + sysEx.Message;
+                        Console.WriteLine("系统异常：" + sysEx.Message);
+                        //todo:异常处理
                     }
                     else if (apiEx is MomBizException)
                     {
                         MomBizException bizEx = apiEx as MomBizException;
-                        dr.ResultNum = -1;
-                        dr.ResultMsg = "API异常：" + bizEx.Message;
+                        Console.WriteLine("API异常：" + bizEx.Message);
+                        //todo:异常处理
                     }
-
+                    //异常原因
                     String exReason = broker.GetExceptionString();
                     if (exReason.Length != 0)
                     {
-                        dr.ResultNum = -1;
-                        dr.ResultMsg = " 异常原因：" + exReason;
+                        Console.WriteLine("异常原因：" + exReason);
                     }
                 }
+                //结束本次调用，释放API资源
                 broker.Release();
-
                 return dr;
             }
-            System.String result = broker.GetReturnValue() as System.String;
-            broker.Release();
-            if (!string.IsNullOrEmpty(result))
-            {
-                dr.ResultNum = -1;
-                dr.ResultMsg = "API错误：" + result;
-                throw new Exception(dr.ResultMsg);
-            }
-            else
-            {
-                if (!DAL.Common.SetVerifyDate(bd.ConnectInfo, dt))
-                    Log.WriteWinLog("设置单据审核日期失败,Cvouchertype:" + dt.Cvouchertype + ";Cvoucherno:" + dt.Cvoucherno + ".");
-            }
 
-            return dr;
+            //第七步：获取返回结果
+
+            //获取返回值
+            //获取普通返回值。此返回值数据类型为System.Boolean，此参数按值传递，表示返回值: true:成功, false: 失败
+            System.Boolean result = Convert.ToBoolean(broker.GetReturnValue());
+
+            //结束本次调用，释放API资源
+            broker.Release(); 
+
+
+            //dr = BrokerInvoker(broker);
+            if (!DAL.Common.SetVerifyDate(bd.ConnectInfo, dt))
+                U8.Interface.Bus.Log.WriteWinLog("设置单据审核日期失败,Cvouchertype:" + dt.Cvouchertype + ";Cvoucherno:" + dt.Cvoucherno + ".");
+
+            return dr; 
         }
 
 

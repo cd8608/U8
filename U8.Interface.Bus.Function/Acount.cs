@@ -79,7 +79,7 @@ namespace U8.Interface.Bus.Function
         }
 
         /// <summary>
-        /// 根据税率获取原币价格体系
+        /// 根据数量\单价\税率 获取原币价格体系
         /// </summary>
         /// <param name="strQty"></param>
         /// <param name="strIUnitPrice"></param>
