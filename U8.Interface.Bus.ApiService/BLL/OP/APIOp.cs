@@ -52,7 +52,7 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <param name="bd"></param>
         /// <param name="u8Login"></param>
         /// <returns></returns>
-        public Model.DealResult GetU8Login(Model.APIData bd, U8Login.clsLogin u8Login)
+        public Model.DealResult GetU8Login_bak(Model.APIData bd, U8Login.clsLogin u8Login)
         {
 
             System.Diagnostics.Trace.WriteLine("  begin GetU8Login  "); 
@@ -182,6 +182,159 @@ namespace U8.Interface.Bus.ApiService.BLL
             return dr;
         }
 
+        public Model.DealResult GetU8Login(Model.APIData bd, U8Login.clsLogin u8Login)
+        {
+            return GetU8LoginNew(bd, null, u8Login);
+        }
+
+
+        /// <summary>
+        /// 获取 vb login 和 .net login 
+        /// 可绕过login验证
+        /// </summary>
+        /// <param name="bd"></param>
+        /// <param name="oSysLogin"></param>
+        /// <param name="u8Login"></param>
+        /// <returns></returns>
+        private Model.DealResult GetU8LoginNew(Model.APIData bd, UFSoft.U8.Framework.Login.UI.clsLogin oSysLogin, U8Login.clsLogin u8Login)
+        {
+
+            Model.DealResult dr = new Model.DealResult();
+
+            System.Diagnostics.Trace.WriteLine("  before  GetU8Login 判断格式 ");
+            #region 判断格式  登录
+            string strErr = ",请在［账套档案注册］模块中更新!";
+            if (string.IsNullOrEmpty(bd.ConnectInfo.UserId))
+            {
+                dr.ResultMsg = "默认操作员不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(bd.ConnectInfo.Source))
+            {
+                dr.ResultMsg = "数据源不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(bd.ConnectInfo.AccId))
+            {
+                dr.ResultMsg = "账套号不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(bd.ConnectInfo.Srv))
+            {
+                dr.ResultMsg = "服务器地址不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            if (string.IsNullOrEmpty(bd.ConnectInfo.YearId))
+            {
+                dr.ResultMsg = "登陆年度不能为空" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            else
+            {
+                try { int.Parse(bd.ConnectInfo.YearId); }
+                catch
+                {
+                    dr.ResultMsg = "登陆年度格式错误：" + bd.ConnectInfo.YearId + strErr;
+                    dr.ResultNum = -1;
+                    Marshal.FinalReleaseComObject(u8Login);
+                    throw new Exception(dr.ResultMsg);
+                }
+            }
+            DbHelperSQLP dsp = new DbHelperSQLP(bd.ConnectInfo.Constring);
+            string strSql = "SELECT 1 FROM UFSystem.dbo.UA_AccountDatabase A JOIN UFSystem.dbo.UA_Account B ON A.cAcc_Id=B.cAcc_Id WHERE A.cAcc_Id='" + bd.ConnectInfo.AccId + "' ";
+            if (!dsp.Exists(strSql))
+            {
+                dr.ResultMsg = "登陆失败，原因：账套 " + bd.ConnectInfo.AccId + " 在 " + bd.ConnectInfo.Srv + " 上不存在";
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+            #endregion
+
+            System.Diagnostics.Trace.WriteLine("  after  GetU8Login 判断格式 ");
+
+
+            bool bLogined;
+            string beginDate;
+
+            oSysLogin = new UFSoft.U8.Framework.Login.UI.clsLogin();
+
+            beginDate = ""; //GetMonthBegindate(acc_ID, iYear, "12")  //用12期间构造login,12期间必有
+            oSysLogin.LanguageID = "zh-CN"; // GetAccountLoginLocaleID(modUtility.GetDbName(acc_ID, iYear))
+
+            string subId = U8.Interface.Bus.SysInfo.subId;
+            string userId = bd.ConnectInfo.UserId;
+            string accId = bd.ConnectInfo.Source + "@" + bd.ConnectInfo.AccId;
+            string yearId = bd.ConnectInfo.YearId;
+            string password = bd.ConnectInfo.Password;
+            string date = bd.ConnectInfo.Date;
+            string srv = bd.ConnectInfo.sSrv;
+            string serial = bd.ConnectInfo.Serial;
+
+            bLogined = oSysLogin.login(subId, userId, password, srv, date, accId, serial);
+
+            if (!bLogined)
+            {
+                strErr = oSysLogin.ErrDescript; //& g_fmtr.GetString("String.U8.AA.Admin.4671", g_args)
+                //'strErr = oSysLogin.ErrDescript & "内置用户密码不正确！"
+                //'Call WriteTransferLog(g_ologin.cAcc_ID, g_ologin.cAccName, g_ologin.cIyear, "", "准备年结环境时出现错误，错误描述：" & oSyslogin.ErrDescript & "内置用户密码不正确！")
+                dr.ResultMsg = "登陆失败，原因：" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+
+            UFSoft.U8.Framework.LoginContext.ProductContext oLoginContext;
+            oLoginContext = new UFSoft.U8.Framework.LoginContext.ProductContext();
+            oLoginContext = oSysLogin.SubLogin(U8.Interface.Bus.SysInfo.subId);
+
+            if (null == oLoginContext)
+            {
+                strErr = oSysLogin.ErrDescript;
+                //'MsgBox oSyslogin.ErrDescript
+                //'Call WriteTransferLog(g_ologin.cAcc_ID, g_ologin.cAccName, g_ologin.cIyear, "", "准备年结环境时出现错误，错误描述：" & oSyslogin.ErrDescript)
+                dr.ResultMsg = "登陆失败，原因：" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+
+            //u8Login = new U8Login.clsLogin();
+
+            if (!u8Login.ConstructLogin(oSysLogin.userToken))
+            { 
+                strErr = u8Login.ShareString;
+                //'Call WriteTransferLog(g_ologin.cAcc_ID, g_ologin.cAccName, g_ologin.cIyear, "", "准备年结环境时出现错误，错误描述：" & oLogin.ShareString)
+                dr.ResultMsg = "登陆失败，原因：" + strErr;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+  
+            if (!u8Login.Login(ref subId, ref accId, ref yearId, ref userId, ref password, ref date, ref srv, ref serial))
+            {
+                System.Diagnostics.Trace.WriteLine("    GetU8Login  failed  ");
+                dr.ResultMsg = "登陆失败，原因：" + u8Login.ShareString;
+                if (u8Login.ShareString.IndexOf("年度") > 0 || u8Login.ShareString.IndexOf("日期") > 0) dr.ResultMsg += " - " + date;
+                dr.ResultNum = -1;
+                Marshal.FinalReleaseComObject(u8Login);
+                throw new Exception(dr.ResultMsg);
+            }
+
+
+            return dr;
+
+        }
 
 
         /// <summary>
