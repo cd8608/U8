@@ -8,6 +8,10 @@ using MSXML2;
 
 namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
 {
+
+    /// <summary>
+    /// bom 子件
+    /// </summary>
     public class Bom_opcomponent : BizBase
     { 
 

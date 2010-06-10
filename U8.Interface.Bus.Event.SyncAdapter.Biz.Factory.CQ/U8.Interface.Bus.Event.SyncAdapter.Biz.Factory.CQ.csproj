@@ -70,6 +70,7 @@
     <Compile Include="CQ\AssemVouch.cs" />
     <Compile Include="CQ\AssemVouchRet.cs" />
     <Compile Include="CQ\AssemVouchRets.cs" />
+    <Compile Include="CQ\Bom_opcomponentsub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

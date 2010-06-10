@@ -14,8 +14,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         private string opertype;
         int bomId;
         System.Data.DataSet ds;
-          
+
         Bom_opcomponent detailBiz;
+        Bom_opcomponentsub detailSubBiz;
 
         /// <summary>
         /// 保存前事件使用(保存并自动审核时，BOM单不会自动调用审核事件)
@@ -75,6 +76,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 StringBuilder sbd = new StringBuilder();
                 if (bNoCase)
                 {
+                    sbd.Append(detailSubBiz.CreateDeleteString());
                     sbd.Append(detailBiz.CreateDeleteString());
                     sbd.Append(this.CreateDeleteString()); 
                 }
@@ -82,6 +84,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 StringBuilder sbi = new StringBuilder();
                 sbi.Append(this.CreateInsertString());
                 sbi.Append(detailBiz.CreateInsertString());
+                sbi.Append(detailSubBiz.CreateInsertString());
                 sbi.Replace("main|##newguid", Guid.NewGuid().ToString());
                 return ExecSql(sbd.ToString() + sbi.ToString());
             }
@@ -105,7 +108,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
 
             StringBuilder sbd = new StringBuilder();
             if (bNoCase)
-            { 
+            {
+                sbd.Append(detailSubBiz.CreateDeleteString());
                 sbd.Append(detailBiz.CreateDeleteString());
                 sbd.Append(this.CreateDeleteString()); 
             }
@@ -137,7 +141,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 else
                 { 
                     sbi.Append(this.CreateInsertString());
-                    sbi.Append(detailBiz.CreateInsertString()); 
+                    sbi.Append(detailBiz.CreateInsertString());
+                    sbi.Append(detailSubBiz.CreateInsertString());
                     sbi.Replace("main|##newguid", Guid.NewGuid().ToString());
 
                 }
@@ -331,15 +336,20 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         public void SetAddData(int bomId)
         {
             detailBiz = new Bom_opcomponent(ref conn, bomId, ufConnStr,opertype);
+            detailSubBiz = new Bom_opcomponentsub(ref conn, bomId, ufConnStr, opertype);
 
+            //主表  bom_bom
             DataSet dsMainBom = new DataSet();
             DataTable dtMainBom = GetBomHeadByBomId(bomId);
             dsMainBom.Tables.Add(dtMainBom.Copy());
-
-
+            //子表 bom_
             DataSet dsBom = new DataSet();
             DataTable dtBom = GetChildByBomId(bomId);
             dsBom.Tables.Add(dtBom.Copy());
+            //替代料
+            DataSet dsSubChildBom = new DataSet();
+            DataTable dtSubChildBom = GetSubChildByBomId(bomId);
+            dsSubChildBom.Tables.Add(dtSubChildBom.Copy());
  
             List<BaseMode> tmpMainLst = new List<BaseMode>(); 
  
@@ -380,7 +390,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
 
                         List<BaseMode> tmpDetailLst = new List<BaseMode>();
                         tmpDetailLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "did", Guid.NewGuid().ToString(), null, null));
+                        string matid = Guid.NewGuid().ToString();
+                        string opcomponentid = dsBom.Tables[i].Rows[j]["OpComponentId"].ToString();
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "did", matid, null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
@@ -392,12 +404,46 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                         {
                             tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
                         }
-                        detailBiz.lst.Add(tmpDetailLst); 
+                        detailBiz.lst.Add(tmpDetailLst);
+
+
+                        //替代料
+                        for (int f = 0; f < dsSubChildBom.Tables.Count; f++)
+                        {
+                            if (dsSubChildBom.Tables[f].Rows.Count > 0)
+                            {
+                                DataRow[] dr = dsSubChildBom.Tables[f].Select("OpComponentId =" + opcomponentid);
+                                for (int h = 0; h < dr.Length; h++)
+                                {
+                                    List<BaseMode> tmpDetailSubLst = new List<BaseMode>();
+
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "did", matid, null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "ddid", Guid.NewGuid().ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "cInvCode", dr[h]["cInvCode"].ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "Sequence", dr[h]["Sequence"].ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "Factor", dr[h]["Factor"].ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "ReplaceFlag", dr[h]["ReplaceFlag"].ToString(), null, null));
+                       
+                                    if (opertype.Equals("a"))
+                                    {
+                                        tmpDetailSubLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                                    }
+                                    else
+                                    {
+                                        tmpDetailSubLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
+                                    }
+                                    detailSubBiz.lst.Add(tmpDetailSubLst);
+
+                                }
+                            }
+                        }
    
                     }
                     
                 }
             }
+
+
         }
 
 
@@ -410,14 +456,21 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         {
 
             detailBiz = new Bom_opcomponent(ref conn, bomId, ufConnStr, opertype);
-
+            detailSubBiz = new Bom_opcomponentsub(ref conn, bomId, ufConnStr, opertype);
+  
+            //主表  bom_bom
             DataSet dsMainBom = new DataSet();
             DataTable dtMainBom = GetBomHeadByBomId(bomId);
             dsMainBom.Tables.Add(dtMainBom.Copy());
-
+            //子表 bom_
             DataSet dsBom = new DataSet();
             DataTable dtBom = GetChildByBomId(bomId);
             dsBom.Tables.Add(dtBom.Copy());
+            //替代料
+            DataSet dsSubChildBom = new DataSet();
+            DataTable dtSubChildBom = GetSubChildByBomId(bomId);
+            dsSubChildBom.Tables.Add(dtSubChildBom.Copy());
+
 
             //表头
             for (int i = 0; i < dsMainBom.Tables.Count; i++)
@@ -440,19 +493,54 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             }
             //DataTable dtLocation = GetLocation(bomId);
             //表体
-            for (int i = 0; i < dsBom.Tables.Count; i++)
+            for (int mti = 0; mti < dsBom.Tables.Count; mti++)
             {
-                if (dsBom.Tables[i].Rows.Count > 0)
+                if (dsBom.Tables[mti].Rows.Count > 0)
                 {
-                    for (int j = 0; j < dsBom.Tables[i].Rows.Count; j++)
+                    for (int j = 0; j < dsBom.Tables[mti].Rows.Count; j++)
                     {
-
+                        //材料
                         List<BaseMode> tmpDetailLst = new List<BaseMode>();
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
-                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
+                        string matid = Guid.NewGuid().ToString();
+                        string opcomponentid = dsBom.Tables[mti].Rows[j]["OpComponentId"].ToString();
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "did", matid, null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[mti].Rows[j]["DInvCode"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[mti].Rows[j]["DBaseQtyN"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[mti].Rows[j]["DBaseQtyD"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
-                        detailBiz.lst.Add(tmpDetailLst); 
+                        detailBiz.lst.Add(tmpDetailLst);
+ 
+
+                        //替代料
+                        for (int f = 0; f < dsSubChildBom.Tables.Count; f++)
+                        {
+                            if (dsSubChildBom.Tables[f].Rows.Count > 0)
+                            {
+                                DataRow[] dr = dsSubChildBom.Tables[f].Select("OpComponentId =" + opcomponentid);
+                                for (int h = 0; h < dr.Length; h++)
+                                {
+                                    List<BaseMode> tmpDetailSubLst = new List<BaseMode>();
+
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "did", matid, null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "ddid", Guid.NewGuid().ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "cInvCode", dr[h]["cInvCode"].ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "Sequence", dr[h]["Sequence"].ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "Factor", dr[h]["Factor"].ToString(), null, null));
+                                    tmpDetailSubLst.Add(new BaseMode(null, null, null, "ReplaceFlag", dr[h]["ReplaceFlag"].ToString(), null, null));
+
+                                    if (opertype.Equals("a"))
+                                    {
+                                        tmpDetailSubLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
+                                    }
+                                    else
+                                    {
+                                        tmpDetailSubLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
+                                    }
+                                    detailSubBiz.lst.Add(tmpDetailSubLst);
+
+                                }
+                            }
+                        }
 
                     }
 
@@ -571,30 +659,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         {
             DataTable dtBom = new DataTable();
             StringBuilder sb = new StringBuilder();
-
-            //sb.Append(" SELECT V.* FROM  ");
-            //sb.Append(" ( ");
-            //sb.Append("     SELECT  ");
-            //sb.Append("            h.bomid,h.InvCode,h.InvName,h.version,h.VersionEffDate,  ");
-            //sb.Append("           D.DBaseQtyN,D.DBaseQtyD, ");
-            //sb.Append("           D.DInvCode,D.DInvCode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit,d.OpComponentId    ");
-            //sb.Append("     FROM v_bom_head h  with(nolock) ");
-            //sb.Append("           INNER JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
-            //sb.Append("     WHERE  H.bomid ='" + bomId + "' ");
-            ////sb.Append("     UNION ALL ");
-            ////sb.Append("     SELECT ");
-            ////sb.Append("           h.InvCode,h.InvName,h.version, ");
-            ////sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,i.cComUnitCode as DInvUnit,d.DBaseQtyD,d.OpComponentId   ");
-            ////sb.Append("     FROM v_bom_head h  with(nolock) ");
-            ////sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
-            ////sb.Append("           LEFT JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
-            ////sb.Append("           LEFT JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
-            ////sb.Append("           LEFT JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
-            ////sb.Append("           WHERE  H.bomid ='" + bomId + "' AND ISNULL(rm.InvCode,'') <> '' ");
-            //sb.Append(" ) V");
-            //sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");
-
-
+             
             sb.Append(" SELECT V.* FROM   (     ");
             sb.Append(" SELECT              bom.bomid,bas.InvCode,inv.cinvname as InvName,bom.version,bom.VersionEffDate,   ");
             sb.Append(" D.BaseQtyN as DBaseQtyN,D.BaseQtyD as DBaseQtyD, bas1.InvCode as DInvCode,bas1.InvCode AS subInvCode,d.EffBegDate as DEffBegDate,d.EffEndDate as DEffEndDate,  ");
@@ -606,6 +671,35 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             sb.Append(" inner JOIN bom_opcomponent d  with(nolock) ON bom.bomid = d.bomid  ");
             sb.Append("  inner join bas_part bas1 with(nolock) on bas1.partid=d.componentid    WHERE  bom.bomid ='" + bomId + "'  ) V ");
             sb.Append("  ORDER BY  V.DInvCode,V.subInvCode ");
+
+
+            dtBom = UFSelect(sb.ToString());
+            return dtBom;
+
+        }
+
+
+        /// <summary>
+        /// 获取替代料
+        /// </summary>
+        /// <param name="bomId"></param>
+        /// <returns></returns>
+        private DataTable GetSubChildByBomId(int bomId)
+        {
+            DataTable dtBom = new DataTable();
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(" SELECT V.* FROM   (     ");
+            sb.Append(" SELECT   bom.bomid,bom.version,bom.VersionEffDate,    ");
+            sb.Append(" d.OpComponentId      , ");
+            sb.Append(" subd.PartId,subd.Sequence,subd.ReplaceFlag, subd.Factor , ");
+            sb.Append(" bas1.InvCode as cInvCode,inv.cinvname as cInvName  ");
+            sb.Append(" FROM bom_bom bom with(nolock) ");
+            sb.Append(" inner JOIN bom_opcomponent d  with(nolock) ON bom.bomid = d.bomid  ");
+            sb.Append(" inner JOIN bom_opcomponentsub subd  with(nolock) ON d.OpComponentId = subd.OpComponentId  ");
+            sb.Append(" inner join bas_part bas1 with(nolock) on bas1.partid=subd.PartId    ");
+            sb.Append(" inner join inventory inv with(nolock) on inv.cinvcode=bas1.InvCode   WHERE  bom.bomid ='" + bomId + "'  ) V ");
+            sb.Append("  ORDER BY  V.cInvCode ");
 
 
             dtBom = UFSelect(sb.ToString());

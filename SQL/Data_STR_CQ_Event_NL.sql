@@ -349,10 +349,11 @@ CREATE TABLE dbo.MES_CQ_bom_opcomponentsub
 	cInvCode	Nvarchar(20), -- 物料编号	
 	Sequence	Int, -- 替代次序
 	Factor	float, -- 替代比
+	ReplaceFlag bit, -- 替换料
 	 
   CONSTRAINT PK_MES_CQ_bom_opcomponentsub PRIMARY KEY  CLUSTERED
   (
-    did
+    ddid
   )
 )
 END
