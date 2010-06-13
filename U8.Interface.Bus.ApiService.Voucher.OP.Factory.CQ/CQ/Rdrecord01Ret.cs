@@ -323,7 +323,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
-            string sql = "select distinct st.*,"; 
+            string sql = "select distinct st.*,";
+            sql += " st.ccode as MES_cARVCode, "; //到货单号
             sql += " st.id as iarriveid ,"; //到货单id
             sql += " st.id as ipurarriveid ,"; //采购到货单id
             sql += " '' as ipurorderid ,";  //采购订单ID
