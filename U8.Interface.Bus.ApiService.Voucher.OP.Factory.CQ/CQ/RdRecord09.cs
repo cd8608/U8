@@ -287,8 +287,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
             string sql = "select ";  
-            sql += " lt.cvencode as MES_cvencode,"; 
-            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";   //入库日期
+            sql += " lt.cvencode as MES_cvencode "; 
+            sql += ",lt.cCusCode as mes_t_cCusCode ";
+            sql += ",lt.cRemark as mes_t_cRemark ";
+            sql += ",lt.cDefine2 as mes_t_cDefine2 ";
+            sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";   //入库日期
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.datetimeFormat) + "' as dnmaketime, ";   //制单时间
             sql += " lt.cRdCode as cCode ,";
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode ";

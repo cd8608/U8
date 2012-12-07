@@ -329,7 +329,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
             string sql = "select t.*,";
             sql += "lt." + voucherNoColumnName + " as cCode ";
-            sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate "; 
+            sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";
+            sql += ",lt.cRemark as mes_t_cRemark ";  
             sql += " from  " + _sourcetablenameh + " t with(nolock) left join " + headtable + " lt with(nolock) on lt.cSoCode = t.cSoCode where lt.id ='" + pdt.Id + "' ";
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);

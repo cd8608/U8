@@ -201,11 +201,12 @@ BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 ('0','1','退货标识','T','0000000002',null,null,1,'0','bReturnFlag',null,'1000000002',1,1)
 END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'T' AND fieldname='cMemo') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','备    注','T','0000000002',null,null,0,'表头|备    注,T|cMemo','cMemo',null,'1000000002',1,1)
---END
+
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'T' AND fieldname='cMemo') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','备注','T','0000000002',null,null,0,'表头|备注,T|mes_t_cRemark','cMemo',null,'1000000002',1,1)
+END
 
 
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'T' AND fieldname='cVerifier') 
@@ -687,61 +688,61 @@ END
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 --('0','1','件数','B','0000000002',null,null,0,'表体|件数,B|iNum','iNum',null,'1000000002',1,1)
 --END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iQuotedPrice') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','报价','B','0000000002',null,null,0,'表体|报价,B|iQuotedPrice','iQuotedPrice',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iUnitPrice') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','无税单价','B','0000000002',null,null,0,'表体|无税单价,B|iUnitPrice','iUnitPrice',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTaxUnitPrice') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','含税单价','B','0000000002',null,null,0,'表体|含税单价,B|iTaxUnitPrice','iTaxUnitPrice',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iMoney') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','无税金额','B','0000000002',null,null,0,'表体|无税金额,B|iMoney','iMoney',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTax') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','税额','B','0000000002',null,null,0,'表体|税额,B|iTax','iTax',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iSum') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','价税合计','B','0000000002',null,null,0,'表体|价税合计,B|iSum','iSum',null,'1000000002',1,1)
---END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iQuotedPrice') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','报价','B','0000000002',null,null,0,'表体|报价,B|iQuotedPrice','iQuotedPrice',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iUnitPrice') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','无税单价','B','0000000002',null,null,0,'表体|无税单价,B|iUnitPrice','iUnitPrice',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTaxUnitPrice') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','含税单价','B','0000000002',null,null,0,'表体|含税单价,B|iTaxUnitPrice','iTaxUnitPrice',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iMoney') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','无税金额','B','0000000002',null,null,0,'表体|无税金额,B|iMoney','iMoney',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTax') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','税额','B','0000000002',null,null,0,'表体|税额,B|iTax','iTax',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iSum') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','价税合计','B','0000000002',null,null,0,'表体|价税合计,B|iSum','iSum',null,'1000000002',1,1)
+END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iDisCount') 
 --BEGIN
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 --('0','1','折扣额','B','0000000002',null,null,0,'表体|折扣额,B|iDisCount','iDisCount',null,'1000000002',1,1)
 --END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatUnitPrice') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','本币单价','B','0000000002',null,null,0,'表体|本币单价,B|iNatUnitPrice','iNatUnitPrice',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatMoney') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','本币金额','B','0000000002',null,null,0,'表体|本币金额,B|iNatMoney','iNatMoney',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatTax') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','本币税额','B','0000000002',null,null,0,'表体|本币税额,B|iNatTax','iNatTax',null,'1000000002',1,1)
---END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatSum') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','本币价税合计','B','0000000002',null,null,0,'表体|本币价税合计,B|iNatSum','iNatSum',null,'1000000002',1,1)
---END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatUnitPrice') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','本币单价','B','0000000002',null,null,0,'表体|本币单价,B|iNatUnitPrice','iNatUnitPrice',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatMoney') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','本币金额','B','0000000002',null,null,0,'表体|本币金额,B|iNatMoney','iNatMoney',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatTax') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','本币税额','B','0000000002',null,null,0,'表体|本币税额,B|iNatTax','iNatTax',null,'1000000002',1,1)
+END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatSum') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','本币价税合计','B','0000000002',null,null,0,'表体|本币价税合计,B|iNatSum','iNatSum',null,'1000000002',1,1)
+END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iNatDisCount') 
 --BEGIN
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
@@ -789,11 +790,11 @@ END
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 --('0','1','失效日期','B','0000000002',null,null,0,'表体|失效日期,B|dvDate','dvDate',null,'1000000002',1,1)
 --END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iSOsID') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','对应订单子表ID','B','0000000002',null,null,0,'表体|对应订单子表ID,B|iSOsID','iSOsID',null,'1000000002',1,1)
---END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iSOsID') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','对应订单子表ID','B','0000000002',null,null,0,'表体|对应订单子表ID,B|iSOsID','iSOsID',null,'1000000002',1,1)
+END
 IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iDLsID') 
 BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
@@ -814,11 +815,11 @@ END
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 --('0','1','存货名称','B','0000000002',null,null,0,'表体|存货名称,B|cInvName','cInvName',null,'1000000002',1,1)
 --END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTaxRate') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','税率（%）','B','0000000002',null,null,0,'表体|税率（%）,B|iTaxRate','iTaxRate',null,'1000000002',1,1)
---END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTaxRate') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','税率（%）','B','0000000002',null,null,0,'表体|税率（%）,B|iTaxRate','iTaxRate',null,'1000000002',1,1)
+END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='cDefine22') 
 --BEGIN
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
@@ -1358,9 +1359,8 @@ END
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 --('0','1','退货申请单号','B','0000000002',null,null,0,'表体|退货申请单号,B|crtnappcode','crtnappcode',null,'1000000002',1,1)
 --END
- 
-END
 
+END
 GO
  
 

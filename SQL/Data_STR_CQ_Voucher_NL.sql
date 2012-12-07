@@ -430,7 +430,7 @@ CREATE TABLE dbo.MES_CQ_rdrecord08
   )
 )
 END
-
+ 
 GO
 
 /*==============================MES_CQ_rdrecords08 structure =============================*/
@@ -487,7 +487,7 @@ CREATE TABLE dbo.MES_CQ_RdRecord11
     id
   )
 )
-END
+END 
 
 GO
 
@@ -543,7 +543,9 @@ CREATE TABLE dbo.MES_CQ_RdRecord09
 	cWhCode	Nvarchar(10),   --仓库	仓库编码
 	cRdStyleCode	Nvarchar(5),    --出库类型	ERP提供,编码
     cDepCode	Nvarchar(12), --部门(工作中心)	
-	cVenCode	Nvarchar(20), -- 供应商	  	
+	cVenCode	Nvarchar(20), -- 供应商	 
+	cCusCode NVARCHAR(40),  -- 客户
+	cDefine2 NVARCHAR(40), 	--
 	cRemark	Nvarchar(255), --备注	  
 
   CONSTRAINT PK_MES_CQ_RdRecord09 PRIMARY KEY  CLUSTERED
@@ -552,6 +554,20 @@ CREATE TABLE dbo.MES_CQ_RdRecord09
   )
 )
 END
+
+IF not exists( select 1 from syscolumns where id = object_id('dbo.MES_CQ_RdRecord09') and name = 'cCusCode')
+BEGIN
+    alter table dbo.MES_CQ_RdRecord09 add cCusCode nvarchar(40) null     
+END 
+IF not exists( select 1 from syscolumns where id = object_id('dbo.MES_CQ_RdRecord09') and name = 'cDefine2')
+BEGIN
+    alter table dbo.MES_CQ_RdRecord09 add cDefine3 nvarchar(40) null     
+END 
+--ELSE	
+--BEGIN	
+--	alter table dbo.MES_CQ_RdRecord09
+--	alter column cDefine2 nvarchar(40) null
+--END 
 
 GO
 
