@@ -561,7 +561,7 @@ BEGIN
 END 
 IF not exists( select 1 from syscolumns where id = object_id('dbo.MES_CQ_RdRecord09') and name = 'cDefine2')
 BEGIN
-    alter table dbo.MES_CQ_RdRecord09 add cDefine3 nvarchar(40) null     
+    alter table dbo.MES_CQ_RdRecord09 add cDefine2 nvarchar(40) null     
 END 
 --ELSE	
 --BEGIN	
