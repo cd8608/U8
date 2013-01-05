@@ -286,11 +286,11 @@ BEGIN
 	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	--('0','1','gsp复核标志','T','0000000003',null,null,0,'表头|gsp复核标志,T|gspcheck','gspcheck',null,'1000000003',1,1)
 	--END
-	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000003' AND cardsection = 'T' AND fieldname='VT_ID') 
-	--BEGIN
-	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	--('0','1','模版号','T','0000000003',null,null,0,'表头|模版号,T|VT_ID','VT_ID',null,'1000000003',1,1)
-	--END
+	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000003' AND cardsection = 'T' AND fieldname='VT_ID') 
+	BEGIN
+	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	('0','1','模版号','T','0000000003',null,null,1,'27','VT_ID',null,'1000000003',1,1)
+	END
 	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000003' AND cardsection = 'T' AND fieldname='dChkDate') 
 	--BEGIN
 	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
