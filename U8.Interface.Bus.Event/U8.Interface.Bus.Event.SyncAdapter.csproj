@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\..\U8SOFT\HY\client\HY_ME_SVR\Event\</OutputPath>
+    <OutputPath>..\..\..\..\..\..\..\U8SOFT\HY\client\HY_ME_SVR\Event\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
