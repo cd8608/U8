@@ -1237,7 +1237,7 @@ BEGIN
 	  
 	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
-	  ('001',@autoidFixvalue,null,null,'017','inatunitprice',7,'3','本币价税合计',@autoid,@guid) 
+	  ('001',@autoidFixvalue,null,null,'017','inatsum',7,'3','本币价税合计',@autoid,@guid) 
 END 
 
 set @fieldname = 'itaxprice'
