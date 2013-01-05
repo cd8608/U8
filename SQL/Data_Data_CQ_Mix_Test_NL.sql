@@ -34,7 +34,7 @@ SET @DID = NEWID()
 INSERT INTO MES_CQ_rdrecords10Ret (id,did,opertype,MoCode,cInvCode,iquantity)
 VALUES (@ID,@DID,0,'0000000010','cp001',-100)
  
-
+GO
  
 --²âÊÔÊý¾Ý  É¾³ý 
 DECLARE @ID AS NVARCHAR(36)   
@@ -167,14 +167,14 @@ DECLARE @ID AS nvarchar(36)
 DECLARE @DID AS nvarchar(36)
 SET @ID = NEWID()
 INSERT INTO MES_CQ_rdrecord01 (ID,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
-VALUES (@ID,0,0,'000001','put005','1','501','XYCG09120001','ZZM')
+VALUES (@ID,0,0,'000001','05','1','0401','01002','00043')
  
 SET @DID = NEWID()
 INSERT INTO MES_CQ_rdrecords01 (id,DID,opertype,dhcode,dhid,cInvCode,iquantity)
-VALUES (@ID,@DID,0,'0000000005','1000000009','CP001',100) 
+VALUES (@ID,@DID,0,'0000000005','1000000009','09004',100) 
 SET @DID = NEWID()
 INSERT INTO MES_CQ_rdrecords01 (id,DID,opertype,dhcode,dhid,cInvCode,iquantity)
-VALUES (@ID,@DID,0,'0000000005','1000000010','CP001',10)
+VALUES (@ID,@DID,0,'0000000005','1000000010','1001',10)
  
 GO
  
