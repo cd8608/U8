@@ -900,20 +900,20 @@ namespace U8.Interface.Bus.ApiService.Setting
 
             if (CheckCtrlNotEmpty(cbxState))
             {
-                whereSYStr.Append(" and (SY.[cstatus] = '" + cbxState.Text + "') ");
-                whereDTStr.Append(" and (DT.[cstatus] = '" + cbxState.Text + "') ");
+                whereSYStr.Append(" and ([cstatus] = '" + cbxState.Text + "') ");
+                whereDTStr.Append(" and ([cstatus] = '" + cbxState.Text + "') ");
             }
 
             if (CheckCtrlNotEmpty(cbxAddress))
             {
-                whereSYStr.Append(" and (RE.[caddress] = '" + cbxAddress.SelectedValue + "') ");
-                whereDTStr.Append(" and (RT.[caddress] = '" + cbxAddress.SelectedValue + "') ");
+                whereSYStr.Append(" and ([caddress] = '" + cbxAddress.SelectedValue + "') ");
+                whereDTStr.Append(" and ([caddress] = '" + cbxAddress.SelectedValue + "') ");
             }
 
             if (CheckCtrlNotEmpty(txtAccount))
             {
-                whereSYStr.Append(" and (SY.[caccid] like '%" + txtAccount.Text + "%' or RE.[cacc_id] like '%" + txtAccount.Text + "%' or RE.[cdatabase] like '%" + txtAccount.Text + "%')");
-                whereDTStr.Append(" and (DT.[accid] like '%" + txtAccount.Text + "%' or RT.[cacc_id] like '%" + txtAccount.Text + "%' or RT.[cdatabase] like '%" + txtAccount.Text + "%')");
+                whereSYStr.Append(" and ([caccid] like '%" + txtAccount.Text + "%' or RE.[cacc_id] like '%" + txtAccount.Text + "%' or RE.[cdatabase] like '%" + txtAccount.Text + "%')");
+                whereDTStr.Append(" and ([accid] like '%" + txtAccount.Text + "%' or RT.[cacc_id] like '%" + txtAccount.Text + "%' or RT.[cdatabase] like '%" + txtAccount.Text + "%')");
             }
 
             if (CheckCtrlNotEmpty(cbxVoucherType))
@@ -925,15 +925,15 @@ namespace U8.Interface.Bus.ApiService.Setting
                 }
                 else
                 {   
-                    whereSYStr.Append(" and (SY.[cvouchertype] = '" + cbxVoucherType.Text + "') ");
-                    whereDTStr.Append(" and (DT.[cvouchertype] = '" + cbxVoucherType.SelectedValue + "') ");
+                    whereSYStr.Append(" and ([cvouchertype] = '" + cbxVoucherType.Text + "') ");
+                    whereDTStr.Append(" and ([cvouchertype] = '" + cbxVoucherType.SelectedValue + "') ");
                 }
             }
 
             if (CheckCtrlNotEmpty(txtOrder))
             {
-                whereSYStr.Append(" and (SY.[cvoucherno] like '%" + txtOrder.Text + "%') ");
-                whereDTStr.Append(" and (DT.[cvoucherno] like '%" + txtOrder.Text + "%') ");
+                whereSYStr.Append(" and ([cvoucherno] like '%" + txtOrder.Text + "%') ");
+                whereDTStr.Append(" and ([cvoucherno] like '%" + txtOrder.Text + "%') ");
             }
 
             if (whereSYStr.Length >= 1 && whereDTStr.Length >= 1)

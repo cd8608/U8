@@ -49,7 +49,7 @@ namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
                     if (dt.Rows[n]["id"].ToString() != "")
                     {
                         //model.Id = int.Parse(dt.Rows[n]["id"].ToString());
-                        model.Id =  dt.Rows[n]["id"].ToString();
+                        model.Id = dt.Rows[n]["id"].ToString();
                     }
                     if (dt.Rows[n]["ilineno"].ToString() != "")
                     {
@@ -163,7 +163,7 @@ namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
                         }
                     }
 
-                        model.Cvouchertypename = dt.Rows[n]["Cvouchertypename"].ToString();
+                    model.Cvouchertypename = dt.Rows[n]["Cvouchertypename"].ToString();
 
                     model.Caddress = dt.Rows[n]["Caddress"].ToString();
                     model.Acc_id = dt.Rows[n]["Acc_id"].ToString();
