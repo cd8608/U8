@@ -60,6 +60,7 @@
     <Compile Include="DBUtility\SQLHelper.cs" />
     <Compile Include="DBUtility\UfDBUtility.cs" />
     <Compile Include="DESEncrypt.cs" />
+    <Compile Include="License.cs" />
     <Compile Include="SysInfo.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

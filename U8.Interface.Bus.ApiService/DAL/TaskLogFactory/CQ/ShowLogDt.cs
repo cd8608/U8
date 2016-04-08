@@ -5,9 +5,9 @@ using System.Text;
 using System.Data;
 using U8.Interface.Bus.DBUtility;
 
-namespace U8.Interface.Bus.ApiService.DAL
+namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
 {
-    public class ShowLogDt 
+    public class ShowLogDt : IShowLogDt
     {
 
         /// <summary>

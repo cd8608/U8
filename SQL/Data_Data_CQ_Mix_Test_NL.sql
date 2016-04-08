@@ -23,7 +23,37 @@ INSERT INTO MES_CQ_rdrecords10 (id,opertype,MoCode,cInvCode,iquantity)
 VALUES ( @@IDENTITY,1,'0000000014','cp001',100)
 GO
  
+----产成品入库单(红字)
+--测试数据  新增
+DECLARE @ID AS NVARCHAR(36)   
+DECLARE @DID AS NVARCHAR(36)  
+SET @ID = NEWID()
+INSERT INTO MES_CQ_rdrecord10Ret (id,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode)
+VALUES (@ID,0,0,'000001','put005','1','05')
+SET @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords10Ret (id,did,opertype,MoCode,cInvCode,iquantity)
+VALUES (@ID,@DID,0,'0000000010','cp001',-100)
+ 
 
+ 
+--测试数据  删除 
+DECLARE @ID AS NVARCHAR(36)   
+DECLARE @DID AS NVARCHAR(36)  
+SET @ID = NEWID()
+INSERT INTO MES_CQ_rdrecord10Ret (id,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode)
+VALUES (@ID,0,2,'0000000006','put005','1','05')
+
+INSERT INTO MES_CQ_rdrecords10Ret (id,opertype,MoCode,cInvCode,iquantity)
+VALUES ( @@IDENTITY,1,'0000000014','cp001',100)
+GO
+
+INSERT INTO MES_CQ_rdrecord10Ret (operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode)
+VALUES (0,2,'0000000014','put005','1','05')
+
+INSERT INTO MES_CQ_rdrecords10Ret (id,opertype,MoCode,cInvCode,iquantity)
+VALUES ( @@IDENTITY,1,'0000000014','cp001',100)
+GO
+ 
 
 
 ----发货单

@@ -18,9 +18,7 @@ using U8.Interface.Bus.DBUtility;
 namespace U8.Interface.Bus.ApiService.BLL
 {
     public abstract class APIOp:BaseOp
-    {
-
-
+    { 
         //设置api地址
         public abstract string SetApiAddressAdd();
         public abstract string SetApiAddressAudit();

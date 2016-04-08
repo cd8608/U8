@@ -16,6 +16,15 @@ namespace U8.Interface.Bus.ApiService.Setting
         [STAThread]
         static void Main(string[] arr)
         {
+            try
+            {
+                U8.Interface.Bus.License.Check();
+            }
+            catch (Exception ee)
+            {
+                Common.MessageShow(ee.ToString());
+                return;
+            }
 
             bool noRun = false;
             Run = new System.Threading.Mutex(true, System.Diagnostics.Process.GetCurrentProcess().ProcessName, out noRun);
@@ -32,14 +41,49 @@ namespace U8.Interface.Bus.ApiService.Setting
                 Application.SetCompatibleTextRenderingDefault(false);
                 if (Common.Verification_lxz())
                 {
+                    Form frm;
+                    switch (U8.Interface.Bus.Config.ConfigUtility.TaskType.ToLower())
+                    {
+                        case "cq":
+                            if (arr.Length > 0)
+                            {
+                                frm = new FrmMainwork(arr[0].Split(';')[0], arr[0].Split(';')[1], arr[0].Split(';')[2], arr[0].Split(';')[3]);
+                            }
+                            else
+                            {
+                                frm = new FrmMainwork("", "", "", "");
+                            }
+                            break;
+                        case "ds":
+                            if (arr.Length > 0)
+                            {
+                                frm = new FrmMainwork(arr[0].Split(';')[0], arr[0].Split(';')[1], arr[0].Split(';')[2], arr[0].Split(';')[3]);
+                            }
+                            else
+                            {
+                                frm = new FrmMainwork("", "", "", "");
+                            }
+                            break;
+                        default:
+                            if (arr.Length > 0)
+                            {
+                                frm = new FrmTeamwork(arr[0].Split(';')[0], arr[0].Split(';')[1], arr[0].Split(';')[2], arr[0].Split(';')[3]);
+                            }
+                            else
+                            {
+                                frm = new FrmTeamwork("", "", "", "");
+                            }
+                            break;
+
+                    }
                     if (arr.Length > 0)
                     {
-                        Application.Run(new FrmMainwork(arr[0].Split(';')[0], arr[0].Split(';')[1], arr[0].Split(';')[2], arr[0].Split(';')[3]));
+                        Application.Run(frm);
                         Common.SetConfig();
                     }
                     else
                     {
-                        Application.Run(new FrmMainwork("", "", "", ""));
+                        Application.Run(frm);
                         Common.SetConfig();
                     }
 

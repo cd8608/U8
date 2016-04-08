@@ -18,15 +18,15 @@ using U8.Interface.Bus.DBUtility;
 namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 {
     /// <summary>
-    /// 产成品入库单(HY_DZ_K7_DLLReflect预置的op类)
+    /// 产成品入库单(红字)(HY_DZ_K7_DLLReflect预置的op类)
     /// </summary>
-    public class RdRecord10 : StockOP
+    public class RdRecordRet10 : StockOP
     {
         private int tasktype = 0;
 
-        private string cardNo = "0411";
-        private string headtable = "MES_CQ_rdrecord10";
-        private string bodytable = "mes_cq_rdrecords10";
+        private string cardNo = "0411_Ret";
+        private string headtable = "MES_CQ_rdrecord10Ret";
+        private string bodytable = "mes_cq_rdrecords10Ret";
 
 
         private string taskStatusflagColName = "operflag";
@@ -92,7 +92,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 v.CardNo = cardNo;
                 v.VoucherName = "产成品入库单";
                 t.VouchType = v;
-                t.taskType = 0;   //MES接口任务  
+                t.taskType = tasktype;   //MES接口任务  
                 t.OperType = (int)dt.Rows[i]["OperType"];
                 try
                 {
@@ -158,8 +158,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             tmpd.Cvouchertype = cardNo;
             tmpd.Ilineno = 2;
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-            //DataSet ds = DbHelperSQL.Query("SELECT b.cRdCode,b.id,b.did,t.opertype FROM " + bodytable + " b with(nolock) left join " + headtable + " t with(nolock) on b.id = t.id WHERE b.DID = " + autoid);
-            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro( autoid,"string"));
+            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid,"string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 tmpd.Cvoucherno = ds.Tables[0].Rows[i]["cRdCode"].ToString();
@@ -178,7 +177,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             fdt.Cvouchertype = "MO21";
             fdt.Id = dt.Id;
             fdt.Ilineno = 1;
-            DataSet ds = DbHelperSQL.Query("SELECT MoCode FROM " + bodytable + " with(nolock) WHERE ID = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id, "string"));
+            DataSet ds = DbHelperSQL.Query("SELECT MoCode FROM " + bodytable + " with(nolock) WHERE ID = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 fdt.Cvoucherno = ds.Tables[0].Rows[i]["MoCode"].ToString();
@@ -233,6 +232,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
+                //DataSet ds = DbHelperSQL.Query("SELECT b.cRdCode,b.id,b.did,t.opertype FROM " + bodytable + " b with(nolock) left join " + headtable + " t with(nolock) on b.id = t.id WHERE b.ID = " + dt.Id);
                 DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
            
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -270,7 +270,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";
             sql += ",'生产订单' as cSource ";
             sql += " from  v_mom_order_wf t with(nolock) left join " + bodytable + " lb with(nolock) on lb.mocode = t.mocode left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id =" +
-                U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(pdt.Id, "string") + " ";
+               U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(pdt.Id, "string") + " ";
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
             BLL.Common.ErrorMsg(ds, "未能获取生产订单表头信息");
@@ -291,9 +291,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);  //new ApiService.DAL.SynergismLogDt();
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
             string sql = "select b.*,lt.cWhCode as cWhCode,lb.iquantity as iquantity,lt.cRdCode as cCode   ";
-            
+
             sql += " from v_mom_orderdetail_wf b with(nolock) left join  v_mom_order_wf t with(nolock) on b.moid = t.moid left join " + bodytable + " lb with(nolock) on lb.mocode = t.mocode left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id =" +
-                U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(pdt.Id,"string") + " ";
+                U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(pdt.Id, "string") + " ";
             
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);

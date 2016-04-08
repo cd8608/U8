@@ -44,7 +44,8 @@ namespace U8.Interface.Bus.WinService
             while (true)
             { 
                 try
-                { 
+                {
+                    U8.Interface.Bus.License.Check();
                     U8.Interface.Bus.ApiService.Model.TaskList tasklist = oper.GetTask();
                     if (tasklist.Count > 0)
                     {
@@ -77,6 +78,7 @@ namespace U8.Interface.Bus.WinService
                 catch (Exception ex)
                 {
                     EventLog.WriteEntry(U8.Interface.Bus.SysInfo.productName, ex.ToString(), EventLogEntryType.Error, 0, 0);
+                    System.Threading.Thread.Sleep(U8.Interface.Bus.Config.ConfigUtility.TaskSleepTime);
                 } 
             }
 

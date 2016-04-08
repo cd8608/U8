@@ -4,18 +4,29 @@ print 'dbo.MES_CQ_DLLReflect data...'
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND cvouchertype = '0411' AND ClassType='op')  
 BEGIN
 insert into MES_Comm_DLLReflect (TaskType,ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
-  (0,'RdRecord10','op','0411','U8.Interface.Bus.ApiService.Voucher','U8.Interface.Bus.ApiService.Voucher')
+  (0,'RdRecord10','op','0411','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ')
 END
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '0411' AND ClassType='data')  
 BEGIN
 insert into MES_Comm_DLLReflect ( TaskType,ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
   (0,'APIData','data','0411','U8.Interface.Bus.ApiService','U8.Interface.Bus.ApiService.Model')
 END
+----产成品入库单(红字)
+IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '0411_Ret' AND ClassType='op')  
+BEGIN
+insert into MES_Comm_DLLReflect (TaskType,ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
+  (0,'RdRecordRet10','op','0411_Ret','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ')
+END
+IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '0411_Ret' AND ClassType='data')  
+BEGIN
+insert into MES_Comm_DLLReflect (TaskType, ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
+  (0,'APIData','data','0411_Ret','U8.Interface.Bus.ApiService','U8.Interface.Bus.ApiService.Model')
+END
 ----销售发货单
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '01' AND ClassType='op')  
 BEGIN
 insert into MES_Comm_DLLReflect (TaskType, ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
-  (0,'Consignment','op','01','U8.Interface.Bus.ApiService.Voucher','U8.Interface.Bus.ApiService.Voucher.CQ')
+  (0,'Consignment','op','01','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ')
 END
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '01' AND ClassType='data')  
 BEGIN
@@ -37,13 +48,13 @@ END
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '24' AND ClassType='op')  
 BEGIN
 insert into MES_Comm_DLLReflect (TaskType,ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
-  (0,'PuStoreIn','op','24','U8.Interface.Bus.ApiService.Voucher','U8.Interface.Bus.ApiService.Voucher.CQ')
+  (0,'PuStoreIn','op','24','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ','U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ')
 END
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '24' AND ClassType='data')  
 BEGIN
 insert into MES_Comm_DLLReflect (TaskType, ClassName,ClassType,cvouchertype,Dllpath,Namespace ) values 
   (0,'APIData','data','24','U8.Interface.Bus.ApiService','U8.Interface.Bus.ApiService.Model')
-END
+END 
 ----其它入库单
 IF NOT EXISTS (SELECT 1 FROM MES_Comm_DLLReflect WHERE TaskType =0 AND  cvouchertype = '0301' AND ClassType='op')  
 BEGIN

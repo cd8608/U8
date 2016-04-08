@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace U8.Interface.Bus.ApiService.BLL
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
 {
-    public class ShowLog
+    public class ShowLog : IShowLog
     {
-        private readonly DAL.ShowLog dal = new DAL.ShowLog();
+        private readonly DAL.TaskLogFactory.IShowLog dal = new DAL.TaskLogFactory.CQ.ShowLog();
 
         /// <summary>
         /// 获得数据列表

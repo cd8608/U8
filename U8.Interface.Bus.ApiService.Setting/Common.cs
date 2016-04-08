@@ -399,13 +399,13 @@ namespace U8.Interface.Bus.ApiService.Setting
         {
             string consting = string.Format("Data Source={0};Initial Catalog={1};Persist Security Info=True;User ID={2};Password={3};Current Language=Simplified Chinese", ServerName, DBName, UserName, DBPwd);
             SqlConnection sqlcon = new SqlConnection(consting);
-            SqlCommand sqlcmd = new SqlCommand("SELECT COUNT(1) FROM sysobjects WHERE type='U' AND name IN ('HY_DZ_K7_SYNERGISMLOGDT','HY_DZ_K7_SYNERGISMLOG','HY_DZ_K7_RELATIONS','HY_DZ_K7_RELATION','HY_DZ_K7_REGIST') ", sqlcon);
+            SqlCommand sqlcmd = new SqlCommand("SELECT COUNT(1) FROM sysobjects WHERE type='U' AND name IN ('MES_Comm_DLLReflect','MES_FIELDCMP','HY_DZ_K7_RELATIONS','HY_DZ_K7_RELATION','HY_DZ_K7_REGIST') ", sqlcon);
             try
             {
                 sqlcon.Open();
                 object obj = sqlcmd.ExecuteScalar();
                 if (obj == null || obj == DBNull.Value) return -1;
-                if (System.Convert.ToInt32(obj) != 5) return 0;
+                if (System.Convert.ToInt32(obj) <2) return 0;
                 return 1;
             }
             catch

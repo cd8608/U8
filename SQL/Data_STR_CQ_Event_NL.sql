@@ -529,6 +529,7 @@ BEGIN
 		cCCCode	Nvarchar(12), --客户分类
 		cCusAddress	Nvarchar(255),--送货地址
 		cCusOType	Nvarchar(10), --发运方式编号
+		cCusDefine1 NVARCHAR(40), --客户自定义项1
 	  CONSTRAINT PK_MES_CQ_Customer PRIMARY KEY  CLUSTERED
 	  (
 		id

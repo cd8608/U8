@@ -57,6 +57,7 @@
     <Compile Include="CQ\SepVouch.cs" />
     <Compile Include="CQ\TransVouch.cs" />
     <Compile Include="CQ\DispatchList.cs" />
+    <Compile Include="CQ\RdRecordRet10.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

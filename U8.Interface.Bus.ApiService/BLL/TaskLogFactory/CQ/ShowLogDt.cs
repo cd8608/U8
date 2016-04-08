@@ -5,9 +5,9 @@ using System.Text;
 using System.Data;
 
 
-namespace U8.Interface.Bus.ApiService.BLL
+namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
 {
-    public class ShowLogDt
+    public class ShowLogDt : IShowLogDt
     {
         private readonly DAL.ShowLogDt dal = new DAL.ShowLogDt();
         

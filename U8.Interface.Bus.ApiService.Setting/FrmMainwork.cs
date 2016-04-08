@@ -20,8 +20,8 @@ namespace U8.Interface.Bus.ApiService.Setting
         private int curRow;
         private Model.ShowLog curLog;
         private Model.ShowLogDt curLogDt;
-        private List<Model.ShowLog> lstLog;
-        private List<Model.ShowLogDt> lstLogDt;
+        private List<Model.ShowLog> lstLog;  //任务列表数据源
+        private List<Model.ShowLogDt> lstLogDt;  //任务详细列表
         private Dictionary<string, string> dicLog;
         private Dictionary<string, string> dicLogDt;
         private string strAddress, strAccID, strVoucherType, strVoucherNo;
@@ -330,9 +330,9 @@ namespace U8.Interface.Bus.ApiService.Setting
             {
                 if (dgvList.SelectedRows[0].Index == curRow) return;
                 curRow = dgvList.SelectedRows[0].Index;
-                curLog = lstLog.Find(delegate(Model.ShowLog model) { return model.Id == int.Parse(dgvList.SelectedRows[0].Cells["colHID"].Value.ToString()).ToString(); });
-                ShowLogDT();
-                GetLogDTTree();
+                curLog = lstLog.Find(delegate(Model.ShowLog model) { return model.Id ==  dgvList.SelectedRows[0].Cells["colHID"].Value.ToString().ToString(); });
+                //ShowLogDT();
+                //GetLogDTTree();
             }
         }
 
@@ -535,23 +535,23 @@ namespace U8.Interface.Bus.ApiService.Setting
             }
             else
             {
-                //装载数据服务器下拉框
-                cbxAddress.DataSource = DAL.Common.getAddressList();
-                cbxAddress.DisplayMember = "U8FieldName";
-                cbxAddress.ValueMember = "U8FieldValue";
-                cbxAddress.SelectedIndex = 0;
+                ////装载数据服务器下拉框
+                //cbxAddress.DataSource = DAL.Common.getAddressList();
+                //cbxAddress.DisplayMember = "U8FieldName";
+                //cbxAddress.ValueMember = "U8FieldValue";
+                //cbxAddress.SelectedIndex = 0;
 
-                //装载协同类型下拉框
-                cbxType.DataSource = DAL.Common.getRoutesetName();
-                cbxType.DisplayMember = "U8FieldName";
-                cbxType.ValueMember = "U8FieldValue";
-                cbxType.SelectedIndex = 0;
+                ////装载协同类型下拉框
+                //cbxType.DataSource = DAL.Common.getRoutesetName();
+                //cbxType.DisplayMember = "U8FieldName";
+                //cbxType.ValueMember = "U8FieldValue";
+                //cbxType.SelectedIndex = 0;
 
-                //装载单据类型下拉框
-                cbxVoucherType.DataSource = DAL.Common.getOrderType();
-                cbxVoucherType.DisplayMember = "U8FieldName";
-                cbxVoucherType.ValueMember = "U8FieldValue";
-                cbxVoucherType.SelectedIndex = 0;
+                ////装载单据类型下拉框
+                //cbxVoucherType.DataSource = DAL.Common.getOrderType();
+                //cbxVoucherType.DisplayMember = "U8FieldName";
+                //cbxVoucherType.ValueMember = "U8FieldValue";
+                //cbxVoucherType.SelectedIndex = 0;
             }
 
             //装载下拉框
@@ -646,14 +646,14 @@ namespace U8.Interface.Bus.ApiService.Setting
 
                     return false;
                 }
-                else if (!Common.CheckInstall())
-                {
-                    Common.bIsLinked = false;
-                    Common.MessageShow("当前链接未设置主账套或主账套数据丢失,             " + Environment.NewLine + "             请在用友【账套档案设置】中设置后重试");
-                    Application.Exit();
+                //else if (!Common.CheckInstall())
+                //{
+                //    Common.bIsLinked = false;
+                //    Common.MessageShow("当前链接未设置主账套或主账套数据丢失,             " + Environment.NewLine + "             请在用友【账套档案设置】中设置后重试");
+                //    Application.Exit();
 
-                    return false;
-                }
+                //    return false;
+                //}
                 else if (!Common.CheckMain())
                 {
                     if (Common.MessageShow("当前链接与主账套设置不一致，是否重设？", "提示") == DialogResult.Yes)
@@ -843,7 +843,7 @@ namespace U8.Interface.Bus.ApiService.Setting
             try
             {
                 bInit = true;
-                BLL.ShowLog logbll = new BLL.ShowLog();
+                BLL.TaskLogFactory.IShowLog logbll = new BLL.TaskLogFactory.CQ.ShowLog();
                 string strWhere = GetWhereStr();
 
                 lstLog = logbll.GetModelList(dicLog["Top"], strWhere, dicLog["Field"], dicLog["Order"]);
@@ -887,11 +887,11 @@ namespace U8.Interface.Bus.ApiService.Setting
 
             StringBuilder whereStr = new StringBuilder(" 1=1 ");
 
-            if (CheckCtrlNotEmpty(dtpStart)) whereStr.Append(" and (ISNULL(SY.[starttime],GETDATE()) >= '" + dtpStart.Value.ToShortDateString() + "')");
+            if (CheckCtrlNotEmpty(dtpStart)) whereStr.Append(" and (ISNULL([createTime],GETDATE()) >= '" + dtpStart.Value.ToShortDateString() + "')");
 
-            if (CheckCtrlNotEmpty(dtpEnd)) whereStr.Append(" and (ISNULL(SY.[starttime],GETDATE()) <= '" + dtpEnd.Value.AddDays(1).ToShortDateString() + "')");
+            if (CheckCtrlNotEmpty(dtpEnd)) whereStr.Append(" and (ISNULL([createTime],GETDATE()) <= '" + dtpEnd.Value.AddDays(1).ToShortDateString() + "')");
 
-            if (CheckCtrlNotEmpty(cbxType)) whereStr.Append(" and (SY.[croutetype] = '" + cbxType.SelectedValue + "')");
+            //if (CheckCtrlNotEmpty(cbxType)) whereStr.Append(" and (SY.[croutetype] = '" + cbxType.SelectedValue + "')");
 
             //if (CheckCtrlNotEmpty(cbxState)) whereStr.Append(" and (SY.[cstatus] = '" + cbxState.Text + "')");
 

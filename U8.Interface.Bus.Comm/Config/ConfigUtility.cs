@@ -8,7 +8,10 @@ using System.IO;
 namespace U8.Interface.Bus.Config
 {
     public class ConfigUtility
-    { 
+    {
+
+        #region XML操作
+
         /// <summary>
         /// 配置文件
         /// </summary>
@@ -41,11 +44,121 @@ namespace U8.Interface.Bus.Config
                 writer.Close();
                 return true;
             }
-            catch(Exception ee)
+            catch (Exception ee)
             {
                 return false;
             }
         }
+
+        /// <summary>
+        /// 获取结点值
+        /// </summary>
+        /// <returns></returns>
+        public static string GetNodeValue(string node)
+        {
+            System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
+
+            string res = "";
+            if (_node == null)
+            {
+
+            }
+            else
+            {
+                res = _node.InnerText.ToString();
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// 获取结点值
+        /// </summary>
+        /// <returns></returns>
+        public static string SetNodeValue(string node, string value)
+        {
+            System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
+
+            string res = "";
+            if (_node == null)
+            {
+
+            }
+            else
+            {
+                _node.InnerText = value;
+            }
+            return res;
+        }
+
+
+        /// <summary>
+        /// 获取属性值
+        /// </summary>
+        /// <returns></returns>
+        public static string GetAttrib(string node, string attribname)
+        {
+            string res = "";
+            try
+            {
+                System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
+                res = _node.Attributes[attribname].InnerText;
+            }
+            catch
+            {
+            }
+            return res;
+        }
+
+        /// <summary>
+        /// 设置属性值
+        /// </summary>
+        /// <returns></returns>
+        public static string SetAttrib(string node, string attribname, string value)
+        {
+            string res = "";
+            try
+            {
+                System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
+                _node.Attributes[attribname].InnerText = value;
+            }
+            catch
+            {
+            }
+            return res;
+        }
+
+
+
+        #endregion
+
+        #region 任务工厂
+        private static string tasktype;
+        public static string TaskType
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(tasktype))
+                {
+                    tasktype = GetTaskType();
+                }
+                return tasktype;
+            }
+            set
+            {
+                SetU8AppUser(value);
+            }
+        }
+        private static string GetTaskType()
+        {
+            string res = GetAttrib("/configuration/ApiService", "tasktype");
+            return res;
+        }
+        private static void SetTaskType(string value)
+        {
+            string res = SetAttrib("/configuration/ApiService", "tasktype", value);
+            SaveXml();
+        }
+        #endregion
 
         #region U8登录配置
         private static string u8appsrv;
@@ -275,7 +388,6 @@ namespace U8.Interface.Bus.Config
         }
 
         #endregion
-
 
         #region 事件配置
 
@@ -527,87 +639,6 @@ namespace U8.Interface.Bus.Config
         }
 
 #endregion
-
-        #region XML操作
-        /// <summary>
-        /// 获取结点值
-        /// </summary>
-        /// <returns></returns>
-        public static string  GetNodeValue(string node)
-        {
-            System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
-           
-            string res = "";
-            if (_node == null)
-            { 
-            
-            }
-            else
-            {
-                res = _node.InnerText.ToString();
-            }
-            return res;
-        }
-
-        /// <summary>
-        /// 获取结点值
-        /// </summary>
-        /// <returns></returns>
-        public static string SetNodeValue(string node,string value)
-        {
-            System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
-
-            string res = "";
-            if (_node == null)
-            {
-
-            }
-            else
-            {
-                _node.InnerText = value;
-            }
-            return res;
-        }
-
-
-        /// <summary>
-        /// 获取属性值
-        /// </summary>
-        /// <returns></returns>
-        public static string GetAttrib(string node,string attribname)
-        { 
-            string res = "";
-            try
-            {
-                System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
-                res = _node.Attributes[attribname].InnerText;
-            }
-            catch { 
-            }
-            return res;
-        }
-
-        /// <summary>
-        /// 设置属性值
-        /// </summary>
-        /// <returns></returns>
-        public static string SetAttrib(string node, string attribname,string value)
-        {
-            string res = "";
-            try
-            {
-                System.Xml.XmlNode _node = ConfigXml.SelectSingleNode(node);
-                _node.Attributes[attribname].InnerText = value;
-            }
-            catch
-            {
-            }
-            return res;
-        }
-
-       
-
-        #endregion
-
+ 
     }
 }

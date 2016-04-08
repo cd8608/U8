@@ -72,8 +72,12 @@ namespace U8.Interface.Bus.ApiService.BLL
                 u8namevaluebll.SetHeadData(apidata, rdds, rdsds, listfd, dt);
                 u8namevaluebll.SetBodyData(apidata, rdds, rdsds, listfd, dt);
  
-                //设置订单关联    
-                DAL.Common.SetInBody(apidata);
+                
+                if (apidata.TaskType == 1)
+                {//设置订单关联    
+                    DAL.Common.SetInBody(apidata);
+
+                }
                 SetNormalValue(apidata, dt);
             }
             return dr;

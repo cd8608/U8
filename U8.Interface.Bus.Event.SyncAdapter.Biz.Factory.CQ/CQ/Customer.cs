@@ -25,11 +25,11 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             l.Add(new BaseMode("id",null,null,"id",Guid.NewGuid().ToString(), null, null));
 
             l.Add(new BaseMode("ccuscode", GetNodeValue(doc, "/customer/ccuscode"), "/customer/ccuscode", "ccuscode", GetNodeValue(doc, "/customer/ccuscode"), null, null));
-            l.Add(new BaseMode("ccusname", GetNodeValue(doc, "/customer/ccusname"), "/customer/ccusname", "ccusname", GetNodeValue(doc, "/customer/ccusname"), null, null)); 
-            l.Add(new BaseMode("ccuscode", GetNodeValue(doc, "/customer/ccccode"), "/customer/ccccode", "ccccode", GetNodeValue(doc, "/customer/ccccode"), null, null));
-            l.Add(new BaseMode("ccusname", GetNodeValue(doc, "/customer/ccusaddress"), "/customer/ccusaddress", "ccusaddress", GetNodeValue(doc, "/customer/ccusaddress"), null, null)); 
-            l.Add(new BaseMode("ccusname", GetNodeValue(doc, "/customer/ccusotype"), "/customer/ccusotype", "ccusotype", GetNodeValue(doc, "/customer/ccusotype"), null, null));
-  
+            l.Add(new BaseMode("ccusname", GetNodeValue(doc, "/customer/ccusname"), "/customer/ccusname", "ccusname", GetNodeValue(doc, "/customer/ccusname"), null, null));
+            l.Add(new BaseMode("ccccode", GetNodeValue(doc, "/customer/ccccode"), "/customer/ccccode", "ccccode", GetNodeValue(doc, "/customer/ccccode"), null, null));
+            l.Add(new BaseMode("ccusname", GetNodeValue(doc, "/customer/ccusaddress"), "/customer/ccusaddress", "ccusaddress", GetNodeValue(doc, "/customer/ccusaddress"), null, null));
+            l.Add(new BaseMode("ccusotype", GetNodeValue(doc, "/customer/ccusotype"), "/customer/ccusotype", "ccusotype", GetNodeValue(doc, "/customer/ccusotype"), null, null));
+            l.Add(new BaseMode("ccusdefine1", GetNodeValue(doc, "/customer/ccusdefine1"), "/customer/ccusdefine1", "ccusdefine1", GetNodeValue(doc, "/customer/ccusdefine1"), null, null));
 
         }
 
