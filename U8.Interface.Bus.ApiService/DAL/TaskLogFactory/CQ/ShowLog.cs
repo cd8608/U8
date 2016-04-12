@@ -33,7 +33,7 @@ namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
             strSql.Append(" '' as Cacc_Name , '' as Caddress, ");
             strSql.Append(" id,CASE  operflag WHEN 0 THEN '未处理' WHEN 1 THEN '完成' WHEN 2 THEN '处理中' WHEN 3 THEN '错误' ELSE '已作废' END AS cstatus,createTime,finishTime,case opertype when   0 then '增加' WHEN 1 THEN '修改' else '删除' end   as opertype,");
             strSql.Append(" cdlcode as cvoucherno,");
-            strSql.Append("cerrordesc,cRemark FROM MES_CQ_DispatchList WITH(NOLOCK) ");
+            strSql.Append(" cerrordesc,cRemark FROM MES_CQ_DispatchList WITH(NOLOCK) ");
             strSql.Append(" UNION ALL ");
             strSql.Append(" SELECT ");
             strSql.Append(" '' as cserialno,'' as croutetype,'' as caccid,'销售退货单' as cvouchertype, '03' as cvouchertypecode,createTime as starttime,finishTime as endtime,'' as Cacc_Id,");
@@ -71,7 +71,7 @@ namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
             strSql.Append("   id,CASE  operflag WHEN 0 THEN '未处理' WHEN 1 THEN '完成' WHEN 2 THEN '处理中' WHEN 3 THEN '错误' ELSE '已作废' END AS cstatus,createTime,finishTime,");
             strSql.Append("case opertype when   0 then '增加' WHEN 1 THEN '修改' else '删除' end   as opertype,");
             strSql.Append(" cRdCode as cvoucherno,");
-            strSql.Append("cerrordesc,cRemark FROM MES_CQ_rdrecord08 WITH(NOLOCK) ");
+            strSql.Append(" cerrordesc,cRemark FROM MES_CQ_rdrecord08 WITH(NOLOCK) ");
             strSql.Append(" UNION ALL ");
             strSql.Append(" SELECT ");
             strSql.Append(" '' as cserialno,'' as croutetype,'' as caccid,'材料出库单' as cvouchertype, '0412' as cvouchertypecode,createTime as starttime,finishTime as endtime,'' as Cacc_Id,");

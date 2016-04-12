@@ -65,8 +65,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 sb.Append(" SELECT @mainid = @@IDENTITY ");
                 sb.Replace("main|##newguid", Guid.NewGuid().ToString());
 
-            }
-
+            } 
             if (bNoCase)
             {
                 base.Delete();  //清除旧记录
@@ -106,6 +105,29 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             }
         }
 
+
+        
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <returns></returns>
+        public override object Delete()
+        {
+            sqlOper = new UFOper(oraLinkName, ufConnStr, ufTableName, ufPriKey, oracleTableName, oraclePriKey, l, lst);
+            if (bNoCase)
+            {
+                sqlOper.Delete();  //清除旧记录
+            }
+            if (bSaveOper)
+            {
+                return this.Insert();
+            }
+            else
+            {
+                return 1;
+            }
+
+        }
 
         #endregion
 

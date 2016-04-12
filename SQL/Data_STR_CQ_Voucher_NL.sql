@@ -631,4 +631,100 @@ GO
 
 
 
+
+
+--组装单     0308
+print 'dbo.MES_Int_CQ_AssemVouch...'
+if not exists (select * from sysobjects where id = object_id('dbo.MES_Int_CQ_AssemVouch') and sysstat & 0xf = 3)
+BEGIN
+CREATE TABLE dbo.MES_Int_CQ_AssemVouch
+(
+
+	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
+	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
+	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+    cerrordesc nvarchar(4000) null ,  --错误信息
+
+    cAVCode	Nvarchar(30)	, --单号
+	dAVDate	Datetime	, --日期
+	cIRdCode	Nvarchar(5), --入库类别	组装单
+	cDepCode	Nvarchar(12), --部门	
+	cORdCode	Nvarchar(5), --出库类型	其他出库单类别
+	cODepCode	Nvarchar(12), --部门	其他出、入库部门
+
+	 
+  CONSTRAINT PK_MES_Int_CQ_AssemVouch PRIMARY KEY  CLUSTERED
+  (
+    id
+  )
+)
+END
+
+GO
+
+/*==============================MES_Int_CQ_AssemVouchs structure =============================*/
+print 'dbo.MES_Int_CQ_AssemVouchs...'
+if not exists (select * from sysobjects where id = object_id('dbo.MES_Int_CQ_AssemVouchs') and sysstat & 0xf = 3)
+BEGIN
+CREATE TABLE dbo.MES_Int_CQ_AssemVouchs
+(
+	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
+	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
+	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
+	opertype Int,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	cerrordesc nvarchar(4000) null ,  --错误信息
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
+
+	cAVDID	int, --子表行号	ERP
+	bAVType	Nvarchar(20), --类型	值：散件、套件。套件作为其他入库明细，散件作为其他出库明细。
+	cInvCode	Nvarchar(20)	, --存货编码
+	cWhCode	Nvarchar(10), --仓库	作为其他出入库的仓库
+	iquantity	Decimal(32,12)	, --数量
+
+
+  CONSTRAINT PK_MES_Int_CQ_AssemVouchs PRIMARY KEY  CLUSTERED
+  (
+    did
+  )
+)
+END
+
+GO
+
+  
+
+--拆卸单     0309
+print 'dbo.MES_Int_CQ_AssemVouchRet...'
+if not exists (select * from sysobjects where id = object_id('dbo.MES_Int_CQ_AssemVouchRet') and sysstat & 0xf = 3)
+BEGIN
+CREATE TABLE dbo.MES_Int_CQ_AssemVouchRet
+(
+
+	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
+	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
+	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+    cerrordesc nvarchar(4000) null ,  --错误信息
+
+    cAVCode	Nvarchar(30)	, --单号
+	dAVDate	Datetime	, --日期
+	cIRdCode	Nvarchar(5), --入库类别	组装单
+	cDepCode	Nvarchar(12), --部门	
+	cORdCode	Nvarchar(5), --出库类型	其他出库单类别
+	cODepCode	Nvarchar(12), --部门	其他出、入库部门
+   
+  CONSTRAINT PK_MES_Int_CQ_AssemVouchRet PRIMARY KEY  CLUSTERED
+  (
+    id
+  )
+)
+END
+
+GO
+
+
 ---- 中间表结束 ----

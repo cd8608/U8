@@ -59,8 +59,8 @@ namespace U8.Interface.Bus.WinService
                             log.OPClass = task.VouchType.VoucherClass;
 
                             if (SysInfo.multiThread)
-                            {
-                                threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run)); 
+                            { 
+                                threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run));
                                 threadTask.Start(log);  
                             }
                             else

@@ -175,9 +175,9 @@ CREATE TRIGGER [T_MES_CQ_sfc_workcenter_INSERT]
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select inserted.WcCode from inserted ) and itype = '生产中心'
 		 
 		INSERT INTO MES_CQ_workcenter
-		 (ID,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0, WcCode,[description],'生产中心' as iType
+		NEWID(),0,0, WcCode,[description],'生产中心' as iType
 		FROM inserted t  
 
 		IF @@TRANCOUNT>=2 COMMIT
@@ -219,6 +219,12 @@ GO
 		SET @filename = '工作中心'
 		SET @deal = 3	 
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.WcCode from deleted )  and itype = '生产中心'
+		INSERT INTO MES_CQ_workcenter
+		 (ID,operflag,opertype, WcCode,Description,iType   )
+		SELECT 
+		NEWID(),0,2, WcCode,[description],'生产中心' as iType
+		FROM deleted t  
+		
 		IF @@TRANCOUNT>=2 COMMIT
 		
 		--结束 
@@ -254,9 +260,9 @@ BEGIN
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.WcCode from deleted )  and itype = '生产中心' 
 		
 		INSERT INTO MES_CQ_workcenter
-		 (ID,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0, WcCode,[description],'生产中心' as iType
+		NEWID(),0,1, WcCode,[description],'生产中心' as iType
 		FROM inserted t  
 
 		IF @@TRANCOUNT>=2 COMMIT
@@ -303,9 +309,9 @@ CREATE TRIGGER [T_MES_CQ_WareHouse_INSERT]
 		DELETE FROM MES_CQ_workcenter WHERE  itype = '仓库' and WcCode in (select inserted.cWhCode from inserted  )    
 		 
 		INSERT INTO MES_CQ_workcenter
-		 (ID,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0, cWhCode,cWhName,'仓库' as iType
+		NEWID(),0,0, cWhCode,cWhName,'仓库' as iType
 		FROM inserted t  
 		set nocount off 
 		--IF @@TRANCOUNT>=2 COMMIT
@@ -348,6 +354,11 @@ GO
 		SET @deal = 3	 
 		set nocount on 
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = '仓库'
+		INSERT INTO MES_CQ_workcenter
+		 (ID,operflag,opertype, WcCode,Description,iType   )
+		SELECT 
+		NEWID(),0,2, cWhCode,cWhName,'仓库' as iType
+		FROM deleted t
 		--IF @@TRANCOUNT>=2 COMMIT
 		set nocount off
 		--结束 
@@ -383,9 +394,9 @@ BEGIN
 		set nocount on  
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = '仓库'  
 		INSERT INTO MES_CQ_workcenter
-		 (ID,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0, cWhCode,cWhName,'仓库' as iType
+		NEWID(),0,1, cWhCode,cWhName,'仓库' as iType
 		FROM inserted t  
 		set nocount off
 		--IF @@TRANCOUNT>=2 COMMIT

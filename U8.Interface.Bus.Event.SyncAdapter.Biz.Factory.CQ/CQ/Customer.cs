@@ -36,16 +36,28 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
 
         public override object Insert()   //virtual  父类实例(用父类声明，用子类创建) 仍调用父类方法，override 父类实例 将调用子类方法
         { 
+            l.Add(new BaseMode("opertype",null,null,"opertype","0","string","string"));
             return base.Insert();
         }
 
         public override object Delete()
-        { 
-            return base.Delete();
+        {
+            if (bSaveOper)
+            {
+                l.Add(new BaseMode("opertype", null, null, "opertype", "2", "string", "string"));
+                return base.Insert();
+            }
+            else
+            {
+                return base.Delete();
+            }
+            
         }
 
         public override object Update()
-        { 
+        {
+
+            l.Add(new BaseMode("opertype", null, null, "opertype", "1", "string", "string"));
             return base.Update();
         }
 

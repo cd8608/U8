@@ -772,11 +772,12 @@ BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 ('0','1','结算标志','B','0000000002',null,null,1,'False','bSettleAll',null,'1000000002',1,1)
 END
-IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='cMemo') 
-BEGIN
-insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-('0','1','备注','B','0000000002',null,null,0,'表体|备注,B|cMemo','cMemo',null,'1000000002',1,1)
-END
+--v12.1
+--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='cMemo') 
+--BEGIN
+--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+--('0','1','备注','B','0000000002',null,null,0,'表体|备注,B|cMemo','cMemo',null,'1000000002',1,1)
+--END
 
 IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='iTB') 
 BEGIN
@@ -1196,10 +1197,16 @@ BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 ('0','1','需求跟踪行号','B','0000000002',null,null,1,null,'idemandseq',null,'1000000002',1,1)
 END
-IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='cvencode') 
+--V12.1
+--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='cvencode') 
+--BEGIN
+--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+--('0','1','入库单供应商编码','B','0000000002',null,null,0,'表体|入库单供应商编码,B|mes_cvencode','cvencode',null,'1000000002',1,1)
+--END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='isosid') 
 BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-('0','1','入库单供应商编码','B','0000000002',null,null,0,'表体|入库单供应商编码,B|mes_cvencode','cvencode',null,'1000000002',1,1)
+('0','1','销售订单表体关联id','B','0000000002',null,null,0,'表体|销售订单表体关联id,B|isosid','isosid',null,'1000000002',1,1)
 END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000002' AND cardsection = 'B' AND fieldname='cReasonCode') 
 --BEGIN
@@ -1368,15 +1375,15 @@ set @fieldcmpCode = '0000000002'
 set @fieldcmpId = '1000000002'
 IF not exists (select 1 from MES_CQ_FIELDCMPS where fieldname='cUnitID' AND cardsection = 'B'  and id=@fieldcmpId )  
 BEGIN 
-	SELECT @autoid=isnull(max(autoid),0)+1 from MES_CQ_FIELDCMPS
+	SELECT @autoid=isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIELDCMPS
 	SELECT @guid = NEWID()
 	INSERT INTO MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0',@autoid,'销售单位编码','B',@fieldcmpCode,'010',null,2,'根据存货获取计量单位信息(来源单据.表体.存货编码).主计量单位编码','cUnitID',@guid,@fieldcmpId,1,1)
 	DELETE FROM MES_CQ_FIXVALUE where did = @autoid
-	SELECT @autoidFixvalue =isnull(max(autoid),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =max(isnull(autoid,0))+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','cComUnitCode',7,'3','默认计量单位编码',@autoid,@guid) 
 END 
@@ -1384,15 +1391,15 @@ END
 set @fieldname = 'cgroupcode'
 IF not exists (select 1 from MES_CQ_FIELDCMPS where fieldname= @fieldname AND cardsection = 'B'  and id=@fieldcmpId )  
 BEGIN 
-	SELECT @autoid=isnull(max(autoid),0)+1 from MES_CQ_FIELDCMPS
+	SELECT @autoid=isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIELDCMPS
 	SELECT @guid = NEWID()
 	INSERT INTO MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0',@autoid,'销售单位编码','B',@fieldcmpCode,'010',null,2,'根据存货获取计量单位信息(来源单据.表体.存货编码).主计量单位编码',@fieldname,@guid,@fieldcmpId,1,1)
 	DELETE FROM MES_CQ_FIXVALUE where did = @autoid
-	SELECT @autoidFixvalue =isnull(max(autoid),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =max(isnull(autoid,0))+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','cgroupcode',7,'3','默认计量单位编码',@autoid,@guid) 
 END 
@@ -1400,15 +1407,15 @@ END
 set @fieldname = 'cinva_unit'
 IF not exists (select 1 from MES_CQ_FIELDCMPS where fieldname= @fieldname AND cardsection = 'B'  and id=@fieldcmpId )  
 BEGIN 
-	SELECT @autoid=isnull(max(autoid),0)+1 from MES_CQ_FIELDCMPS
+	SELECT @autoid=isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIELDCMPS
 	SELECT @guid = NEWID()
 	INSERT INTO MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0',@autoid,'销售单位编码','B',@fieldcmpCode,'010',null,2,'根据存货获取计量单位信息(来源单据.表体.存货编码).主计量单位编码',@fieldname,@guid,@fieldcmpId,1,1)
 	DELETE FROM MES_CQ_FIXVALUE where did = @autoid
-	SELECT @autoidFixvalue =isnull(max(autoid),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =max(isnull(autoid,0))+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','csacomunitcode',7,'3','默认计量单位编码',@autoid,@guid) 
 END 
@@ -1417,15 +1424,15 @@ END
 set @fieldname = 'igrouptype'
 IF not exists (select 1 from MES_CQ_FIELDCMPS where fieldname= @fieldname AND cardsection = 'B'  and id=@fieldcmpId )  
 BEGIN 
-	SELECT @autoid=isnull(max(autoid),0)+1 from MES_CQ_FIELDCMPS
+	SELECT @autoid=isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIELDCMPS
 	SELECT @guid = NEWID()
 	INSERT INTO MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0',@autoid,'销售单位编码','B',@fieldcmpCode,'010',null,2,'根据存货获取计量单位信息(来源单据.表体.存货编码).主计量单位编码',@fieldname,@guid,@fieldcmpId,1,1)
 	DELETE FROM MES_CQ_FIXVALUE where did = @autoid
-	SELECT @autoidFixvalue =isnull(max(autoid),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =max(isnull(autoid,0))+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','igrouptype',7,'3','默认计量单位编码',@autoid,@guid) 
 END 

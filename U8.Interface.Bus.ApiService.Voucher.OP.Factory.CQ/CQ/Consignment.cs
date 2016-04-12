@@ -183,7 +183,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             tmpd.Cvouchertype = cardNo; 
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
             //DataSet ds = DbHelperSQL.Query("SELECT b.cRdCode,b.id,b.did,t.opertype FROM " + bodytable + " b with(nolock) left join " + headtable + " t with(nolock) on b.id = t.id WHERE b.DID = " + autoid);
-            DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + autoid);
+            DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = '" + autoid + "' ");
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 tmpd.Cvoucherno = ds.Tables[0].Rows[i][voucherNoColumnName].ToString();
@@ -207,7 +207,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             tmpd.Cvouchertype = cardNo;
             tmpd.Ilineno = 2;
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
-            DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + autoid);
+            DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = '" + autoid + "' ");
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 tmpd.Cvoucherno = ds.Tables[0].Rows[i][voucherNoColumnName].ToString();
@@ -226,7 +226,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             fdt.Cvouchertype = sourceCardNo;
             fdt.Id = dt.Id;
             fdt.Ilineno = 1;
-            DataSet ds = DbHelperSQL.Query("SELECT cSoCode FROM " + headtable + " with(nolock) WHERE ID = " + dt.Id);
+            DataSet ds = DbHelperSQL.Query("SELECT cSoCode FROM " + headtable + " with(nolock) WHERE ID = '" + dt.Id + "' ");
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 fdt.Cvoucherno = ds.Tables[0].Rows[i]["cSoCode"].ToString();
@@ -271,7 +271,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <param name="dt"></param>
         /// <returns></returns>
         public override List<Model.Synergismlogdt> GetNext(Model.Synergismlogdt dt)
-        { 
+        {
             List<Model.Synergismlogdt> logdt = new List<U8.Interface.Bus.ApiService.Model.Synergismlogdt>();
             if (dt.Ilineno == 1)
             {
@@ -281,16 +281,17 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-                
-                DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
-           
+                tmpd.Isaudit = U8.Interface.Bus.ApiService.DAL.Constant.SynergisnLogDT_Isaudit_True;
+
+                DataSet ds = DbHelperSQL.Query("SELECT t." + voucherNoColumnName + ",t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id, "string"));
+
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     tmpd.Cvoucherno = ds.Tables[0].Rows[i][voucherNoColumnName].ToString();
                     tmpd.Autoid = ds.Tables[0].Rows[i]["id"].ToString(); // int.Parse(ds.Tables[0].Rows[i]["id"].ToString());
                     tmpd.Cdealmothed = int.Parse(ds.Tables[0].Rows[i]["opertype"].ToString()) + 1; // 0(自动生单/自动审核) 1增 2修改 3删
-                } 
-                
+                }
+
                 logdt.Add(tmpd);
                 return logdt;
             }

@@ -50,8 +50,8 @@
     <Compile Include="CQ\Consignment.cs" />
     <Compile Include="CQ\Mom_order.cs" />
     <Compile Include="CQ\PuStoreIn.cs" />
-    <Compile Include="CQ\RdRecord08.cs" />
     <Compile Include="CQ\RdRecord09.cs" />
+    <Compile Include="CQ\RdRecord08.cs" />
     <Compile Include="CQ\RdRecord10.cs" />
     <Compile Include="CQ\RdRecord11.cs" />
     <Compile Include="CQ\SepVouch.cs" />

@@ -362,7 +362,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// <returns></returns>
         private string GetUnitCodeByPartid(string partid)
         {
-            string sql = " select  i.cComUnitCode from bas_part rm with(nolock) left join inventory i with(nolock) on rm.InvCode = i.cInvCode  where rm.PartId = '" + partid + "' ";
+            string sql = " select  i.cComUnitCode from bas_part rm with(nolock) INNER join inventory i with(nolock) on rm.InvCode = i.cInvCode  where rm.PartId = '" + partid + "' ";
             DataTable dt = UFSelect(sql);
             if (dt.Rows.Count > 0)
             {
@@ -480,10 +480,10 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             sb.Append("           h.InvCode,h.InvName,h.version, ");
             sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,i.cComUnitCode as DInvUnit,d.DBaseQtyD,d.OpComponentId   ");
             sb.Append("     FROM v_bom_head h  with(nolock) ");
-            sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
-            sb.Append("           LEFT JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
-            sb.Append("           LEFT JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
-            sb.Append("           LEFT JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
+            sb.Append("           INNER JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
+            sb.Append("           INNER JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
+            sb.Append("           INNER JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
+            sb.Append("           INNER JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
             sb.Append("           WHERE  H.bomid ='" + bomId + "' AND ISNULL(rm.InvCode,'') <> '' ");
             sb.Append(" ) V");
             sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");
@@ -532,9 +532,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             sb.Append("           h.InvCode,h.InvName,h.version, ");
             sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit ,d.DBaseQtyD,d.OpComponentId  ");
             sb.Append("     FROM v_bom_head h with(nolock) ");
-            sb.Append("           LEFT JOIN v_bom_detail d with(nolock) ON h.bomid = d.bomid  ");
-            sb.Append("           LEFT JOIN bom_opcomponentsub r with(nolock) ON d.opcomponentid = r.opcomponentid ");
-            sb.Append("           LEFT JOIN bas_part rm with(nolock) ON r.PartId = rm.PartId ");
+            sb.Append("           INNER JOIN v_bom_detail d with(nolock) ON h.bomid = d.bomid  ");
+            sb.Append("           INNER JOIN bom_opcomponentsub r with(nolock) ON d.opcomponentid = r.opcomponentid ");
+            sb.Append("           INNER JOIN bas_part rm with(nolock) ON r.PartId = rm.PartId ");
             sb.Append("           WHERE  H.InvCode ='" + cInvcode + "' AND ISNULL(rm.InvCode,'') <> '' ");
             sb.Append(" ) V");
             sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");

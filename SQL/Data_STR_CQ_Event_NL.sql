@@ -9,10 +9,9 @@ if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_SO_SOMa
 BEGIN
 CREATE TABLE dbo.MES_CQ_SO_SOMain
 (
-
 	id  nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
@@ -29,7 +28,7 @@ CREATE TABLE dbo.MES_CQ_SO_SOMain
 	cDepName	Nvarchar(255)	,--销售部门名称
 	cPersonCode	Nvarchar(20)	,--业务员代码
 	cPersonName	Nvarchar(40)	,--业务员名称
-	cStatus	int	, --订单状态 0=有效，1=无效。(MES只需要知道哪些订单需要发货，哪些不需要)
+	cStatus	int	default 0, --订单状态 0=有效，1=无效。(MES只需要知道哪些订单需要发货，哪些不需要)
 	cSoRemark	Nvarchar(60), --备注	  
   CONSTRAINT PK_MES_CQ_SO_SOMain PRIMARY KEY  CLUSTERED
   (
@@ -48,11 +47,11 @@ CREATE TABLE dbo.MES_CQ_SO_SODetails
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-	opertype Int,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	opertype Int default 0,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
 	isosid	int, --行ID
 	cinvcode	Nvarchar(20), --产品编号
 	cinvname	Nvarchar(255), --产品名称
@@ -79,11 +78,11 @@ CREATE TABLE dbo.MES_CQ_PU_ArrivalVouchs
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	opertype Int default 0,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否 
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否 
 
 	dhCode	Nvarchar(20)	, --到货单号
 	dhid	int	 , --到货单明细行号ID
@@ -96,7 +95,7 @@ CREATE TABLE dbo.MES_CQ_PU_ArrivalVouchs
 	cPTName	Nvarchar(20), --采购类型名称	
 	cInvCode	Nvarchar(20)	,-- 存货编码
 	iquantity	Decimal(32,12),--数量	
-	cstatus	int default 1, -- 单据状态	0=有效，1=无效
+	cstatus	int default 0, -- 单据状态	0=有效，1=无效
 	 
   CONSTRAINT PK_MES_CQ_PU_ArrivalVouchs PRIMARY KEY  CLUSTERED
   (
@@ -116,10 +115,10 @@ CREATE TABLE dbo.MES_CQ_rdrecord01Ret
 (
 
 	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	opertype Int default 0,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
 
 	cRdCode	Nvarchar(30),	--入库单号
@@ -148,9 +147,9 @@ CREATE TABLE dbo.MES_CQ_rdrecords01Ret
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-	opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	opertype Int default 0,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
 	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否
 
@@ -179,11 +178,11 @@ CREATE TABLE dbo.MES_CQ_mps_netdemand
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否
+	operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否
  
 	PlanCode	Nvarchar(30), --计划号	
 	DemandId	int	, --计划单行号
@@ -217,8 +216,8 @@ CREATE TABLE dbo.MES_CQ_mom_order
 (
 
 	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
@@ -254,11 +253,11 @@ CREATE TABLE dbo.MES_CQ_mom_orderdetail
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
 
   	MoCode	Varchar(32)	, --订单号
 	BomID	Varchar(32), --BOM编号	取订单BOM的ID号
@@ -284,8 +283,8 @@ CREATE TABLE dbo.MES_CQ_bom_bom
 (
 
 	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
@@ -294,7 +293,7 @@ CREATE TABLE dbo.MES_CQ_bom_bom
 	[Version]	Int	, --版本号
 	VersionEffDate	datetime, --版本时间	
 	cInvCode	Nvarchar(20), --产品编号	
-	status	int, --状态	0=有效，1=无效 
+	status	int default 0, --状态	0=有效，1=无效 
 
   CONSTRAINT PK_MES_CQ_bom_bom PRIMARY KEY  CLUSTERED
   (
@@ -313,11 +312,11 @@ CREATE TABLE dbo.MES_CQ_bom_opcomponent
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
 
 	cInvCode	Nvarchar(20), --物料编号	
 	BaseQtyN	float, --标准数量	子件数量
@@ -331,10 +330,7 @@ CREATE TABLE dbo.MES_CQ_bom_opcomponent
 END
 GO
 
-
-
-
-
+ 
 --组装单     0308
 print 'dbo.MES_CQ_AssemVouch...'
 if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_AssemVouch') and sysstat & 0xf = 3)
@@ -343,8 +339,8 @@ CREATE TABLE dbo.MES_CQ_AssemVouch
 (
 
 	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
@@ -374,11 +370,11 @@ CREATE TABLE dbo.MES_CQ_AssemVouchs
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
 
 	cAVDID	int, --子表行号	ERP
 	bAVType	Nvarchar(20), --类型	值：散件、套件。套件作为其他入库明细，散件作为其他出库明细。
@@ -406,8 +402,8 @@ CREATE TABLE dbo.MES_CQ_AssemVouchRet
 (
 
 	id nvarchar(36),--Int  IDENTITY(1,1) not null ,-- 主表ID 主表唯一KEY。
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
     cerrordesc nvarchar(4000) null ,  --错误信息
@@ -436,11 +432,11 @@ CREATE TABLE dbo.MES_CQ_AssemVouchRets
 (
 	did	nvarchar(36),--Int IDENTITY(1,1) not null , --子表ID	该子表数据唯一KEY
 	id	nvarchar(36),--Int, -- 关联主表ID	所属主表记录的ID
-	createTime Datetime, --创建时间	该数据创建时间
+	createTime Datetime  default getdate(), --创建时间	该数据创建时间
 	finishTime	Datetime,--完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-	opertype Int,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+	opertype Int default 0,  -- 操作标示	(枚举) 0/1/2	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
-	operflag Int, -- 处理标示	(采用整型便于后续拓展)	是/否
+	operflag Int default 0, -- 处理标示	(采用整型便于后续拓展)	是/否
 	 
 	cAVDID	int, --子表行号	ERP
 	bAVType	Nvarchar(20), --类型	值：散件、套件。套件作为其他入库明细，散件作为其他出库明细。
@@ -465,8 +461,8 @@ BEGIN
 CREATE TABLE dbo.MES_CQ_Department
 (
 	id	nvarchar(36),--Int IDENTITY(1,1) not null , --表ID	该子表数据唯一KEY 
-	operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
@@ -491,8 +487,8 @@ BEGIN
 CREATE TABLE dbo.MES_CQ_WorkCenter
 (
 	id	nvarchar(36),--Int IDENTITY(1,1) not null , --表ID	该子表数据唯一KEY 
-	operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-	createTime Datetime,	--创建时间 该数据创建时间
+	operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+	createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 	finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 	opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 	cerrordesc nvarchar(4000) null ,  --错误信息
@@ -518,8 +514,8 @@ BEGIN
 	CREATE TABLE dbo.MES_CQ_Customer
 	(
 		id	nvarchar(36),--Int IDENTITY(1,1) not null , --表ID	该子表数据唯一KEY 
-		operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-		createTime Datetime,	--创建时间 该数据创建时间
+		operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+		createTime Datetime default getdate(),	--创建时间 该数据创建时间
 		finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 		opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 		cerrordesc nvarchar(4000) null ,  --错误信息
@@ -547,8 +543,8 @@ BEGIN
 	CREATE TABLE dbo.MES_CQ_Vendor
 	(
 		id	nvarchar(36),--Int IDENTITY(1,1) not null , --表ID	该子表数据唯一KEY 
-		operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-		createTime Datetime,	--创建时间 该数据创建时间
+		operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+		createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 		finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 		opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 		cerrordesc nvarchar(4000) null ,  --错误信息
@@ -575,10 +571,10 @@ BEGIN
 	CREATE TABLE dbo.MES_CQ_Person
 	(
 		id	nvarchar(36),--Int IDENTITY(1,1) not null , --表ID	该子表数据唯一KEY 
-		operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-		createTime Datetime,	--创建时间 该数据创建时间
+		operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+		createTime Datetime  default getdate(),	--创建时间 该数据创建时间
 		finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
-		opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
+		opertype Int,  -- 操作标示	(枚举)	0/1/2 增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 		cerrordesc nvarchar(4000) null ,  --错误信息
 
 		cPersonCode	Nvarchar(20), --编号
@@ -606,8 +602,8 @@ BEGIN
 	CREATE TABLE dbo.MES_CQ_Inventory
 	(
 		id	nvarchar(36),--Int IDENTITY(1,1) not null , --表ID	该子表数据唯一KEY 
-		operflag Int, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
-		createTime Datetime,	--创建时间 该数据创建时间
+		operflag Int default 0, -- 处理标示 0未处理 1处理成功 2处理失败	(采用整型便于后续拓展)	是/否，默认为否，表示该数据是否被读取处理或者被业务调用。
+		createTime Datetime default getdate(),	--创建时间 该数据创建时间
 		finishTime	Datetime, --完成时间	该数据完成时间，有些业务不需要回写，供需要的业务回写。
 		opertype Int,  -- 操作标示	(枚举)	增加/修改/删除。用于记录该条记录是新增、修改还是删除。
 		cerrordesc nvarchar(4000) null ,  --错误信息

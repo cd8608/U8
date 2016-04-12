@@ -119,6 +119,27 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
         }
 
 
+        /// <summary>
+        /// 6
+        /// </summary>
+        /// <param name="operflag"></param>
+        /// <returns></returns>
+        public static string GetCQFlagByOper(string operflag)
+        {
+            if (operflag.ToLower().Equals("d"))
+            {
+                return "2";
+            }
+            else if (operflag.ToLower().Equals("m"))
+            {
+                return "1";
+            }
+            else
+            {
+                return "0";
+            }
+        }
+
 
 
     }

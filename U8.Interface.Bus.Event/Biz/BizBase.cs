@@ -579,6 +579,10 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz
                         {
                             tempOrValue = Function.Comm.GetInvPurType(drValue["bBomMain"].ToString(), drValue["bBomSub"].ToString(), drValue["bPurchase"].ToString(), drValue["bSelf"].ToString());
                         }
+                        else if (getvalue == "6")
+                        {
+                            tempOrValue = Function.Comm.GetCQFlagByOper(opertype);
+                        }
                         tmpl.Add(new BaseMode(targetColName, colValue, getvalue, targetColName, tempOrValue, sourceColType, sourceColType));
                         break;
                     case "4":

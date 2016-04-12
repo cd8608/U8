@@ -19,10 +19,10 @@ namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
             int rowsCount = dt.Rows.Count;
             if (rowsCount > 0)
             {
-                Model.ShowLog model;
+                Model.TaskLogFactory.CQ.ShowLog model;
                 for (int n = 0; n < rowsCount; n++)
                 {
-                    model = new Model.ShowLog();
+                    model = new Model.TaskLogFactory.CQ.ShowLog();
                     if (dt.Rows[n]["id"].ToString() != "")
                     {
                         model.Id = dt.Rows[n]["id"].ToString(); // int.Parse(dt.Rows[n]["id"].ToString());
@@ -46,6 +46,7 @@ namespace U8.Interface.Bus.ApiService.BLL.TaskLogFactory.CQ
                     model.Cacc_Id = dt.Rows[n]["Cacc_Id"].ToString();
                     model.Cacc_Name = dt.Rows[n]["Cacc_Name"].ToString();
                     model.Caddress = dt.Rows[n]["Caddress"].ToString();
+                    model.CErrordesc = dt.Rows[n]["cerrordesc"].ToString();
 
                     model.CDataName = dal.GetDataName(model.Cvouchertype, model.Cvoucherno);
 

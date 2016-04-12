@@ -22,6 +22,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.CQ
     /// </summary>
     public class RdRecord08 : StockOP
     {
+        private int tasktype = 0;
+
         /// <summary>
         /// 目标
         /// </summary>
@@ -134,7 +136,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.CQ
             tmpd.Id = autoid;
             tmpd.Cvouchertype = cardNo; 
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + autoid);
+            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid,"string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 tmpd.Cvoucherno = ds.Tables[0].Rows[i]["cRdCode"].ToString();
@@ -235,8 +237,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.CQ
                 tmpd.Id = dt.Id;
                 tmpd.Cvouchertype = cardNo; 
                 tmpd.Ilineno = 2;
+                tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-                DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + dt.Id);
+                DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string"));
            
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
@@ -367,6 +370,10 @@ namespace U8.Interface.Bus.ApiService.Voucher.CQ
             {
                 operflag = "0";
             }
+            else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
+            {
+                operflag = "4";
+            }
             else
             {
                 operflag = "2";
@@ -389,7 +396,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.CQ
                 strSql.Append(" finishTime = '" + finishTime + "',  ");
             }
             strSql.Append(" operflag = " + operflag + "  ");
-            strSql.Append(" where id= " + dt.Id + " ");
+            strSql.Append(" where id= " +  U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string" )+ " ");
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
 
@@ -434,7 +441,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.CQ
             }  
             strSql.Append(" operflag = " + operflag + ",  ");
             strSql.Append(" cerrordesc = '" + dt.Cerrordesc + "'  ");
-            strSql.Append(" where id=" + dt.Id + " ");
+            strSql.Append(" where id='" + dt.Id + "' ");
 
             int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
 

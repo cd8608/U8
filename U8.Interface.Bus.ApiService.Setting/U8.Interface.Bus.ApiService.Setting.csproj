@@ -70,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="CQ\FrmUISetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CQ\FrmUISetting.Designer.cs">
+      <DependentUpon>FrmUISetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataGridViewDisableButton.cs" />
     <Compile Include="FrmConnectSetting.cs">
       <SubType>Form</SubType>
@@ -103,6 +109,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CQ\FrmUISetting.resx">
+      <DependentUpon>FrmUISetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmConnectSetting.resx">
       <DependentUpon>FrmConnectSetting.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,7 +135,7 @@
     <EmbeddedResource Include="FrmConfigSetting.resx">
       <DependentUpon>FrmConfigSetting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMainwork.resx">
+    <EmbeddedResource Include="CQ\FrmMainwork.resx">
       <DependentUpon>FrmMainwork.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -152,10 +161,10 @@
     <Compile Include="FrmConfigSetting.Designer.cs">
       <DependentUpon>FrmConfigSetting.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmMainwork.cs">
+    <Compile Include="CQ\FrmMainwork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMainwork.Designer.cs">
+    <Compile Include="CQ\FrmMainwork.Designer.cs">
       <DependentUpon>FrmMainwork.cs</DependentUpon>
     </Compile>
   </ItemGroup>

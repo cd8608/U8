@@ -47,20 +47,6 @@ namespace U8.Interface.Bus.ApiService.Model
             set { cDataName = value; }
         }
 
-
-        /// <summary>
-        /// 单据号(类型)
-        /// </summary>
-        private string cvouchertypecode;
-        /// <summary>
-        /// CardNo
-        /// </summary>
-        public string CVouchertypeCode
-        {
-            get { return cvouchertypecode; }
-            set { cvouchertypecode = value; }
-        }
-
-
+         
     }
 }

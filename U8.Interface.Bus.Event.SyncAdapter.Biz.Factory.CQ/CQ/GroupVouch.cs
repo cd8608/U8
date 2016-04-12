@@ -78,11 +78,14 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             {
                 DeleteLog();  //清除旧记录
             }
-            if (sb.Length > 0)
+            if (bSaveOper)
             {
-                return ExecSql(sb.ToString());
+                if (sb.Length > 0)
+                {
+                    return ExecSql(sb.ToString());
+                }
             }
-            return null;
+            return 1; 
         }
 
         /// <summary>

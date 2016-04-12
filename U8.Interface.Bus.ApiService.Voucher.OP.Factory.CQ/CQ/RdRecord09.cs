@@ -18,18 +18,18 @@ using U8.Interface.Bus.DBUtility;
 namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 {
     /// <summary>
-    /// 其它入库单 (HY_DZ_K7_DLLReflect预置的op类)
+    /// 其它出库单 (HY_DZ_K7_DLLReflect预置的op类)
     /// </summary>
-    public class RdRecord08 : StockOP
+    public class RdRecord09 : StockOP
     {
         private int tasktype = 0;
 
         /// <summary>
         /// 目标
         /// </summary>
-        private string cardNo = "0301";
-        private string headtable = "MES_CQ_RdRecord08";
-        private string bodytable = "MES_CQ_RdRecords08";
+        private string cardNo = "0302";
+        private string headtable = "MES_CQ_RdRecord09";
+        private string bodytable = "MES_CQ_RdRecords09";
 
         /// <summary>
         /// 来源
@@ -38,41 +38,43 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         string sourceHeadTable = "";
         string sourceBodyTable = "";
 
+
         private string taskStatusflagColName = "operflag";
+ 
 
         public override string SetTableName()
         {
-            return "RdRecord08";
+            return "RdRecord09";
         }
 
         public override string SetVouchType()
         {
-            return "08";
+            return "09";
         }
   
         public override string SetApiAddressAdd()
         {
-            return "U8API/otherin/Add";
+            return "U8API/otherout/Add";
         }
 
         public override string SetApiAddressAudit()
         {
-            return "U8API/otherin/Audit";
+            return "U8API/otherout/Audit";
         }
 
         public override string SetApiAddressCancelAudit()
         {
-            return "U8API/otherin/CancelAudit";
+            return "U8API/otherout/CancelAudit";
         }
 
         public override string SetApiAddressDelete()
         {
-            return "U8API/otherin/Delete";
+            return "U8API/otherout/Delete";
         }
 
         public override string SetApiAddressLoad()
         {
-            return "U8API/otherin/Load";
+            return "U8API/otherout/Load";
         }
 
         public override string SetApiAddressUpdate()
@@ -101,12 +103,12 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 v.CardNo = cardNo;
                 v.VoucherName = "无";
                 t.VouchType = v;
-                t.taskType = 0;   //MES接口任务  
+                t.taskType = tasktype;   //MES接口任务  
                 t.OperType = (int)dt.Rows[i]["OperType"];
 
                 try
                 {
-                    t.id = dt.Rows[i]["id"].ToString(); //int.Parse(dt.Rows[i]["id"].ToString());
+                    t.id = dt.Rows[i]["id"].ToString();  //int.Parse(dt.Rows[i]["id"].ToString());
                 }
                 catch (Exception ee)
                 {
@@ -144,11 +146,12 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             tmpd.Id = autoid;
             tmpd.Cvouchertype = cardNo; 
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + autoid);
+            DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + 
+                U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid,"string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 tmpd.Cvoucherno = ds.Tables[0].Rows[i]["cRdCode"].ToString();
-                tmpd.Id = ds.Tables[0].Rows[i]["id"].ToString(); // int.Parse(ds.Tables[0].Rows[i]["id"].ToString());
+                tmpd.Id = ds.Tables[0].Rows[i]["id"].ToString(); //int.Parse(ds.Tables[0].Rows[i]["id"].ToString());
                 //tmpd.Cdealmothed = int.Parse(ds.Tables[0].Rows[i]["opertype"].ToString()) + 1; // 0(自动生单/自动审核) 1增 2修改 3删
             }
             return tmpd;
@@ -163,10 +166,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         public override Model.Synergismlogdt GetModel(string autoid)
         {
             Model.Synergismlogdt tmpd = new Synergismlogdt();
-            tmpd.Autoid = autoid;
-            tmpd.Id = autoid;
+            tmpd.Autoid = autoid.ToString();
+            tmpd.Id = autoid.ToString();
             tmpd.Cvouchertype = cardNo;
             tmpd.Ilineno = 2;
+            tmpd.TaskType = tasktype;
             tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal; 
             DataSet ds = DbHelperSQL.Query("SELECT t.cRdCode,t.id,t.opertype FROM " + headtable + " t with(nolock)  WHERE t.id = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(autoid,"string"));
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
@@ -215,6 +219,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 Model.Synergismlogdt pdt = new Model.Synergismlogdt();
                 pdt.Cvouchertype = sourceCardNo;
                 pdt.Id = dt.Id;
+                pdt.TaskType = tasktype;
                 //DataSet ds = DbHelperSQL.Query("SELECT " + sourceCodeColName + " FROM " + bodytable + " with(nolock) WHERE ID = " + dt.Id);
                 //for (int i = 0; i < ds.Tables[0].Rows.Count;i++ )
                 //{
@@ -337,17 +342,17 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             string sqlstr = string.Empty;
             if (codeorid == "id")
             {
-                sqlstr = "select isnull(id,'') from rdrecord08  with(nolock)  where ccode='" + strID + "'";
+                sqlstr = "select isnull(id,'') from RdRecord09  with(nolock)  where ccode='" + strID + "'";
             }
             if (codeorid == "code")
             {
-                sqlstr = "select isnull(ccode,'') from rdrecord08  with(nolock)  where id='" + strID + "'";
+                sqlstr = "select isnull(ccode,'') from RdRecord09  with(nolock)  where id='" + strID + "'";
             }
             Model.APIData apidata = bd as Model.APIData;
 
             DBUtility.DbHelperSQLP sqlp = new DBUtility.DbHelperSQLP(apidata.ConnectInfo.Constring);
             string ret = sqlp.GetSingle(sqlstr).NullToString();
-            BLL.Common.ErrorMsg(ret, "未能获其它入库单ID或单号");
+            BLL.Common.ErrorMsg(ret, "未能获其它出库单ID或单号");
             return ret;
         }
 

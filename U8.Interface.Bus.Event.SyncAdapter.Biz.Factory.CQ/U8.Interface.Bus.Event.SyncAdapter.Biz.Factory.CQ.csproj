@@ -65,6 +65,10 @@
     <Compile Include="CQ\Bom_opcomponent.cs" />
     <Compile Include="CQ\Sfc_workcenter.cs" />
     <Compile Include="CQ\Mom_OrderBom.cs" />
+    <Compile Include="CQ\AssemVouchs.cs" />
+    <Compile Include="CQ\AssemVouch.cs" />
+    <Compile Include="CQ\AssemVouchRet.cs" />
+    <Compile Include="CQ\AssemVouchRets.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

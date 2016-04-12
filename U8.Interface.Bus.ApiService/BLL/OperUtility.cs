@@ -286,6 +286,42 @@ namespace U8.Interface.Bus.ApiService.BLL
             logdal.Update(log);
         }
 
+
+        /// <summary>
+        /// 重发 for setting
+        /// </summary>
+        /// <param name="tasktype"></param>
+        /// <param name="id"></param>
+        /// <param name="vouchertype"></param>
+        public void ReDo(int tasktype, string id, string vouchertype)
+        {
+            DAL.TaskLogFactory.ITaskLogMain logdal = new DAL.SynergismLog();
+            DataSet ds = U8.Interface.Bus.DBUtility.DbHelperSQL.Query(" SELECT Dllpath,[Namespace],ClassName  FROM mes_comm_dllreflect WITH(NOLOCK) WHERE ClassType='op' AND tasktype ='" + tasktype + "'  AND cvouchertype = '" + vouchertype + "' ");
+            if (ds == null || ds.Tables[0].Rows.Count < 1)
+            {
+                throw new Exception("mes_comm_dllreflect 中不存在此op ");
+            }
+            BaseOp tmpOp = (BaseOp)System.Reflection.Assembly.Load(ds.Tables[0].Rows[0]["Dllpath"].ToString())
+                .CreateInstance(ds.Tables[0].Rows[0]["Namespace"].ToString() + "." + ds.Tables[0].Rows[0]["ClassName"].ToString());
+            if (tasktype == 0)
+            {
+                logdal = new DAL.TaskLogFactory.CQ.TaskMain();
+            }
+            else if (tasktype == 1)
+            {
+                logdal = new DAL.SynergismLog();
+            }
+            else
+            {
+                logdal = new DAL.TaskLogFactory.DS.TaskMain();
+            }
+
+            Model.Synergismlog log = logdal.GetModel(id, tmpOp);
+            log.Cstatus = Constant.SynerginsLog_Cstatus_NoDeal;
+            log.Endtime = DateTime.Now;
+            logdal.Update(log, tmpOp);
+        }
+
         /// <summary>
         /// 报废 for setting
         /// </summary>

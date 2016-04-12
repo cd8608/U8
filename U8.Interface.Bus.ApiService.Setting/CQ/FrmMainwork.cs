@@ -18,7 +18,7 @@ namespace U8.Interface.Bus.ApiService.Setting
         private bool bInit;
         private int iSecond;
         private int curRow;
-        private Model.ShowLog curLog;
+        private Model.TaskLogFactory.CQ.ShowLog curLog;
         private Model.ShowLogDt curLogDt;
         private List<Model.ShowLog> lstLog;  //任务列表数据源
         private List<Model.ShowLogDt> lstLogDt;  //任务详细列表
@@ -26,6 +26,8 @@ namespace U8.Interface.Bus.ApiService.Setting
         private Dictionary<string, string> dicLogDt;
         private string strAddress, strAccID, strVoucherType, strVoucherNo;
 
+
+        System.Threading.Thread threadTask;
 
 
         /// <summary>
@@ -133,7 +135,7 @@ namespace U8.Interface.Bus.ApiService.Setting
 
         private void btnUISetting_Click(object sender, EventArgs e)
         {
-            using (Form f = new FrmUISetting())
+            using (Form f = new CQ.FrmUISetting())
             {
                 f.ShowDialog();
             }
@@ -210,10 +212,9 @@ namespace U8.Interface.Bus.ApiService.Setting
 
                         if (U8.Interface.Bus.SysInfo.multiThread)
                         {
-                            //threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run));
-                            //threadTask.Start(task);
-
-                            oper.Run(log);
+                            threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run));
+                            threadTask.Start(task);
+ 
                         }
                         else
                         {
@@ -313,6 +314,11 @@ namespace U8.Interface.Bus.ApiService.Setting
                 blldeal = new BLL.TaskOperator();
                 blldeal.DoScrap(0, curLog.Id.ToString(), curLog.CVouchertypeCode);
             }
+            else if (curLog.Opname == "重发")
+            {
+                blldeal = new BLL.TaskOperator();
+                blldeal.ReDo(0, curLog.Id.ToString(), curLog.CVouchertypeCode);
+            }
             else
             {
                 return;
@@ -330,7 +336,7 @@ namespace U8.Interface.Bus.ApiService.Setting
             {
                 if (dgvList.SelectedRows[0].Index == curRow) return;
                 curRow = dgvList.SelectedRows[0].Index;
-                curLog = lstLog.Find(delegate(Model.ShowLog model) { return model.Id ==  dgvList.SelectedRows[0].Cells["colHID"].Value.ToString().ToString(); });
+                curLog = (Model.TaskLogFactory.CQ.ShowLog)lstLog.Find(delegate(Model.ShowLog model) { return model.Id ==  dgvList.SelectedRows[0].Cells["colHID"].Value.ToString().ToString(); });
                 //ShowLogDT();
                 //GetLogDTTree();
             }
@@ -381,7 +387,7 @@ namespace U8.Interface.Bus.ApiService.Setting
             {
                 if (e.ColumnIndex <= 0) return;
 
-                SetListField(dicLogDt, dgvDetail,e.ColumnIndex);
+                SetListField(dicLogDt, dgvDetail, e.ColumnIndex);
                 ShowLogDT();
                 return;
             }
@@ -412,8 +418,6 @@ namespace U8.Interface.Bus.ApiService.Setting
                 ShowLogDT();
                 return;
             }
-
-
             if (opname == "重发")
             {
                 blldeal.ReDo(autoid, curLog.Id.ToString());
@@ -421,7 +425,7 @@ namespace U8.Interface.Bus.ApiService.Setting
 
             if (opname == "删除")
             {
-                Model.DealResult dr = blldeal.DeleteSyncDt(1,autoid, curLog.Id.ToString());
+                Model.DealResult dr = blldeal.DeleteSyncDt(1, autoid, curLog.Id.ToString());
                 if (dr.ResultNum < 0)
                 {
                     int iStart = dr.ResultMsg.IndexOf("System.Exception:");
@@ -862,7 +866,7 @@ namespace U8.Interface.Bus.ApiService.Setting
                 else
                     curRow = lstLog.FindIndex(delegate(Model.ShowLog model) { return model.Id == curLog.Id; });
                 if (curRow <= 0) curRow = 0;
-                curLog = lstLog[curRow];
+                curLog = (Model.TaskLogFactory.CQ.ShowLog)lstLog[curRow];
                 dgvList.CurrentCell = dgvList.Rows[curRow].Cells[0];
                 dgvList.Rows[curRow].Selected = true;
                 return true;
@@ -991,7 +995,11 @@ namespace U8.Interface.Bus.ApiService.Setting
                 {
                     lst[0].Opname = "作废";
                 }
-                curLog = lst[0];
+                else if (lst[0].Cstatus != "错误")
+                {
+                    lst[0].Opname = "重发";
+                }
+                curLog = (Model.TaskLogFactory.CQ.ShowLog)lst[0];
                 if (curLog == null)
                     curRow = 0;
                 else

@@ -98,12 +98,19 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 }
 
             }
- 
-            StringBuilder sb = new StringBuilder();
-            sb.Append(detailBiz.CreateDeleteString());
-            sb.Append(this.CreateDeleteString());
- 
-            return ExecSql(sb.ToString());
+            if (bNoCase)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(detailBiz.CreateDeleteString());
+                sb.Append(this.CreateDeleteString());
+                ExecSql(sb.ToString());
+            }
+            if (bSaveOper)
+            {
+                return Insert();
+            }
+            return 1;
+
         }
 
 
@@ -141,40 +148,44 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             List<BaseMode> tmpMainLst = new List<BaseMode>();
             //for (int i = 0; i < ds.Tables["StandardBom"].Rows.Count; i++)
             //{
-                BomId = ds.Tables["StandardBom"].Rows[0]["BomId"].ToString();
-                InvCode = GetInvCodeByPartid(ds.Tables["BomParent"].Rows[0]["ParentId"].ToString());
-                version = ds.Tables["StandardBom"].Rows[0]["Version"].ToString();
-                VersionEffDate = ds.Tables["StandardBom"].Rows[0]["VersionEffDate"].ToString();
-                VersionEndDate = ds.Tables["StandardBom"].Rows[0]["VersionEndDate"].ToString();
+            BomId = ds.Tables["StandardBom"].Rows[0]["BomId"].ToString();
+            InvCode = GetInvCodeByPartid(ds.Tables["BomParent"].Rows[0]["ParentId"].ToString());
+            version = ds.Tables["StandardBom"].Rows[0]["Version"].ToString();
+            VersionEffDate = ds.Tables["StandardBom"].Rows[0]["VersionEffDate"].ToString();
+            VersionEndDate = ds.Tables["StandardBom"].Rows[0]["VersionEndDate"].ToString();
 
 
-                tmpMainLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
-                tmpMainLst.Add(new BaseMode(null, null, null, "bomid", BomId, null, null));
-                tmpMainLst.Add(new BaseMode(null, null, null, "Version", version, null, null));
-                tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", VersionEffDate, null, null));
-                tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", InvCode, null, null));
-                tmpMainLst.Add(new BaseMode(null, null, null, "status", "1", null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "bomid", BomId, null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "Version", version, null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", VersionEffDate, null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", InvCode, null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "status", "0", null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
 
-                this.lst.Add(tmpMainLst);
+
+            this.lst.Add(tmpMainLst);
             //}
 
 
             //子件表
             for (int i = 0; i < ds.Tables["BomComponents"].Rows.Count; i++)
-            { 
+            {
                 List<BaseMode> tmpDetailLst = new List<BaseMode>();
 
                 if (ds.Tables["BomComponents"].Rows[i].RowState.ToString().ToLower().Equals("deleted"))
                 {
                     continue;
-                } 
+                }
                 DInvCode = GetInvCodeByPartid(ds.Tables["BomComponents"].Rows[i]["ComponentId"].ToString());
 
-                tmpDetailLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null)); 
-                tmpDetailLst.Add(new BaseMode(null, null, null, "did", Guid.NewGuid().ToString(), null, null)); 
+                tmpDetailLst.Add(new BaseMode(null, null, null, "id", "main|##newguid", null, null));
+                tmpDetailLst.Add(new BaseMode(null, null, null, "did", Guid.NewGuid().ToString(), null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", DInvCode, null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", ds.Tables["BomComponents"].Rows[i]["BaseQtyN"].ToString(), null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", ds.Tables["BomComponents"].Rows[i]["BaseQtyD"].ToString(), null, null));
+
+                tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
                 detailBiz.lst.Add(tmpDetailLst);
             }
 
@@ -227,7 +238,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             tmpMainLst.Add(new BaseMode(null, null, null, "Version", version, null, null));
             tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", VersionEffDate, null, null));
             tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", InvCode, null, null));
-            tmpMainLst.Add(new BaseMode(null, null, null, "status", "1", null, null));
+            tmpMainLst.Add(new BaseMode(null, null, null, "status", "0", null, null)); 
+            tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
 
             this.lst.Add(tmpMainLst);
             //}
@@ -247,6 +259,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                 tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", DInvCode, null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", ds.Tables["BomComponents"].Rows[i]["BaseQtyN"].ToString(), null, null));
                 tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", ds.Tables["BomComponents"].Rows[i]["BaseQtyD"].ToString(), null, null));
+                tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
                 detailBiz.lst.Add(tmpDetailLst);
             }
 
@@ -288,7 +301,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                         tmpMainLst.Add(new BaseMode(null, null, null, "Version", dsMainBom.Tables[i].Rows[j]["version"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", dsMainBom.Tables[i].Rows[j]["VersionEffDate"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", dsMainBom.Tables[i].Rows[j]["InvCode"].ToString(), null, null));
-                        tmpMainLst.Add(new BaseMode(null, null, null, "status", "1", null, null));
+                        tmpMainLst.Add(new BaseMode(null, null, null, "status", "0", null, null));
+                        tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
                         this.lst.Add(tmpMainLst);
                     }
                 }
@@ -308,6 +322,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                         tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "0", null, null));
                         detailBiz.lst.Add(tmpDetailLst); 
    
                     }
@@ -348,7 +363,8 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                         tmpMainLst.Add(new BaseMode(null, null, null, "Version", dsMainBom.Tables[i].Rows[j]["version"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "VersionEffDate", dsMainBom.Tables[i].Rows[j]["VersionEffDate"].ToString(), null, null));
                         tmpMainLst.Add(new BaseMode(null, null, null, "cInvCode", dsMainBom.Tables[i].Rows[j]["InvCode"].ToString(), null, null));
-                        tmpMainLst.Add(new BaseMode(null, null, null, "status", "1", null, null));
+                        tmpMainLst.Add(new BaseMode(null, null, null, "status", "0", null, null));
+                        tmpMainLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
                         this.lst.Add(tmpMainLst);
                     }
                 }
@@ -366,6 +382,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                         tmpDetailLst.Add(new BaseMode(null, null, null, "cInvCode", dsBom.Tables[i].Rows[j]["DInvCode"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyN", dsBom.Tables[i].Rows[j]["DBaseQtyN"].ToString(), null, null));
                         tmpDetailLst.Add(new BaseMode(null, null, null, "BaseQtyD", dsBom.Tables[i].Rows[j]["DBaseQtyD"].ToString(), null, null));
+                        tmpDetailLst.Add(new BaseMode(null, null, null, "opertype", "2", null, null));
                         detailBiz.lst.Add(tmpDetailLst); 
 
                     }
@@ -453,7 +470,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// <returns></returns>
         private string GetUnitCodeByPartid(string partid)
         {
-            string sql = " select  i.cComUnitCode from bas_part rm with(nolock) left join inventory i with(nolock) on rm.InvCode = i.cInvCode  where rm.PartId = '" + partid + "' ";
+            string sql = " select  i.cComUnitCode from bas_part rm with(nolock) INNER join inventory i with(nolock) on rm.InvCode = i.cInvCode  where rm.PartId = '" + partid + "' ";
             DataTable dt = UFSelect(sql);
             if (dt.Rows.Count > 0)
             {
@@ -486,27 +503,41 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             DataTable dtBom = new DataTable();
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(" SELECT V.* FROM  ");
-            sb.Append(" ( ");
-            sb.Append("     SELECT  ");
-            sb.Append("            h.bomid,h.InvCode,h.InvName,h.version,h.VersionEffDate,  ");
-            sb.Append("           D.DBaseQtyN,D.DBaseQtyD, ");
-            sb.Append("           D.DInvCode,D.DInvCode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit,d.OpComponentId    ");
-            sb.Append("     FROM v_bom_head h  with(nolock) ");
-            sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
-            sb.Append("     WHERE  H.bomid ='" + bomId + "' ");
-            //sb.Append("     UNION ALL ");
-            //sb.Append("     SELECT ");
-            //sb.Append("           h.InvCode,h.InvName,h.version, ");
-            //sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,i.cComUnitCode as DInvUnit,d.DBaseQtyD,d.OpComponentId   ");
+            //sb.Append(" SELECT V.* FROM  ");
+            //sb.Append(" ( ");
+            //sb.Append("     SELECT  ");
+            //sb.Append("            h.bomid,h.InvCode,h.InvName,h.version,h.VersionEffDate,  ");
+            //sb.Append("           D.DBaseQtyN,D.DBaseQtyD, ");
+            //sb.Append("           D.DInvCode,D.DInvCode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit,d.OpComponentId    ");
             //sb.Append("     FROM v_bom_head h  with(nolock) ");
-            //sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
-            //sb.Append("           LEFT JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
-            //sb.Append("           LEFT JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
-            //sb.Append("           LEFT JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
-            //sb.Append("           WHERE  H.bomid ='" + bomId + "' AND ISNULL(rm.InvCode,'') <> '' ");
-            sb.Append(" ) V");
-            sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");
+            //sb.Append("           INNER JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
+            //sb.Append("     WHERE  H.bomid ='" + bomId + "' ");
+            ////sb.Append("     UNION ALL ");
+            ////sb.Append("     SELECT ");
+            ////sb.Append("           h.InvCode,h.InvName,h.version, ");
+            ////sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,i.cComUnitCode as DInvUnit,d.DBaseQtyD,d.OpComponentId   ");
+            ////sb.Append("     FROM v_bom_head h  with(nolock) ");
+            ////sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
+            ////sb.Append("           LEFT JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
+            ////sb.Append("           LEFT JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
+            ////sb.Append("           LEFT JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
+            ////sb.Append("           WHERE  H.bomid ='" + bomId + "' AND ISNULL(rm.InvCode,'') <> '' ");
+            //sb.Append(" ) V");
+            //sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");
+
+
+            sb.Append(" SELECT V.* FROM   (     ");
+            sb.Append(" SELECT              bom.bomid,bas.InvCode,inv.cinvname as InvName,bom.version,bom.VersionEffDate,   ");
+            sb.Append(" D.BaseQtyN as DBaseQtyN,D.BaseQtyD as DBaseQtyD, bas1.InvCode as DInvCode,bas1.InvCode AS subInvCode,d.EffBegDate as DEffBegDate,d.EffEndDate as DEffEndDate,  ");
+            sb.Append(" d.OpComponentId        ");
+            sb.Append(" FROM bom_bom bom with(nolock) ");
+            sb.Append(" inner join bom_parent bp with(nolock) on bp.bomid=bom.bomid ");
+            sb.Append(" inner join bas_part bas  with(nolock) on bas.partid=bp.parentid ");
+            sb.Append(" inner join inventory inv with(nolock) on inv.cinvcode=bas.InvCode     ");
+            sb.Append(" inner JOIN bom_opcomponent d  with(nolock) ON bom.bomid = d.bomid  ");
+            sb.Append("  inner join bas_part bas1 with(nolock) on bas1.partid=d.componentid    WHERE  bom.bomid ='" + bomId + "'  ) V ");
+            sb.Append("  ORDER BY  V.DInvCode,V.subInvCode ");
+
 
             dtBom = UFSelect(sb.ToString());
             return dtBom;
@@ -537,10 +568,10 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             sb.Append("           h.InvCode,h.InvName,h.version, ");
             sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,i.cComUnitCode as DInvUnit,d.DBaseQtyD,d.OpComponentId   ");
             sb.Append("     FROM v_bom_head h  with(nolock) ");
-            sb.Append("           LEFT JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
-            sb.Append("           LEFT JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
-            sb.Append("           LEFT JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
-            sb.Append("           LEFT JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
+            sb.Append("           INNER JOIN v_bom_detail d  with(nolock) ON h.bomid = d.bomid  ");
+            sb.Append("           INNER JOIN bom_opcomponentsub r  with(nolock) ON d.opcomponentid = r.opcomponentid ");
+            sb.Append("           INNER JOIN bas_part rm  with(nolock) ON r.PartId = rm.PartId ");
+            sb.Append("           INNER JOIN inventory i  with(nolock) ON i.cInvCode = rm.InvCode ");
             sb.Append("           WHERE  H.bomid ='" + bomId + "' AND ISNULL(rm.InvCode,'') <> '' ");
             sb.Append(" ) V");
             sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");
@@ -595,9 +626,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
             sb.Append("           h.InvCode,h.InvName,h.version, ");
             sb.Append("           D.DInvCode,rm.invcode AS subInvCode,d.DEffBegDate,d.DEffEndDate,d.DInvUnit ,d.DBaseQtyD,d.OpComponentId  ");
             sb.Append("     FROM v_bom_head h with(nolock) ");
-            sb.Append("           LEFT JOIN v_bom_detail d with(nolock) ON h.bomid = d.bomid  ");
-            sb.Append("           LEFT JOIN bom_opcomponentsub r with(nolock) ON d.opcomponentid = r.opcomponentid ");
-            sb.Append("           LEFT JOIN bas_part rm with(nolock) ON r.PartId = rm.PartId ");
+            sb.Append("           INNER JOIN v_bom_detail d with(nolock) ON h.bomid = d.bomid  ");
+            sb.Append("           INNER JOIN bom_opcomponentsub r with(nolock) ON d.opcomponentid = r.opcomponentid ");
+            sb.Append("           INNER JOIN bas_part rm with(nolock) ON r.PartId = rm.PartId ");
             sb.Append("           WHERE  H.InvCode ='" + cInvcode + "' AND ISNULL(rm.InvCode,'') <> '' ");
             sb.Append(" ) V");
             sb.Append(" ORDER BY  V.DInvCode,V.subInvCode ");

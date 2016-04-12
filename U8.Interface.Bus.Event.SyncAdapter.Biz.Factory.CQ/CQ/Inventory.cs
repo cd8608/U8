@@ -46,23 +46,27 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         { 
 
             StringBuilder sb = new StringBuilder();
-            StringBuilder sbm = new StringBuilder();
+            StringBuilder sbm = new StringBuilder(); 
+                StringBuilder sbd = new StringBuilder();
             sbm = this.CreateInsertString();
             if (sbm.Length > 0)
             {
                 sb.Append(" DECLARE @mainid AS INT ");
                 sb.Append(sbm);
                 sb.Append(" SELECT @mainid = @@IDENTITY "); 
-                sb.Replace("main|##newguid", Guid.NewGuid().ToString());
-
-            }
-
+                sb.Replace("main|##newguid", Guid.NewGuid().ToString()); 
+            } 
             if (bNoCase)
             {
-                base.Delete();  //清除旧记录
+                //清除旧记录
+                sbd = this.CreateDeleteString(); 
             }
             if (sb.Length > 0)
             {
+                if (sbd.Length > 0)
+                {
+                    return ExecSql(sbd.ToString() + " " + sb.ToString());
+                }
                 return ExecSql(sb.ToString());
             }
             return null;
@@ -83,6 +87,42 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
                     sqlOper.Delete();  //清除旧记录
                 }
                 return this.Insert();
+            }
+            else if (Synch.Equals("LinkOper"))
+            {
+                sqlOper = new LinkOper(oraLinkName, ufConnStr, ufTableName, ufPriKey, oracleTableName, oraclePriKey, l, lst);
+                return sqlOper.Update();
+            }
+            else
+            {
+                sqlOper = new OracleOper(oraConnStr, oracleTableName, oraclePriKey, l, lst);
+                return sqlOper.Update();
+            }
+        }
+
+
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <returns></returns>
+        public override object Delete()
+        {
+            if (Synch.Equals("UFOper"))
+            {
+                sqlOper = new UFOper(oraLinkName, ufConnStr, ufTableName, ufPriKey, oracleTableName, oraclePriKey, l, lst);
+                if (bNoCase)
+                {
+                    sqlOper.Delete();  //清除旧记录
+                }
+                if (bSaveOper)
+                {
+                    return this.Insert();
+                }
+                else
+                {
+                    return 1;
+                }
             }
             else if (Synch.Equals("LinkOper"))
             {

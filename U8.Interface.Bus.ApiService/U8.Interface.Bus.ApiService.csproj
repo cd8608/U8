@@ -133,8 +133,9 @@
     <Compile Include="DAL\TaskLogFactory\ITaskLogMain.cs" />
     <Compile Include="DAL\TaskLogFactory\IShowLogDt.cs" />
     <Compile Include="Model\ServiceModel.cs" />
-    <Compile Include="Model\ShowLog.cs" />
-    <Compile Include="Model\ShowLogDt.cs" />
+    <Compile Include="Model\TaskLogFactory\CQ\ShowLog.cs" />
+    <Compile Include="Model\TaskLogFactory\ShowLog.cs" />
+    <Compile Include="Model\TaskLogFactory\ShowLogDt.cs" />
     <Compile Include="DAL\TaskLogFactory\XT\SynergismLog.cs" />
     <Compile Include="DAL\TaskLogFactory\XT\SynergismLogDt.cs" />
     <Compile Include="BLL\U8NameValue.cs" />

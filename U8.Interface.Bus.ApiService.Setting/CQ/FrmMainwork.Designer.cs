@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMainwork));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
             this.tsMain = new System.Windows.Forms.ToolStrip();
             this.btnConnectSetting = new System.Windows.Forms.ToolStripButton();
@@ -79,6 +79,7 @@
             this.colHStart = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHErrMsg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.scDetail = new System.Windows.Forms.SplitContainer();
             this.gbxTask = new System.Windows.Forms.GroupBox();
             this.tvTask = new System.Windows.Forms.TreeView();
@@ -523,14 +524,14 @@
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeRows = false;
             this.dgvList.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colHOpera,
@@ -546,7 +547,8 @@
             this.colHName,
             this.colHStart,
             this.colHEnd,
-            this.colHState});
+            this.colHState,
+            this.colHErrMsg});
             this.dgvList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvList.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.dgvList.Location = new System.Drawing.Point(3, 17);
@@ -675,6 +677,13 @@
             this.colHState.ReadOnly = true;
             this.colHState.Width = 80;
             // 
+            // colHErrMsg
+            // 
+            this.colHErrMsg.DataPropertyName = "cerrordesc";
+            this.colHErrMsg.HeaderText = "错误信息";
+            this.colHErrMsg.Name = "colHErrMsg";
+            this.colHErrMsg.ReadOnly = true;
+            // 
             // scDetail
             // 
             this.scDetail.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -736,14 +745,14 @@
             this.dgvDetail.AllowUserToDeleteRows = false;
             this.dgvDetail.AllowUserToResizeRows = false;
             this.dgvDetail.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colBOpera,
@@ -1106,20 +1115,6 @@
         private System.Windows.Forms.CheckBox cbxRefresh;
         private DataGridViewDisableButtonColumn dataGridViewDisableButtonColumn1;
         private DataGridViewDisableButtonColumn dataGridViewDisableButtonColumn2;
-        private DataGridViewDisableButtonColumn colHOpera;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHAcccode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHAddress;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHAccid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHAccname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHOrderType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHStart;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHEnd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHState;
         private DataGridViewDisableButtonColumn colBOpera;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBAutoID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colBID;
@@ -1148,5 +1143,20 @@
         private System.Windows.Forms.ComboBox cbxAddress;
         private System.Windows.Forms.ComboBox cbxVoucherType;
         private System.Windows.Forms.ToolStripButton btnCheck;
+        private DataGridViewDisableButtonColumn colHOpera;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHAcccode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHAccid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHAccname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHOrderType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHStart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHEnd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHErrMsg;
     }
 }

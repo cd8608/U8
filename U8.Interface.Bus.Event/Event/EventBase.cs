@@ -263,12 +263,12 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                     //条码管理 
                     case "u8api/genbarcode/delete_before":
                     case "u8api/genbarcode/delete_after":
-                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "BarCodeMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] {  conn, dombody, login.UFDataConnstringForNet.ToString() }, null, null); 
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "BarCodeMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, dombody, login.UFDataConnstringForNet.ToString() }, null, null);
                         oper.Delete();
-                        break; 
+                        break;
                     case "u8api/genbarcode/save_before":
                     case "u8api/genbarcode/save_after":
-                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "BarCodeMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, dombody, login.UFDataConnstringForNet.ToString() }, null, null);  
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "BarCodeMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, dombody, login.UFDataConnstringForNet.ToString() }, null, null);
                         oper.Save();
                         break;
 
@@ -276,9 +276,9 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                     //销售订单
                     case "u8api/saleorder/audit_after":
                     case "u8api/saleorder/audit_before":
-                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "SO_SOMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead,dombody, login.UFDataConnstringForNet.ToString(),"a" }, null, null);
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "SO_SOMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "a" }, null, null);
                         oper.Insert();
-                        break; 
+                        break;
                     case "u8api/saleorder/cancelaudit_after":
                     case "u8api/saleorder/cancelaudit_before":
                         oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "SO_SOMain", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "d" }, null, null);
@@ -298,24 +298,37 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                         oper.Delete();
                         break;
 
-                        //组装单
+                    //组装单
                     case "u8api/groupvouch/audit_before":
                     case "u8api/groupvouch/audit_after":
-                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "GroupVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "a" }, null, null);
+                        //oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "GroupVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "a" }, null, null);
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "AssemVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "a" }, null, null);
                         oper.Insert();
                         break;
-                         
+
                     case "u8api/groupvouch/cancelaudit_before":
                     case "u8api/groupvouch/cancelaudit_after":
-                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "GroupVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "d" }, null, null);
-                        oper.Delete(); 
+                        //oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "GroupVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "d" }, null, null);
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "AssemVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "d" }, null, null);
+                        oper.Delete();
                         break;
+
+
+                    //拆卸单 
+                    case "u8api/sepvouch/audit_before":
+                    case "u8api/sepvouch/audit_after":
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "AssemVouchRet", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "a" }, null, null);
+                        oper.Insert();
+                        break;
+
+                    case "u8api/sepvouch/cancelaudit_before":
+                    case "u8api/sepvouch/cancelaudit_after":
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "AssemVouchRet", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "d" }, null, null);
+                        oper.Delete();
+                        break;
+                         
                 }
-
-
-
- 
-
+                 
                 return true;
             }
             catch (Exception ex)

@@ -46,13 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\..\RdRecord091.cs">
+      <Link>BLL\OP\CQ\RdRecord091.cs</Link>
+    </Compile>
     <Compile Include="BLL\Common.cs" />
     <Compile Include="BLL\OP\CQ\Mom_order.cs" />
     <Compile Include="BLL\OP\CQ\Consignment.cs" />
     <Compile Include="BLL\OP\CQ\PuStoreIn.cs" />
     <Compile Include="BLL\OP\CQ\RdRecord08.cs" />
     <Compile Include="BLL\OP\CQ\RdRecord11.cs" />
-    <Compile Include="BLL\OP\CQ\RdRecord09.cs" />
     <Compile Include="BLL\OP\CQ\TransVouch.cs" />
     <Compile Include="BLL\OP\CQ\CheckVouch.cs" />
     <Compile Include="BLL\OP\CQ\AssemVouch.cs" />

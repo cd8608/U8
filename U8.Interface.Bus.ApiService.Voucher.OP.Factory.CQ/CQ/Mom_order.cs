@@ -15,7 +15,7 @@ using U8.Interface.Bus.ApiService.DAL;
 using U8.Interface.Bus.DBUtility;
 
 
-namespace U8.Interface.Bus.ApiService.Voucher
+namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 {
     /// <summary>
     /// 产成品入库单(HY_DZ_K7_DLLReflect预置的op类)
@@ -170,7 +170,7 @@ namespace U8.Interface.Bus.ApiService.Voucher
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-                DataSet ds = DbHelperSQL.Query("SELECT MoCode FROM " + bodytable + " with(nolock) WHERE ID = " + dt.Id);
+                DataSet ds = DbHelperSQL.Query("SELECT MoCode FROM " + bodytable + " with(nolock) WHERE ID = '" + dt.Id + "' ");
                 for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                 {
                     tmpd.Cvoucherno = ds.Tables[0].Rows[i]["MoCode"].ToString();
