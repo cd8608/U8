@@ -44,12 +44,21 @@ namespace U8.Interface.Bus.ApiService.Model
             set { sVouchType = value; }
         
         }
+
+        /// <summary>
+        /// 表头
+        /// </summary>
         private List<Model.U8NameValue> headData;
         public List<Model.U8NameValue> HeadData
         {
             get { return headData; }
             set { headData = value; }
         }
+
+
+        /// <summary>
+        /// 表体
+        /// </summary>
         private List<List<Model.U8NameValue>> bodyData;
         public List<List<Model.U8NameValue>> BodyData
         {
@@ -57,6 +66,19 @@ namespace U8.Interface.Bus.ApiService.Model
             set { bodyData = value; }
         }
 
+
+        /// <summary>
+        /// 带子表的表体
+        /// </summary>
+        private List<BodyRow> sfcbodydata;
+        public List<BodyRow> SfcBodyData
+        {
+            get { return sfcbodydata; }
+            set { sfcbodydata = value; }
+        }
+         
+
+         
 
         private BLL.BaseOp op;
         public BLL.BaseOp OP

@@ -34,14 +34,15 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <summary>
         /// 中间
         /// </summary>
-        private string voucherNoColumnName = "cdlcode";
-        private string cardNo = "01";
+        private string voucherNoColumnName = "cdlcode"; 
         private string headtable = "MES_CQ_Dispatchlist";
-        private string bodytable = "MES_CQ_Dispatchlists";
-
-
+        private string bodytable = "MES_CQ_Dispatchlists";  
         private string taskStatusflagColName = "operflag";
 
+        /// <summary>
+        /// 目标
+        /// </summary>
+        private string cardNo = "01";
 
         public override string SetTableName()
         {
@@ -364,54 +365,57 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
 
         public override int Update(Model.Synergismlog dt)
-        { 
-            DateTime? finishTime = new DateTime?(); 
-            string operflag = dt.Cstatus;
+        {
+
+            return CQ.Utility.UpdateMainLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, "cerrordesc");
+
+            //DateTime? finishTime = new DateTime?(); 
+            //string operflag = dt.Cstatus;
             
-            if (operflag == Constant.SynerginsLog_Cstatus_Complete || operflag == Constant.SynerginsLog_Cstatus_Wait)
-            {
-                operflag = "1";
-                finishTime = DateTime.Now;
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_Error)
-            {
-                operflag = "3";
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_NoDeal)
-            {
-                operflag = "0";
-            }
-            else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
-            {
-                operflag = "4";
-            }
-            else
-            {
-                operflag = "2";
-            }
+            //if (operflag == Constant.SynerginsLog_Cstatus_Complete || operflag == Constant.SynerginsLog_Cstatus_Wait)
+            //{
+            //    operflag = "1";
+            //    finishTime = DateTime.Now;
+            //}
+            //else if (operflag == Constant.SynerginsLog_Cstatus_Error)
+            //{
+            //    operflag = "3";
+            //}
+            //else if (operflag == Constant.SynerginsLog_Cstatus_NoDeal)
+            //{
+            //    operflag = "0";
+            //}
+            //else if (operflag == Constant.SynerginsLog_Cstatus_Scrap)
+            //{
+            //    operflag = "4";
+            //}
+            //else
+            //{
+            //    operflag = "2";
+            //}
              
  
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("update " + headtable + " set ");
-            if (!string.IsNullOrEmpty(dt.Cvoucherno))
-            {
-                strSql.Append(" cDlCode = '" + dt.Cvoucherno + "',  ");
+            //StringBuilder strSql = new StringBuilder();
+            //strSql.Append("update " + headtable + " set ");
+            //if (!string.IsNullOrEmpty(dt.Cvoucherno))
+            //{
+            //    strSql.Append(" cDlCode = '" + dt.Cvoucherno + "',  ");
 
-            } 
-            if (finishTime == null)
-            {
-                strSql.Append(" finishTime = null,  ");
-            }
-            else
-            {
-                strSql.Append(" finishTime = '" + finishTime + "',  ");
-            }
-            strSql.Append(" operflag = " + operflag + "  ");
-            strSql.Append(" where id= " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
+            //} 
+            //if (finishTime == null)
+            //{
+            //    strSql.Append(" finishTime = null,  ");
+            //}
+            //else
+            //{
+            //    strSql.Append(" finishTime = '" + finishTime + "',  ");
+            //}
+            //strSql.Append(" operflag = " + operflag + "  ");
+            //strSql.Append(" where id= " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
 
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            //int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
 
-            return rows;
+            //return rows;
 
 
         }
@@ -421,43 +425,46 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         public override int Update(Model.Synergismlogdt dt)
         {
 
-            string operflag = dt.Cstatus;
-            if (operflag == Constant.SynergisnLogDT_Cstatus_Complete)
-            {
-                operflag = "1";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_Error)
-            {
-                operflag = "3";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_NoDeal)
-            {
-                operflag = "0";
-            }
-            else if (operflag == Constant.SynergisnLogDT_Cstatus_Delete)
-            {
-                operflag = "1";
-            }
-            else
-            {
-                operflag = "2";
-            }
+
+            return CQ.Utility.UpdateDetailLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, "cerrordesc");
+
+            //string operflag = dt.Cstatus;
+            //if (operflag == Constant.SynergisnLogDT_Cstatus_Complete)
+            //{
+            //    operflag = "1";
+            //}
+            //else if (operflag == Constant.SynergisnLogDT_Cstatus_Error)
+            //{
+            //    operflag = "3";
+            //}
+            //else if (operflag == Constant.SynergisnLogDT_Cstatus_NoDeal)
+            //{
+            //    operflag = "0";
+            //}
+            //else if (operflag == Constant.SynergisnLogDT_Cstatus_Delete)
+            //{
+            //    operflag = "1";
+            //}
+            //else
+            //{
+            //    operflag = "2";
+            //}
  
-            StringBuilder strSql = new StringBuilder(); 
+            //StringBuilder strSql = new StringBuilder(); 
 
-            strSql.Append("update " + headtable + " set ");
-            if (!string.IsNullOrEmpty(dt.Cvoucherno))
-            {
-                strSql.Append(" cDlCode = '" + dt.Cvoucherno + "',  ");
+            //strSql.Append("update " + headtable + " set ");
+            //if (!string.IsNullOrEmpty(dt.Cvoucherno))
+            //{
+            //    strSql.Append(" cDlCode = '" + dt.Cvoucherno + "',  ");
 
-            }  
-            strSql.Append(" operflag = " + operflag + ",  ");
-            strSql.Append(" cerrordesc = '" + dt.Cerrordesc + "'  ");
-            strSql.Append(" where id=" + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
+            //}  
+            //strSql.Append(" operflag = " + operflag + ",  ");
+            //strSql.Append(" cerrordesc = '" + dt.Cerrordesc + "'  ");
+            //strSql.Append(" where id=" + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id,"string") + " ");
 
-            int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
+            //int rows = DbHelperSQL.ExecuteSql(strSql.ToString());
 
-            return rows;
+            //return rows;
         }
 
 

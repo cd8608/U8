@@ -213,8 +213,7 @@ namespace U8.Interface.Bus.ApiService.Setting
                         if (U8.Interface.Bus.SysInfo.multiThread)
                         {
                             threadTask = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(oper.Run));
-                            threadTask.Start(task);
- 
+                            threadTask.Start(log);    
                         }
                         else
                         {
@@ -336,7 +335,11 @@ namespace U8.Interface.Bus.ApiService.Setting
             {
                 if (dgvList.SelectedRows[0].Index == curRow) return;
                 curRow = dgvList.SelectedRows[0].Index;
-                curLog = (Model.TaskLogFactory.CQ.ShowLog)lstLog.Find(delegate(Model.ShowLog model) { return model.Id ==  dgvList.SelectedRows[0].Cells["colHID"].Value.ToString().ToString(); });
+                curLog = (Model.TaskLogFactory.CQ.ShowLog)lstLog.Find(delegate(Model.ShowLog model) { 
+                    return ( 
+                        model.Id ==  dgvList.SelectedRows[0].Cells["colHID"].Value.ToString().ToString()
+                        && model.Cvouchertype == dgvList.SelectedRows[0].Cells["colHOrderType"].Value.ToString()
+                        ); });
                 //ShowLogDT();
                 //GetLogDTTree();
             }
@@ -715,7 +718,14 @@ namespace U8.Interface.Bus.ApiService.Setting
             dicLogDt.Add("Order", "asc");
             dicLogDt.Add("Name", "colBRow");
 
-            dgvList.DataSource = lstLog;
+            List<Model.TaskLogFactory.CQ.ShowLog> tmplist = new List<U8.Interface.Bus.ApiService.Model.TaskLogFactory.CQ.ShowLog>();
+            for (int i = 0; i < lstLog.Count;i++)
+            {
+                Model.TaskLogFactory.CQ.ShowLog tmplog = new U8.Interface.Bus.ApiService.Model.TaskLogFactory.CQ.ShowLog();
+                tmplog = (Model.TaskLogFactory.CQ.ShowLog)lstLog[i];
+                tmplist.Add(tmplog);
+            }
+            dgvList.DataSource = tmplist;
             dgvDetail.DataSource = lstLogDt;
 
             if (VerifyU8Button())
@@ -853,7 +863,16 @@ namespace U8.Interface.Bus.ApiService.Setting
                 lstLog = logbll.GetModelList(dicLog["Top"], strWhere, dicLog["Field"], dicLog["Order"]);
                 if (lstLog == null) lstLog = new List<Model.ShowLog>();
                 SetLogOpname();
-                dgvList.DataSource = lstLog;
+
+                List<Model.TaskLogFactory.CQ.ShowLog> tmplist = new List<U8.Interface.Bus.ApiService.Model.TaskLogFactory.CQ.ShowLog>();
+                for (int i = 0; i < lstLog.Count; i++)
+                {
+                    Model.TaskLogFactory.CQ.ShowLog tmplog = new U8.Interface.Bus.ApiService.Model.TaskLogFactory.CQ.ShowLog();
+                    tmplog = (Model.TaskLogFactory.CQ.ShowLog)lstLog[i];
+                    tmplist.Add(tmplog);
+                }
+
+                dgvList.DataSource = tmplist;
                 if (lstLog.Count <= 0)
                 {
                     curRow = 0;
@@ -968,12 +987,17 @@ namespace U8.Interface.Bus.ApiService.Setting
                 {
                     log.Opname = "还原";
                 }
+                else if (log.Cstatus == "错误")
+                {
+                    log.Opname = "重发";
+                }
                 else if (log.Cstatus != "完成")
                 {
                     log.Opname = "作废";
                 }
             }
         }
+
 
         /// <summary>
         /// 刷新当前主表行操作
@@ -990,14 +1014,14 @@ namespace U8.Interface.Bus.ApiService.Setting
                 if (lst[0].Cstatus == "已作废")
                 {
                     lst[0].Opname = "还原";
+                } 
+                else if (lst[0].Cstatus == "错误")
+                {
+                    lst[0].Opname = "重发";
                 }
                 else if (lst[0].Cstatus != "完成")
                 {
                     lst[0].Opname = "作废";
-                }
-                else if (lst[0].Cstatus != "错误")
-                {
-                    lst[0].Opname = "重发";
                 }
                 curLog = (Model.TaskLogFactory.CQ.ShowLog)lst[0];
                 if (curLog == null)

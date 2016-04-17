@@ -679,7 +679,7 @@
             // 
             // colHErrMsg
             // 
-            this.colHErrMsg.DataPropertyName = "cerrordesc";
+            this.colHErrMsg.DataPropertyName = "CErrordesc";
             this.colHErrMsg.HeaderText = "错误信息";
             this.colHErrMsg.Name = "colHErrMsg";
             this.colHErrMsg.ReadOnly = true;

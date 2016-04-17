@@ -64,6 +64,9 @@ namespace U8.Interface.Bus.ApiService.DAL
         public const string Fixvalue_Cardsection_Title = "T";
         ///表体
         public const string Fixvalue_Cardsection_Body = "B";
+        ///表体 子表
+        public const string Fixvalue_Cardsection_Child = "C";
+
         ///公共变量
         public const string Fixvalue_Cardsection_V = "V";
         ///单据类型

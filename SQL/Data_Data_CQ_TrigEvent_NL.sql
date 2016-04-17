@@ -32,14 +32,14 @@ GO
 		 INSERT INTO MES_CQ_mps_netdemand
 		(ID,opertype,PlanCode,DemandId,cInvCode,
 		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
-		DmandDate
+		DmandDate,DID
 	    )
 		SELECT 
 		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
-		planqty as iquantity,cSoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
-		FirmDate as DmandDate 
+		planqty as iquantity,t.SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
+		FirmDate as DmandDate ,NEWID()
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
-		LEFT JOIN SO_SOMAIN S on s.ID = t.SrpSoDId
+		Where t.SupplyType=3
 
 		IF @@TRANCOUNT>=2 COMMIT
 		
@@ -131,10 +131,10 @@ GO
 	    )
 		SELECT 
 		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
-		planqty as iquantity,cSoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
+		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
 		FirmDate as DmandDate 
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
-		LEFT JOIN SO_SOMAIN S on s.ID = t.SrpSoDId
+		Where t.SupplyType=3
 
 		IF @@TRANCOUNT>=2 COMMIT
 		
@@ -167,17 +167,19 @@ CREATE TRIGGER [T_MES_CQ_sfc_workcenter_INSERT]
 		@filename NVARCHAR(500),		--档案名称 
 		@deal INT,						--处理模式 - 1:新增;2:修改;3:删除
 		@error NVARCHAR(2000),			--错误信息
-		@status BIT			
+		@status BIT		,	
+		@itype nvarchar(20)
+		set @itype = 'SC'	
 		
 		SET @filename = '工作中心'
 		SET @deal = 1 
 		 
-		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select inserted.WcCode from inserted ) and itype = '生产中心'
+		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select inserted.WcCode from inserted ) and itype = @itype
 		 
 		INSERT INTO MES_CQ_workcenter
 		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0,0, WcCode,[description],'生产中心' as iType
+		NEWID(),0,0, WcCode,[description],@itype as iType
 		FROM inserted t  
 
 		IF @@TRANCOUNT>=2 COMMIT
@@ -214,15 +216,17 @@ GO
 		@filename NVARCHAR(500),		--档案名称 
 		@deal INT,						--处理模式 - 1:新增;2:修改;3:删除
 		@error NVARCHAR(2000),			--错误信息
-		@status BIT							
+		@status BIT			,
+		@itype nvarchar(20)
+		set @itype = 'SC'				
 		
 		SET @filename = '工作中心'
 		SET @deal = 3	 
-		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.WcCode from deleted )  and itype = '生产中心'
+		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.WcCode from deleted )  and itype = @itype
 		INSERT INTO MES_CQ_workcenter
 		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0,2, WcCode,[description],'生产中心' as iType
+		NEWID(),0,2, WcCode,[description],@itype as iType
 		FROM deleted t  
 		
 		IF @@TRANCOUNT>=2 COMMIT
@@ -253,16 +257,18 @@ BEGIN
 		@filename NVARCHAR(500),		--档案名称 
 		@deal INT,						--处理模式 - 1:新增;2:修改;3:删除
 		@error NVARCHAR(2000),			--错误信息
-		@status BIT							
-		
+		@status BIT		,					
+		@itype nvarchar(20)
+		set @itype = 'SC'
 		SET @filename = '工作中心'
-		SET @deal = 2	 
-		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.WcCode from deleted )  and itype = '生产中心' 
+		SET @deal = 2
+			 
+		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.WcCode from deleted )  and itype = @itype
 		
 		INSERT INTO MES_CQ_workcenter
 		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0,1, WcCode,[description],'生产中心' as iType
+		NEWID(),0,1, WcCode,[description],@itype as iType
 		FROM inserted t  
 
 		IF @@TRANCOUNT>=2 COMMIT
@@ -300,7 +306,9 @@ CREATE TRIGGER [T_MES_CQ_WareHouse_INSERT]
 		@filename NVARCHAR(500),		--档案名称 
 		@deal INT,						--处理模式 - 1:新增;2:修改;3:删除
 		@error NVARCHAR(2000),			--错误信息
-		@status BIT			
+		@status BIT	,	
+		@itype nvarchar(20)
+		set @itype = 'CC'			
 		
 		SET @filename = '仓库'
 		SET @deal = 1 
@@ -348,16 +356,19 @@ GO
 		@filename NVARCHAR(500),		--档案名称 
 		@deal INT,						--处理模式 - 1:新增;2:修改;3:删除
 		@error NVARCHAR(2000),			--错误信息
-		@status BIT							
+		@status BIT		,	
+		@itype nvarchar(20)
+		set @itype = 'CC'			
+							
 		
 		SET @filename = '仓库'
 		SET @deal = 3	 
 		set nocount on 
-		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = '仓库'
+		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = @itype
 		INSERT INTO MES_CQ_workcenter
 		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0,2, cWhCode,cWhName,'仓库' as iType
+		NEWID(),0,2, cWhCode,cWhName,@itype as iType
 		FROM deleted t
 		--IF @@TRANCOUNT>=2 COMMIT
 		set nocount off
@@ -387,16 +398,18 @@ BEGIN
 		@filename NVARCHAR(500),		--档案名称 
 		@deal INT,						--处理模式 - 1:新增;2:修改;3:删除
 		@error NVARCHAR(2000),			--错误信息
-		@status BIT							
+		@status BIT	,	
+		@itype nvarchar(20)
 		
+		set @itype = 'CC'	 
 		SET @filename = '仓库'
 		SET @deal = 2	
 		set nocount on  
-		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = '仓库'  
+		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = @itype 
 		INSERT INTO MES_CQ_workcenter
 		 (ID,operflag,opertype, WcCode,Description,iType   )
 		SELECT 
-		NEWID(),0,1, cWhCode,cWhName,'仓库' as iType
+		NEWID(),0,1, cWhCode,cWhName,@itype as iType
 		FROM inserted t  
 		set nocount off
 		--IF @@TRANCOUNT>=2 COMMIT

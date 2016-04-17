@@ -16,6 +16,7 @@ namespace U8.Interface.Bus.ApiService.Voucher
 {
     /// <summary>
     /// 采购到货单(HY_DZ_K7_DLLReflect预置的op类)
+    /// envContext.SetApiContext("sBillType", new string()); //上下文数据类型：string，含义：到货单类型， 到货单 0 退货单 1
     /// </summary>
     public class PU_ArrivalVouch : PurchaseOp
     {

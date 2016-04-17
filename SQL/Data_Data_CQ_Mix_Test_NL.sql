@@ -56,7 +56,7 @@ GO
  
 
 
-----发货单
+----销售发货单
  
 --测试数据  新增
 DECLARE @ID AS INT
@@ -114,7 +114,7 @@ update MES_CQ_DispatchLists  set opertype=0
 
 
 
-----退货单
+----销售退货单
  
 --测试数据  新增 
 DECLARE @ID AS NVARCHAR(36)   
@@ -175,6 +175,28 @@ VALUES (@ID,0,'0000000001','1000000002','CP001',10)
  
 GO
  
+ 
+ 
+
+----采购退货单   采购入库单(红字)
+--测试数据  新增   
+DECLARE @ID AS nvarchar(36) 
+DECLARE @DID AS nvarchar(36)
+set @ID = NEWID()
+INSERT INTO MES_CQ_rdrecord01Ret (id,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
+VALUES (@ID,0,0,'00000001','put005','1','501','XYCG09120001','ZZM')
+
+SELECT @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords01Ret (id,did,opertype,cPoCode,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,@DID,0,null,'00000001','1000000005','CL001',-10)
+SELECT @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords01Ret (id,did,opertype,cPoCode,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,@DID,0,null,'00000001','1000000006','CL002',-10)
+ 
+GO
+ 
+ 
+ 
 --测试数据  删除 
 DECLARE @ID AS INT
 INSERT INTO MES_CQ_rdrecord01 (operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
@@ -187,6 +209,39 @@ INSERT INTO MES_CQ_rdrecords01 (id,opertype,dhcode,dhid,cInvCode,iquantity)
 VALUES (@ID,0,'0000000001','1000000002','CP001',10)
 
 GO
+
+
+
+----采购入库单(红字)   / 采购退货单
+--测试数据  新增  
+
+DECLARE @ID AS nvarchar(36) 
+DECLARE @DID AS nvarchar(36)
+SET @ID = NEWID()
+INSERT INTO MES_CQ_rdrecord01Ret (id,operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
+VALUES (@ID,0,0,'000001','put005','1','501','XYCG09120001','ZZM')
+ 
+SET @DID = NEWID()
+INSERT INTO MES_CQ_rdrecords01Ret (id,did,opertype,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,@DID,0,'0000000001','1000000001','CP001',100)
+INSERT INTO MES_CQ_rdrecords01Ret (id,did,opertype,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,@DID,0,'0000000001','1000000002','CP001',10)
+ 
+GO
+ 
+--测试数据  删除 
+DECLARE @ID AS INT
+INSERT INTO MES_CQ_rdrecord01 (operflag,opertype,crdcode,cWhCode,cRdStyleCode,cDepCode,cVenCode,cPersonCode)
+VALUES (0,2,'0000000004','put005','1','501','XYCG09120001','ZZM')
+
+SELECT @ID = @@IDENTITY
+INSERT INTO MES_CQ_rdrecords01 (id,opertype,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,0,'0000000001','1000000001','CP001',100)
+INSERT INTO MES_CQ_rdrecords01 (id,opertype,dhcode,dhid,cInvCode,iquantity)
+VALUES (@ID,0,'0000000001','1000000002','CP001',10)
+
+GO
+
 
 
 ----其它入库单

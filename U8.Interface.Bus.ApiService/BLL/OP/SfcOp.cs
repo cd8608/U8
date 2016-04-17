@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Runtime.InteropServices;
 using UFIDA.U8.MomServiceCommon;
 using UFIDA.U8.U8MOMAPIFramework;
@@ -27,11 +28,83 @@ namespace U8.Interface.Bus.ApiService.BLL
         }
 
 
+
+        /// <summary>
+        /// 子表
+        /// </summary>
         public virtual string SubEntityName
         {
             get;
             set;
         }
+
+        /// <summary>
+        /// 子表下的子表
+        /// </summary>
+        public virtual string SubChildEntityName
+        {
+            get;
+            set;
+        }
+
+
+
+        /// <summary>
+        /// 组织数据
+        /// </summary>
+        /// <param name="dt">当前任务节点信息</param>
+        /// <param name="bd">HY_DZ_K7_DLLReflect 中预置的 data类</param>
+        /// <returns></returns>
+        public override Model.DealResult MakeData(Model.Synergismlogdt dt, BaseData bd)
+        {
+            Model.DealResult dr = new Model.DealResult();
+            Model.APIData apidata = bd as Model.APIData;         //API实体,包括当前任务节点信息
+            DAL.TaskLogFactory.ITaskLogDetail dtdal;
+
+            //当前任务节点信息
+            switch (apidata.TaskType)
+            {
+                case 0:
+                    dtdal = new DAL.TaskLogFactory.CQ.TaskDetail();
+                    break;
+                case 1:
+                    dtdal = new DAL.SynergismLogDt();
+                    break;
+                case 2:
+                    dtdal = new DAL.TaskLogFactory.DS.TaskDetail();
+                    break;
+                default:
+                    BLL.Common.ErrorMsg(SysInfo.productName, "tasktype" + apidata.TaskType + "未适配!");
+                    dr.Message = "tasktype" + apidata.TaskType + "未适配!";
+                    return dr;
+
+            }
+
+            Model.Synergismlogdt pdt = dtdal.GetPrevious(dt);      //上一任务节点信息
+
+            apidata.ConnectInfo = dtdal.GetConnectInfo(dt);   //获取当前结点的数据串连接串
+            apidata.Synergismlogdt = dt;
+
+            if (!apidata.Dodelete)
+            {
+                DataSet rdds = SetFromTabet(dt, pdt, apidata);    //上一节点 单据头信息
+                DataSet rdsds = SetFromTabets(dt, pdt, apidata);  //上一节点 单据体信息
+
+                DAL.IFieldcmps fieldcmpdal = ClassFactory.GetIFieldcmpsDAL(apidata.TaskType); //new DAL.Fieldcmps();
+                List<Model.Fieldcmps> listfd = fieldcmpdal.GetListFieldcmps(dt, pdt);   //字段对照信息
+                BLL.U8NameValue u8namevaluebll = new BLL.U8NameValue();  //字段赋值
+                u8namevaluebll.SetHeadData(apidata, rdds, rdsds, listfd, dt);
+                u8namevaluebll.SetSfcBodyData(apidata, rdds, rdsds, listfd, dt);
+
+                //设置订单关联    
+                DAL.Common.SetInBody(apidata);
+                SetNormalValue(apidata, dt);
+            }
+            return dr;
+        }
+
+
+        public abstract DataSet SetFromTabetsChild(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata); 
 
 
         /// <summary>
@@ -46,11 +119,8 @@ namespace U8.Interface.Bus.ApiService.BLL
             ExtensionBusinessEntity extbo = broker.GetExtBoEntity("extbo");
             //extbo.ItemCount = apidata.HeadData.Count; 
             foreach (Model.U8NameValue unv in apidata.HeadData)
-            {
-                //ExtensionItem newItem = extbo.NewItem();
-                //newItem[unv.U8FieldName.ToLower()] = unv.U8FieldValue; 
-                extbo[0][unv.U8FieldName] = unv.U8FieldValue; 
-                //extbo[0][unv.U8FieldName.ToLower()]=unv.U8FieldValue; 
+            { 
+                extbo[0][unv.U8FieldName] = unv.U8FieldValue;  
             }
             return dr;
         }
@@ -65,6 +135,8 @@ namespace U8.Interface.Bus.ApiService.BLL
         public Model.DealResult SetDomBody(Model.APIData apidata, U8ApiBroker broker)
         {
             Model.DealResult dr = new Model.DealResult();
+
+            #region //第二层
             if (apidata.BodyData.Count == 0)
             {
                 return dr;
@@ -73,52 +145,124 @@ namespace U8.Interface.Bus.ApiService.BLL
             {
                 return dr;
             }
-            ExtensionBusinessEntity WorkhrNoteOpSum = broker.GetExtBoEntity("extbo")[0].SubEntity[SubEntityName];
 
-            WorkhrNoteOpSum.ItemCount = apidata.BodyData.Count;
-            int i = 0; 
-            foreach (List<Model.U8NameValue> lunv in apidata.BodyData)
+            ExtensionBusinessEntity SubEntity = broker.GetExtBoEntity("extbo")[0].SubEntity[SubEntityName];
+
+            SubEntity.ItemCount = apidata.BodyData.Count;
+            int i = 0;
+            foreach (BodyRow bodyRow in apidata.SfcBodyData)
             {
-                foreach (Model.U8NameValue unv in lunv)
+                // SetUNV(lunv, WorkhrNoteOpSum, apidata, apidata.Synergismlogdt.Cvouchertype);
+                SetUNV(bodyRow.BodyCols, SubEntity, apidata, "FC32");
+
+                #region 待删除
+                //foreach (Model.U8NameValue unv in lunv)
+                //{
+                //    //string fieldName = unv.U8FieldName.ToLower();
+                //    string fieldName = unv.U8FieldName.ToLower();
+
+                //    if (unv.U8FieldName.ToLower() == "bgsp")
+                //    {
+                //        if (unv.U8FieldValue.ToString() == "是")
+                //        {
+                //            WorkhrNoteOpSum[i][unv.U8FieldName] = "1";
+                //        }
+                //        else if (unv.U8FieldValue.ToString() == "否")
+                //        {
+                //            WorkhrNoteOpSum[i][unv.U8FieldName] = "0";
+                //        }
+                //        else
+                //        {
+                //            WorkhrNoteOpSum[i][unv.U8FieldName] = unv.U8FieldValue;
+                //        }
+                //    }
+
+                //    else
+                //    {
+                //        int iFieldType = DAL.Common.GetFieldType(apidata.ConnectInfo.Constring, unv.U8FieldName, "FC32");
+                //        if (iFieldType == 5 && !string.IsNullOrEmpty(unv.U8FieldValue))
+                //        {
+                //            WorkhrNoteOpSum[i][unv.U8FieldName] = Convert.ToDateTime(unv.U8FieldValue).ToString("yyyy-MM-dd");
+                //        }
+                //        else
+                //        {
+                //            WorkhrNoteOpSum[i][unv.U8FieldName] = unv.U8FieldValue;
+                //        }
+                //    }
+                //}
+                #endregion
+
+            #endregion
+
+                #region  第三层
+                if (bodyRow.ChildData.Count == 0)
                 {
-                    //string fieldName = unv.U8FieldName.ToLower();
-                    string fieldName = unv.U8FieldName.ToLower();
-
-                    if (unv.U8FieldName.ToLower() == "bgsp")
-                    {
-                        if (unv.U8FieldValue.ToString() == "是")
-                        {
-                            WorkhrNoteOpSum[i][unv.U8FieldName] = "1";
-                        }
-                        else if (unv.U8FieldValue.ToString() == "否")
-                        {
-                            WorkhrNoteOpSum[i][unv.U8FieldName] = "0";
-                        }
-                        else
-                        {
-                            WorkhrNoteOpSum[i][unv.U8FieldName] = unv.U8FieldValue;
-                        }
-                    }
-
-                    else
-                    {
-                        int iFieldType = DAL.Common.GetFieldType(apidata.ConnectInfo.Constring, unv.U8FieldName, "FC32");
-                        if (iFieldType == 5 && !string.IsNullOrEmpty(unv.U8FieldValue))
-                        {
-                            WorkhrNoteOpSum[i][unv.U8FieldName] = Convert.ToDateTime(unv.U8FieldValue).ToString("yyyy-MM-dd");
-                        }
-                        else
-                        {
-                            WorkhrNoteOpSum[i][unv.U8FieldName] = unv.U8FieldValue;
-                        }
-                    }
+                    return dr;
                 }
+                if (string.IsNullOrEmpty(SubChildEntityName))
+                {
+                    return dr;
+                }
+
+                ExtensionBusinessEntity SubChildEntity = SubEntity[i].SubEntity[SubChildEntityName];
+                foreach (List<Model.U8NameValue> lunvc in bodyRow.ChildData)
+                {
+                    SetUNV(lunvc, SubChildEntity, apidata, apidata.Synergismlogdt.Cvouchertype);
+                } 
+                #endregion
+
+
                 i++;
             }
 
             return dr;
         }
 
+
+        /// <summary>
+        /// 字段赋值
+        /// 一行数据
+        /// </summary>
+        /// <param name="lunv"></param>
+        /// <param name="subEntity"></param>
+        /// <param name="apidata"></param>
+        /// <param name="vouchtype"></param>
+        public virtual void SetUNV(List<Model.U8NameValue> lunv, ExtensionBusinessEntity subEntity, Model.APIData apidata, string vouchtype)
+        {
+            int i = 0;
+            foreach (Model.U8NameValue unv in lunv)
+            {
+                string fieldName = unv.U8FieldName.ToLower();
+
+                if (unv.U8FieldName.ToLower() == "bgsp")
+                {
+                    if (unv.U8FieldValue.ToString() == "是")
+                    {
+                        subEntity[i][unv.U8FieldName] = "1";
+                    }
+                    else if (unv.U8FieldValue.ToString() == "否")
+                    {
+                        subEntity[i][unv.U8FieldName] = "0";
+                    }
+                    else
+                    {
+                        subEntity[i][unv.U8FieldName] = unv.U8FieldValue;
+                    }
+                } 
+                else
+                {
+                    int iFieldType = DAL.Common.GetFieldType(apidata.ConnectInfo.Constring, unv.U8FieldName, vouchtype);
+                    if (iFieldType == 5 && !string.IsNullOrEmpty(unv.U8FieldValue))
+                    {
+                        subEntity[i][unv.U8FieldName] = Convert.ToDateTime(unv.U8FieldValue).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        subEntity[i][unv.U8FieldName] = unv.U8FieldValue;
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// 
@@ -187,6 +331,10 @@ namespace U8.Interface.Bus.ApiService.BLL
                     break;
                 case "workhrnote":
                     retId = Convert.ToString(extboRet[0].GetValue("WorkHrId"));
+                    break;
+                case "mom":
+                    retId = Convert.ToString(extboRet[0].GetValue("Mom_OrderId"));
+                    //
                     break;
                 default:
                     break;

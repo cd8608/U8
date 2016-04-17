@@ -38,10 +38,14 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS
         /// 中间表
         /// </summary>
         private string voucherNoColumnName = "workdoccode";
-        private string cardNo = "FC32";
         private string headtable = "MES_Int_optransform";
         private string bodytable = "MES_Int_optransform";
         private string voucherTypeName = "工时记录单";
+
+        /// <summary>
+        /// 目标
+        /// </summary>
+        private string cardNo = "FC32";
 
         #region 中间表通用字段
 
@@ -407,6 +411,21 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS
             DataSet ds = help.Query(sql);
             BLL.Common.ErrorMsg(ds, "未能获取 表体信息");
             return ds;
+        }
+
+
+
+
+        /// <summary>
+        /// 获取来源表体数据
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="pdt"></param>
+        /// <param name="apidata"></param>
+        /// <returns></returns>
+        public override System.Data.DataSet SetFromTabetsChild(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
+        {
+            return null;
         }
 
         #endregion

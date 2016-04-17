@@ -123,6 +123,34 @@ namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
             strSql.Append("createTime,finishTime,case opertype when   0 then '增加' WHEN 1 THEN '修改' else '删除' end   as opertype,");
             strSql.Append(" cCVCode as cvoucherno,");
             strSql.Append("cerrordesc,'' AS cRemark FROM MES_CQ_CheckVouch WITH(NOLOCK) ");
+            strSql.Append(" UNION ALL ");
+            strSql.Append(" SELECT ");
+            strSql.Append(" '' as cserialno,'' as croutetype,'' as caccid,'采购退货单' as cvouchertype,'26' as cvouchertypecode,");
+            strSql.Append(" createTime as starttime,finishTime as endtime,'' as Cacc_Id,");
+            strSql.Append(" '' as Cacc_Name , '' as Caddress, ");
+            strSql.Append("   id,CASE  operflag WHEN 0 THEN '未处理' WHEN 1 THEN '完成' WHEN 2 THEN '处理中' WHEN 3 THEN '错误' ELSE '已作废' END AS cstatus,");
+            strSql.Append("createTime,finishTime,case opertype when   0 then '增加' WHEN 1 THEN '修改' else '删除' end   as opertype,");
+            strSql.Append(" cCode as cvoucherno,");
+            strSql.Append("cerrordesc,'' AS cRemark FROM MES_CQ_rdrecord01Ret WITH(NOLOCK) ");
+            strSql.Append(" UNION ALL ");
+            strSql.Append(" SELECT ");
+            strSql.Append(" '' as cserialno,'' as croutetype,'' as caccid,'采购入库单(红字)' as cvouchertype,'24_Ret' as cvouchertypecode,");
+            strSql.Append(" createTime as starttime,finishTime as endtime,'' as Cacc_Id,");
+            strSql.Append(" '' as Cacc_Name , '' as Caddress, ");
+            strSql.Append("   id,CASE  operflag_rd WHEN 0 THEN '未处理' WHEN 1 THEN '完成' WHEN 2 THEN '处理中' WHEN 3 THEN '错误' ELSE '已作废' END AS cstatus,");
+            strSql.Append("createTime,finishTime,case opertype_rd when   0 then '增加' WHEN 1 THEN '修改' else '删除' end   as opertype,");
+            strSql.Append(" cPuRdCode as cvoucherno,");
+            strSql.Append("cerrordesc_rd as cerrordesc,'' AS cRemark FROM MES_CQ_rdrecord01Ret WITH(NOLOCK) ");
+            strSql.Append(" UNION ALL ");
+            strSql.Append(" SELECT ");
+            strSql.Append(" '' as cserialno,'' as croutetype,'' as caccid,'生产订单' as cvouchertype,'MO21' as cvouchertypecode,");
+            strSql.Append(" createTime as starttime,finishTime as endtime,'' as Cacc_Id,");
+            strSql.Append(" '' as Cacc_Name , '' as Caddress, ");
+            strSql.Append("   id,CASE  operflag WHEN 0 THEN '未处理' WHEN 1 THEN '完成' WHEN 2 THEN '处理中' WHEN 3 THEN '错误' ELSE '已作废' END AS cstatus,");
+            strSql.Append("createTime,finishTime,case opertype when   0 then '增加' WHEN 1 THEN '修改' else '删除' end   as opertype,");
+            strSql.Append(" MOCODE as cvoucherno,");
+            strSql.Append("cerrordesc as cerrordesc,'' AS cRemark FROM MES_CQ_mom_order WITH(NOLOCK) ");
+
 
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {

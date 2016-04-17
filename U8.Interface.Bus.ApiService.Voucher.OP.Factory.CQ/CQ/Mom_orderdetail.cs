@@ -18,9 +18,9 @@ using U8.Interface.Bus.DBUtility;
 namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 {
     /// <summary>
-    /// 生产订单(HY_DZ_K7_DLLReflect预置的op类)
+    /// 生产订单子件用料表(HY_DZ_K7_DLLReflect预置的op类)
     /// </summary>
-    public class Mom_order : SfcOp
+    public class Mom_orderdetail : SfcOp
     { 
         private int tasktype = 0;
 
@@ -50,8 +50,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         private string voucherTypeName = "生产订单";
    
 
+
         /// <summary>
-        /// 子表
+        /// 
         /// </summary>
         public override string SubEntityName
         {
@@ -62,22 +63,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             set { }
         }
 
-
-        /// <summary>
-        /// 子表下的子表
-        /// 子件用料表
-        /// </summary>
-        public virtual string SubChildEntityName
-        {
-            get
-            {
-                return "Mom_MoAllocate";
-            }
-            set { }
-        }
-
-
-
+ 
 
         public override string SetTableName()
         {
@@ -272,27 +258,6 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <returns></returns>
         public override System.Data.DataSet SetFromTabets(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
         {
-            ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
-            Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
-
-            string sql = "select st.*,";
-            sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode,lt.cInvCode as MES_cInvCode, ";
-            sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
-            sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,  ";
-            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate, ";
-            sql += " '生产订单' as cSource ";
-            sql += " from  " + headtable + " lt with(nolock) ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
-            sql += " where lt.id ='" + pdt.Id + "' ";
-
-            DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
-            DataSet ds = help.Query(sql);
-            BLL.Common.ErrorMsg(ds, "未能获取生产计划表体信息");
-            return ds;
-        }
-
-        public override System.Data.DataSet SetFromTabetsChild(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
-        {
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);  //new ApiService.DAL.SynergismLogDt();
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
@@ -300,7 +265,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode, ";
             sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
             sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,  ";
-            sql += " lb.BomID as MES_BomID ,lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity,  ";
+            sql += " lb.BomID as MES_BomID ,lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity,  "; 
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate , ";
             sql += " '生产订单' as cSource ";
             sql += " from  " + headtable + " lt with(nolock) ";
@@ -310,11 +275,25 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
-            BLL.Common.ErrorMsg(ds, "未能获取生产计划表体子件信息");
+            BLL.Common.ErrorMsg(ds, "未能获取生产计划表体信息");
             return ds;
         }
 
-  
+
+
+        /// <summary>
+        /// 获取来源表体数据
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="pdt"></param>
+        /// <param name="apidata"></param>
+        /// <returns></returns>
+        public override System.Data.DataSet SetFromTabetsChild(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
+        {
+            throw new NotImplementedException("未实现");
+        }
+         
+
         #endregion
 
 

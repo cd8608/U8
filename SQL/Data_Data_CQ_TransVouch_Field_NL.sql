@@ -40,17 +40,16 @@ BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0','1','转入仓库编码','T','0000000007',null,null,0,'表头|转入仓库编码,T|mes_cIWhCode','cIWhCode',null,'1000000007',1,1)
 	END
-	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cODepCode') 
-	--BEGIN
-	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	--('0','1','转出部门编码','T','0000000007',null,null,0,'表头|转出部门编码,T|cODepCode','cODepCode',null,'1000000007',1,1)
-	--END
-	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cIDepCode') 
-	--BEGIN
-	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	--('0','1','转入部门编码','T','0000000007',null,null,0,'表头|转入部门编码,T|cIDepCode','cIDepCode',null,'1000000007',1,1)
-	--END
-
+	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cODepCode') 
+	BEGIN
+	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	('0','1','转出部门编码','T','0000000007',null,null,0,'表头|转出部门编码,T|cODepCode','cODepCode',null,'1000000007',1,1)
+	END
+	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cIDepCode') 
+	BEGIN
+	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	('0','1','转入部门编码','T','0000000007',null,null,0,'表头|转入部门编码,T|cIDepCode','cIDepCode',null,'1000000007',1,1)
+	END 
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000007' AND cardsection = 'T' AND fieldname='cIRdCode') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 

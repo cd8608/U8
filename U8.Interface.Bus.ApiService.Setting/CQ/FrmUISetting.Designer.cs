@@ -56,6 +56,7 @@
             this.tsmiMRepeal = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMDefault = new System.Windows.Forms.ToolStripMenuItem();
             this.tlpList = new System.Windows.Forms.TableLayoutPanel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.cbH13 = new System.Windows.Forms.CheckBox();
             this.cbH12 = new System.Windows.Forms.CheckBox();
             this.cbH11 = new System.Windows.Forms.CheckBox();
@@ -98,7 +99,6 @@
             this.cbB02 = new System.Windows.Forms.CheckBox();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.gbUI.SuspendLayout();
             this.cmsUICheck.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -445,6 +445,21 @@
             this.tlpList.TabIndex = 0;
             this.tlpList.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpList_Paint);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkBox1.Location = new System.Drawing.Point(5, 53);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(127, 17);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Tag = "8192";
+            this.checkBox1.Text = "协同状态";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // cbH13
             // 
             this.cbH13.AutoSize = true;
@@ -455,10 +470,11 @@
             this.cbH13.Name = "cbH13";
             this.cbH13.Size = new System.Drawing.Size(127, 17);
             this.cbH13.TabIndex = 12;
-            this.cbH13.Tag = "8192";
+            this.cbH13.Tag = "16384";
             this.cbH13.Text = "错误描述";
             this.cbH13.UseVisualStyleBackColor = true;
             this.cbH13.CheckStateChanged += new System.EventHandler(this.cbH_CheckedChanged);
+            this.cbH13.CheckedChanged += new System.EventHandler(this.cbH13_CheckedChanged);
             // 
             // cbH12
             // 
@@ -1042,20 +1058,6 @@
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkBox1.Location = new System.Drawing.Point(5, 53);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(127, 17);
-            this.checkBox1.TabIndex = 13;
-            this.checkBox1.Tag = "8192";
-            this.checkBox1.Text = "协同状态";
-            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // FrmUISetting
             // 

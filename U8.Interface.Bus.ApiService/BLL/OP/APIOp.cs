@@ -40,10 +40,11 @@ namespace U8.Interface.Bus.ApiService.BLL
         //获取上一节点单据 表头 数据
         public abstract DataSet SetFromTabet(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata);
         //获取上一节点单据 表体 数据
-        public abstract DataSet SetFromTabets(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata);
-
+        public abstract DataSet SetFromTabets(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata); 
 
         public abstract Model.DealResult BrokerInvoker(U8ApiBroker broker);
+
+        public static U8Login.clsLogin _login;
 
         /// <summary>
         /// 获取Login对象
@@ -53,9 +54,16 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <returns></returns>
         public Model.DealResult GetU8Login(Model.APIData bd, U8Login.clsLogin u8Login)
         {
-            Model.DealResult dr = new Model.DealResult();
 
-            #region 判断格式
+            Model.DealResult dr = new Model.DealResult();
+            if (bd.TaskType != 1 && null != _login)
+            {
+                u8Login = _login;
+                return dr;
+            }
+
+
+            #region 判断格式  登录
             string strErr = ",请在［账套档案注册］模块中更新!";
             if (string.IsNullOrEmpty(bd.ConnectInfo.UserId))
             {
@@ -137,6 +145,7 @@ namespace U8.Interface.Bus.ApiService.BLL
                 throw new Exception(dr.ResultMsg);
             }
 
+            _login = u8Login;
             return dr;
         }
 
@@ -271,7 +280,7 @@ namespace U8.Interface.Bus.ApiService.BLL
                 List<Model.Fieldcmps> listfd = fieldcmpdal.GetListFieldcmps(dt, pdt);   //字段对照信息
                 BLL.U8NameValue u8namevaluebll = new BLL.U8NameValue();  //字段赋值
                 u8namevaluebll.SetHeadData(apidata, rdds, rdsds, listfd, dt);
-                u8namevaluebll.SetBodyData(apidata, rdds, rdsds, listfd, dt);
+                u8namevaluebll.SetBodyData(apidata, rdds, rdsds, listfd, dt); 
 
                 //设置订单关联    
                 DAL.Common.SetInBody(apidata);

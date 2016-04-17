@@ -46,20 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\RdRecord091.cs">
-      <Link>BLL\OP\CQ\RdRecord091.cs</Link>
-    </Compile>
     <Compile Include="BLL\Common.cs" />
-    <Compile Include="BLL\OP\CQ\Mom_order.cs" />
-    <Compile Include="BLL\OP\CQ\Consignment.cs" />
-    <Compile Include="BLL\OP\CQ\PuStoreIn.cs" />
-    <Compile Include="BLL\OP\CQ\RdRecord08.cs" />
-    <Compile Include="BLL\OP\CQ\RdRecord11.cs" />
-    <Compile Include="BLL\OP\CQ\TransVouch.cs" />
-    <Compile Include="BLL\OP\CQ\CheckVouch.cs" />
-    <Compile Include="BLL\OP\CQ\AssemVouch.cs" />
-    <Compile Include="BLL\OP\CQ\SepVouch.cs" />
-    <Compile Include="BLL\OP\DS\RdRecord10.cs" />
     <Compile Include="DAL\CQ\Mom_order.cs" />
     <Compile Include="DAL\XT\Rdrecord01.cs" />
     <Compile Include="DAL\XT\Rdrecord32.cs" />
@@ -75,7 +62,6 @@
     <Compile Include="BLL\OP\XT\SalesOutStockOrder.cs" />
     <Compile Include="BLL\OP\XT\TransVouch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BLL\OP\CQ\RdRecord10.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\U8.Interface.Bus.ApiService\U8.Interface.Bus.ApiService.csproj">

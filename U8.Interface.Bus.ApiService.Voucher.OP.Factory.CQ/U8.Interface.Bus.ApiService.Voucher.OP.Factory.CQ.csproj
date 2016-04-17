@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CQ\AssemVouch.cs" />
     <Compile Include="CQ\CheckVouch.cs" />
+    <Compile Include="CQ\Comm.cs" />
     <Compile Include="CQ\Consignment.cs" />
     <Compile Include="CQ\Mom_order.cs" />
     <Compile Include="CQ\PuStoreIn.cs" />
@@ -58,6 +59,10 @@
     <Compile Include="CQ\TransVouch.cs" />
     <Compile Include="CQ\DispatchList.cs" />
     <Compile Include="CQ\RdRecordRet10.cs" />
+    <Compile Include="CQ\Mom_order_bak.cs" />
+    <Compile Include="CQ\Rdrecord01Ret.cs" />
+    <Compile Include="CQ\PU_ArrivalVouch.cs" />
+    <Compile Include="CQ\Mom_orderdetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

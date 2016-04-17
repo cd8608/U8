@@ -36,12 +36,16 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS
         /// <summary>
         /// 中间表
         /// </summary>
-        private string voucherNoColumnName = "opdoccode";
-        private string cardNo = "FC31";
+        private string voucherNoColumnName = "opdoccode"; 
         private string headtable = "MES_Int_optransform";
         private string bodytable = "MES_Int_optransform";
         private string voucherTypeName = "工序转移单";
 
+
+        /// <summary>
+        /// 目标
+        /// </summary>
+        private string cardNo = "FC31";
 
         public override string SetTableName()
         {
@@ -395,6 +399,20 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.DS
             //BLL.Common.ErrorMsg(ds, "未能获取 表体信息");
             return ds;
         }
+
+
+        /// <summary>
+        /// 获取来源表体数据
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="pdt"></param>
+        /// <param name="apidata"></param>
+        /// <returns></returns>
+        public override System.Data.DataSet SetFromTabetsChild(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
+        {
+            return null;
+        }
+
 
         #endregion
 

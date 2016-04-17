@@ -43,23 +43,23 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// </summary>
         /// <returns></returns>
         public override object Insert()
-        { 
+        {
 
             StringBuilder sb = new StringBuilder();
-            StringBuilder sbm = new StringBuilder(); 
-                StringBuilder sbd = new StringBuilder();
+            StringBuilder sbm = new StringBuilder();
+            StringBuilder sbd = new StringBuilder();
             sbm = this.CreateInsertString();
             if (sbm.Length > 0)
             {
                 sb.Append(" DECLARE @mainid AS INT ");
                 sb.Append(sbm);
-                sb.Append(" SELECT @mainid = @@IDENTITY "); 
-                sb.Replace("main|##newguid", Guid.NewGuid().ToString()); 
-            } 
+                sb.Append(" SELECT @mainid = @@IDENTITY ");
+                sb.Replace("main|##newguid", Guid.NewGuid().ToString());
+            }
             if (bNoCase)
             {
                 //清除旧记录
-                sbd = this.CreateDeleteString(); 
+                sbd = this.CreateDeleteString();
             }
             if (sb.Length > 0)
             {

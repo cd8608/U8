@@ -317,7 +317,7 @@ namespace U8.Interface.Bus.ApiService.BLL
             }
 
             Model.Synergismlog log = logdal.GetModel(id, tmpOp);
-            log.Cstatus = Constant.SynerginsLog_Cstatus_NoDeal;
+            log.Cstatus = Constant.SynerginsLog_Cstatus_NoDeal; 
             log.Endtime = DateTime.Now;
             logdal.Update(log, tmpOp);
         }

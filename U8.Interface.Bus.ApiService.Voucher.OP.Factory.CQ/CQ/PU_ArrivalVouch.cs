@@ -18,103 +18,86 @@ using U8.Interface.Bus.DBUtility;
 namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
 {
     /// <summary>
-    /// 生产订单(HY_DZ_K7_DLLReflect预置的op类)
+    /// 采购退货单 /采购退货单(MES_COMM_DLLReflect预置的op类)   code 不重复
+    /// envContext.SetApiContext("sBillType", new string()); //上下文数据类型：string，含义：到货单类型， 到货单 0 退货单 1
     /// </summary>
-    public class Mom_order : SfcOp
+    public class PU_ArrivalVouch : PurchaseOp
     { 
         private int tasktype = 0;
 
- 
         /// <summary>
         /// 来源
         /// </summary>
-        private string sourceCardNo = "MQ6303";
-        string sourceHeadTable = "mps_netdemand";
-        string sourceBodyTable = "mps_netdemand";
+        private string sourceCardNo = "26";
+        string sourceHeadTable = "PU_ArrivalVouch";
+        string sourceBodyTable = "PU_ArrivalVouchs";
 
 
         /// <summary>
         /// 中间表
         /// </summary>
-        private string voucherNoColumnName = "mocode"; 
-        private string headtable = "MES_CQ_mom_order";
-        private string bodytable = "MES_CQ_mom_orderdetail"; 
+        private string voucherNoColumnName = "cCode";
+        private string headtable = "MES_CQ_rdrecord01Ret";
+        private string bodytable = "MES_CQ_rdrecords01Ret"; 
         private string taskStatusflagColName = "operflag"; 
         private string opertype = "opertype";
-
 
         /// <summary>
         /// 目标表
         /// </summary> 
-        private string cardNo = "MO21";
-        private string voucherTypeName = "生产订单";
+        private string cardNo = "26";
+        private string voucherTypeName = "采购退货单";
+        private string targetVoucherNoColumnName = "cCode";
    
-
-        /// <summary>
-        /// 子表
-        /// </summary>
-        public override string SubEntityName
-        {
-            get
-            {
-                return "Mom_OrderDetail";
-            }
-            set { }
-        }
-
-
-        /// <summary>
-        /// 子表下的子表
-        /// 子件用料表
-        /// </summary>
-        public virtual string SubChildEntityName
-        {
-            get
-            {
-                return "Mom_MoAllocate";
-            }
-            set { }
-        }
-
-
-
 
         public override string SetTableName()
         {
-            return "mom_order";
+            return "PU_ArrivalVouch";
         }
 
 
-        #region  api address
+        #region  api  setting
+
+ 
+        public override string SetVouchType()
+        {
+            return "2";
+        }
+ 
         public override string SetApiAddressAdd()
         {
-            return "U8API/MOrder/MOrderAdd";
-        } 
+            return "U8API/ArrivedGoods/VoucherSave";
+        }
+
         public override string SetApiAddressAudit()
         {
-            return "U8API/MOrder/MOrderAuditing";
-        } 
+            return "U8API/ArrivedGoods/ConfirmArr";
+        }
+
         public override string SetApiAddressCancelAudit()
         {
-            return "U8API/MOrder/MOrderUnauditing";
-        } 
+            return "U8API/ArrivedGoods/CancelconfirmArr";
+        }
+
         public override string SetApiAddressDelete()
         {
-            return "U8API/MOrder/MOrderDelete";
-        } 
+            return "U8API/ArrivedGoods/Delete";
+        }
+
         public override string SetApiAddressLoad()
         {
-            return "U8API/MOrder/MOrderLoad";
-        } 
+            return "U8API/ArrivedGoods/GetVoucherData";
+        }
         public override string SetApiAddressUpdate()
         {
-            return "U8API/MOrder/MOrderUpdate";
+            throw new NotImplementedException();
         }
+
         #endregion
 
         public override TaskList GetTask()
         {
-            string sql = "SELECT * FROM " + headtable + " WHERE operflag = 0 ";
+            string sql = "SELECT * FROM " + headtable + " WHERE " + taskStatusflagColName + " = 0 ";
             string curid = "";  
             DataTable dt = new DataTable();
             dt = DbHelperSQL.Query(sql).Tables[0];
@@ -181,11 +164,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 Model.Synergismlogdt pdt = new Model.Synergismlogdt();
                 pdt.Cvouchertype = sourceCardNo;
                 pdt.Id = dt.Id;
-                DataSet ds = DbHelperSQL.Query("SELECT " + voucherNoColumnName + " FROM " + bodytable + " with(nolock) WHERE ID = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id, "string"));
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    pdt.Cvoucherno = ds.Tables[0].Rows[i][voucherNoColumnName].ToString();
-                }
+                //DataSet ds = DbHelperSQL.Query("SELECT MoCode FROM " + bodytable + " with(nolock) WHERE ID = " + U8.Interface.Bus.Comm.Convert.ConvertDbValueFromPro(dt.Id, "string"));
+                //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //{
+                pdt.Cvoucherno = "";// ds.Tables[0].Rows[i]["MoCode"].ToString();
+                //}
                 return pdt;
             }
             else
@@ -211,11 +194,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 tmpd.Ilineno = 2;
                 tmpd.TaskType = tasktype;
                 tmpd.Cstatus = U8.Interface.Bus.ApiService.DAL.Constant.SynerginsLog_Cstatus_NoDeal;
-                DataSet ds = DbHelperSQL.Query("SELECT " + voucherNoColumnName + " FROM " + bodytable + " with(nolock) WHERE ID = '" + dt.Id + "' ");
-                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                {
-                    tmpd.Cvoucherno = ds.Tables[0].Rows[i][voucherNoColumnName].ToString();
-                } 
+                //DataSet ds = DbHelperSQL.Query("SELECT lt." + voucherNoColumnName + " FROM " + bodytable + " lb with(nolock) INNER JOIN " + headtable + " lt WITH(NOLOCK) ON lt.ID = lb.id WHERE lb.ID = '" + dt.Id + "' ");
+                //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                //{
+                tmpd.Cvoucherno = "";// ds.Tables[0].Rows[i][voucherNoColumnName].ToString();
+                //} 
 
                 logdt.Add(tmpd);
                 return logdt;
@@ -244,20 +227,18 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         {
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
+
+            string sql = "select "; // t.*,";
+            sql += "lt.cRdCode as MES_cRdCode ,lt.ddate as MES_ddate, ";
+            sql += "lt.cWhCode as MES_cWhCode ,lt.cRdStyleCode as MES_cRdStyleCode, "; 
+            sql += "lt.cDepCode as MES_cDepCode ,lt.cVenCode as MES_cVenCode, "; 
+            sql += "lt.cPersonCode as MES_cPersonCode ,lt.cRemark as MES_cRemark, "; 
+            sql += " '采购退货单' as cSource ";
+            sql += " from  " + headtable + " lt with(nolock) where lt.id ='" + pdt.Id + "' ";
   
-            string sql = "select st.*,";
-            sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode,lt.cInvCode as MES_cInvCode, ";
-            sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
-            sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,  ";
-            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate, ";
-            sql += " '生产订单' as cSource ";
-            sql += " from  " + headtable + " lt with(nolock) ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
-            sql += " where lt.id ='" + pdt.Id + "' ";
-            
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
-            BLL.Common.ErrorMsg(ds, "未能获取生产计划表头信息");
+            BLL.Common.ErrorMsg(ds, "未能获取采购退货单表头信息");
             return ds;
  
         }
@@ -272,58 +253,25 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <returns></returns>
         public override System.Data.DataSet SetFromTabets(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
         {
-            ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
-            Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
-
-            string sql = "select st.*,";
-            sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode,lt.cInvCode as MES_cInvCode, ";
-            sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
-            sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,  ";
-            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate, ";
-            sql += " '生产订单' as cSource ";
-            sql += " from  " + headtable + " lt with(nolock) ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
-            sql += " where lt.id ='" + pdt.Id + "' ";
-
-            DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
-            DataSet ds = help.Query(sql);
-            BLL.Common.ErrorMsg(ds, "未能获取生产计划表体信息");
-            return ds;
-        }
-
-        public override System.Data.DataSet SetFromTabetsChild(Model.Synergismlogdt dt, Model.Synergismlogdt pdt, Model.APIData apidata)
-        {
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);  //new ApiService.DAL.SynergismLogDt();
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
-
-            string sql = "select st.*,";
-            sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode, ";
-            sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
-            sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,  ";
-            sql += " lb.BomID as MES_BomID ,lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity,  ";
-            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate , ";
-            sql += " '生产订单' as cSource ";
-            sql += " from  " + headtable + " lt with(nolock) ";
-            sql += " inner join " + bodytable + " lb with(nolock) on lt.id = lb.id ";
-            sql += " inner join " + sourceHeadTable + " st with(nolock) on  lt.PlanCode = sb.PlanCode  ";
-            sql += " where lt.id ='" + pdt.Id + "' ";
-
+            string sql = "select st.cCode as cCode,sb.*,"; 
+            sql += " lt.cWhCode as MES_cWhCode,";
+            sql += " lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity   ";
+            sql += " FROM " + sourceBodyTable + " sb with(nolock) ";
+            sql += " INNER JOIN " + sourceHeadTable + " st with(nolock) on sb.id = st.id ";
+            sql += " INNER JOIN " + bodytable + " lb with(nolock) on lb.dhid = sb.autoid ";
+            sql += " INNER JOIN " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);
-            BLL.Common.ErrorMsg(ds, "未能获取生产计划表体子件信息");
+            BLL.Common.ErrorMsg(ds, "未能获取采购退货单表体信息");
             return ds;
         }
 
-  
         #endregion
 
-
-
-        #region 为API 赋表头表体数据
 
          
-
-        #endregion
 
         /// <summary>
         /// ID CODE 互查
@@ -337,17 +285,17 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             string sqlstr = string.Empty;
             if (codeorid == "id")
             {
-                sqlstr = "select isnull(moid,'') from mom_order  with(nolock)  where mocode='" + strID + "'";
+                sqlstr = "select isnull(id,'') from PU_ArrivalVouch  with(nolock)  where " + targetVoucherNoColumnName + "='" + strID + "'";
             }
             if (codeorid == "code")
             {
-                sqlstr = "select isnull(mocode,'') from mom_order  with(nolock)  where moid ='" + strID + "'";
+                sqlstr = "select isnull(" + targetVoucherNoColumnName + ",'') from PU_ArrivalVouch  with(nolock)  where id ='" + strID + "'";
             }
             Model.APIData apidata = bd as Model.APIData;
 
             DBUtility.DbHelperSQLP sqlp = new DBUtility.DbHelperSQLP(apidata.ConnectInfo.Constring);
             string ret = sqlp.GetSingle(sqlstr).NullToString();
-            BLL.Common.ErrorMsg(ret, "未能获生产订单ID或单号");
+            BLL.Common.ErrorMsg(ret, "未能获采购退货单ID或单号");
             return ret;
         }
 
@@ -357,20 +305,20 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         }
 
 
+        #region update  log
+        //修改日志 
         public override int Update(Model.Synergismlog dt)
         {
             return CQ.Utility.UpdateMainLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, "cerrordesc");
         }
-
-
-        //修改日志
         public override int Update(Model.Synergismlogdt dt)
         {
             return CQ.Utility.UpdateDetailLog(dt, headtable, voucherNoColumnName, taskStatusflagColName, "cerrordesc");
         }
+ 
+        #endregion
 
-
-          
+ 
         /// <summary>
         /// 得到一个对象实体
         /// </summary>
@@ -378,7 +326,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <returns></returns>
         public override Model.Synergismlogdt GetModel(string autoid)
         {
-            return CQ.Utility.GetModel(tasktype, headtable, cardNo, voucherNoColumnName, opertype,autoid);
+            return CQ.Utility.GetModel(tasktype, headtable, cardNo, voucherNoColumnName, opertype, autoid);
         }
 
         /// <summary>
@@ -388,9 +336,31 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
         /// <returns></returns>
         public override Model.Synergismlog GetLogModel(string id)
         {
-            return CQ.Utility.GetLogModel(headtable, cardNo,voucherNoColumnName,opertype,id); 
+            return CQ.Utility.GetLogModel(headtable, cardNo, voucherNoColumnName, opertype, id);
         }
 
+
+
+        public override void SetNormalValue(Model.APIData apidata, Model.Synergismlogdt dt)
+        {
+            base.SetNormalValue(apidata, dt);
+
+            //单据号获取
+            string ccode = "ccode";
+            Model.U8NameValue nv = ApiService.DAL.Common.U8NameValueFind(apidata.HeadData, ccode);
+            if (nv == null) return;
+            if (!string.IsNullOrEmpty(nv.U8FieldValue)) return;
+            DbHelperSQLP help = new DbHelperSQLP(apidata.ConnectInfo.Constring);
+            string sql = "select top 1 ccode from PU_ArrivalVouch  with(nolock) ";
+            nv.U8FieldValue = help.GetSingle(sql).NullToString();
+            if (string.IsNullOrEmpty(nv.U8FieldValue)) nv.U8FieldValue = "0000000001";
+
+
+            //envContext.SetApiContext("VoucherType", new int()); //上下文数据类型：int，含义：单据类型， 采购退货单 2 
+            //envContext.SetApiContext("bPositive", new bool()); //上下文数据类型：bool，含义：红蓝标识：True,蓝字；False,红字
+            //envContext.SetApiContext("sBillType", new string()); //上下文数据类型：string，含义：到货单类型， 到货单 0 退货单 1
+            //envContext.SetApiContext("sBusType", new string()); //上下文数据类型：string，含义：业务类型：普通采购,直运采购,受托代销
+        }
 
 
     }

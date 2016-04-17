@@ -10,12 +10,13 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
     {
         /// <summary>
         /// 1
+        /// 传入操作类型，返回操作标识
         /// </summary>
         /// <param name="operflag"></param>
         /// <returns></returns>
-        public static string GetFlagByOper(string operflag)
+        public static string GetFlagByOper(string opertype)
         {
-            if (operflag.ToLower().Equals("d"))
+            if (opertype.ToLower().Equals("d"))
             {
                 return "D";
             }
@@ -28,6 +29,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
 
         /// <summary>
         /// 2
+        /// 获取上层部门编码
         /// </summary>
         /// <param name="cdepcode"></param>
         /// <returns></returns>
@@ -45,6 +47,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
 
         /// <summary>
         /// 3
+        /// 
         /// </summary>
         /// <param name="cdepcode"></param>
         /// <returns></returns>
@@ -64,6 +67,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
 
         /// <summary>
         /// 4
+        /// 获取计量单位名称
         /// </summary>
         /// <param name="cdepcode"></param>
         /// <returns></returns>
@@ -81,6 +85,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
 
         /// <summary>
         /// 5
+        /// CQ 存货 采购自制属性生成
         /// </summary>
         /// <param name="cdepcode"></param>
         /// <returns></returns>
@@ -89,11 +94,11 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
             string ret = "";
             if (bBomSub.ToLower().Equals("1") || bBomSub.ToLower().Equals("true"))
             {
-                ret += "采购";
+                ret += "0"; //"采购";
             }
             else
             {
-                ret += "自制";
+                ret += "1"; // "自制";
             }
 
 
@@ -121,16 +126,17 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Function
 
         /// <summary>
         /// 6
+        /// CQ 生成操作符
         /// </summary>
         /// <param name="operflag"></param>
         /// <returns></returns>
-        public static string GetCQFlagByOper(string operflag)
+        public static string GetCQFlagByOper(string opertype)
         {
-            if (operflag.ToLower().Equals("d"))
+            if (opertype.ToLower().Equals("d"))
             {
                 return "2";
             }
-            else if (operflag.ToLower().Equals("m"))
+            else if (opertype.ToLower().Equals("m"))
             {
                 return "1";
             }

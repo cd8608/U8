@@ -170,6 +170,11 @@ namespace U8.Interface.Bus.Comm
             return res;
         }
 
+        public static string EncodeDbValue(string strValue)
+        {
+            return strValue.Replace("'", "''");
+        }
+
 
     }
 }
