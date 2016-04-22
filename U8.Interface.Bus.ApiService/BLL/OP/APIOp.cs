@@ -147,15 +147,33 @@ namespace U8.Interface.Bus.ApiService.BLL
 
             System.Diagnostics.Trace.WriteLine("  before  GetU8Login u8Login.Login   ");
             System.Diagnostics.Trace.WriteLine("  login parameter :  " + subId + "----" + accId + "----" + yearId + "----" + userId + "----" + password + "----" + date + "----" + srv + "----" + serial);
-            if (!u8Login.Login(ref subId, ref accId, ref yearId, ref userId, ref password, ref date, ref srv, ref serial))
-            { 
-                System.Diagnostics.Trace.WriteLine("    GetU8Login  failed  "); 
-                dr.ResultMsg = "登陆失败，原因：" + u8Login.ShareString;
-                if (u8Login.ShareString.IndexOf("年度") > 0 || u8Login.ShareString.IndexOf("日期") > 0) dr.ResultMsg += " - " + date;
-                dr.ResultNum = -1;
-                Marshal.FinalReleaseComObject(u8Login);
-                throw new Exception(dr.ResultMsg);
+
+            try
+            {
+                if (!u8Login.Login(ref subId, ref accId, ref yearId, ref userId, ref password, ref date, ref srv, ref serial))
+                {
+                    System.Diagnostics.Trace.WriteLine("    GetU8Login  failed  ");
+                    dr.ResultMsg = "登陆失败，原因：" + u8Login.ShareString;
+                    if (u8Login.ShareString.IndexOf("年度") > 0 || u8Login.ShareString.IndexOf("日期") > 0) dr.ResultMsg += " - " + date;
+                    dr.ResultNum = -1;
+                    Marshal.FinalReleaseComObject(u8Login);
+                    throw new Exception(dr.ResultMsg);
+                }
             }
+            catch(Exception ee)
+            {
+                if (dr.ResultNum == -1)
+                {
+                    throw new Exception(dr.ResultMsg);
+                }
+                else
+                {  
+                    System.Diagnostics.Trace.WriteLine("   GetU8Login u8Login.Login Error : " + ee.StackTrace);
+                    dr.ResultNum = -1;
+                    throw new Exception(ee.Message);
+                }
+            }
+
 
             System.Diagnostics.Trace.WriteLine("  end  GetU8Login u8Login.Login ");  
             System.Diagnostics.Trace.WriteLine("  end GetU8Login  "); 

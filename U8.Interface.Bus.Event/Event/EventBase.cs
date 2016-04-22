@@ -289,7 +289,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                     //采购到货单
                     case "u8api/arrivedgoods/audit_before":
                     case "u8api/arrivedgoods/audit_after":
-                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "PU_ArrivalVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "d" }, null, null);
+                        oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "PU_ArrivalVouch", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, domhead, dombody, login.UFDataConnstringForNet.ToString(), "a" }, null, null);
                         oper.Insert();
                         break;
                     case "u8api/arrivedgoods/cancelaudit_before":

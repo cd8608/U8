@@ -1380,10 +1380,10 @@ BEGIN
 	INSERT INTO MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0',@autoid,'销售单位编码','B',@fieldcmpCode,'010',null,2,'根据存货获取计量单位信息(来源单据.表体.存货编码).主计量单位编码','cUnitID',@guid,@fieldcmpId,1,1)
 	DELETE FROM MES_CQ_FIXVALUE where did = @autoid
-	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','cComUnitCode',7,'3','默认计量单位编码',@autoid,@guid) 
 END 
@@ -1399,7 +1399,7 @@ BEGIN
 	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','cgroupcode',7,'3','默认计量单位编码',@autoid,@guid) 
 END 
@@ -1415,7 +1415,7 @@ BEGIN
 	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','csacomunitcode',7,'3','默认计量单位编码',@autoid,@guid) 
 END 
@@ -1432,7 +1432,7 @@ BEGIN
 	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,'B','S','010','cinvcode',1,'2','来源单据.表体.存货编码',@autoid,@guid)
-	SELECT @autoidFixvalue =isnull(convert(int,max(autoid)),0)+1 from MES_CQ_FIXVALUE  
+	SELECT @autoidFixvalue =isnull(max(convert(int,autoid)),0)+1 from MES_CQ_FIXVALUE  
 	INSERT INTO MES_CQ_FIXVALUE ( accid,autoid,cardsection,cfromortobill,cfunid,cfunparareturn,cno,ctype,cvalue,did,guid ) values 
 	  ('001',@autoidFixvalue,null,null,'010','igrouptype',7,'3','默认计量单位编码',@autoid,@guid) 
 END 

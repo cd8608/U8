@@ -286,6 +286,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.datetimeFormat) + "' as dnmaketime, ";   //制单时间
             sql += " lt.cRdCode as cCode ,";
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,lt.cPersonCode as MES_cPersonCode ";
+            sql += " lb.dhCode as MES_dhCode, ";
+            sql += " '" + apidata.ConnectInfo.UserId + "'  as PRO_CMaker  ";
             sql += " from  pu_ArrHead t with(nolock) left join " + bodytable + " lb with(nolock) on lb.dhCode = t.ccode left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             //sql += " from " + _sourcetablenameb + " b with(nolock) inner join  " + _sourcetablenameh + " t with(nolock) on b.id = t.id inner join " + bodytable + " lb with(nolock) on lb.dhid = b.autoid inner join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             

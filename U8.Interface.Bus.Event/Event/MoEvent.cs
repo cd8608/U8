@@ -85,8 +85,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter
                     case "u8api/morder/unaudit_after":
                     case "u8api/morder/cancelaudit_after":
                         oper = (Biz.BizBase)System.Reflection.Assembly.Load(U8.Interface.Bus.Config.ConfigUtility.EventBizDllName).CreateInstance(U8.Interface.Bus.Config.ConfigUtility.EventBizNamespace + "." + "Mom_order", true, System.Reflection.BindingFlags.CreateInstance, null, new object[] { conn, moid, modid, connStr, "d" }, null, null);
-                        oper.Delete();
- 
+                        oper.Delete(); 
                         break;
                 }
  
