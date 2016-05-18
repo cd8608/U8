@@ -322,7 +322,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             string sql = "select  ";
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,";
             //sql += " lt.cPersonCode as MES_cPersonCode, ";
-            sql += " lt.cvencode as MES_cvencode,";
+            sql += " lt.cvencode as MES_t_cvencode,";
+            sql += " lb.cvencode as MES_cvencode,";
             sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
             sql += " lb.cinvcode as mes_cinvcode   ";
             sql += " ,lb.iquantity as MES_iquantity   ";

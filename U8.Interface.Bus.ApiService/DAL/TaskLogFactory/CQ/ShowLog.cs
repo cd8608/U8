@@ -152,13 +152,14 @@ namespace U8.Interface.Bus.ApiService.DAL.TaskLogFactory.CQ
             strSql.Append("cerrordesc as cerrordesc,'' AS cRemark FROM MES_CQ_mom_order WITH(NOLOCK) ");
 
 
+            strSql.Append(" ) AS T ");
+
+
             if (!string.IsNullOrEmpty(strWhere.Trim()))
             {
                 if (strWhere.Trim() != "1=1")
                     strSql.Append(" WHERE " + strWhere);
             }
-            strSql.Append(" ) AS T ");
-
 
             if (!string.IsNullOrEmpty(order))
             {
