@@ -293,7 +293,7 @@ END
 IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000005' AND cardsection = 'T' AND fieldname='cMPoCode') 
 BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-('0','1','生产订单号','T','0000000005',null,null,0,'表头|生产订单号,T|MES_MOcode','cMPoCode',null,'1000000005',1,1)
+('0','1','生产订单号','T','0000000005',null,null,0,'表头|生产订单号,T|MES_T_MOcode','cMPoCode',null,'1000000005',1,1)
 END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000005' AND cardsection = 'T' AND fieldname='gspcheck') 
 --BEGIN
