@@ -152,7 +152,7 @@ namespace U8.Interface.Bus.ApiService.BLL
             int i = 0;
             foreach (BodyRow bodyRow in apidata.SfcBodyData)
             {
-                SetUNV(bodyRow.BodyCols, SubEntity, apidata, apidata.Synergismlogdt.Cvouchertype);
+                SetUNV(i,bodyRow.BodyCols, SubEntity, apidata, apidata.Synergismlogdt.Cvouchertype);
                 //SetUNV(bodyRow.BodyCols, SubEntity, apidata, "FC32");
 
                 #region 待删除
@@ -205,9 +205,11 @@ namespace U8.Interface.Bus.ApiService.BLL
                 }
 
                 ExtensionBusinessEntity SubChildEntity = SubEntity[i].SubEntity[SubChildEntityName];
+                int iChildRow = 0;
                 foreach (List<Model.U8NameValue> lunvc in bodyRow.ChildData)
                 {
-                    SetUNV(lunvc, SubChildEntity, apidata, apidata.Synergismlogdt.Cvouchertype);
+                    SetUNV(iChildRow, lunvc, SubChildEntity, apidata, apidata.Synergismlogdt.Cvouchertype);
+                    iChildRow++;
                 } 
                 #endregion
 
@@ -227,9 +229,13 @@ namespace U8.Interface.Bus.ApiService.BLL
         /// <param name="subEntity"></param>
         /// <param name="apidata"></param>
         /// <param name="vouchtype"></param>
-        public virtual void SetUNV(List<Model.U8NameValue> lunv, ExtensionBusinessEntity subEntity, Model.APIData apidata, string vouchtype)
+        public virtual void SetUNV(int iRow,List<Model.U8NameValue> lunv, ExtensionBusinessEntity subEntity, Model.APIData apidata, string vouchtype)
         {
             int i = 0;
+            if (iRow > -1)
+            {
+                i = iRow;
+            }
             foreach (Model.U8NameValue unv in lunv)
             {
                 string fieldName = unv.U8FieldName.ToLower();
@@ -248,7 +254,12 @@ namespace U8.Interface.Bus.ApiService.BLL
                     {
                         subEntity[i][unv.U8FieldName] = unv.U8FieldValue;
                     }
-                } 
+                }
+                //子件行号
+                if (unv.U8FieldName.ToLower() == "dsortseq")
+                {
+                    subEntity[i][unv.U8FieldName] = iRow+1;
+                }
                 else
                 {
                     int iFieldType = DAL.Common.GetFieldType(apidata.ConnectInfo.Constring, unv.U8FieldName, vouchtype);

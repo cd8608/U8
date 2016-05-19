@@ -361,6 +361,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.cORdCode as mes_cORdCode, ";
             sql += " lt.cremark as mes_cTVMemo , "; 
             sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
+            sql += " lb.cinvcode as mes_cinvcode ,lb.cVenCode as MES_B_cVenCode,  ";
             sql += " lb.cinvcode as mes_cinvcode   ";
             sql += " ,lb.iquantity as MES_iquantity   "; 
             sql += " from   " + bodytable + " lb with(nolock) INNER JOIN " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";

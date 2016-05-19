@@ -277,7 +277,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
-            string sql = "select t.*,lt.cWhCode as cWhCode ,lt.cRdCode as cCode ";
+            string sql = "select t.*,lt.cWhCode as cWhCode ,lt.cRdCode as cCode,lt.cRdStyleCode as MES_T_cRdStyleCode, ";
+            sql += " lt.cdepcode as MES_T_cDepCode ";
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";
             sql += ",'生产订单' as cSource "; 
             sql += ",'" + apidata.ConnectInfo.UserId + "'  as PRO_CMaker  ";

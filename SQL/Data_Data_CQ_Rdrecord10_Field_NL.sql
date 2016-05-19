@@ -783,11 +783,11 @@ END
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 --('0','1','bChecked','B','0000000001',null,null,0,'表体|bChecked,B|bChecked','bChecked',null,'1000000001',1,1)
 --END
---IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000001' AND cardsection = 'B' AND fieldname='bRelated') 
---BEGIN
---insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
---('0','1','是否联副产品','B','0000000001',null,null,0,'表体|是否联副产品,B|bRelated','bRelated',null,'1000000001',1,1)
---END
+IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000001' AND cardsection = 'B' AND fieldname='bRelated') 
+BEGIN
+insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+('0','1','是否联副产品','B','0000000001',null,null,1,'0','bRelated',null,'1000000001',1,1)
+END
 --IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000001' AND cardsection = 'B' AND fieldname='cmworkcentercode') 
 --BEGIN
 --insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 

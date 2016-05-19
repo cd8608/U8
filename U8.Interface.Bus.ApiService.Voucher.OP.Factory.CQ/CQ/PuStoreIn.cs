@@ -294,7 +294,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " t.id as ipurarriveid ,"; //采购到货单id
             sql += " '' as ipurorderid ,";  //采购订单ID
             sql += " lt.cvencode as MES_cvencode,"; 
-            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";   //入库日期
+            sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as pro_ddate ";   //入库日期
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.datetimeFormat) + "' as dnmaketime, ";   //制单时间
             sql += " lt.cRdCode as cCode ,";
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,lt.cPersonCode as MES_cPersonCode , ";

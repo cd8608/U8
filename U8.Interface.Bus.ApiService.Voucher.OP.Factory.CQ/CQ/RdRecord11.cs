@@ -282,8 +282,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
             string sql = "select t.*,";
-            sql += "lt.cWhCode as MES_cWhCode ,lt.cRdCode as cCode,lt.cvencode as mes_cvencode, lt.cDepCode as mes_cdepcode ";
-            sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";
+            sql += "lt.cWhCode as MES_cWhCode ,lt.cRdCode as cCode,lt.cvencode as mes_cvencode, lt.cDepCode as mes_cdepcode,lt.cRdStyleCode as MES_cRdStyleCode ";
+            sql += ",'" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate,";
+            sql += " lb.MoCode as MES_T_MOCODE ";
             sql += ",'生产订单' as cSource ";
             sql += " from  " + sourceHeadTable + " t with(nolock) INNER JOIN " + bodytable + " lb with(nolock) on lb.mocode = t.mocode INNER JOIN " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);

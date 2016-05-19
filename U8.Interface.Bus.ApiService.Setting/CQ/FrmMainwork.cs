@@ -157,7 +157,8 @@ namespace U8.Interface.Bus.ApiService.Setting
 
         private void btnDebug_Click(object sender, EventArgs e)
         {
-            Exec_Task();
+            System.Threading.Thread btnClickThread = new System.Threading.Thread(new System.Threading.ThreadStart(Exec_Task));
+            btnClickThread.Start();  
         }
 
         private void Exec_Cor(object sender, EventArgs e)
@@ -991,10 +992,14 @@ namespace U8.Interface.Bus.ApiService.Setting
                 {
                     log.Opname = "重发";
                 }
+                else if (log.Cstatus == "处理中")
+                {
+                    log.Opname = "";
+                }
                 else if (log.Cstatus != "完成")
                 {
                     log.Opname = "作废";
-                }
+                } 
             }
         }
 
