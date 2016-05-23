@@ -307,9 +307,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             ApiService.DAL.TaskLogFactory.ITaskLogDetail dtdal = ClassFactory.GetITaskLogDetailDAL(apidata.TaskType);  //new ApiService.DAL.SynergismLogDt();
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
             string sql = "select b.*,";
-            sql += " lt.cWhCode as MES_cWhCode,lt.cRdCode as cCode,"; 
-            sql += "lb.iquantity as MES_iquantity, lb.cVenCode as mes_cvencode,lb.cpinvcode as mes_cpinvcode,lb.cInvCode as mes_cinvcode,lb.mocode as mes_mocode,  "; 
-            sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop  ";
+            sql += " sb.DSortSeq as DSortSeq , ";
+            sql += " lt.cWhCode as MES_cWhCode,lt.cRdCode as cCode,sb.modid as modid,"; 
+            sql += " lb.iquantity as MES_iquantity, lb.cVenCode as mes_cvencode,lb.cpinvcode as mes_cpinvcode,lb.cInvCode as mes_cinvcode,lb.mocode as mes_mocode,  "; 
+            sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop,  ";
+            sql += " lb.MOCODE as MES_B_MOCODE ";
             sql += " from " + sourceBodyTable + " sb with(nolock) INNER JOIN  " + sourceHeadTable + " t with(nolock) on sb.moid = t.moid ";
             sql += " INNER JOIN mom_moallocate b with(nolock) on b.modid = sb.modid ";
             sql += " INNER JOIN " + bodytable + " lb with(nolock) on lb.mocode = t.mocode and lb.cinvcode = b.invcode and lb.cpinvcode = sb.dinvcode "; 

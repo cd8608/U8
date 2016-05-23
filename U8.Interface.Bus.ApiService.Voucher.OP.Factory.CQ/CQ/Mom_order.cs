@@ -299,7 +299,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode, ";
             sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
             sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,  ";
-            sql += " lb.BomID as MES_BomID ,lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity,  ";
+            sql += " lb.BomID as MES_BomID ,lb.cInvCode as MES_cInvCode,lb.iquantity as MES_iquantity, ";
+            sql += " lb.iquantity * lt.iquantity as MES_C_iquantity,  ";
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate , ";
             sql += " '生产订单' as cSource ";
             sql += " from  " + headtable + " lt with(nolock) ";
