@@ -33,7 +33,7 @@ GO
 		(ID,opertype,PlanCode,DemandId,cInvCode,
 		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
 		DmandDate,DID
-	    )
+	        )
 		SELECT 
 		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,t.SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
@@ -80,8 +80,19 @@ GO
 		SET @filename = '生产计划'
 		SET @deal = 3	 
 		DELETE FROM MES_CQ_mps_netdemand WHERE DemandId in (select deleted.DemandId from deleted )
-		 
-
+		
+	        INSERT INTO MES_CQ_mps_netdemand
+		(ID,opertype,PlanCode,DemandId,cInvCode,
+		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
+		DmandDate,did
+	        )
+		SELECT 
+		NEWID(),3,PlanCode,DemandId,b.invcode as cInvCode,
+		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
+		FirmDate as DmandDate ,NEWID()
+		FROM deleted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
+		Where t.SupplyType=3
+ 
 		IF @@TRANCOUNT>=2 COMMIT
 		
 		--结束 
@@ -128,7 +139,7 @@ GO
 		(ID,opertype,PlanCode,DemandId,cInvCode,
 		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
 		DmandDate,did
-	    )
+	        )
 		SELECT 
 		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
