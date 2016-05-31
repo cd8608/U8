@@ -35,7 +35,7 @@ GO
 		DmandDate,DID
 	        )
 		SELECT 
-		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
+		NEWID(), case delflag when 1 then 2 else 0 end ,PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,t.SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
 		FirmDate as DmandDate ,NEWID()
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
@@ -87,7 +87,7 @@ GO
 		DmandDate,did
 	        )
 		SELECT 
-		NEWID(),3,PlanCode,DemandId,b.invcode as cInvCode,
+		NEWID(),2,PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
 		FirmDate as DmandDate ,NEWID()
 		FROM deleted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
@@ -141,7 +141,7 @@ GO
 		DmandDate,did
 	        )
 		SELECT 
-		NEWID(),0,PlanCode,DemandId,b.invcode as cInvCode,
+		NEWID(), case delflag when 1 then 2 else 1 end ,PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
 		FirmDate as DmandDate ,NEWID()
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
