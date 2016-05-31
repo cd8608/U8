@@ -38,10 +38,15 @@ GO
 IF (1=1)   
 BEGIN 
 
+	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000014' AND cardsection = 'B' AND fieldname='DMoClass') 
+	--BEGIN
+	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	--('0','1','类型','B','0000000014',null,null,0,'表体|类型,B|MES_MOTYPE','DMoClass',null,'1000000014',1,1)
+	--END 
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000014' AND cardsection = 'B' AND fieldname='DMoClass') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	('0','1','类型','B','0000000014',null,null,0,'表体|类型,B|MES_MOTYPE','DMoClass',null,'1000000014',1,1)
+	('0','1','类型','B','0000000014',null,null,1,'0','DMoClass',null,'1000000014',1,1)
 	END 
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000014' AND cardsection = 'B' AND fieldname='DInvCode') 
 	BEGIN
@@ -68,11 +73,16 @@ BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 	('0','1','行号','B','0000000014',null,null,1,'1','DSortSeq',null,'1000000014',1,1)
 	END 
+	--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000014' AND cardsection = 'B' AND fieldname='DMoTypeId') 
+	--BEGIN
+	--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+	--('0','1','生产订单类别','B','0000000014',null,null,0,'表体|订单类别,B|MES_MoType','DMoTypeId',null,'1000000014',1,1)
+	--END 
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000014' AND cardsection = 'B' AND fieldname='DMoTypeId') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-	('0','1','生产订单类别','B','0000000014',null,null,0,'表体|生产数量,B|MES_MoType','DMoTypeId',null,'1000000014',1,1)
-	END 
+	('0','1','生产订单类别','B','0000000014',null,null,0,'表体|订单类别,B|PRO_MoType','DMoTypeId',null,'1000000014',1,1)
+	END                                                                   
 	IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000014' AND cardsection = 'B' AND fieldname='DOrderType') 
 	BEGIN
 	insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
