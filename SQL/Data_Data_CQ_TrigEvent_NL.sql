@@ -328,9 +328,9 @@ CREATE TRIGGER [T_MES_CQ_WareHouse_INSERT]
 		DELETE FROM MES_CQ_workcenter WHERE  itype = @itype and WcCode in (select inserted.cWhCode from inserted  )    
 		 
 		INSERT INTO MES_CQ_workcenter
-		 (ID,operflag,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType,bProxyWh   )
 		SELECT 
-		NEWID(),0,0, cWhCode,cWhName,@itype as iType
+		NEWID(),0,0, cWhCode,cWhName,@itype as iType,bProxyWh
 		FROM inserted t  
 		set nocount off 
 		--IF @@TRANCOUNT>=2 COMMIT
@@ -377,11 +377,11 @@ GO
 		set nocount on 
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = @itype
 		INSERT INTO MES_CQ_workcenter
-		 (ID,operflag,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType,bProxyWh)
 		SELECT 
-		NEWID(),0,2, cWhCode,cWhName,@itype as iType
+		NEWID(),0,2, cWhCode,cWhName,@itype as iType,bProxyWh
 		FROM deleted t
-		--IF @@TRANCOUNT>=2 COMMIT
+		IF @@TRANCOUNT>=2 COMMIT
 		set nocount off
 		--½áÊø 
    		CANCEL:
@@ -418,9 +418,9 @@ BEGIN
 		set nocount on  
 		DELETE FROM MES_CQ_workcenter WHERE WcCode in (select deleted.cWhCode from deleted )  and itype = @itype 
 		INSERT INTO MES_CQ_workcenter
-		 (ID,operflag,opertype, WcCode,Description,iType   )
+		 (ID,operflag,opertype, WcCode,Description,iType,bProxyWh   )
 		SELECT 
-		NEWID(),0,1, cWhCode,cWhName,@itype as iType
+		NEWID(),0,1, cWhCode,cWhName,@itype as iType,bProxyWh
 		FROM inserted t  
 		set nocount off
 		--IF @@TRANCOUNT>=2 COMMIT

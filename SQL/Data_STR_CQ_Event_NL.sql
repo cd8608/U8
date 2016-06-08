@@ -496,7 +496,7 @@ CREATE TABLE dbo.MES_CQ_WorkCenter
 	WcCode	Nvarchar(8), --编号	
 	[Description]	Nvarchar(60), --名称	
 	iType	Nvarchar(10), --工作中心类型	生产中心、仓库,如果编码在部门表内,则是生产中心,如果再仓库档案内,则是仓库
-
+    [bProxyWh]  bit default 0, --是否代管仓
   CONSTRAINT PK_MES_CQ_WorkCenter PRIMARY KEY  CLUSTERED
   (
     id
