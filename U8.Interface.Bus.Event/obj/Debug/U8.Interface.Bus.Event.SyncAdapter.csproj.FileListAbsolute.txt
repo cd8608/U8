@@ -51,3 +51,4 @@ C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Ev
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Interop.MSXML2.dll
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\bin\Interop.VBA.dll
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.dll
+C:\U8SOFT\HY\client\HY_ME_SVR\Event\U8.Interface.Bus.Event.SyncAdapter.pdb

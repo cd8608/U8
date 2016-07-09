@@ -51,7 +51,7 @@ namespace U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.CQ
         /// <returns></returns>
         public override DataTable GetSourceData(string sourceTableName, string sourceKeyName, string sourceKeyValue, string colNames)
         {
-            string _tempsourcetable = " (select t.ccode as dhCode,b.Autoid as dhid,cPoCode,ddate,";
+            string _tempsourcetable = " (select t.ccode as dhCode,b.Autoid as dhid,b.cordercode as cPoCode,t.cPoCode as h_cPoCode,ddate,";
             _tempsourcetable += "cVenCode,cDepCode,cPersonCode,t.cPTCode,cPTName,cInvCode,iquantity ";
             _tempsourcetable += " from PU_ArrivalVouchs b with(nolock) inner join PU_ArrivalVouch t on t.id = b.id ";
             _tempsourcetable += " left join PurchaseType ty with(nolock) on t.cPTCode = ty.cPTCode ) tmpt   ";

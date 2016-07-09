@@ -10,3 +10,8 @@ C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService\obj\Deb
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\U8.Interface.Bus.WebService.csproj.ResolveComReference.cache
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\U8.Interface.Bus.WebService.dll
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\U8.Interface.Bus.WebService.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\Interop.U8Login.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\U8.Interface.Bus.WebService.csproj.ResolveComReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\U8.Interface.Bus.WebService.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.WebService\obj\Debug\U8.Interface.Bus.WebService.pdb

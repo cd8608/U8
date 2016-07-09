@@ -18,11 +18,11 @@ C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\Int
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.Comm.csproj.ResolveComReference.cache
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.dll
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\Interop.MSXML2.dll
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\Interop.MSXML2.dll
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.Comm.csproj.ResolveComReference.cache
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.dll
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\obj\Debug\U8.Interface.Bus.pdb
-C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.dll
-C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\U8.Interface.Bus.pdb
-C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Comm\bin\Debug\Interop.MSXML2.dll

@@ -9,7 +9,7 @@ namespace U8.Interface.Bus
     {
         public static void Check()
         {
-            if (System.DateTime.Now > Convert.ToDateTime("2016-06-20"))
+            if (System.DateTime.Now > Convert.ToDateTime("2016-08-20"))
             {
                 throw new System.Exception("程序试用结束!请购买正式程序..."); 
             }

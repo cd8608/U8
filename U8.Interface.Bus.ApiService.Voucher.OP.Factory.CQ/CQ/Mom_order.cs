@@ -278,7 +278,8 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,lt.iquantity as MES_iquantity,  ";
             sql += " sob.iRowNo as sob_iRowNo,sob.cSOCode as sob_cSOCode,  ";
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate, ";
-            sql += " tt.MoTypeId as PRO_MoType, ";
+            sql += " tt.MoTypeId as PRO_MoTypeId, ";
+            sql += " tt.MoTypeCode as PRO_MoType, ";
             sql += " '生产订单' as cSource ";
             sql += " from  " + headtable + " lt with(nolock) ";
             sql += " inner join " + sourceHeadTable + " st with(nolock) on  ltrim(rtrim(lt.PlanCode)) = ltrim(rtrim(st.PlanCode))  ";

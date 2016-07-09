@@ -555,11 +555,11 @@ namespace U8.Interface.Bus.ApiService.Setting
                 //cbxType.ValueMember = "U8FieldValue";
                 //cbxType.SelectedIndex = 0;
 
-                ////装载单据类型下拉框
-                //cbxVoucherType.DataSource = DAL.Common.getOrderType();
-                //cbxVoucherType.DisplayMember = "U8FieldName";
-                //cbxVoucherType.ValueMember = "U8FieldValue";
-                //cbxVoucherType.SelectedIndex = 0;
+                //装载单据类型下拉框
+                cbxVoucherType.DataSource = DAL.Common.getCQOrderType();
+                cbxVoucherType.DisplayMember = "U8FieldName";
+                cbxVoucherType.ValueMember = "U8FieldValue";
+                cbxVoucherType.SelectedIndex = 0;
             }
 
             //装载下拉框
@@ -944,13 +944,13 @@ namespace U8.Interface.Bus.ApiService.Setting
             {
                 if (cbxVoucherType.SelectedValue.ToString() == "0")
                 {
-                    whereSYStr.Append(" and (SY.[cvouchertype] NOT IN (SELECT [cbillname] FROM HY_DZ_K7_BILLSCOPE)) ");
-                    whereDTStr.Append(" and (ISNUMERIC(DT.[cvouchertype]) = 0) ");
+                   // whereSYStr.Append(" and (SY.[cvouchertypecode] NOT IN (SELECT [cbillname] FROM HY_DZ_K7_BILLSCOPE)) ");
+                    //whereDTStr.Append(" and (ISNUMERIC(DT.[cvouchertype]) = 0) ");
                 }
                 else
                 {   
-                    whereSYStr.Append(" and ([cvouchertype] = '" + cbxVoucherType.Text + "') ");
-                    whereDTStr.Append(" and ([cvouchertype] = '" + cbxVoucherType.SelectedValue + "') ");
+                    whereSYStr.Append(" and ([cvouchertypecode] = '" + cbxVoucherType.Text + "') ");
+                    whereDTStr.Append(" and ([cvouchertypecode] = '" + cbxVoucherType.SelectedValue + "') ");
                 }
             }
 

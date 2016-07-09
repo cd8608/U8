@@ -239,6 +239,31 @@ namespace U8.Interface.Bus.ApiService.DAL
             }
             return lst;
         }
+          
+                
+        /// <summary>
+        /// 获取单据类型下拉列表
+        /// 车桥专用
+        /// </summary>
+        /// <returns></returns>
+        public static List<Model.U8NameValue> getCQOrderType()
+        {
+            List<Model.U8NameValue> lst = new List<Model.U8NameValue>();
+            lst.Add(new Model.U8NameValue() { U8FieldName = "全部", U8FieldValue = "全部" });
+            string cmdText = "SELECT ctobillcardnum as cardnum,cname as cbillname FROM (select ctobillcardnum,cname from MES_CQ_FIELDCMP ) AS TEMP order by ctobillcardnum ";
+            DataSet ds = DbHelperSQL.Query(cmdText);
+            if (ds == null || ds.Tables[0].Rows.Count <= 0) return lst;
+            Model.U8NameValue model;
+            foreach (DataRow dr in ds.Tables[0].Rows)
+            {
+                model = new Model.U8NameValue();
+                model.U8FieldName = dr["cbillname"].ToString();
+                model.U8FieldValue = dr["cardnum"].ToString();
+                lst.Add(model);
+            }
+            return lst;
+        }
+        
 
 
         /// <summary>

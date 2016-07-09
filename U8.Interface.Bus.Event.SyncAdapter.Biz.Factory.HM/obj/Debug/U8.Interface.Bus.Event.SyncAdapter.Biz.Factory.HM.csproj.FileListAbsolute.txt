@@ -25,3 +25,28 @@ C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.csproj.ResolveComReference.cache
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.dll
 C:\Users\Administrator\Desktop\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\U8.Interface.Bus.Event.SyncAdapter.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\Spring.Data.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\Spring.Aop.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFIDA.U8.MomServiceCommon.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFSoft.U8.U8M.Common.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFSoft.U8.Framework.AssemblyAssist.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\antlr.runtime.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\U8.Interface.Bus.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\Spring.Core.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFSoft.U8.Framework.Exceptions.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFIDA.U8.U8M.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFSoft.U8.Framework.ContextSrv.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFSoft.U8.U8M.DOSchema.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\Common.Logging.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\UFSoft.U8.U8M.Base.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\U8.Interface.Bus.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\bin\Debug\U8.Interface.Bus.Event.SyncAdapter.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\Interop.MSXML2.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.csproj.ResolveComReference.cache
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.dll
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM\obj\Debug\U8.Interface.Bus.Event.SyncAdapter.Biz.Factory.HM.pdb

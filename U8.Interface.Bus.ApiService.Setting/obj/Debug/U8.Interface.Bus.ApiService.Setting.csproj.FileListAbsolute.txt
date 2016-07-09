@@ -28,3 +28,6 @@ C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.Ap
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.FrmMainwork.resources
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.csproj.GenerateResource.Cache
 C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.pdb
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.CQ.FrmUISetting.resources
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.exe
+C:\Documents and Settings\Administrator\桌面\车桥\Source\U8.Interface.Bus.ApiService.Setting\obj\Debug\U8.Interface.Bus.ApiService.Setting.CQ.FrmU8AppSetting.resources
