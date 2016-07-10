@@ -1,0 +1,8 @@
+bin
+obj
+*.suo
+*.SCC
+*.user
+*.vsscc
+*.vspscc
+/U8.Interface.Bus.WinService/Properties/复件 AssemblyInfo.cs
