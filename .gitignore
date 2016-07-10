@@ -6,3 +6,4 @@ obj
 *.vsscc
 *.vspscc
 /U8.Interface.Bus.WinService/Properties/复件 AssemblyInfo.cs
+*.vssscc
