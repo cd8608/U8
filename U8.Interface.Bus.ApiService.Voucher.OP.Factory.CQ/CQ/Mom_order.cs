@@ -273,7 +273,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             Model.ConnectInfo cimodel = dtdal.GetConnectInfo(pdt);
 
             string sql = "select st.*,";
-            sql += " lt.PlanCode as MES_cWhCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode,lt.cInvCode as MES_cInvCode, ";
+            sql += " lt.PlanCode as MES_PlanCode ,lt.MoCode as MES_MoCode,lt.cWcCode as MES_cWcCode,lt.cInvCode as MES_cInvCode, ";
             sql += " lt.cSoCode as MES_cSoCode ,lt.cForCode as MES_cForCode,lt.PStartDate as MES_PStartDate,lt.PDueDate as MES_PDueDate, ";
             sql += " lt.DmandDate as MES_DmandDate ,lt.MoType as MES_MoType,lt.iquantity as MES_iquantity,  ";
             sql += " sob.iRowNo as sob_iRowNo,sob.cSOCode as sob_cSOCode,  ";
