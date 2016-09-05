@@ -11,7 +11,7 @@ namespace U8.Interface.Bus
         {
             if (System.DateTime.Now > Convert.ToDateTime("2016-10-20"))
             {
-                throw new System.Exception("程序试用结束!请购买正式程序..."); 
+                //throw new System.Exception("程序试用结束!请购买正式程序..."); 
             }
         }
     }
