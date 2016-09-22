@@ -32,13 +32,15 @@ GO
 		 INSERT INTO MES_CQ_mps_netdemand
 		(ID,opertype,PlanCode,DemandId,cInvCode,
 		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
-		DmandDate,DID
+		DmandDate,DID,plancodeDH
 	        )
 		SELECT 
-		NEWID(), case delflag when 1 then 2 else 0 end ,PlanCode,DemandId,b.invcode as cInvCode,
+		NEWID(), case delflag when 1 then 2 else 0 end ,t.PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,t.SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
-		FirmDate as DmandDate ,NEWID()
+		FirmDate as DmandDate ,NEWID(),
+		d.PlanCode
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
+		left join mps_plancode d with(nolock) on d.PlanCodeId = t.ProjectId
 		Where t.SupplyType=3
 
 		IF @@TRANCOUNT>=2 COMMIT
@@ -138,13 +140,16 @@ GO
 		 INSERT INTO MES_CQ_mps_netdemand
 		(ID,opertype,PlanCode,DemandId,cInvCode,
 		iquantity,cSoCode,cForCode,PStartDate,PDueDate,
-		DmandDate,did
+		DmandDate,did,
+		plancodeDH
 	        )
 		SELECT 
-		NEWID(), case delflag when 1 then 2 else 1 end ,PlanCode,DemandId,b.invcode as cInvCode,
+		NEWID(), case delflag when 1 then 2 else 1 end ,t.PlanCode,DemandId,b.invcode as cInvCode,
 		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
-		FirmDate as DmandDate ,NEWID()
+		FirmDate as DmandDate ,NEWID(),
+		d.PlanCode
 		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
+		left join mps_plancode d with(nolock) on d.PlanCodeId = t.ProjectId
 		Where t.SupplyType=3
 
 		IF @@TRANCOUNT>=2 COMMIT

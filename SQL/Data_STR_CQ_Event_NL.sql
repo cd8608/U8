@@ -194,6 +194,7 @@ CREATE TABLE dbo.MES_CQ_mps_netdemand
 	PDueDate	datetime	,--计划结束日期
 	DmandDate	datetime	, --需求日期
 	cRemark	Nvarchar(255)	, --备注
+	plancodeDH nvarchar(40) , --计划代号
 
 	  
   CONSTRAINT PK_MES_CQ_mps_netdemand PRIMARY KEY  CLUSTERED
