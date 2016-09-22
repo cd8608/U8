@@ -39,8 +39,9 @@ GO
 		planqty as iquantity,t.SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
 		FirmDate as DmandDate ,NEWID(),
 		d.PlanCode
-		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
-		left join mps_plancode d with(nolock) on d.PlanCodeId = t.ProjectId
+		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId 
+		left join mps_planproject pp on t.ProjectId = pp.ProjectId 
+		left join mps_plancode d with(nolock) on d.MrpPlanCodeId = pp.PlanCodeId 
 		Where t.SupplyType=3
 
 		IF @@TRANCOUNT>=2 COMMIT
@@ -148,8 +149,9 @@ GO
 		planqty as iquantity,SoCode,NULL AS cForCode,StartDate as PStartDate,DueDate as PDueDate,
 		FirmDate as DmandDate ,NEWID(),
 		d.PlanCode
-		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId
-		left join mps_plancode d with(nolock) on d.PlanCodeId = t.ProjectId
+		FROM inserted t INNER JOIN bas_part b WITH(NOLOCK) on b.partid =  t.PartId 
+		left join mps_planproject pp on t.ProjectId = pp.ProjectId 
+		left join mps_plancode d with(nolock) on d.MrpPlanCodeId = pp.PlanCodeId 
 		Where t.SupplyType=3
 
 		IF @@TRANCOUNT>=2 COMMIT
