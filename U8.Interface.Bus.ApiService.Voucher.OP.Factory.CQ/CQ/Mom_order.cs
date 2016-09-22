@@ -284,7 +284,7 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " from  " + headtable + " lt with(nolock) ";
             sql += " LEFT JOIN " + sourceHeadTable + " st with(nolock) on  ltrim(rtrim(lt.PlanCode)) = ltrim(rtrim(st.PlanCode))  ";
             sql += " LEFT JOIN mom_motype tt with(nolock) ON lt.MoType  = substring(tt.MotypeCode,LEN(tt.MotypeCode),1)  ";
-            sql += " left join SO_SODetails sob with(nolock) on sob.iSOsID = st.sodid  ";
+            sql += " left join SO_SODetails sob with(nolock) on Convert(nvarchar,sob.iSOsID) = st.sodid  ";
             sql += " where lt.id ='" + pdt.Id + "' ";
 
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
