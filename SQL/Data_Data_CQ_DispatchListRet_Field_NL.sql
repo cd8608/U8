@@ -773,11 +773,11 @@ BEGIN
 insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
 ('0','1','结算标志','B','0000000009',null,null,1,'False','bSettleAll',null,'1000000009',1,1)
 END
-IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000009' AND cardsection = 'B' AND fieldname='cMemo') 
-BEGIN
-insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
-('0','1','备注','B','0000000009',null,null,0,'表体|备注,B|cMemo','cMemo',null,'1000000009',1,1)
-END
+--IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000009' AND cardsection = 'B' AND fieldname='cMemo') 
+--BEGIN
+--insert into MES_CQ_FIELDCMPS ( TaskType, autoid,carditemname,cardsection,ccode,cfunid,cremark,ctype,cvalue,fieldname,guid,id,isnull,isvisable  ) values 
+--('0','1','备注','B','0000000009',null,null,0,'表体|备注,B|cMemo','cMemo',null,'1000000009',1,1)
+--END
 
 IF NOT EXISTS (SELECT 1 FROM MES_CQ_FIELDCMPS WHERE TaskType = '0' AND id='1000000009' AND cardsection = 'B' AND fieldname='iTB') 
 BEGIN
