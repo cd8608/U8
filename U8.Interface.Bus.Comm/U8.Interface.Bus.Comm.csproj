@@ -8,8 +8,8 @@
     <ProjectGuid>{5022ADAD-A6FC-4C98-A068-E35D1F98B98D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>U8.Interface.Bus</RootNamespace>
-    <AssemblyName>U8.Interface.Bus</AssemblyName>
+    <RootNamespace>U8.Interface.Bus.Comm</RootNamespace>
+    <AssemblyName>U8.Interface.Bus.Comm</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
