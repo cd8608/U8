@@ -119,12 +119,15 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                 {
                     BLL.Common.ErrorMsg(SysInfo.productName, "opertype 值出错！");
                 }
-                tl.Add(t);
-                curid += "'" + t.id + "'";
+                tl.Add(t); 
+                curid += "'" + t.id + "',";
+                break;
             }
             if (!string.IsNullOrEmpty(curid))
             {
-                string msql = " update " + headtable + " set " + taskStatusflagColName + " = 2 where id in (" + curid + ") ";
+                curid = curid.Substring(0, curid.Length - 1);
+                string[] ids = curid.Split(',');
+                string msql = " update " + headtable + " set " + taskStatusflagColName + " = 2 where id in (" + ids[0] + ") ";
                 DbHelperSQL.ExecuteSql(msql);
             }
             return tl;
