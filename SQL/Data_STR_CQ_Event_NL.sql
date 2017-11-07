@@ -297,7 +297,7 @@ CREATE TABLE dbo.MES_CQ_mom_orderdetailsub
     EffBegDate datetime, --生效时间
     EffEndDate datetime, --结束时间 
 	  
-  CONSTRAINT MES_CQ_mom_orderdetailsub PRIMARY KEY  CLUSTERED
+  CONSTRAINT PK_MES_CQ_mom_orderdetailsub PRIMARY KEY  CLUSTERED
   (
     ddid
   )

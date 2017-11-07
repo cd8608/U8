@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="GB2312"?>
+<filelist>
+	<ControlX ID="ME_INTF" Name="U8 MES接口">
+		<!-- 表结构 -->
+		<file 路径="SQL\ME_INTF" 文件="Data_STR_CQ_Mix_NL.sql" 数据库="UFData" 安装类型="S" /> 
+		<file 路径="SQL\ME_INTF" 文件="Data_STR_CQ_Voucher_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_STR_CQ_Event_NL.sql" 数据库="UFData" 安装类型="S" />
+
+		<!-- 事件 -->
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_APIEvent_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_TrigEvent_NL.sql" 数据库="UFData" 安装类型="S" />
+
+		<!-- 参数设置 -->
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Mix_NL.sql" 数据库="UFData" 安装类型="S" />
+
+		<!-- 生单对照 -->
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_CheckVouch_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_DispatchList_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_DispatchListRet_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Mom_order_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_PU_ArrivalVouch_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord01_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord01Ret_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord08_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord09_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord10_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord10Ret_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Rdrecord11_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_TransVouch_Field_NL.sql" 数据库="UFData" 安装类型="S" />
+
+		<!-- 事件对照 -->
+                <file 路径="SQL\ME_INTF" 文件="Data_Data_CQ_Event_Field_NL.sql" 数据库="UFData" 安装类型="S" /> 
+
+	</ControlX>
+</filelist>
+
