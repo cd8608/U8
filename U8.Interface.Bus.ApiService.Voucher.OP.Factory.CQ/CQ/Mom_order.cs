@@ -169,11 +169,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
                     BLL.Common.ErrorMsg(SysInfo.productName, "opertype 值出错！");
                 }
                 tl.Add(t);
-                curid += "'" + t.id + "'";
+                curid += "'" + t.id + "',";
             }
             if (!string.IsNullOrEmpty(curid))
             {
-                string msql = " update " + headtable + " set " + taskStatusflagColName + " = 2 where id in (" + curid + ") ";
+                string msql = " update " + headtable + " set " + taskStatusflagColName + " = 2 where id in (" + curid.Substring(0,curid.Length-1) + ") ";
                 DbHelperSQL.ExecuteSql(msql);
             }
             return tl;
