@@ -281,6 +281,7 @@ CREATE TABLE dbo.MES_CQ_rdrecord01
 
 	cRdCode	Nvarchar(30),	--入库单号
 	ddate	datetime,       --入库日期	
+	bIsRedVouch bit default 0,     --1 红字单据，其它默认为蓝字
 	cWhCode	Nvarchar(10),   --仓库	仓库编码
 	cRdStyleCode	Nvarchar(5),    --收发类别	此字段是编码字段
     cDepCode	Nvarchar(12), --部门(工作中心)	
