@@ -69,7 +69,7 @@ END
 GO
 
 
---采购到货单 子表  
+--采购到货单 子表  ERP->MES
 /*==============================MES_CQ_PU_ArrivalVouchs structure =============================*/
 print 'dbo.MES_CQ_PU_ArrivalVouchs...'   
 if not exists (select * from sysobjects where id = object_id('dbo.MES_CQ_PU_ArrivalVouchs') and sysstat & 0xf = 3)
@@ -86,6 +86,7 @@ CREATE TABLE dbo.MES_CQ_PU_ArrivalVouchs
 
 	dhCode	Nvarchar(20)	, --到货单号
 	dhid	int	 , --到货单明细行号ID
+	ibilltype int default 0, -- 0:到货  1:退货 2:拒收
 	cPoCode	Nvarchar(20), --采购订单号	
 	ddate	datetime	, --到货日期
 	cVenCode	Nvarchar(20)	, --供应商编码

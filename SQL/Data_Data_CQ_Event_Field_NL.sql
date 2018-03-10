@@ -84,6 +84,13 @@ if not exists(select * from MES_FIELDCMP where cfield= 'dhCode' and ctable= 'MES
 if not exists(select * from MES_FIELDCMP where cfield= 'dhid' and ctable= 'MES_CQ_PU_ArrivalVouchs')
   insert into MES_FIELDCMP ( bfixed,bvisible,cdefult,cfield,cfielddesc,cfieldlength,cfieldtype,cname,ctable,ctabledesc,cversion,igetvalue,igetvaluetype,itype ) values 
   ('0',  0, null,  'dhid',  '到货单明细行号ID',  20,  'int',  '采购到货单子表',  'MES_CQ_PU_ArrivalVouchs',  '采购到货单子表',  '861',  'dhid',  1,  '业务类')
+  
+   
+if not exists(select * from MES_FIELDCMP where cfield= 'ibilltype' and ctable= 'MES_CQ_PU_ArrivalVouchs')
+  insert into MES_FIELDCMP ( bfixed,bvisible,cdefult,cfield,cfielddesc,cfieldlength,cfieldtype,cname,ctable,ctabledesc,cversion,igetvalue,igetvaluetype,itype ) values 
+  ('0',  0, null,  'ibilltype',  '单据类型',  20,  'int',  '采购到货单子表',  'MES_CQ_PU_ArrivalVouchs',  '采购到货单子表',  '861',  'ibilltype',  1,  '业务类')
+  
+  
 if not exists(select * from MES_FIELDCMP where cfield= 'cPoCode' and ctable= 'MES_CQ_PU_ArrivalVouchs')
   insert into MES_FIELDCMP ( bfixed,bvisible,cdefult,cfield,cfielddesc,cfieldlength,cfieldtype,cname,ctable,ctabledesc,cversion,igetvalue,igetvaluetype,itype ) values 
   ('0',  0, null,  'cPoCode',  '采购订单号',  20,  'nvarchar',  '采购到货单子表',  'MES_CQ_PU_ArrivalVouchs',  '采购到货单子表',  '861',  'cPoCode',  1,  '业务类')
