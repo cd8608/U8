@@ -255,7 +255,7 @@ select @AppTagID=ID from IB_AppTag where AppTag='HY_ME_SVREvent.BeforePU_Arrival
 if @AppTagID is null 
 begin 
 insert into IB_AppTag(AppTag,FriendName,AppTypeID,ExtendProperties,Description,Customize,IsPlugin) 
- values('HY_ME_SVREvent.BeforePU_ArrivalVouchCancelAudit','Mes服务采购订单弃审前事件',@AppTypeID,'','',0,1) 
+ values('HY_ME_SVREvent.BeforePU_ArrivalVouchCancelAudit','Mes服务采购到货单弃审前事件',@AppTypeID,'','',0,1) 
 set @AppTagID=@@identity 
 end 
 else 
