@@ -300,7 +300,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,lt.cPersonCode as MES_cPersonCode , ";
             sql += " lb.dhCode as MES_dhCode, ";
             sql += " '" + apidata.ConnectInfo.UserId + "'  as PRO_CMaker  ";
-            sql += " from  pu_ArrHead t with(nolock) left join " + bodytable + " lb with(nolock) on lb.dhCode = t.ccode left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
+            sql += " from  pu_ArrHead t with(nolock) ";
+            sql += " left join " + bodytable + " lb with(nolock) on lb.dhCode = t.ccode ";
+            sql += " left join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             //sql += " from " + _sourcetablenameb + " b with(nolock) inner join  " + _sourcetablenameh + " t with(nolock) on b.id = t.id inner join " + bodytable + " lb with(nolock) on lb.dhid = b.autoid inner join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
             
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
@@ -331,7 +333,11 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " lt.cvencode as MES_cvencode,"; 
             sql += " CASE lb.opertype WHEN 0 THEN 'A' WHEN 1 THEN 'M' WHEN '2' THEN 'D' ELSE 'A' END as editprop, ";
             sql += " lb.iquantity as MES_iquantity   ";
-            sql += " from " + _sourcetablenameb + " b with(nolock) inner join  " + _sourcetablenameh + " t with(nolock) on b.id = t.id inner join " + bodytable + " lb with(nolock) on lb.dhid = b.autoid inner join " + headtable + " lt with(nolock) on lt.id = lb.id where lt.id ='" + pdt.Id + "' ";
+            sql += " from " + _sourcetablenameb + " b with(nolock) ";
+            sql += " inner join  " + _sourcetablenameh + " t with(nolock) on b.id = t.id ";
+            sql += " inner join " + bodytable + " lb with(nolock) on lb.dhid = b.autoid ";
+            sql += " inner join " + headtable + " lt with(nolock) on lt.id = lb.id ";
+            sql += " where lt.id ='" + pdt.Id + "' ";
              
             DbHelperSQLP help = new DbHelperSQLP(cimodel.Constring);
             DataSet ds = help.Query(sql);

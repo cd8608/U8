@@ -332,7 +332,9 @@ namespace U8.Interface.Bus.ApiService.Voucher.OP.Factory.CQ
             sql += " '" + System.DateTime.Now.ToString(SysInfo.dateFormat) + "' as ddate ";   //入库日期
             sql += ",'" + System.DateTime.Now.ToString(SysInfo.datetimeFormat) + "' as dnmaketime, ";   //制单时间
             sql += " lt." + voucherNoColumnName + " as cCode ,";
-            sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,lt.cPersonCode as MES_cPersonCode ";
+            sql += " lt.cWhCode as MES_cWhCode,lt.cRdStyleCode as MES_cRdCode,lt.cDepCode as MES_cDepCode,lt.cPersonCode as MES_cPersonCode , ";
+            sql += " lb.dhCode as MES_dhCode, ";
+            sql += " '" + apidata.ConnectInfo.UserId + "'  as PRO_CMaker  ";
             sql += " FROM " + sourceBodyTable + " sb with(nolock) ";
             sql += " INNER JOIN " + sourceHeadTable + " st with(nolock) on sb.id = st.id ";
             sql += " INNER JOIN " + bodytable + " lb with(nolock) on lb.dhid = sb.autoid ";
